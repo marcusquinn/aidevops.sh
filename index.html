@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI DevOps - Unleash Your AI Assistant's DevOps Superpowers</title>
+    <meta name="description" content="Transform your AI assistant into a powerful infrastructure management tool with seamless access to 30+ service integrations.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">AI DevOps</a>
+            <div class="nav-links">
+                <a href="docs.html" class="nav-link">Docs</a>
+                <a href="https://github.com/marcusquinn/aidevops" target="_blank" rel="noopener noreferrer" class="btn-nav" aria-label="View on GitHub">
+                    <span class="btn-icon-left">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                    </span>
+                    <span class="btn-text">GitHub</span>
+                    <span class="btn-icon-right">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/>
+                        </svg>
+                    </span>
+                </a>
+                <a href="https://x.com/marcusquinn" target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="X/Twitter">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-logo">AI DevOps</h1>
+                <p class="hero-tagline">Unleash your AI assistant's true potential with specialist DevOps agents</p>
+                <p class="hero-description">One conversation, complete infrastructure management across 30+ service integrations.</p>
+                
+                <div class="code-box">
+                    <div class="code-box-header">
+                        <div class="code-box-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="code-box-title">Terminal</span>
+                        <button class="copy-btn" id="copyBtn" aria-label="Copy to clipboard">
+                            <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                            </svg>
+                            <svg class="check-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <pre class="code-box-content"><code id="installCommand">bash &lt;(curl -fsSL https://raw.githubusercontent.com/marcusquinn/aidevops/main/setup.sh)</code></pre>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="docs.html" class="btn btn-primary" aria-label="Read the Docs">
+                        <span class="btn-icon-left">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                            </svg>
+                        </span>
+                        <span class="btn-text">Read the Docs</span>
+                        <span class="btn-icon-right">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/>
+                            </svg>
+                        </span>
+                    </a>
+                    <a href="https://github.com/marcusquinn/aidevops" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" aria-label="View on GitHub">
+                        <span class="btn-icon-left">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                        </span>
+                        <span class="btn-text">View on GitHub</span>
+                        <span class="btn-badge">Open Source</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">DevOps Superpowers for AI</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">30+</div>
+                        <h3>Multi-Service Management</h3>
+                        <p>APIs for hosting, Git, security, monitoring, and deployment all in one place.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">SSH</div>
+                        <h3>Real-Time Operations</h3>
+                        <p>SSH access, domain management, database operations, and remote command execution.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">MCP</div>
+                        <h3>18 MCP Servers</h3>
+                        <p>Model Context Protocol integrations for seamless AI assistant connectivity.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">18+</div>
+                        <h3>AI Assistants</h3>
+                        <p>Works with OpenCode, Claude, Cursor, Zed, GitHub Copilot, and more.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services">
+            <div class="container">
+                <h2 class="section-title">Comprehensive Service Coverage</h2>
+                <div class="services-grid">
+                    <div class="service-category">
+                        <h3>Infrastructure & Hosting</h3>
+                        <ul>
+                            <li>Hostinger</li>
+                            <li>Hetzner Cloud</li>
+                            <li>Closte</li>
+                            <li>Coolify</li>
+                            <li>Cloudron</li>
+                            <li>Vercel</li>
+                        </ul>
+                    </div>
+                    <div class="service-category">
+                        <h3>Domain & DNS</h3>
+                        <ul>
+                            <li>Cloudflare</li>
+                            <li>Spaceship</li>
+                            <li>101domains</li>
+                            <li>AWS Route 53</li>
+                            <li>Namecheap</li>
+                        </ul>
+                    </div>
+                    <div class="service-category">
+                        <h3>Development & Git</h3>
+                        <ul>
+                            <li>GitHub</li>
+                            <li>GitLab</li>
+                            <li>Gitea</li>
+                            <li>Agno</li>
+                            <li>Pandoc</li>
+                        </ul>
+                    </div>
+                    <div class="service-category">
+                        <h3>Security & Quality</h3>
+                        <ul>
+                            <li>SonarCloud</li>
+                            <li>CodeFactor</li>
+                            <li>Codacy</li>
+                            <li>CodeRabbit</li>
+                            <li>Snyk</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h2>Transform your AI assistant into a powerful infrastructure management tool</h2>
+                <div class="code-box code-box-small">
+                    <div class="code-box-header">
+                        <div class="code-box-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="code-box-title">Quick Start</span>
+                        <button class="copy-btn" id="copyBtn2" aria-label="Copy to clipboard">
+                            <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                            </svg>
+                            <svg class="check-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <pre class="code-box-content"><code>bash &lt;(curl -fsSL https://raw.githubusercontent.com/marcusquinn/aidevops/main/setup.sh)</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Powered and inspired by <a href="https://opencode.ai" target="_blank" rel="noopener noreferrer">OpenCode</a>, <a href="https://tabby.sh" target="_blank" rel="noopener noreferrer">Tabby</a>, and <a href="https://zed.dev" target="_blank" rel="noopener noreferrer">Zed</a></p>
+            <p class="copyright">MIT License - Created by Marcus Quinn</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
