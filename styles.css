@@ -339,40 +339,52 @@ body {
 }
 
 [data-theme="light"] .install-box {
-    background: #1a1a1a;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    background: #ffffff;
+    border: 1px solid var(--border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="light"] .install-header {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
 }
 
 [data-theme="light"] .install-tab {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
 }
 
 [data-theme="light"] .install-tab:hover {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-secondary);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 [data-theme="light"] .install-tab.active {
-    color: #ffffff;
+    color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="light"] .command-highlight {
-    color: #B2E969;
+    color: var(--accent);
 }
 
 [data-theme="light"] .command-dim {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
 }
 
 [data-theme="light"] .copy-status {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
 }
 
 [data-theme="light"] .install-command:hover .copy-status {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .install-command:hover {
+    background: var(--bg-secondary);
+}
+
+[data-theme="light"] .install-command.copied .check-icon path {
+    stroke: var(--accent);
 }
 
 /* Code Box */
@@ -454,28 +466,30 @@ body {
 }
 
 [data-theme="light"] .code-box {
-    background: #1a1a1a;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    background: #ffffff;
+    border: 1px solid var(--border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="light"] .code-box-header {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
 }
 
 [data-theme="light"] .code-box-title {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
 }
 
 [data-theme="light"] .copy-btn {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
 }
 
 [data-theme="light"] .copy-btn:hover {
-    color: #B2E969;
+    color: var(--accent);
 }
 
 [data-theme="light"] .code-box-content code {
-    color: #B2E969;
+    color: var(--accent);
 }
 
 /* Buttons - Alcove-inspired animated style */
@@ -512,7 +526,13 @@ body {
 }
 
 [data-theme="light"] .btn-primary {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 20px 25px -5px rgba(85, 139, 47, 0.25), 0 8px 10px -6px rgba(85, 139, 47, 0.15);
+}
+
+[data-theme="light"] .btn-primary:hover {
+    background: var(--accent-hover);
 }
 
 /* Primary button - filled with accent */
@@ -949,11 +969,17 @@ body {
 }
 
 [data-theme="light"] .docs-content pre {
-    background: #1a1a1a;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
 }
 
 [data-theme="light"] .docs-content pre code {
-    color: #B2E969;
+    color: var(--accent);
+}
+
+[data-theme="light"] .docs-content code {
+    background: var(--bg-secondary);
+    color: var(--accent);
 }
 
 .docs-content a {
