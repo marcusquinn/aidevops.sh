@@ -20,8 +20,12 @@
   <!-- Background -->
   <rect width="1200" height="630" fill="url(#bgGrad)"/>
   
-  <!-- Subtle glow effect -->
-  <ellipse cx="600" cy="315" rx="400" ry="200" fill="#B2E969" opacity="0.08" filter="url(#glow)"/>
+  <!-- Subtle glow effect - soft radial, no hard edge -->
+  <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+    <stop offset="0%" style="stop-color:#B2E969;stop-opacity:0.15"/>
+    <stop offset="100%" style="stop-color:#B2E969;stop-opacity:0"/>
+  </radialGradient>
+  <ellipse cx="600" cy="280" rx="500" ry="300" fill="url(#glowGrad)"/>
   
   <!-- Terminal icon -->
   <g transform="translate(440, 180)">
