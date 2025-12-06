@@ -292,9 +292,7 @@ body {
 }
 
 .command-text {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0;
+    display: inline;
 }
 
 .command-dim {
