@@ -935,6 +935,12 @@ body {
     line-height: 1.7;
 }
 
+.docs-content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+}
+
 .docs-content ul, .docs-content ol {
     margin-bottom: 1rem;
     padding-left: 1.5rem;
