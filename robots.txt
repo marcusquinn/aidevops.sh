@@ -1,0 +1,11 @@
+# AI DevOps - https://aidevops.sh
+# Robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://aidevops.sh/sitemap.xml
+
+# Crawl-delay (optional, be nice to crawlers)
+Crawl-delay: 1
