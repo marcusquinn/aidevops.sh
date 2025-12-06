@@ -907,6 +907,7 @@ code-quality, browser-automation, git-platforms.
 <h2><strong>Slash Commands (OpenCode)</strong></h2>
 <p><strong>Slash commands provide quick access to common workflows directly from the OpenCode prompt.</strong> Type <code>/</code> to see available commands.</p>
 <h3><strong>Available Commands</strong></h3>
+<p><strong>Development Workflow</strong> (typical order):</p>
 <table>
 <thead>
 <tr>
@@ -915,36 +916,8 @@ code-quality, browser-automation, git-platforms.
 </tr>
 </thead>
 <tbody><tr>
-<td><code>/agent-review</code></td>
-<td>Analyze session and suggest agent improvements</td>
-</tr>
-<tr>
-<td><code>/preflight</code></td>
-<td>Run quality checks before release</td>
-</tr>
-<tr>
-<td><code>/postflight</code></td>
-<td>Verify release health after deployment</td>
-</tr>
-<tr>
-<td><code>/release</code></td>
-<td>Full release workflow (bump, tag, GitHub release)</td>
-</tr>
-<tr>
-<td><code>/version-bump</code></td>
-<td>Bump version following semver</td>
-</tr>
-<tr>
-<td><code>/changelog</code></td>
-<td>Update CHANGELOG.md with recent changes</td>
-</tr>
-<tr>
-<td><code>/code-review</code></td>
-<td>Comprehensive code review checklist</td>
-</tr>
-<tr>
-<td><code>/quality-check</code></td>
-<td>Run all quality linters and scanners</td>
+<td><code>/context</code></td>
+<td>Build AI context with Repomix for complex tasks</td>
 </tr>
 <tr>
 <td><code>/feature</code></td>
@@ -959,12 +932,58 @@ code-quality, browser-automation, git-platforms.
 <td>Start an urgent hotfix workflow</td>
 </tr>
 <tr>
-<td><code>/context</code></td>
-<td>Build AI context with Repomix</td>
+<td><code>/code-review</code></td>
+<td>Comprehensive code review checklist</td>
+</tr>
+<tr>
+<td><code>/quality-check</code></td>
+<td>Run all quality linters and scanners</td>
 </tr>
 <tr>
 <td><code>/pr</code></td>
 <td>Create a pull request</td>
+</tr>
+</tbody></table>
+<p><strong>Release Workflow</strong> (in order):</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/preflight</code></td>
+<td>Run quality checks before release</td>
+</tr>
+<tr>
+<td><code>/changelog</code></td>
+<td>Update CHANGELOG.md with recent changes</td>
+</tr>
+<tr>
+<td><code>/version-bump</code></td>
+<td>Bump version following semver</td>
+</tr>
+<tr>
+<td><code>/release</code></td>
+<td>Full release workflow (bump, tag, GitHub release)</td>
+</tr>
+<tr>
+<td><code>/postflight</code></td>
+<td>Verify release health after deployment</td>
+</tr>
+</tbody></table>
+<p><strong>Meta/Improvement</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/agent-review</code></td>
+<td>Analyze session and suggest agent improvements</td>
 </tr>
 </tbody></table>
 <h3><strong>Installation</strong></h3>
