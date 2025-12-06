@@ -3,72 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary Meta Tags -->
-    <title>AIDevOps Documentation - AI DevOps Framework Setup &amp; Configuration Guide</title>
-    <meta name="title" content="AIDevOps Documentation - AI DevOps Framework Setup & Configuration Guide">
-    <meta name="description" content="Complete AIDevOps documentation: setup guide, MCP server configuration, service integrations, AI assistant compatibility, and DevOps automation tutorials for the AI DevOps framework.">
-    <meta name="keywords" content="ai devops documentation, aidevops guide, ai devops setup, mcp server configuration, ai assistant devops, devops framework docs, ai infrastructure guide, aidevops tutorial">
-    <meta name="author" content="Marcus Quinn">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aidevops.sh/docs.html">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://aidevops.sh/docs.html">
-    <meta property="og:title" content="AIDevOps Documentation - Setup & Configuration Guide">
-    <meta property="og:description" content="Complete AIDevOps documentation: setup guide, MCP server configuration, service integrations, AI assistant compatibility, and DevOps automation tutorials.">
-    <meta property="og:image" content="https://aidevops.sh/og-image.png">
-    <meta property="og:site_name" content="AI DevOps">
-    <meta property="og:locale" content="en_US">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://aidevops.sh/docs.html">
-    <meta name="twitter:title" content="AIDevOps Documentation - Setup & Configuration Guide">
-    <meta name="twitter:description" content="Complete AIDevOps documentation: setup guide, MCP server configuration, service integrations, AI assistant compatibility, and DevOps automation tutorials.">
-    <meta name="twitter:image" content="https://aidevops.sh/og-image.png">
-    <meta name="twitter:creator" content="@marcuswquinn">
-    
-    <!-- Additional SEO -->
-    <meta name="theme-color" content="#B2E969">
-    <meta name="apple-mobile-web-app-title" content="AI DevOps Docs">
-    <meta name="application-name" content="AI DevOps">
-    
+    <title>Documentation - AI DevOps Framework</title>
+    <meta name="description" content="Complete documentation for the AI DevOps Framework - transform your AI assistant into a powerful infrastructure management tool.">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
-    
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "TechArticle",
-        "@id": "https://aidevops.sh/docs.html#article",
-        "headline": "AIDevOps Framework Documentation",
-        "description": "Complete documentation for the AIDevOps framework - setup guide, MCP server configuration, service integrations, and DevOps automation tutorials.",
-        "url": "https://aidevops.sh/docs.html",
-        "author": {
-            "@type": "Person",
-            "name": "Marcus Quinn",
-            "url": "https://x.com/marcuswquinn"
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "AI DevOps",
-            "url": "https://aidevops.sh/"
-        },
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://aidevops.sh/docs.html"
-        },
-        "about": {
-            "@type": "SoftwareApplication",
-            "name": "AIDevOps Framework",
-            "applicationCategory": "DeveloperApplication"
-        },
-        "keywords": "ai devops, aidevops, documentation, setup guide, mcp servers, devops automation"
-    }
-    </script>
 </head>
 <body class="docs-page">
     <nav class="nav">
@@ -89,7 +27,7 @@
                         </svg>
                     </span>
                 </a>
-                <a href="https://x.com/marcuswquinn" target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="X/Twitter">
+                <a href="https://x.com/marcusquinn" target="_blank" rel="noopener noreferrer" class="nav-icon" aria-label="X/Twitter">
                     <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
@@ -164,19 +102,27 @@
 <p><strong>Capabilities:</strong> Execute commands, access credentials, modify infrastructure, interact with APIs
 <strong>Your responsibility:</strong> Use trusted AI providers, rotate credentials regularly, monitor activity</p>
 <h2><strong>Quick Start</strong></h2>
-<pre><code class="language-bash"># 1. Clone and setup
-mkdir -p ~/git &amp;&amp; cd ~/git
-git clone https://github.com/marcusquinn/aidevops.git
-cd aidevops &amp;&amp; ./setup.sh
-
-# 2. Add to your AI assistant&#39;s system prompt:
-# &quot;Before any DevOps operations, read ~/git/aidevops/AGENTS.md for authoritative guidance&quot;
-
-# 3. Setup Git CLI tools (recommended for enhanced Git platform integration):
-# Framework setup will guide you through installing GitHub CLI (gh), GitLab CLI (glab), and Gitea CLI (tea)
-# These provide enhanced repository management capabilities beyond basic git operations
+<p><strong>One-liner install</strong> (fresh install or update):</p>
+<pre><code class="language-bash">bash &lt;(curl -fsSL https://raw.githubusercontent.com/marcusquinn/aidevops/main/setup.sh)
 </code></pre>
-<p><strong>That&#39;s it! Your AI assistant now has agentic access to 30+ service integrations.</strong></p>
+<p>Or manually:</p>
+<pre><code class="language-bash">git clone https://github.com/marcusquinn/aidevops.git ~/Git/aidevops
+~/Git/aidevops/setup.sh
+</code></pre>
+<p><strong>That&#39;s it!</strong> The setup script will:</p>
+<ul>
+<li>Clone/update the repo to <code>~/Git/aidevops</code></li>
+<li>Deploy agents to <code>~/.aidevops/agents/</code></li>
+<li>Install the <code>aidevops</code> CLI command</li>
+<li>Configure your AI assistants automatically</li>
+<li>Guide you through recommended tools (Tabby, Zed, Git CLIs)</li>
+</ul>
+<p><strong>After installation, use the CLI:</strong></p>
+<pre><code class="language-bash">aidevops status     # Check what&#39;s installed
+aidevops update     # Update to latest version
+aidevops uninstall  # Remove aidevops
+</code></pre>
+<p><strong>Your AI assistant now has agentic access to 30+ service integrations.</strong></p>
 <p><strong>Supported AI Assistants:</strong> (OpenCode &amp; Zed are our daily drivers and preferred tools, so will have the most continual testing. All 18 assistants below have MCP configuration support.)</p>
 <p><strong>Preferred:</strong></p>
 <ul>
@@ -958,15 +904,15 @@ bash .agent/scripts/continue-cli.sh review
 <h2><strong>Documentation &amp; Resources</strong></h2>
 <p><strong>Complete Guides Available:</strong></p>
 <ul>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/mcp-integrations.md" target="_blank" rel="noopener noreferrer">MCP Integrations Guide</a></strong> - MCP servers setup</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/api-integrations.md" target="_blank" rel="noopener noreferrer">API Integrations Guide</a></strong> - Service APIs</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/pandoc-conversion.md" target="_blank" rel="noopener noreferrer">Pandoc Conversion Guide</a></strong> - Document format conversion</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/agno-integration.md" target="_blank" rel="noopener noreferrer">Agno Integration Guide</a></strong> - Local AI agent operating system</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/browser-automation.md" target="_blank" rel="noopener noreferrer">Browser Automation Guide</a></strong> - LinkedIn automation and web scraping</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/pagespeed-lighthouse.md" target="_blank" rel="noopener noreferrer">PageSpeed &amp; Lighthouse Guide</a></strong> - Performance auditing</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/ai-cli-tools.md" target="_blank" rel="noopener noreferrer">AI CLI Tools Reference</a></strong> - AI assistant integration</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/service-links.md" target="_blank" rel="noopener noreferrer">Service Links Directory</a></strong> - Direct links to all services</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/security.md" target="_blank" rel="noopener noreferrer">Security Best Practices</a></strong> - Enterprise security standards</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/mcp-integrations.md">MCP Integrations Guide</a></strong> - MCP servers setup</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/api-integrations.md">API Integrations Guide</a></strong> - Service APIs</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/pandoc-conversion.md">Pandoc Conversion Guide</a></strong> - Document format conversion</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/agno-integration.md">Agno Integration Guide</a></strong> - Local AI agent operating system</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/browser-automation.md">Browser Automation Guide</a></strong> - LinkedIn automation and web scraping</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/pagespeed-lighthouse.md">PageSpeed &amp; Lighthouse Guide</a></strong> - Performance auditing</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/ai-cli-tools.md">AI CLI Tools Reference</a></strong> - AI assistant integration</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/service-links.md">Service Links Directory</a></strong> - Direct links to all services</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/security.md">Security Best Practices</a></strong> - Enterprise security standards</li>
 </ul>
 <p><strong>Provider-Specific Guides:</strong> Hostinger, Hetzner, Cloudflare, WordPress, Git platforms, Vercel CLI, Coolify CLI, and more in <code>.agent/</code></p>
 <h2><strong>Architecture</strong></h2>
@@ -1015,7 +961,7 @@ bash .agent/scripts/setup-mcp-integrations.sh all
 <li>Test with your infrastructure</li>
 <li>Submit pull request</li>
 </ol>
-<p><strong>License:</strong> MIT License - see <a href="https://github.com/marcusquinn/aidevops/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">LICENSE</a> file for details
+<p><strong>License:</strong> MIT License - see <a href="https://github.com/marcusquinn/aidevops/blob/main/LICENSE">LICENSE</a> file for details
 <strong>Created by Marcus Quinn</strong> - Copyright © 2025</p>
 <hr>
 <h2><strong>What This Framework Achieves</strong></h2>
@@ -1034,12 +980,9 @@ bash .agent/scripts/setup-mcp-integrations.sh all
 <li>Performance monitoring with and continual improvement of agents&#39; token efficiency, tool use, and file location consistency</li>
 </ul>
 <p><strong>Get Started:</strong></p>
-<ol>
-<li>Clone repository: <code>git clone https://github.com/marcusquinn/aidevops.git</code></li>
-<li>Run setup: <code>./setup.sh</code></li>
-<li>Configure providers: Copy and edit config templates</li>
-<li>Let your AI assistant manage your infrastructure!</li>
-</ol>
+<pre><code class="language-bash">bash &lt;(curl -fsSL https://raw.githubusercontent.com/marcusquinn/aidevops/main/setup.sh)
+</code></pre>
+<p>Or: <code>git clone https://github.com/marcusquinn/aidevops.git ~/Git/aidevops &amp;&amp; ~/Git/aidevops/setup.sh</code></p>
 <p><strong>Transform your AI assistant into a powerful infrastructure management tool with seamless access to all your servers and services.</strong></p>
 
             <div class="back-to-top">
