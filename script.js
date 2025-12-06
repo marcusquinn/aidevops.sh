@@ -45,66 +45,101 @@
     }
 })();
 
+// Install Tabs
+(function() {
+    const tabs = document.querySelectorAll('.install-tab');
+    const panels = document.querySelectorAll('.install-panel');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const targetPanel = this.dataset.tab;
+            
+            // Update tabs
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            this.classList.add('active');
+            this.setAttribute('aria-selected', 'true');
+            
+            // Update panels
+            panels.forEach(p => {
+                p.classList.remove('active');
+                if (p.dataset.panel === targetPanel) {
+                    p.classList.add('active');
+                }
+            });
+        });
+    });
+})();
+
 // Copy to Clipboard
 (function() {
-    const installCommand = 'bash <(curl -fsSL https://raw.githubusercontent.com/marcusquinn/aidevops/main/setup.sh)';
-    
-    function setupCopyButton(buttonId) {
-        const copyBtn = document.getElementById(buttonId);
-        if (!copyBtn) return;
+    function setupCopyButton(button) {
+        if (!button) return;
         
-        copyBtn.addEventListener('click', async function() {
+        button.addEventListener('click', async function() {
+            const command = this.dataset.command;
+            
             try {
-                await navigator.clipboard.writeText(installCommand);
-                
-                // Visual feedback
-                const copyIcon = this.querySelector('.copy-icon');
-                const checkIcon = this.querySelector('.check-icon');
-                
-                if (copyIcon && checkIcon) {
-                    copyIcon.style.display = 'none';
-                    checkIcon.style.display = 'block';
-                    this.classList.add('copied');
-                    
-                    setTimeout(() => {
-                        copyIcon.style.display = 'block';
-                        checkIcon.style.display = 'none';
-                        this.classList.remove('copied');
-                    }, 2000);
-                }
+                await navigator.clipboard.writeText(command);
+                showCopied(this);
             } catch (err) {
                 // Fallback for older browsers
                 const textarea = document.createElement('textarea');
-                textarea.value = installCommand;
+                textarea.value = command;
                 textarea.style.position = 'fixed';
                 textarea.style.opacity = '0';
                 document.body.appendChild(textarea);
                 textarea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
-                
-                // Visual feedback
-                const copyIcon = copyBtn.querySelector('.copy-icon');
-                const checkIcon = copyBtn.querySelector('.check-icon');
-                
-                if (copyIcon && checkIcon) {
-                    copyIcon.style.display = 'none';
-                    checkIcon.style.display = 'block';
-                    copyBtn.classList.add('copied');
-                    
-                    setTimeout(() => {
-                        copyIcon.style.display = 'block';
-                        checkIcon.style.display = 'none';
-                        copyBtn.classList.remove('copied');
-                    }, 2000);
-                }
+                showCopied(this);
             }
         });
     }
     
-    // Setup both copy buttons
-    setupCopyButton('copyBtn');
-    setupCopyButton('copyBtn2');
+    function showCopied(button) {
+        button.classList.add('copied');
+        setTimeout(() => {
+            button.classList.remove('copied');
+        }, 2000);
+    }
+    
+    // Setup install command buttons
+    document.querySelectorAll('.install-command').forEach(setupCopyButton);
+    
+    // Setup old-style copy buttons (for CTA section)
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', async function() {
+            const command = 'bash <(curl -fsSL https://raw.githubusercontent.com/marcusquinn/aidevops/main/setup.sh)';
+            try {
+                await navigator.clipboard.writeText(command);
+            } catch (err) {
+                const textarea = document.createElement('textarea');
+                textarea.value = command;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            }
+            
+            const copyIcon = this.querySelector('.copy-icon');
+            const checkIcon = this.querySelector('.check-icon');
+            if (copyIcon && checkIcon) {
+                copyIcon.style.display = 'none';
+                checkIcon.style.display = 'block';
+                this.classList.add('copied');
+                setTimeout(() => {
+                    copyIcon.style.display = 'block';
+                    checkIcon.style.display = 'none';
+                    this.classList.remove('copied');
+                }, 2000);
+            }
+        });
+    });
 })();
 
 // Smooth scroll for anchor links

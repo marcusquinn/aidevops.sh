@@ -206,6 +206,123 @@ body {
     margin-bottom: 3rem;
 }
 
+/* Install Box - OpenCode style */
+.install-box {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+.install-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 0;
+}
+
+.install-tab {
+    background: transparent;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+}
+
+.install-tab:hover {
+    color: var(--text-secondary);
+}
+
+.install-tab.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--accent);
+}
+
+.install-panels {
+    background: var(--code-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.install-panel {
+    display: none;
+}
+
+.install-panel.active {
+    display: block;
+}
+
+.install-command {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.install-command:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.command-text {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+}
+
+.command-dim {
+    color: var(--text-muted);
+}
+
+.command-highlight {
+    color: var(--accent);
+}
+
+.copy-status {
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
+.install-command:hover .copy-status {
+    color: var(--text-secondary);
+}
+
+.copy-status .check-icon {
+    display: none;
+}
+
+.install-command.copied .copy-icon {
+    display: none;
+}
+
+.install-command.copied .check-icon {
+    display: block;
+}
+
+[data-theme="light"] .install-panels {
+    background: #1a1a1a;
+}
+
+[data-theme="light"] .command-highlight {
+    color: #B2E969;
+}
+
+[data-theme="light"] .command-dim {
+    color: rgba(255, 255, 255, 0.5);
+}
+
 /* Code Box */
 .code-box {
     background: var(--code-bg);
