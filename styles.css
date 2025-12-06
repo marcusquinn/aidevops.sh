@@ -89,6 +89,11 @@ body {
     color: var(--text-primary);
     text-decoration: none;
     letter-spacing: -0.02em;
+    transition: color 0.2s;
+}
+
+.nav-logo:hover {
+    color: var(--accent);
 }
 
 .nav-links {
