@@ -904,6 +904,85 @@ code-quality, browser-automation, git-platforms.
 <p>The <code>@code-quality</code> agent also learns from issues. After fixing violations from SonarCloud, Codacy, ShellCheck, etc., it analyzes patterns and updates framework guidance to prevent recurrence:</p>
 <pre><code class="language-text">Quality Issue → Fix Applied → Pattern Identified → Framework Updated → Issue Prevented
 </code></pre>
+<h2><strong>Slash Commands (OpenCode)</strong></h2>
+<p><strong>Slash commands provide quick access to common workflows directly from the OpenCode prompt.</strong> Type <code>/</code> to see available commands.</p>
+<h3><strong>Available Commands</strong></h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/agent-review</code></td>
+<td>Analyze session and suggest agent improvements</td>
+</tr>
+<tr>
+<td><code>/preflight</code></td>
+<td>Run quality checks before release</td>
+</tr>
+<tr>
+<td><code>/postflight</code></td>
+<td>Verify release health after deployment</td>
+</tr>
+<tr>
+<td><code>/release</code></td>
+<td>Full release workflow (bump, tag, GitHub release)</td>
+</tr>
+<tr>
+<td><code>/version-bump</code></td>
+<td>Bump version following semver</td>
+</tr>
+<tr>
+<td><code>/changelog</code></td>
+<td>Update CHANGELOG.md with recent changes</td>
+</tr>
+<tr>
+<td><code>/code-review</code></td>
+<td>Comprehensive code review checklist</td>
+</tr>
+<tr>
+<td><code>/quality-check</code></td>
+<td>Run all quality linters and scanners</td>
+</tr>
+<tr>
+<td><code>/feature</code></td>
+<td>Start a new feature branch workflow</td>
+</tr>
+<tr>
+<td><code>/bugfix</code></td>
+<td>Start a bugfix branch workflow</td>
+</tr>
+<tr>
+<td><code>/hotfix</code></td>
+<td>Start an urgent hotfix workflow</td>
+</tr>
+<tr>
+<td><code>/context</code></td>
+<td>Build AI context with Repomix</td>
+</tr>
+<tr>
+<td><code>/pr</code></td>
+<td>Create a pull request</td>
+</tr>
+</tbody></table>
+<h3><strong>Installation</strong></h3>
+<p>Slash commands are automatically installed by <code>setup.sh</code>:</p>
+<pre><code class="language-bash"># Commands are deployed to:
+~/.config/opencode/commands/
+
+# Regenerate commands manually:
+.agent/scripts/generate-opencode-commands.sh
+</code></pre>
+<h3><strong>Usage</strong></h3>
+<p>In OpenCode, type the command at the prompt:</p>
+<pre><code class="language-text">/preflight
+/release minor
+/feature add-user-authentication
+</code></pre>
+<p>Commands invoke the corresponding workflow subagent with appropriate context.</p>
+<hr>
 <h3><strong>Creating Custom Agents</strong></h3>
 <p>Create a markdown file in <code>~/.config/opencode/agent/</code> (OpenCode) or reference in your AI&#39;s system prompt:</p>
 <pre><code class="language-markdown">---
