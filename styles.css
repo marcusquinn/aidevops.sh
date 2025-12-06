@@ -206,45 +206,62 @@ body {
     margin-bottom: 3rem;
 }
 
-/* Install Box - OpenCode style */
+/* Install Box - OpenCode style with window frame */
 .install-box {
     max-width: 600px;
     margin: 0 auto 2rem;
+    background: var(--code-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.install-header {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--border);
+    gap: 1rem;
+}
+
+.install-dots {
+    display: flex;
+    gap: 0.5rem;
 }
 
 .install-tabs {
     display: flex;
     gap: 0;
-    margin-bottom: 0;
+    margin-left: 0.5rem;
 }
 
 .install-tab {
     background: transparent;
     border: none;
-    padding: 0.75rem 1.25rem;
+    padding: 0.35rem 0.75rem;
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.2s;
-    border-bottom: 2px solid transparent;
+    border-radius: 6px;
 }
 
 .install-tab:hover {
     color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .install-tab.active {
     color: var(--text-primary);
-    border-bottom-color: var(--accent);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .install-panels {
-    background: var(--code-bg);
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    overflow: hidden;
+    /* No border/background - parent has it */
 }
 
 .install-panel {
@@ -311,7 +328,7 @@ body {
     display: block;
 }
 
-[data-theme="light"] .install-panels {
+[data-theme="light"] .install-box {
     background: #1a1a1a;
 }
 
