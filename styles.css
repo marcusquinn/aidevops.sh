@@ -90,10 +90,22 @@ body {
     text-decoration: none;
     letter-spacing: -0.02em;
     transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-logo-icon {
+    color: var(--accent);
+    transition: transform 0.2s;
 }
 
 .nav-logo:hover {
     color: var(--accent);
+}
+
+.nav-logo:hover .nav-logo-icon {
+    transform: scale(1.1);
 }
 
 .nav-links {
