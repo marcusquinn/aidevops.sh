@@ -18,15 +18,15 @@
 
 [data-theme="light"] {
     --bg-primary: #ffffff;
-    --bg-secondary: #f5f5f5;
-    --bg-tertiary: #ebebeb;
-    --text-primary: #0a0a0a;
-    --text-secondary: rgba(10, 10, 10, 0.7);
-    --text-muted: rgba(10, 10, 10, 0.5);
-    --accent: #7CB342;
-    --accent-hover: #8bc34a;
-    --border: rgba(0, 0, 0, 0.1);
-    --border-hover: rgba(0, 0, 0, 0.2);
+    --bg-secondary: #f8f8f8;
+    --bg-tertiary: #f0f0f0;
+    --text-primary: #111111;
+    --text-secondary: rgba(17, 17, 17, 0.75);
+    --text-muted: rgba(17, 17, 17, 0.55);
+    --accent: #558B2F;
+    --accent-hover: #689F38;
+    --border: rgba(0, 0, 0, 0.12);
+    --border-hover: rgba(0, 0, 0, 0.25);
     --code-bg: #1a1a1a;
 }
 
@@ -67,6 +67,11 @@ body {
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     z-index: 100;
+}
+
+[data-theme="light"] .nav {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
@@ -172,7 +177,14 @@ body {
 }
 
 [data-theme="light"] .hero::before {
-    background: radial-gradient(ellipse at center, rgba(124, 179, 66, 0.15) 0%, transparent 60%);
+    background: radial-gradient(ellipse at center, rgba(85, 139, 47, 0.12) 0%, transparent 60%);
+}
+
+[data-theme="light"] .hero-logo {
+    background: linear-gradient(135deg, var(--text-primary) 0%, #558B2F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero-content {
@@ -328,6 +340,23 @@ body {
 
 [data-theme="light"] .install-box {
     background: #1a1a1a;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] .install-header {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="light"] .install-tab {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="light"] .install-tab:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="light"] .install-tab.active {
+    color: #ffffff;
 }
 
 [data-theme="light"] .command-highlight {
@@ -336,6 +365,14 @@ body {
 
 [data-theme="light"] .command-dim {
     color: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="light"] .copy-status {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="light"] .install-command:hover .copy-status {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 /* Code Box */
@@ -418,6 +455,23 @@ body {
 
 [data-theme="light"] .code-box {
     background: #1a1a1a;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="light"] .code-box-header {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="light"] .code-box-title {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="light"] .copy-btn {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="light"] .copy-btn:hover {
+    color: #B2E969;
 }
 
 [data-theme="light"] .code-box-content code {
@@ -451,6 +505,14 @@ body {
 
 .btn:focus {
     box-shadow: 0 0 0 3px rgba(178, 233, 105, 0.3);
+}
+
+[data-theme="light"] .btn:focus {
+    box-shadow: 0 0 0 3px rgba(85, 139, 47, 0.3);
+}
+
+[data-theme="light"] .btn-primary {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 }
 
 /* Primary button - filled with accent */
@@ -678,6 +740,14 @@ body {
     transform: translateY(-2px);
 }
 
+[data-theme="light"] .feature-card {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .feature-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 .feature-icon {
     font-size: 2rem;
     font-weight: 700;
@@ -736,6 +806,16 @@ body {
     position: absolute;
     left: 0;
     color: var(--text-muted);
+}
+
+.service-category li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.service-category li a:hover {
+    color: var(--accent);
 }
 
 /* CTA Section */
@@ -984,4 +1064,8 @@ body::before {
     opacity: 0.03;
     z-index: 1000;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] body::before {
+    opacity: 0.015;
 }
