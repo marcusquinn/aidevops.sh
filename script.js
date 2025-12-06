@@ -112,7 +112,7 @@
     // Setup old-style copy buttons (for CTA section)
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', async function() {
-            const command = 'bash <(curl -fsSL https://raw.githubusercontent.com/marcusquinn/aidevops/main/setup.sh)';
+            const command = 'bash <(curl -fsSL https://aidevops.sh/install)';
             try {
                 await navigator.clipboard.writeText(command);
             } catch (err) {
