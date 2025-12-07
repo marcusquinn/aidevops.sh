@@ -142,7 +142,7 @@
 <a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/github/release-date/marcusquinn/aidevops" alt="GitHub Release Date"></a>
 <a href="https://github.com/marcusquinn/aidevops/commits/main"><img src="https://img.shields.io/github/commits-since/marcusquinn/aidevops/latest" alt="GitHub commits since latest release"></a></p>
 <!-- Repository Stats -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-2.20.5-blue" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-2.22.0-blue" alt="Version"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/github/repo-size/marcusquinn/aidevops?style=flat&color=blue" alt="GitHub repo size"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/Lines%20of%20Code-18%2C000%2B-brightgreen" alt="Lines of code"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/github/languages/count/marcusquinn/aidevops" alt="GitHub language count"></a>
@@ -457,6 +457,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><a href="https://developers.google.com/webmaster-tools">Google Search Console</a> - Search performance insights</li>
 <li><a href="https://docs.perplexity.ai/">Perplexity</a> - AI-powered web search and research</li>
 <li><a href="https://grep.app/">Grep by Vercel</a> - Search code snippets across GitHub repositories</li>
+<li><strong>Keyword Research</strong> - ClearSERP-style keyword research with SERP weakness detection (via DataForSEO + Serper + Ahrefs)</li>
 </ul>
 <p><strong>Data Extraction:</strong></p>
 <ul>
@@ -979,6 +980,27 @@ code-quality, browser-automation, git-platforms.
 <td>Unified PR workflow (orchestrates all checks)</td>
 </tr>
 </tbody></table>
+<p><strong>SEO Workflow</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/keyword-research</code></td>
+<td>Seed keyword expansion with volume, CPC, difficulty</td>
+</tr>
+<tr>
+<td><code>/autocomplete-research</code></td>
+<td>Google autocomplete long-tail discovery</td>
+</tr>
+<tr>
+<td><code>/keyword-research-extended</code></td>
+<td>Full SERP analysis with weakness detection</td>
+</tr>
+</tbody></table>
 <p><strong>Release Workflow</strong> (in order):</p>
 <table>
 <thead>
@@ -1081,6 +1103,34 @@ Detailed instructions for the agent...
 # Check domain availability
 ./.agent/scripts/101domains-helper.sh check-availability example.com
 </code></pre>
+<h3><strong>Keyword Research (ClearSERP-Style)</strong></h3>
+<pre><code class="language-bash"># Basic keyword research with volume, CPC, difficulty
+./.agent/scripts/keyword-research-helper.sh research &quot;seo tools&quot; --limit 20
+
+# Google autocomplete long-tail discovery
+./.agent/scripts/keyword-research-helper.sh autocomplete &quot;how to&quot; --provider both
+
+# Extended research with SERP weakness detection
+./.agent/scripts/keyword-research-helper.sh extended &quot;keywords&quot; --quick
+
+# Competitor keyword research
+./.agent/scripts/keyword-research-helper.sh extended --competitor ahrefs.com --limit 50
+
+# Keyword gap analysis (find keywords competitor ranks for but you don&#39;t)
+./.agent/scripts/keyword-research-helper.sh extended --gap semrush.com,ahrefs.com
+
+# Domain research (all keywords a domain ranks for)
+./.agent/scripts/keyword-research-helper.sh extended --domain example.com --limit 100
+</code></pre>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>6 Research Modes</strong>: Keyword expansion, autocomplete, domain research, competitor research, keyword gap, extended SERP analysis</li>
+<li><strong>17 SERP Weaknesses</strong>: Low domain score, no backlinks, thin content, UGC-heavy, non-HTTPS, and more</li>
+<li><strong>KeywordScore Algorithm</strong>: 0-100 score based on weakness count, volume, and difficulty</li>
+<li><strong>Multi-Provider</strong>: DataForSEO (primary), Serper (autocomplete), Ahrefs (domain ratings)</li>
+<li><strong>Locale Support</strong>: US/UK/CA/AU/DE/FR/ES with saved preferences</li>
+<li><strong>Output Formats</strong>: Markdown tables (TUI) and CSV export to ~/Downloads</li>
+</ul>
 <h3><strong>Quality Control &amp; Performance</strong></h3>
 <pre><code class="language-bash"># Run quality analysis with auto-fixes
 bash .agent/scripts/qlty-cli.sh check 10
