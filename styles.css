@@ -807,13 +807,15 @@ body {
     background: var(--bg-primary);
 }
 
-.quickstart-step a {
+.quickstart-step a,
+.quickstart-footer a {
     color: var(--accent);
     text-decoration: none;
     transition: opacity 0.2s;
 }
 
-.quickstart-step a:hover {
+.quickstart-step a:hover,
+.quickstart-footer a:hover {
     opacity: 0.8;
     text-decoration: underline;
 }
