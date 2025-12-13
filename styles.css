@@ -839,8 +839,17 @@ body {
     text-align: center;
     font-size: clamp(1.75rem, 5vw, 2.5rem);
     font-weight: 700;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
 }
 
 .features-grid {
