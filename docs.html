@@ -142,7 +142,7 @@
 <a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/github/release-date/marcusquinn/aidevops" alt="GitHub Release Date"></a>
 <a href="https://github.com/marcusquinn/aidevops/commits/main"><img src="https://img.shields.io/github/commits-since/marcusquinn/aidevops/latest" alt="GitHub commits since latest release"></a></p>
 <!-- Repository Stats -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-2.28.0-blue" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-2.29.0-blue" alt="Version"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/github/repo-size/marcusquinn/aidevops?style=flat&color=blue" alt="GitHub repo size"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/Lines%20of%20Code-18%2C000%2B-brightgreen" alt="Lines of code"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/github/languages/count/marcusquinn/aidevops" alt="GitHub language count"></a>
@@ -186,6 +186,20 @@ aidevops update     # Update to latest version
 aidevops uninstall  # Remove aidevops
 </code></pre>
 <p><strong>Your AI assistant now has agentic access to 30+ service integrations.</strong></p>
+<h3>OpenCode Antigravity OAuth Plugin</h3>
+<p>The setup automatically installs the <a href="https://github.com/NoeFabris/opencode-antigravity-auth">opencode-antigravity-auth</a> plugin, enabling Google OAuth authentication for OpenCode. This gives you access to Antigravity rate limits and premium models.</p>
+<p><strong>After setup, authenticate:</strong></p>
+<pre><code class="language-bash">opencode auth login
+# Select: Google → OAuth with Google (Antigravity)
+# Press Enter to skip Project ID prompt
+</code></pre>
+<p><strong>Available models via Antigravity:</strong></p>
+<ul>
+<li><code>gemini-3-pro-high</code> / <code>gemini-3-pro-low</code> / <code>gemini-3-flash</code></li>
+<li><code>claude-sonnet-4-5</code> / <code>claude-sonnet-4-5-thinking</code> / <code>claude-opus-4-5-thinking</code></li>
+<li><code>gpt-oss-120b-medium</code></li>
+</ul>
+<p><strong>Multi-account load balancing:</strong> Add multiple Google accounts for automatic rate limit distribution and failover. See the <a href="https://github.com/NoeFabris/opencode-antigravity-auth">plugin documentation</a> for model configuration.</p>
 <p><strong>Supported AI Assistants:</strong> (OpenCode &amp; Zed are our daily drivers and preferred tools, so will have the most continual testing. All 18 assistants below have MCP configuration support.)</p>
 <p><strong>Preferred:</strong></p>
 <ul>
