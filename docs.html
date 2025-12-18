@@ -480,6 +480,11 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <td>Yes</td>
 </tr>
 <tr>
+<td><a href="https://ui.shadcn.com/">shadcn/ui</a></td>
+<td>UI component library browsing &amp; installation</td>
+<td>No</td>
+</tr>
+<tr>
 <td><a href="https://snyk.io/">Snyk</a></td>
 <td>Security vulnerability scanning</td>
 <td>Yes</td>
@@ -521,6 +526,8 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><a href="https://docs.perplexity.ai/">Perplexity</a> - AI-powered web search and research</li>
 <li><a href="https://grep.app/">Grep by Vercel</a> - Search code snippets across GitHub repositories</li>
 <li><strong>Keyword Research</strong> - Strategic keyword research with SERP weakness detection (via DataForSEO + Serper + Ahrefs)</li>
+<li><strong>Site Crawler</strong> - Screaming Frog-like SEO auditing: broken links, redirects, meta issues, structured data</li>
+<li><strong>Domain Research</strong> - DNS intelligence via THC (4.51B records) and Reconeer APIs: rDNS, subdomains, CNAMEs</li>
 </ul>
 <p><strong>Data Extraction:</strong></p>
 <ul>
@@ -535,6 +542,10 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <ul>
 <li><a href="https://localwp.com/">LocalWP</a> - Direct WordPress database access</li>
 <li><a href="https://nextjs.org/docs">Next.js DevTools</a> - React/Next.js development assistance</li>
+</ul>
+<p><strong>UI Components:</strong></p>
+<ul>
+<li><a href="https://ui.shadcn.com/">shadcn/ui</a> - Browse, search, and install shadcn/ui components directly via MCP</li>
 </ul>
 <h3><strong>Quick Setup</strong></h3>
 <pre><code class="language-bash"># Install all MCP integrations
@@ -916,13 +927,18 @@ osgrep &quot;where is authentication handled?&quot;
 </tr>
 <tr>
 <td><code>@seo</code></td>
-<td>Search Console, keyword research</td>
+<td>Search Console, keyword research, domain intelligence</td>
 <td>gsc, ahrefs, dataforseo, serper, context7</td>
 </tr>
 <tr>
 <td><code>@dataforseo</code></td>
 <td>SERP, keywords, backlinks, on-page analysis</td>
 <td>dataforseo</td>
+</tr>
+<tr>
+<td><code>@domain-research</code></td>
+<td>DNS intelligence: rDNS, subdomains, CNAMEs (THC + Reconeer)</td>
+<td>(API-based)</td>
 </tr>
 <tr>
 <td><code>@serper</code></td>
@@ -998,6 +1014,28 @@ code-quality, browser-automation, git-platforms.
 <h2><strong>Slash Commands (OpenCode)</strong></h2>
 <p><strong>Slash commands provide quick access to common workflows directly from the OpenCode prompt.</strong> Type <code>/</code> to see available commands.</p>
 <h3><strong>Available Commands</strong></h3>
+<p><strong>Planning &amp; Task Management</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/create-prd</code></td>
+<td>Create a Product Requirements Document for complex features</td>
+</tr>
+<tr>
+<td><code>/generate-tasks</code></td>
+<td>Generate implementation tasks from a PRD</td>
+</tr>
+<tr>
+<td><code>/plan-status</code></td>
+<td>Check status of plans in <code>TODO.md</code> and <code>todo/PLANS.md</code></td>
+</tr>
+</tbody></table>
+<p>Plans are tracked in <code>TODO.md</code> (quick tasks) and <code>todo/PLANS.md</code> (complex execution plans with PRDs).</p>
 <p><strong>Development Workflow</strong> (typical order):</p>
 <table>
 <thead>
