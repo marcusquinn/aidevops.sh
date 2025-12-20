@@ -804,6 +804,102 @@ osgrep &quot;where is authentication handled?&quot;
 </tr>
 </tbody></table>
 <p>See <code>.agent/tools/context/osgrep.md</code> for complete documentation and AI tool configurations.</p>
+<h2><strong>Cross-Tool Compatibility</strong></h2>
+<h3>Agent Skills Standard</h3>
+<p>aidevops implements the <a href="https://agentskills.io/">Agent Skills</a> standard for cross-tool compatibility. Skills are auto-discovered by compatible AI assistants.</p>
+<p><strong>Generated SKILL.md files</strong> in <code>~/.aidevops/agents/</code> provide skill metadata for:</p>
+<ul>
+<li>Cursor</li>
+<li>Claude Code</li>
+<li>VS Code (GitHub Copilot)</li>
+<li>Other Agent Skills-compatible tools</li>
+</ul>
+<h3>Claude Code Plugin Marketplace</h3>
+<p>aidevops is registered as a <strong>Claude Code plugin marketplace</strong>. Install skills directly:</p>
+<pre><code class="language-bash"># Add the aidevops marketplace
+/plugin marketplace add marcusquinn/aidevops
+
+# Install all skills
+/plugin install aidevops-all@aidevops
+
+# Or install specific skills
+/plugin install wordpress@aidevops
+/plugin install seo@aidevops
+/plugin install tools-browser@aidevops
+</code></pre>
+<p><strong>Available plugins</strong> (17 total):</p>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>aidevops-all</code></td>
+<td>Complete framework with all agents and scripts</td>
+</tr>
+<tr>
+<td><code>wordpress</code></td>
+<td>WordPress ecosystem management</td>
+</tr>
+<tr>
+<td><code>seo</code></td>
+<td>SEO optimization and analysis</td>
+</tr>
+<tr>
+<td><code>build-agent</code></td>
+<td>Agent design and composition</td>
+</tr>
+<tr>
+<td><code>build-mcp</code></td>
+<td>MCP server development</td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td>Content creation workflows</td>
+</tr>
+<tr>
+<td><code>workflows</code></td>
+<td>Git, releases, version management</td>
+</tr>
+<tr>
+<td><code>tools-browser</code></td>
+<td>Playwright, Stagehand, Crawl4AI</td>
+</tr>
+<tr>
+<td><code>tools-code-review</code></td>
+<td>Codacy, CodeRabbit, SonarCloud, Snyk</td>
+</tr>
+<tr>
+<td><code>tools-context</code></td>
+<td>osgrep, Augment, Context7, DSPy</td>
+</tr>
+<tr>
+<td><code>tools-deployment</code></td>
+<td>Coolify, Vercel</td>
+</tr>
+<tr>
+<td><code>tools-git</code></td>
+<td>GitHub/GitLab/Gitea CLI</td>
+</tr>
+<tr>
+<td><code>tools-credentials</code></td>
+<td>API key management</td>
+</tr>
+<tr>
+<td><code>services-hosting</code></td>
+<td>Hetzner, Cloudflare, Hostinger</td>
+</tr>
+<tr>
+<td><code>services-email</code></td>
+<td>Amazon SES</td>
+</tr>
+<tr>
+<td><code>services-accounting</code></td>
+<td>QuickFile</td>
+</tr>
+</tbody></table>
 <h2><strong>AI Agents &amp; Subagents</strong></h2>
 <p><strong>Agents are specialized AI personas with focused knowledge and tool access.</strong> Instead of giving your AI assistant access to everything at once (which wastes context tokens), agents provide targeted capabilities for specific tasks.</p>
 <p>Call them in your AI assistant conversation with a simple @mention</p>
@@ -1003,7 +1099,14 @@ osgrep &quot;where is authentication handled?&quot;
 .agent/scripts/generate-opencode-agents.sh  # Shows status after generation
 </code></pre>
 <h3><strong>Setup for Other AI Assistants</strong></h3>
-<p>Add to your AI assistant&#39;s system prompt:</p>
+<p><strong>Claude Code</strong> (recommended):</p>
+<pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
+/plugin install aidevops-all@aidevops
+</code></pre>
+<p><strong>Agent Skills-compatible tools</strong> (Cursor, VS Code, etc.):
+Skills are auto-discovered from <code>~/.aidevops/agents/</code> via SKILL.md files after running <code>setup.sh</code>.</p>
+<p><strong>Manual configuration</strong> (other tools):
+Add to your AI assistant&#39;s system prompt:</p>
 <pre><code class="language-text">Before any DevOps operations, read ~/git/aidevops/AGENTS.md for authoritative guidance.
 
 When working with specific services, read the corresponding .agent/[service].md file
