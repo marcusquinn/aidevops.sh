@@ -142,7 +142,7 @@
 <a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/github/release-date/marcusquinn/aidevops" alt="GitHub Release Date"></a>
 <a href="https://github.com/marcusquinn/aidevops/commits/main"><img src="https://img.shields.io/github/commits-since/marcusquinn/aidevops/latest" alt="GitHub commits since latest release"></a></p>
 <!-- Repository Stats -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-2.34.0-blue" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-2.34.1-blue" alt="Version"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/github/repo-size/marcusquinn/aidevops?style=flat&color=blue" alt="GitHub repo size"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/Lines%20of%20Code-18%2C000%2B-brightgreen" alt="Lines of code"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/github/languages/count/marcusquinn/aidevops" alt="GitHub language count"></a>
@@ -183,8 +183,25 @@
 <p><strong>After installation, use the CLI:</strong></p>
 <pre><code class="language-bash">aidevops status     # Check what&#39;s installed
 aidevops update     # Update to latest version
+aidevops init       # Initialize aidevops in any project
+aidevops features   # List available features
 aidevops uninstall  # Remove aidevops
 </code></pre>
+<h3><strong>Use aidevops in Any Project</strong></h3>
+<p>Initialize aidevops features in any git repository:</p>
+<pre><code class="language-bash">cd ~/your-project
+aidevops init                         # Enable all features
+aidevops init planning                # Enable only planning
+aidevops init planning,time-tracking  # Enable specific features
+</code></pre>
+<p>This creates:</p>
+<ul>
+<li><code>.aidevops.json</code> - Configuration with enabled features</li>
+<li><code>.agent</code> symlink → <code>~/.aidevops/agents/</code></li>
+<li><code>TODO.md</code> - Quick task tracking with time estimates</li>
+<li><code>todo/PLANS.md</code> - Complex execution plans</li>
+</ul>
+<p><strong>Available features:</strong> <code>planning</code>, <code>git-workflow</code>, <code>code-quality</code>, <code>time-tracking</code></p>
 <p><strong>Your AI assistant now has agentic access to 30+ service integrations.</strong></p>
 <h3>OpenCode Antigravity OAuth Plugin</h3>
 <p>The setup automatically installs the <a href="https://github.com/NoeFabris/opencode-antigravity-auth">opencode-antigravity-auth</a> plugin, enabling Google OAuth authentication for OpenCode. This gives you access to Antigravity rate limits and premium models.</p>
@@ -1034,8 +1051,13 @@ code-quality, browser-automation, git-platforms.
 <td><code>/plan-status</code></td>
 <td>Check status of plans in <code>TODO.md</code> and <code>todo/PLANS.md</code></td>
 </tr>
+<tr>
+<td><code>/log-time-spent</code></td>
+<td>Log time spent on a task for tracking</td>
+</tr>
 </tbody></table>
 <p>Plans are tracked in <code>TODO.md</code> (quick tasks) and <code>todo/PLANS.md</code> (complex execution plans with PRDs).</p>
+<p><strong>Time Tracking</strong>: Tasks support time estimates and actuals with the format <code>~4h (ai:2h test:1h) started:2025-01-15T10:30Z</code>. Configure per-repo via <code>.aidevops.json</code>.</p>
 <p><strong>Development Workflow</strong> (typical order):</p>
 <table>
 <thead>
