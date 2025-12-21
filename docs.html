@@ -1070,6 +1070,10 @@ code-quality, browser-automation, git-platforms.
 </tr>
 </thead>
 <tbody><tr>
+<td><code>/list-todo</code></td>
+<td>List tasks with sorting, filtering, and grouping</td>
+</tr>
+<tr>
 <td><code>/save-todo</code></td>
 <td>Save discussion as task or plan (auto-detects complexity)</td>
 </tr>
@@ -1090,7 +1094,7 @@ code-quality, browser-automation, git-platforms.
 <td>Log time spent on a task for tracking</td>
 </tr>
 </tbody></table>
-<p>Plans are tracked in <code>TODO.md</code> (all tasks) and <code>todo/PLANS.md</code> (complex execution plans). The <code>/save-todo</code> command auto-detects whether work is simple (TODO.md only) or complex (PLANS.md + TODO.md reference).</p>
+<p>Plans are tracked in <code>TODO.md</code> (all tasks) and <code>todo/PLANS.md</code> (complex execution plans). Use <code>/list-todo</code> to browse tasks with options like <code>--priority</code>, <code>--tag seo</code>, <code>--owner marcus</code>, or <code>--group-by tag</code>.</p>
 <p><strong>Time Tracking</strong>: Tasks support time estimates and actuals with the format <code>~4h (ai:2h test:1h) started:2025-01-15T10:30Z</code>. Configure per-repo via <code>.aidevops.json</code>.</p>
 <p><strong>Development Workflow</strong> (typical order):</p>
 <table>
