@@ -1094,7 +1094,57 @@ code-quality, browser-automation, git-platforms.
 <td>Log time spent on a task for tracking</td>
 </tr>
 </tbody></table>
-<p>Plans are tracked in <code>TODO.md</code> (all tasks) and <code>todo/PLANS.md</code> (complex execution plans). Use <code>/list-todo</code> to browse tasks with options like <code>--priority</code>, <code>--tag seo</code>, <code>--owner marcus</code>, or <code>--group-by tag</code>.</p>
+<p>Plans are tracked in <code>TODO.md</code> (all tasks) and <code>todo/PLANS.md</code> (complex execution plans).</p>
+<p><strong><code>/list-todo</code> options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Example</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--priority</code></td>
+<td><code>/list-todo -p</code></td>
+<td>Sort by priority (high → low)</td>
+</tr>
+<tr>
+<td><code>--estimate</code></td>
+<td><code>/list-todo -e</code></td>
+<td>Sort by time estimate (shortest first)</td>
+</tr>
+<tr>
+<td><code>--tag</code></td>
+<td><code>/list-todo -t seo</code></td>
+<td>Filter by tag</td>
+</tr>
+<tr>
+<td><code>--owner</code></td>
+<td><code>/list-todo -o marcus</code></td>
+<td>Filter by assignee</td>
+</tr>
+<tr>
+<td><code>--estimate</code></td>
+<td><code>/list-todo --estimate &quot;&lt;2h&quot;</code></td>
+<td>Filter by estimate range</td>
+</tr>
+<tr>
+<td><code>--group-by</code></td>
+<td><code>/list-todo -g tag</code></td>
+<td>Group by tag, owner, status, or estimate</td>
+</tr>
+<tr>
+<td><code>--plans</code></td>
+<td><code>/list-todo --plans</code></td>
+<td>Include full plan details</td>
+</tr>
+<tr>
+<td><code>--compact</code></td>
+<td><code>/list-todo --compact</code></td>
+<td>One-line per task</td>
+</tr>
+</tbody></table>
 <p><strong>Time Tracking</strong>: Tasks support time estimates and actuals with the format <code>~4h (ai:2h test:1h) started:2025-01-15T10:30Z</code>. Configure per-repo via <code>.aidevops.json</code>.</p>
 <p><strong>Development Workflow</strong> (typical order):</p>
 <table>
