@@ -815,91 +815,11 @@ osgrep &quot;where is authentication handled?&quot;
 <li>Other Agent Skills-compatible tools</li>
 </ul>
 <h3>Claude Code Plugin Marketplace</h3>
-<p>aidevops is registered as a <strong>Claude Code plugin marketplace</strong>. Install skills directly:</p>
-<pre><code class="language-bash"># Add the aidevops marketplace
-/plugin marketplace add marcusquinn/aidevops
-
-# Install all skills
-/plugin install aidevops-all@aidevops
-
-# Or install specific skills
-/plugin install wordpress@aidevops
-/plugin install seo@aidevops
-/plugin install tools-browser@aidevops
+<p>aidevops is registered as a <strong>Claude Code plugin marketplace</strong>. Install with two commands:</p>
+<pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
+/plugin install aidevops@aidevops
 </code></pre>
-<p><strong>Available plugins</strong> (17 total):</p>
-<table>
-<thead>
-<tr>
-<th>Plugin</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>aidevops-all</code></td>
-<td>Complete framework with all agents and scripts</td>
-</tr>
-<tr>
-<td><code>wordpress</code></td>
-<td>WordPress ecosystem management</td>
-</tr>
-<tr>
-<td><code>seo</code></td>
-<td>SEO optimization and analysis</td>
-</tr>
-<tr>
-<td><code>build-agent</code></td>
-<td>Agent design and composition</td>
-</tr>
-<tr>
-<td><code>build-mcp</code></td>
-<td>MCP server development</td>
-</tr>
-<tr>
-<td><code>content</code></td>
-<td>Content creation workflows</td>
-</tr>
-<tr>
-<td><code>workflows</code></td>
-<td>Git, releases, version management</td>
-</tr>
-<tr>
-<td><code>tools-browser</code></td>
-<td>Playwright, Stagehand, Crawl4AI</td>
-</tr>
-<tr>
-<td><code>tools-code-review</code></td>
-<td>Codacy, CodeRabbit, SonarCloud, Snyk</td>
-</tr>
-<tr>
-<td><code>tools-context</code></td>
-<td>osgrep, Augment, Context7, DSPy</td>
-</tr>
-<tr>
-<td><code>tools-deployment</code></td>
-<td>Coolify, Vercel</td>
-</tr>
-<tr>
-<td><code>tools-git</code></td>
-<td>GitHub/GitLab/Gitea CLI</td>
-</tr>
-<tr>
-<td><code>tools-credentials</code></td>
-<td>API key management</td>
-</tr>
-<tr>
-<td><code>services-hosting</code></td>
-<td>Hetzner, Cloudflare, Hostinger</td>
-</tr>
-<tr>
-<td><code>services-email</code></td>
-<td>Amazon SES</td>
-</tr>
-<tr>
-<td><code>services-accounting</code></td>
-<td>QuickFile</td>
-</tr>
-</tbody></table>
+<p>This installs the complete framework: 14 domain agents, 80+ subagents, and 100+ helper scripts.</p>
 <h2><strong>AI Agents &amp; Subagents</strong></h2>
 <p><strong>Agents are specialized AI personas with focused knowledge and tool access.</strong> Instead of giving your AI assistant access to everything at once (which wastes context tokens), agents provide targeted capabilities for specific tasks.</p>
 <p>Call them in your AI assistant conversation with a simple @mention</p>
