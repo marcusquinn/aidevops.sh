@@ -269,7 +269,14 @@ aidevops init planning,time-tracking  # Enable specific features
 </tr>
 </tbody></table>
 <p><strong>Architecture:</strong> aidevops markdown files (TODO.md, PLANS.md) are the source of truth. Beads syncs from them for visualization.</p>
-<p>See <code>.agent/tools/task-management/beads.md</code> for complete documentation.</p>
+<p><strong>Optional Viewers:</strong> Beyond the <code>bd</code> CLI, there are community viewers for richer visualization:</p>
+<ul>
+<li><code>beads_viewer</code> (Python TUI) - PageRank, critical path analysis</li>
+<li><code>beads-ui</code> (Web) - Live updates in browser</li>
+<li><code>bdui</code> (React/Ink TUI) - Modern terminal UI</li>
+<li><code>perles</code> (Rust TUI) - BQL query language</li>
+</ul>
+<p>See <code>.agent/tools/task-management/beads.md</code> for complete documentation and installation commands.</p>
 <p><strong>Your AI assistant now has agentic access to 30+ service integrations.</strong></p>
 <h3>OpenCode Antigravity OAuth Plugin</h3>
 <p>The setup automatically installs the <a href="https://github.com/NoeFabris/opencode-antigravity-auth">opencode-antigravity-auth</a> plugin, enabling Google OAuth authentication for OpenCode. This gives you access to Antigravity rate limits and premium models.</p>
