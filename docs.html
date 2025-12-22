@@ -142,7 +142,7 @@
 <a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/github/release-date/marcusquinn/aidevops" alt="GitHub Release Date"></a>
 <a href="https://github.com/marcusquinn/aidevops/commits/main"><img src="https://img.shields.io/github/commits-since/marcusquinn/aidevops/latest" alt="GitHub commits since latest release"></a></p>
 <!-- Repository Stats -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-2.40.8-blue" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-2.40.9-blue" alt="Version"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/github/repo-size/marcusquinn/aidevops?style=flat&color=blue" alt="GitHub repo size"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/Lines%20of%20Code-18%2C000%2B-brightgreen" alt="Lines of code"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/github/languages/count/marcusquinn/aidevops" alt="GitHub language count"></a>
@@ -913,7 +913,7 @@ osgrep &quot;where is authentication handled?&quot;
 </tr>
 </tbody></table>
 <h3><strong>Main Agents</strong></h3>
-<p>Ordered as they appear in OpenCode Tab selector and other AI assistants (14 total):</p>
+<p>Ordered as they appear in OpenCode Tab selector and other AI assistants (12 total):</p>
 <table>
 <thead>
 <tr>
@@ -936,18 +936,6 @@ osgrep &quot;where is authentication handled?&quot;
 <td>context7, augment, repomix</td>
 </tr>
 <tr>
-<td>Build-Agent</td>
-<td><code>build-agent.md</code></td>
-<td>Design and improve AI agents</td>
-<td>context7, augment, repomix</td>
-</tr>
-<tr>
-<td>Build-MCP</td>
-<td><code>build-mcp.md</code></td>
-<td>Build MCP servers with TS+Bun+ElysiaJS</td>
-<td>context7, augment, repomix</td>
-</tr>
-<tr>
 <td>Accounting</td>
 <td><code>accounting.md</code></td>
 <td>Financial operations</td>
@@ -956,7 +944,7 @@ osgrep &quot;where is authentication handled?&quot;
 <tr>
 <td>AI-DevOps</td>
 <td><code>aidevops.md</code></td>
-<td>Framework operations, meta-agents, setup</td>
+<td>Framework operations, agent/MCP development</td>
 <td>context7, augment, repomix</td>
 </tr>
 <tr>
@@ -1002,10 +990,10 @@ osgrep &quot;where is authentication handled?&quot;
 <td>gsc, ahrefs, dataforseo, serper, context7, augment</td>
 </tr>
 <tr>
-<td>WordPress</td>
-<td><code>wordpress.md</code></td>
-<td>WordPress ecosystem (dev, admin, MainWP, LocalWP)</td>
-<td>localwp, context7, augment</td>
+<td>Onboarding</td>
+<td><code>onboarding.md</code></td>
+<td>Interactive setup wizard for new users</td>
+<td>augment</td>
 </tr>
 </tbody></table>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
@@ -1019,6 +1007,21 @@ osgrep &quot;where is authentication handled?&quot;
 </tr>
 </thead>
 <tbody><tr>
+<td><code>@build-agent</code></td>
+<td>Design and improve AI agents (under aidevops/)</td>
+<td>context7, augment, repomix</td>
+</tr>
+<tr>
+<td><code>@build-mcp</code></td>
+<td>Build MCP servers with TS+Bun+ElysiaJS (under aidevops/)</td>
+<td>context7, augment, repomix</td>
+</tr>
+<tr>
+<td><code>@wordpress</code></td>
+<td>WordPress ecosystem (dev, admin, MainWP, LocalWP)</td>
+<td>localwp, context7, augment</td>
+</tr>
+<tr>
 <td><code>@hostinger</code></td>
 <td>Hosting, WordPress, DNS, domains</td>
 <td>hostinger-api</td>
@@ -1030,7 +1033,7 @@ osgrep &quot;where is authentication handled?&quot;
 </tr>
 <tr>
 <td><code>@wordpress</code></td>
-<td>Local dev, MainWP management</td>
+<td>WordPress ecosystem (under tools/wordpress/)</td>
 <td>localwp, context7</td>
 </tr>
 <tr>
@@ -1075,7 +1078,7 @@ osgrep &quot;where is authentication handled?&quot;
 </tr>
 <tr>
 <td><code>@agent-review</code></td>
-<td>Session analysis, agent improvement (under build-agent/)</td>
+<td>Session analysis, agent improvement (under aidevops/build-agent/)</td>
 <td>(read/write only)</td>
 </tr>
 </tbody></table>
