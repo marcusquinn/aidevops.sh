@@ -1479,6 +1479,50 @@ code-quality, browser-automation, git-platforms.
 </ul>
 <p>The pre-edit check now recommends worktrees when creating branches, keeping your main directory on <code>main</code>.</p>
 <p>See <code>.agent/workflows/worktree.md</code> for the complete guide.</p>
+<h3>Session Management - Parallel AI Sessions</h3>
+<p>Spawn new AI sessions for parallel work or fresh context. The framework detects natural session completion points and suggests next steps.</p>
+<p><strong>Completion signals:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PR merged</td>
+<td>Branch work complete</td>
+</tr>
+<tr>
+<td>Release published</td>
+<td>Version shipped</td>
+</tr>
+<tr>
+<td>All tests passing</td>
+<td>Quality gates satisfied</td>
+</tr>
+<tr>
+<td>User says &quot;done&quot;</td>
+<td>Explicit completion</td>
+</tr>
+</tbody></table>
+<p><strong>Spawning options:</strong></p>
+<pre><code class="language-bash"># Background session (same terminal)
+opencode --non-interactive --prompt &quot;Continue with feature X&quot; &amp;
+
+# New terminal tab (macOS)
+osascript -e &#39;tell application &quot;Terminal&quot; to do script &quot;cd ~/Git/project &amp;&amp; opencode&quot;&#39;
+
+# Worktree-based (isolated branch)
+~/.aidevops/agents/scripts/worktree-helper.sh add feature/next-feature
+cd ../project-feature-next-feature &amp;&amp; opencode
+</code></pre>
+<p><strong>Session handoff pattern:</strong></p>
+<p>When ending a session, the AI provides a continuation prompt for the next session:</p>
+<pre><code class="language-markdown">## Continuation Prompt
+[Copy this to start a new session with full context]
+</code></pre>
+<p>See <code>.agent/workflows/session-manager.md</code> for the complete guide.</p>
 <h3><strong>Installation</strong></h3>
 <p>Slash commands are automatically installed by <code>setup.sh</code>:</p>
 <pre><code class="language-bash"># Commands are deployed to:
