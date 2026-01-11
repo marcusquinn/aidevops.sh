@@ -1419,6 +1419,10 @@ code-quality, browser-automation, git-platforms.
 <td>Check against documented quality standards</td>
 </tr>
 <tr>
+<td><code>/code-simplifier</code></td>
+<td>Simplify and refine code for clarity and maintainability</td>
+</tr>
+<tr>
 <td><code>/list-keys</code></td>
 <td>List all configured API keys and their storage locations</td>
 </tr>
@@ -1494,6 +1498,14 @@ code-quality, browser-automation, git-platforms.
 <td>Analyze session and suggest agent improvements</td>
 </tr>
 <tr>
+<td><code>/session-review</code></td>
+<td>Review session for completeness and capture learnings</td>
+</tr>
+<tr>
+<td><code>/full-loop</code></td>
+<td>End-to-end development loop (task → preflight → PR → postflight → deploy)</td>
+</tr>
+<tr>
 <td><code>/preflight-loop</code></td>
 <td>Run preflight checks iteratively until all pass</td>
 </tr>
@@ -1521,6 +1533,44 @@ code-quality, browser-automation, git-platforms.
 <li>Detailed logging of each iteration</li>
 </ul>
 <p>See <code>.agent/workflows/ralph-loop.md</code> for the full workflow guide.</p>
+<h3>Full Loop - End-to-End Development Automation</h3>
+<p>The <strong>Full Loop</strong> chains all development phases into a single automated workflow:</p>
+<pre><code class="language-text">Task Development → Preflight → PR Create → PR Review → Postflight → Deploy
+</code></pre>
+<p><strong>Usage:</strong></p>
+<pre><code class="language-bash"># Start a full development loop
+/full-loop &quot;Implement feature X with tests&quot;
+
+# With options
+/full-loop &quot;Fix bug Y&quot; --max-task-iterations 30 --skip-postflight
+</code></pre>
+<p><strong>Options:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--max-task-iterations N</code></td>
+<td>Max iterations for task (default: 50)</td>
+</tr>
+<tr>
+<td><code>--skip-preflight</code></td>
+<td>Skip preflight checks</td>
+</tr>
+<tr>
+<td><code>--skip-postflight</code></td>
+<td>Skip postflight monitoring</td>
+</tr>
+<tr>
+<td><code>--no-auto-pr</code></td>
+<td>Pause for manual PR creation</td>
+</tr>
+</tbody></table>
+<p>The loop pauses for human input at merge approval, rollback decisions, and scope changes.</p>
+<p>See <code>.agent/scripts/commands/full-loop.md</code> for complete documentation.</p>
 <h3>Git Worktrees - Parallel Branch Development</h3>
 <p>Work on multiple branches simultaneously without stashing or switching. Each branch gets its own directory.</p>
 <p><strong>Quick usage:</strong></p>
@@ -1541,7 +1591,7 @@ code-quality, browser-automation, git-platforms.
 <li>No context switching or stash management</li>
 <li>Each OpenCode session can work on a different branch</li>
 </ul>
-<p>The pre-edit check now recommends worktrees when creating branches, keeping your main directory on <code>main</code>.</p>
+<p><strong>Worktree-first workflow:</strong> The pre-edit check now <strong>enforces</strong> worktrees as the default when creating branches, keeping your main directory on <code>main</code>. This prevents uncommitted changes from blocking branch switches and ensures parallel sessions don&#39;t inherit wrong branch state.</p>
 <p>See <code>.agent/workflows/worktree.md</code> for the complete guide.</p>
 <h3>Session Management - Parallel AI Sessions</h3>
 <p>Spawn new AI sessions for parallel work or fresh context. The framework detects natural session completion points and suggests next steps.</p>
