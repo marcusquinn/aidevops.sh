@@ -4,6 +4,9 @@
 User-agent: *
 Allow: /
 
+# Block Cloudflare internal paths (email obfuscation, etc.)
+Disallow: /cdn-cgi/
+
 # Sitemap location
 Sitemap: https://aidevops.sh/sitemap.xml
 
