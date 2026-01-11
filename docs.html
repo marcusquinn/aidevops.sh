@@ -687,11 +687,17 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <td>AI browser automation</td>
 <td>Optional (Browserbase)</td>
 </tr>
+<tr>
+<td><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a></td>
+<td>Semantic code analysis (95% token savings)</td>
+<td>No</td>
+</tr>
 </tbody></table>
 <h3><strong>By Category</strong></h3>
 <p><strong>Context &amp; Codebase:</strong></p>
 <ul>
 <li><a href="https://docs.augmentcode.com/context-services/mcp/overview">Augment Context Engine</a> - Semantic codebase retrieval with deep code understanding</li>
+<li><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a> - Semantic code analysis with 95% token savings (tree, structure, CFG, DFG, impact analysis)</li>
 <li><a href="https://github.com/Ryandonofrio3/osgrep">osgrep</a> - Local semantic search (100% private, no cloud)</li>
 <li><a href="https://context7.com/">Context7</a> - Real-time documentation access for thousands of libraries</li>
 <li><a href="https://github.com/yamadashy/repomix">Repomix</a> - Pack codebases into AI-friendly context</li>
@@ -968,6 +974,56 @@ osgrep &quot;where is authentication handled?&quot;
 </tr>
 </tbody></table>
 <p>See <code>.agent/tools/context/osgrep.md</code> for complete documentation and AI tool configurations.</p>
+<h3>llm-tldr - Semantic Code Analysis</h3>
+<p><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a> extracts code structure and semantics, saving ~95% tokens compared to raw code. From the <a href="https://github.com/parcadei/Continuous-Claude-v3">Continuous-Claude</a> project.</p>
+<pre><code class="language-bash"># Install
+pip install llm-tldr
+
+# CLI usage
+tldr tree ./src                    # File structure with line counts
+tldr structure src/auth.py         # Code skeleton (classes, functions)
+tldr context src/auth.py           # Full semantic analysis
+tldr search &quot;authentication&quot; ./src # Semantic code search
+tldr impact src/auth.py validate   # What would change affect?
+</code></pre>
+<p><strong>MCP Integration:</strong></p>
+<pre><code class="language-json">{
+  &quot;llm-tldr&quot;: {
+    &quot;command&quot;: &quot;tldr-mcp&quot;,
+    &quot;args&quot;: [&quot;--project&quot;, &quot;${workspaceFolder}&quot;]
+  }
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Token Savings</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Structure extraction</td>
+<td>90%</td>
+<td>Understanding code layout</td>
+</tr>
+<tr>
+<td>Context analysis</td>
+<td>95%</td>
+<td>Deep code understanding</td>
+</tr>
+<tr>
+<td>Semantic search</td>
+<td>N/A</td>
+<td>Finding code by meaning</td>
+</tr>
+<tr>
+<td>Impact analysis</td>
+<td>N/A</td>
+<td>Change risk assessment</td>
+</tr>
+</tbody></table>
+<p>See <code>.agent/tools/context/llm-tldr.md</code> for complete documentation.</p>
 <h2><strong>Cross-Tool Compatibility</strong></h2>
 <h3>Agent Skills Standard</h3>
 <p>aidevops implements the <a href="https://agentskills.io/">Agent Skills</a> standard for cross-tool compatibility. Skills are auto-discovered by compatible AI assistants.</p>
@@ -1265,6 +1321,14 @@ code-quality, browser-automation, git-platforms.
 <td><code>/sync-beads</code></td>
 <td>Sync TODO.md/PLANS.md with Beads task graph</td>
 </tr>
+<tr>
+<td><code>/remember</code></td>
+<td>Store knowledge for cross-session recall</td>
+</tr>
+<tr>
+<td><code>/recall</code></td>
+<td>Search memories from previous sessions</td>
+</tr>
 </tbody></table>
 <p>Plans are tracked in <code>TODO.md</code> (all tasks) and <code>todo/PLANS.md</code> (complex execution plans). Task dependencies are visualized with <a href="https://github.com/steveyegge/beads">Beads</a>.</p>
 <p><strong><code>/list-todo</code> options:</strong></p>
@@ -1523,6 +1587,86 @@ cd ../project-feature-next-feature &amp;&amp; opencode
 [Copy this to start a new session with full context]
 </code></pre>
 <p>See <code>.agent/workflows/session-manager.md</code> for the complete guide.</p>
+<h3>Cross-Session Memory System</h3>
+<p><strong>&quot;Compound, then clear&quot;</strong> - Sessions should build on each other. The memory system stores knowledge, patterns, and learnings for future sessions using SQLite FTS5 for fast full-text search.</p>
+<p><strong>Slash commands:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/remember {content}</code></td>
+<td>Store a memory with AI-assisted categorization</td>
+</tr>
+<tr>
+<td><code>/recall {query}</code></td>
+<td>Search memories by keyword</td>
+</tr>
+<tr>
+<td><code>/recall --recent</code></td>
+<td>Show 10 most recent memories</td>
+</tr>
+<tr>
+<td><code>/recall --stats</code></td>
+<td>Show memory statistics</td>
+</tr>
+</tbody></table>
+<p><strong>Memory types:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Use For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>WORKING_SOLUTION</code></td>
+<td>Fixes that worked</td>
+</tr>
+<tr>
+<td><code>FAILED_APPROACH</code></td>
+<td>What didn&#39;t work (avoid repeating)</td>
+</tr>
+<tr>
+<td><code>CODEBASE_PATTERN</code></td>
+<td>Project conventions</td>
+</tr>
+<tr>
+<td><code>USER_PREFERENCE</code></td>
+<td>Developer preferences</td>
+</tr>
+<tr>
+<td><code>TOOL_CONFIG</code></td>
+<td>Tool setup notes</td>
+</tr>
+<tr>
+<td><code>DECISION</code></td>
+<td>Architecture decisions</td>
+</tr>
+<tr>
+<td><code>CONTEXT</code></td>
+<td>Background info</td>
+</tr>
+</tbody></table>
+<p><strong>CLI usage:</strong></p>
+<pre><code class="language-bash"># Store a memory
+~/.aidevops/agents/scripts/memory-helper.sh store &quot;WORKING_SOLUTION&quot; &quot;Fixed CORS with nginx headers&quot; &quot;cors,nginx&quot;
+
+# Recall memories
+~/.aidevops/agents/scripts/memory-helper.sh recall &quot;cors&quot;
+
+# View statistics
+~/.aidevops/agents/scripts/memory-helper.sh stats
+
+# Maintenance
+~/.aidevops/agents/scripts/memory-helper.sh validate   # Check for stale entries
+~/.aidevops/agents/scripts/memory-helper.sh prune      # Remove stale memories
+</code></pre>
+<p><strong>Storage:</strong> <code>~/.aidevops/.agent-workspace/memory/memory.db</code></p>
+<p>See <code>.agent/memory/README.md</code> for complete documentation.</p>
 <h3><strong>Installation</strong></h3>
 <p>Slash commands are automatically installed by <code>setup.sh</code>:</p>
 <pre><code class="language-bash"># Commands are deployed to:
