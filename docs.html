@@ -122,6 +122,7 @@
 <li><strong>Guided development</strong> - Build your AI team incrementally, with specialists for every online need</li>
 </ul>
 <p>The result: AI agents that work <em>with</em> your development process, not around it.</p>
+<p><strong>Built on proven patterns</strong>: aidevops implements <a href="#agent-design-patterns">industry-standard agent design patterns</a> validated across Claude Code, Manus, and Cursor - including multi-layer action spaces, context isolation, and iterative execution loops.</p>
 <p><strong><a href="https://aidevops.sh">aidevops</a></strong> knows what you need to know.</p>
 <h2><strong>Why This Framework?</strong></h2>
 <p><strong>Beyond Single-Repo Limitations:</strong> VS Code and Web UIs work on one repo at a time. CLI AI assistants can manage your entire infrastructure when given the right tools, access, and guidance.</p>
@@ -495,6 +496,59 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <li><strong>Performance Auditing</strong>: PageSpeed Insights and Lighthouse integration</li>
 <li><strong>Uptime Monitoring</strong>: Updown.io integration for website and SSL monitoring</li>
 </ul>
+<h2><strong>Agent Design Patterns</strong></h2>
+<p>aidevops implements proven agent design patterns identified by <a href="https://x.com/RLanceMartin/status/2009683038272401719">Lance Martin (LangChain)</a> and validated across successful agents like Claude Code, Manus, and Cursor.</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Description</th>
+<th>aidevops Implementation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Give Agents a Computer</strong></td>
+<td>Filesystem + shell for persistent context</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 100+ helper scripts</td>
+</tr>
+<tr>
+<td><strong>Multi-Layer Action Space</strong></td>
+<td>Few tools, push actions to computer</td>
+<td>Per-agent MCP filtering (~12-20 tools each)</td>
+</tr>
+<tr>
+<td><strong>Progressive Disclosure</strong></td>
+<td>Load context on-demand</td>
+<td>Subagent tables, YAML frontmatter, read-on-demand</td>
+</tr>
+<tr>
+<td><strong>Offload Context</strong></td>
+<td>Write results to filesystem</td>
+<td><code>.agent-workspace/work/[project]/</code> for persistence</td>
+</tr>
+<tr>
+<td><strong>Cache Context</strong></td>
+<td>Prompt caching for cost</td>
+<td>Stable instruction prefixes</td>
+</tr>
+<tr>
+<td><strong>Isolate Context</strong></td>
+<td>Sub-agents with separate windows</td>
+<td>Subagent files with specific tool permissions</td>
+</tr>
+<tr>
+<td><strong>Ralph Loop</strong></td>
+<td>Iterative execution until complete</td>
+<td><code>ralph-loop-helper.sh</code>, <code>full-loop-helper.sh</code></td>
+</tr>
+<tr>
+<td><strong>Evolve Context</strong></td>
+<td>Learn from sessions</td>
+<td><code>/remember</code>, <code>/recall</code> with SQLite FTS5</td>
+</tr>
+</tbody></table>
+<p><strong>Key insight</strong>: Context is a finite resource with diminishing returns. aidevops treats every token as precious - loading only what&#39;s needed, when it&#39;s needed.</p>
+<p>See <code>.agent/aidevops/architecture.md</code> for detailed implementation notes and references.</p>
 <h2><strong>Requirements</strong></h2>
 <pre><code class="language-bash"># Install dependencies (auto-detected by setup.sh)
 brew install sshpass jq curl mkcert dnsmasq  # macOS
