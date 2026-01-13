@@ -186,14 +186,28 @@
                             <span class="dot green"></span>
                         </div>
                         <div class="install-tabs" role="tablist">
-                            <button class="install-tab active" role="tab" aria-selected="true" data-tab="npm">npm</button>
+                            <button class="install-tab active" role="tab" aria-selected="true" data-tab="bun">bun</button>
+                            <button class="install-tab" role="tab" aria-selected="false" data-tab="npm">npm</button>
                             <button class="install-tab" role="tab" aria-selected="false" data-tab="brew">brew</button>
                             <button class="install-tab" role="tab" aria-selected="false" data-tab="curl">curl</button>
                             <button class="install-tab" role="tab" aria-selected="false" data-tab="git">git</button>
                         </div>
                     </div>
                     <div class="install-panels">
-                        <div class="install-panel active" data-panel="npm">
+                        <div class="install-panel active" data-panel="bun">
+                            <button class="install-command" id="copyBtnBun" data-command="bun install -g aidevops">
+                                <span class="command-text"><span class="command-dim">bun install -g</span> <span class="command-highlight">aidevops</span></span>
+                                <span class="copy-status">
+                                    <svg class="copy-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+                                        <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
+                                    </svg>
+                                    <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+                                        <path d="M2.75 15.0938L9 20.25L21.25 3.75" stroke="#B2E969"/>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="install-panel" data-panel="npm">
                             <button class="install-command" id="copyBtnNpm" data-command="npm install -g aidevops">
                                 <span class="command-text"><span class="command-dim">npm install -g</span> <span class="command-highlight">aidevops</span></span>
                                 <span class="copy-status">
