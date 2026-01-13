@@ -221,6 +221,13 @@ aidevops init planning,time-tracking  # Enable specific features
 <li><code>.beads/</code> - Task graph database (if beads enabled)</li>
 </ul>
 <p><strong>Available features:</strong> <code>planning</code>, <code>git-workflow</code>, <code>code-quality</code>, <code>time-tracking</code>, <code>beads</code></p>
+<h3>Upgrade Planning Files</h3>
+<p>When aidevops templates evolve, upgrade existing projects to the latest format:</p>
+<pre><code class="language-bash">aidevops upgrade-planning           # Interactive upgrade with backup
+aidevops upgrade-planning --dry-run # Preview changes without modifying
+aidevops upgrade-planning --force   # Skip confirmation prompt
+</code></pre>
+<p>This preserves your existing tasks while adding TOON-enhanced parsing, dependency tracking, and better structure.</p>
 <h3>Task Graph Visualization with Beads</h3>
 <p><a href="https://github.com/steveyegge/beads">Beads</a> provides task dependency tracking and graph visualization:</p>
 <pre><code class="language-bash">aidevops init beads              # Enable beads (includes planning)
