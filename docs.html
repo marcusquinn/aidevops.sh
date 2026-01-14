@@ -212,13 +212,15 @@ brew install aidevops
 <li>Guide you through setting up each service with links and commands</li>
 </ul>
 <p><strong>After installation, use the CLI:</strong></p>
-<pre><code class="language-bash">aidevops status      # Check what&#39;s installed
-aidevops update      # Update framework + check registered projects
-aidevops init        # Initialize aidevops in any project
-aidevops features    # List available features
-aidevops repos       # List/add/remove registered projects
-aidevops detect      # Scan for unregistered aidevops projects
-aidevops uninstall   # Remove aidevops
+<pre><code class="language-bash">aidevops status           # Check what&#39;s installed
+aidevops update           # Update framework + check registered projects
+aidevops init             # Initialize aidevops in any project
+aidevops features         # List available features
+aidevops repos            # List/add/remove registered projects
+aidevops detect           # Scan for unregistered aidevops projects
+aidevops upgrade-planning # Upgrade TODO.md/PLANS.md to latest templates
+aidevops update-tools     # Check and update installed tools
+aidevops uninstall        # Remove aidevops
 </code></pre>
 <p><strong>Project tracking:</strong> When you run <code>aidevops init</code>, the project is automatically registered in <code>~/.config/aidevops/repos.json</code>. Running <code>aidevops update</code> checks all registered projects for version updates.</p>
 <h3><strong>Use aidevops in Any Project</strong></h3>
