@@ -547,7 +547,8 @@ body {
     border-radius: 4px;
 }
 
-.supported-tools-list a:hover {
+.supported-tools-list a:hover,
+.supported-tools-list a:focus {
     color: var(--accent);
 }
 
