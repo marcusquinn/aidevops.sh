@@ -180,19 +180,16 @@
 <h2><strong>Quick Start</strong></h2>
 <h3>Installation Options</h3>
 <p><strong>npm</strong> (recommended - <a href="https://docs.npmjs.com/generating-provenance-statements">verified provenance</a>):</p>
-<pre><code class="language-bash">npm install -g aidevops
-aidevops update  # Deploy agents (required after npm install)
+<pre><code class="language-bash">npm install -g aidevops &amp;&amp; aidevops update
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>: npm suppresses postinstall output. Run <code>aidevops update</code> to deploy agents to <code>~/.aidevops/agents/</code>. The CLI will remind you if agents need updating.</p>
+<p><strong>Note</strong>: npm suppresses postinstall output. The <code>&amp;&amp; aidevops update</code> deploys agents to <code>~/.aidevops/agents/</code>. The CLI will remind you if agents need updating.</p>
 </blockquote>
 <p><strong>Bun</strong> (fast alternative):</p>
-<pre><code class="language-bash">bun install -g aidevops
-aidevops update  # Deploy agents
+<pre><code class="language-bash">bun install -g aidevops &amp;&amp; aidevops update
 </code></pre>
 <p><strong>Homebrew</strong> (macOS/Linux):</p>
-<pre><code class="language-bash">brew tap marcusquinn/tap
-brew install aidevops
+<pre><code class="language-bash">brew install marcusquinn/tap/aidevops &amp;&amp; aidevops update
 </code></pre>
 <p><strong>Direct from source</strong> (aidevops.sh):</p>
 <pre><code class="language-bash">bash &lt;(curl -fsSL https://aidevops.sh/install)
@@ -2002,13 +1999,13 @@ bash .agent/scripts/setup-mcp-integrations.sh all
 </ul>
 <p><strong>Get Started:</strong></p>
 <pre><code class="language-bash"># npm (recommended)
-npm install -g aidevops
+npm install -g aidevops &amp;&amp; aidevops update
 
 # Bun (fast alternative)
-bun install -g aidevops
+bun install -g aidevops &amp;&amp; aidevops update
 
 # Homebrew
-brew tap marcusquinn/tap &amp;&amp; brew install aidevops
+brew install marcusquinn/tap/aidevops &amp;&amp; aidevops update
 
 # Direct from source
 bash &lt;(curl -fsSL https://aidevops.sh/install)
