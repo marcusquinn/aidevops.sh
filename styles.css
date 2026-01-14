@@ -517,6 +517,56 @@ body {
     flex-wrap: wrap;
 }
 
+/* Supported Tools */
+.supported-tools {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.supported-tools-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.supported-tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.supported-tools-list a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.supported-tools-list a:hover {
+    color: var(--accent);
+}
+
+.tool-separator {
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+@media (max-width: 640px) {
+    .supported-tools-list {
+        gap: 0.125rem;
+        font-size: 0.8rem;
+    }
+    
+    .supported-tools-list a {
+        padding: 0.2rem 0.35rem;
+    }
+}
+
 .btn {
     position: relative;
     display: inline-flex;
