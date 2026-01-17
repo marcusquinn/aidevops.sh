@@ -578,12 +578,42 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <p>See <code>.agent/aidevops/architecture.md</code> for detailed implementation notes and references.</p>
 <h2><strong>Requirements</strong></h2>
 <pre><code class="language-bash"># Install dependencies (auto-detected by setup.sh)
-brew install sshpass jq curl mkcert dnsmasq  # macOS
-sudo apt-get install sshpass jq curl dnsmasq  # Ubuntu/Debian
+brew install sshpass jq curl mkcert dnsmasq fd ripgrep  # macOS
+sudo apt-get install sshpass jq curl dnsmasq fd-find ripgrep  # Ubuntu/Debian
 
 # Generate SSH key
 ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 </code></pre>
+<h3><strong>File Discovery Tools</strong></h3>
+<p>AI agents use fast file discovery tools for efficient codebase navigation:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Purpose</th>
+<th>Speed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>fd</code></td>
+<td>Fast file finder (replaces <code>find</code>)</td>
+<td>~10x faster</td>
+</tr>
+<tr>
+<td><code>ripgrep</code></td>
+<td>Fast content search (replaces <code>grep</code>)</td>
+<td>~10x faster</td>
+</tr>
+</tbody></table>
+<p>Both tools respect <code>.gitignore</code> by default and are written in Rust for maximum performance.</p>
+<p><strong>Preference order for file discovery:</strong></p>
+<ol>
+<li><code>git ls-files &#39;*.md&#39;</code> - Instant, git-tracked files only</li>
+<li><code>fd -e md</code> - Fast, respects .gitignore</li>
+<li><code>rg --files -g &#39;*.md&#39;</code> - Fast, respects .gitignore</li>
+<li>Built-in glob tools - Fallback when bash unavailable</li>
+</ol>
+<p>The setup script offers to install these tools automatically.</p>
 <h2><strong>Comprehensive Service Coverage</strong></h2>
 <h3><strong>Infrastructure &amp; Hosting</strong></h3>
 <ul>
