@@ -155,7 +155,7 @@
 <a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/github/release-date/marcusquinn/aidevops" alt="GitHub Release Date"></a>
 <a href="https://github.com/marcusquinn/aidevops/commits/main"><img src="https://img.shields.io/github/commits-since/marcusquinn/aidevops/latest" alt="GitHub commits since latest release"></a></p>
 <!-- Repository Stats -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-2.59.0-blue" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-2.60.0-blue" alt="Version"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/github/repo-size/marcusquinn/aidevops?style=flat&color=blue" alt="GitHub repo size"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/Lines%20of%20Code-18%2C000%2B-brightgreen" alt="Lines of code"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/github/languages/count/marcusquinn/aidevops" alt="GitHub language count"></a>
@@ -1695,15 +1695,27 @@ code-quality, browser-automation, git-platforms.
 <p>See <code>.agent/scripts/commands/full-loop.md</code> for complete documentation.</p>
 <h3>Git Worktrees - Parallel Branch Development</h3>
 <p>Work on multiple branches simultaneously without stashing or switching. Each branch gets its own directory.</p>
-<p><strong>Quick usage:</strong></p>
-<pre><code class="language-bash"># Create worktree for a new branch
-~/.aidevops/agents/scripts/worktree-helper.sh add feature/my-feature
-# Creates: ~/Git/aidevops-feature-my-feature/
+<p><strong>Recommended: <a href="https://worktrunk.dev">Worktrunk</a></strong> (<code>wt</code>) - Git worktree management with shell integration, CI status, and PR links:</p>
+<pre><code class="language-bash"># Install (macOS/Linux)
+brew install max-sixty/worktrunk/wt &amp;&amp; wt config shell install
+# Restart your shell for shell integration to take effect
 
-# List all worktrees
+# Create worktree + cd into it
+wt switch -c feature/my-feature
+
+# Create worktree + start any AI CLI (-x runs command after switch)
+wt switch -c -x claude feature/ai-task
+
+# List worktrees with CI status and PR links
+wt list
+
+# Merge + cleanup (squash/rebase options)
+wt merge
+</code></pre>
+<p><strong>Fallback</strong> (no dependencies):</p>
+<pre><code class="language-bash">~/.aidevops/agents/scripts/worktree-helper.sh add feature/my-feature
+# Creates: ~/Git/{repo}-feature-my-feature/ (cd there manually)
 ~/.aidevops/agents/scripts/worktree-helper.sh list
-
-# Clean up after merge
 ~/.aidevops/agents/scripts/worktree-helper.sh clean
 </code></pre>
 <p><strong>Benefits:</strong></p>
@@ -1711,10 +1723,10 @@ code-quality, browser-automation, git-platforms.
 <li>Run tests on one branch while coding on another</li>
 <li>Compare implementations side-by-side</li>
 <li>No context switching or stash management</li>
-<li>Each OpenCode session can work on a different branch</li>
+<li>Each AI session can work on a different branch</li>
 </ul>
 <p><strong>Worktree-first workflow:</strong> The pre-edit check now <strong>enforces</strong> worktrees as the default when creating branches, keeping your main directory on <code>main</code>. This prevents uncommitted changes from blocking branch switches and ensures parallel sessions don&#39;t inherit wrong branch state.</p>
-<p>See <code>.agent/workflows/worktree.md</code> for the complete guide.</p>
+<p>See <code>.agent/workflows/worktree.md</code> for the complete guide and <code>.agent/tools/git/worktrunk.md</code> for Worktrunk documentation.</p>
 <h3>Session Management - Parallel AI Sessions</h3>
 <p>Spawn new AI sessions for parallel work or fresh context. The framework detects natural session completion points and suggests next steps.</p>
 <p><strong>Completion signals:</strong></p>
@@ -1749,9 +1761,11 @@ opencode --non-interactive --prompt &quot;Continue with feature X&quot; &amp;
 # New terminal tab (macOS)
 osascript -e &#39;tell application &quot;Terminal&quot; to do script &quot;cd ~/Git/project &amp;&amp; opencode&quot;&#39;
 
-# Worktree-based (isolated branch)
-~/.aidevops/agents/scripts/worktree-helper.sh add feature/next-feature
-cd ../project-feature-next-feature &amp;&amp; opencode
+# Worktree-based (isolated branch) - recommended
+wt switch -c -x opencode feature/next-feature  # Worktrunk: create + start AI CLI
+# Or fallback:
+# ~/.aidevops/agents/scripts/worktree-helper.sh add feature/next-feature
+# cd ~/Git/{repo}-feature-next-feature &amp;&amp; opencode
 </code></pre>
 <p><strong>Session handoff pattern:</strong></p>
 <p>When ending a session, the AI provides a continuation prompt for the next session:</p>
