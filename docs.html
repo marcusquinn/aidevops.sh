@@ -1183,6 +1183,30 @@ tldr impact src/auth.py validate   # What would change affect?
 /plugin install aidevops@aidevops
 </code></pre>
 <p>This installs the complete framework: ~15 domain agents, 80+ subagents, and 100+ helper scripts.</p>
+<h3>Importing External Skills</h3>
+<p>Import skills from any GitHub repository using <code>/add-skill</code>:</p>
+<pre><code class="language-bash"># Import from GitHub (auto-detects format)
+/add-skill owner/repo
+
+# Examples
+/add-skill anthropics/courses           # SKILL.md format
+/add-skill PatrickJS/awesome-cursorrules # .cursorrules format
+/add-skill someone/agents-repo          # AGENTS.md format
+</code></pre>
+<p><strong>Supported formats:</strong></p>
+<ul>
+<li><code>SKILL.md</code> - Agent Skills standard (preferred)</li>
+<li><code>AGENTS.md</code> - Claude Code agents format</li>
+<li><code>.cursorrules</code> - Cursor rules (auto-converted to SKILL.md)</li>
+</ul>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Conflict detection with existing skills</li>
+<li>Version tracking for updates (<code>/add-skill --check-updates</code>)</li>
+<li>Symlinks created for Claude Code, Cursor, Amp, and other tools</li>
+<li>Registry stored in <code>.agent/configs/skill-sources.json</code></li>
+</ul>
+<p>See <code>.agent/tools/build-agent/add-skill.md</code> for full documentation.</p>
 <h2><strong>AI Agents &amp; Subagents</strong></h2>
 <p><strong>Agents are specialized AI personas with focused knowledge and tool access.</strong> Instead of giving your AI assistant access to everything at once (which wastes context tokens), agents provide targeted capabilities for specific tasks.</p>
 <p>Call them in your AI assistant conversation with a simple @mention</p>
@@ -1650,6 +1674,10 @@ code-quality, browser-automation, git-platforms.
 </tr>
 </thead>
 <tbody><tr>
+<td><code>/add-skill</code></td>
+<td>Import external skills from GitHub repos (SKILL.md, AGENTS.md, .cursorrules)</td>
+</tr>
+<tr>
 <td><code>/agent-review</code></td>
 <td>Analyze session and suggest agent improvements</td>
 </tr>
