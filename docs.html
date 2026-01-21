@@ -545,7 +545,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <li><strong>Uptime Monitoring</strong>: Updown.io integration for website and SSL monitoring</li>
 </ul>
 <h2><strong>Imported Skills</strong></h2>
-<p>aidevops includes curated skills imported from external repositories, with automatic update tracking:</p>
+<p>aidevops includes curated skills imported from external repositories. Skills from GitHub repos support automatic update tracking:</p>
 <table>
 <thead>
 <tr>
@@ -566,17 +566,17 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 </tr>
 <tr>
 <td><strong>animejs</strong></td>
-<td><a href="https://animejs.com">Context7 docs</a></td>
-<td>JavaScript animation library patterns and API</td>
+<td><a href="https://animejs.com">animejs.com</a></td>
+<td>JavaScript animation library patterns and API (via Context7)</td>
 </tr>
 </tbody></table>
 <p><strong>Skill Commands:</strong></p>
-<pre><code class="language-bash">/add-skill &lt;owner/repo&gt;      # Import a skill from GitHub
-/add-skill list              # List imported skills
-/add-skill check-updates     # Check for upstream updates
-/add-skill &lt;repo&gt; --force    # Update an existing skill
+<pre><code class="language-bash">/add-skill &lt;owner/repo&gt;        # Import a skill from GitHub
+/add-skill list                # List imported skills
+/add-skill check-updates       # Check for upstream updates
+/add-skill &lt;owner/repo&gt; --force  # Update an existing skill
 </code></pre>
-<p>Skills are registered in <code>.agent/configs/skill-sources.json</code> and checked for updates during <code>./setup.sh</code>.</p>
+<p>Skills are registered in <code>~/.aidevops/agents/configs/skill-sources.json</code> and checked for updates during <code>./setup.sh</code>.</p>
 <h2><strong>Agent Design Patterns</strong></h2>
 <p>aidevops implements proven agent design patterns identified by <a href="https://x.com/RLanceMartin/status/2009683038272401719">Lance Martin (LangChain)</a> and validated across successful agents like Claude Code, Manus, and Cursor.</p>
 <table>
