@@ -570,13 +570,23 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <td>JavaScript animation library patterns and API (via Context7)</td>
 </tr>
 </tbody></table>
-<p><strong>Skill Commands:</strong></p>
-<pre><code class="language-bash">/add-skill &lt;owner/repo&gt;        # Import a skill from GitHub
-/add-skill list                # List imported skills
-/add-skill check-updates       # Check for upstream updates
-/add-skill &lt;owner/repo&gt; --force  # Update an existing skill
+<p><strong>CLI Commands:</strong></p>
+<pre><code class="language-bash">aidevops skill add &lt;owner/repo&gt;    # Import a skill from GitHub
+aidevops skill list                # List imported skills
+aidevops skill check               # Check for upstream updates
+aidevops skill update [name]       # Update specific or all skills
+aidevops skill remove &lt;name&gt;       # Remove an imported skill
 </code></pre>
-<p>Skills are registered in <code>~/.aidevops/agents/configs/skill-sources.json</code> and checked for updates during <code>./setup.sh</code>.</p>
+<p>Skills are registered in <code>~/.aidevops/agents/configs/skill-sources.json</code> with upstream commit tracking for update detection. Telemetry is disabled - no data is sent to third parties.</p>
+<p><strong>Browse community skills:</strong> <a href="https://skills.sh">skills.sh</a> | <strong>Specification:</strong> <a href="https://agentskills.io">agentskills.io</a></p>
+<p><strong>Reference:</strong></p>
+<ul>
+<li><a href="https://agentskills.io/specification">Agent Skills Specification</a> - The open format for SKILL.md files</li>
+<li><a href="https://skills.sh">skills.sh Leaderboard</a> - Discover popular community skills</li>
+<li><a href="https://github.com/vercel-labs/add-skill">vercel-labs/add-skill</a> - The upstream CLI tool (aidevops uses its own implementation)</li>
+<li><a href="https://github.com/anthropics/skills">anthropics/skills</a> - Official Anthropic example skills</li>
+<li><a href="https://github.com/agentskills/agentskills">agentskills/agentskills</a> - Specification source and reference library</li>
+</ul>
 <h2><strong>Agent Design Patterns</strong></h2>
 <p>aidevops implements proven agent design patterns identified by <a href="https://x.com/RLanceMartin/status/2009683038272401719">Lance Martin (LangChain)</a> and validated across successful agents like Claude Code, Manus, and Cursor.</p>
 <table>
@@ -1226,29 +1236,67 @@ tldr impact src/auth.py validate   # What would change affect?
 </code></pre>
 <p>This installs the complete framework: 13 domain agents, 225+ subagents, and 130+ helper scripts.</p>
 <h3>Importing External Skills</h3>
-<p>Import skills from any GitHub repository using <code>/add-skill</code>:</p>
+<p>Import skills from any GitHub repository using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
-/add-skill owner/repo
+aidevops skill add owner/repo
 
 # Examples
-/add-skill anthropics/courses           # SKILL.md format
-/add-skill PatrickJS/awesome-cursorrules # .cursorrules format
-/add-skill someone/agents-repo          # AGENTS.md format
+aidevops skill add anthropics/skills/pdf           # Specific skill from multi-skill repo
+aidevops skill add vercel-labs/agent-skills         # All skills from a repo
+aidevops skill add expo/skills --name expo-dev      # Custom name
+aidevops skill add owner/repo --dry-run             # Preview without changes
 </code></pre>
 <p><strong>Supported formats:</strong></p>
 <ul>
-<li><code>SKILL.md</code> - Agent Skills standard (preferred)</li>
+<li><code>SKILL.md</code> - <a href="https://agentskills.io/specification">Agent Skills standard</a> (preferred)</li>
 <li><code>AGENTS.md</code> - Claude Code agents format</li>
-<li><code>.cursorrules</code> - Cursor rules (auto-converted to SKILL.md)</li>
+<li><code>.cursorrules</code> - Cursor rules (auto-converted)</li>
 </ul>
 <p><strong>Features:</strong></p>
 <ul>
-<li>Conflict detection with existing skills</li>
-<li>Version tracking for updates (<code>/add-skill --check-updates</code>)</li>
-<li>Symlinks created for Claude Code, Cursor, Amp, and other tools</li>
+<li>Auto-detection of skill format and category placement</li>
+<li>Conflict detection with merge/replace/rename options</li>
+<li>Upstream commit tracking for update detection (<code>aidevops skill check</code>)</li>
+<li>Conversion to aidevops subagent format with YAML frontmatter</li>
 <li>Registry stored in <code>.agent/configs/skill-sources.json</code></li>
+<li>Telemetry disabled (no data sent to skills.sh or other services)</li>
 </ul>
-<p>See <code>.agent/tools/build-agent/add-skill.md</code> for full documentation.</p>
+<p><strong>How it differs from <code>npx add-skill</code>:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>aidevops skill add</code></th>
+<th><code>npx add-skill</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Target</strong></td>
+<td>Converts to aidevops format in <code>.agent/</code></td>
+<td>Copies SKILL.md to agent-specific dirs</td>
+</tr>
+<tr>
+<td><strong>Tracking</strong></td>
+<td>Git commit-based upstream tracking</td>
+<td>Lock file with content hashes</td>
+</tr>
+<tr>
+<td><strong>Telemetry</strong></td>
+<td>Disabled</td>
+<td>Sends anonymous install counts</td>
+</tr>
+<tr>
+<td><strong>Scope</strong></td>
+<td>OpenCode-first</td>
+<td>22+ agents</td>
+</tr>
+<tr>
+<td><strong>Updates</strong></td>
+<td><code>aidevops skill check</code> (GitHub API)</td>
+<td><code>npx skills check</code> (Vercel API)</td>
+</tr>
+</tbody></table>
+<p>See <code>.agent/scripts/add-skill-helper.sh</code> for implementation details.</p>
 <h2><strong>AI Agents &amp; Subagents</strong></h2>
 <p><strong>Agents are specialized AI personas with focused knowledge and tool access.</strong> Instead of giving your AI assistant access to everything at once (which wastes context tokens), agents provide targeted capabilities for specific tasks.</p>
 <p>Call them in your AI assistant conversation with a simple @mention</p>
