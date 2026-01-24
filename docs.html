@@ -633,6 +633,16 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <td>Subagent files with specific tool permissions</td>
 </tr>
 <tr>
+<td><strong>Multi-Agent Orchestration</strong></td>
+<td>Coordinate parallel agents</td>
+<td>TOON mailbox, agent registry, stateless coordinator</td>
+</tr>
+<tr>
+<td><strong>Compaction Resilience</strong></td>
+<td>Preserve context across compaction</td>
+<td>OpenCode plugin injects dynamic state at compaction time</td>
+</tr>
+<tr>
 <td><strong>Ralph Loop</strong></td>
 <td>Iterative execution until complete</td>
 <td><code>ralph-loop-helper.sh</code>, <code>full-loop-helper.sh</code></td>
@@ -645,6 +655,58 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 </tbody></table>
 <p><strong>Key insight</strong>: Context is a finite resource with diminishing returns. aidevops treats every token as precious - loading only what&#39;s needed, when it&#39;s needed.</p>
 <p>See <code>.agent/aidevops/architecture.md</code> for detailed implementation notes and references.</p>
+<h3>Multi-Agent Orchestration</h3>
+<p>Run multiple AI agents in parallel on separate branches, coordinated through a lightweight mailbox system. Each agent works independently in its own git worktree while a stateless coordinator manages task distribution and status reporting.</p>
+<p><strong>Architecture:</strong></p>
+<pre><code class="language-text">Coordinator (pulse loop)
+├── Agent Registry (TOON format - who&#39;s active, what branch, idle/busy)
+├── Mailbox System (file-based, per-agent inbox/outbox)
+│   ├── task_assignment → worker inbox
+│   ├── status_report → coordinator outbox
+│   └── broadcast → all agents
+└── Model Routing (tier-based: haiku/sonnet/opus/flash/pro)
+</code></pre>
+<p><strong>Key components:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Script</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mailbox</td>
+<td><code>mail-helper.sh</code></td>
+<td>TOON-based inter-agent messaging (send, check, broadcast, archive)</td>
+</tr>
+<tr>
+<td>Coordinator</td>
+<td><code>coordinator-helper.sh</code></td>
+<td>Stateless pulse loop: collect reports, dispatch tasks, track idle workers</td>
+</tr>
+<tr>
+<td>Registry</td>
+<td><code>mail-helper.sh register</code></td>
+<td>Agent registration with role, branch, worktree, heartbeat</td>
+</tr>
+<tr>
+<td>Model routing</td>
+<td><code>generate-opencode-agents.sh</code></td>
+<td>Maps agent tiers to cost-effective models</td>
+</tr>
+</tbody></table>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>Each agent registers on startup (<code>mail-helper.sh register --role worker</code>)</li>
+<li>Coordinator runs periodic pulses (<code>coordinator-helper.sh pulse</code>)</li>
+<li>Pulse collects status reports, dispatches queued tasks to idle workers</li>
+<li>Agents send completion reports back via outbox</li>
+<li>File locking (<code>noclobber</code> + retry) prevents race conditions</li>
+</ol>
+<p><strong>Compaction plugin</strong> (<code>.agent/plugins/opencode-aidevops/</code>): When OpenCode compacts context (at ~200K tokens), the plugin injects current session state - agent registry, pending mailbox messages, git context, and relevant memories - ensuring continuity across compaction boundaries.</p>
+<p><strong>Custom system prompt</strong> (<code>.agent/prompts/build.txt</code>): Based on upstream OpenCode with aidevops-specific overrides for tool preferences, professional objectivity, and per-model reinforcements for weaker models.</p>
+<p><strong>Subagent index</strong> (<code>.agent/subagent-index.toon</code>): Compressed TOON routing table listing all agents, subagents, workflows, and scripts with model tier assignments - enables fast agent discovery without loading full markdown files.</p>
 <h2><strong>Requirements</strong></h2>
 <pre><code class="language-bash"># Install dependencies (auto-detected by setup.sh)
 brew install sshpass jq curl mkcert dnsmasq fd ripgrep  # macOS
