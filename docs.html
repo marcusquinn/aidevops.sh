@@ -187,8 +187,8 @@
 <h3>Agent Structure</h3>
 <ul>
 <li>18 primary agents (Plan+, Build+, SEO, WordPress, etc.)</li>
-<li>530+ subagent markdown files organized by domain</li>
-<li>139+ helper scripts in <code>.agent/scripts/</code></li>
+<li>536+ subagent markdown files organized by domain</li>
+<li>141+ helper scripts in <code>.agent/scripts/</code></li>
 <li>41 slash commands for common workflows</li>
 </ul>
 <!-- AI-CONTEXT-END -->
@@ -613,7 +613,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 139+ helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 141+ helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -1010,7 +1010,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><a href="https://context7.com/">Context7</a> - Real-time documentation access for thousands of libraries</li>
 <li><a href="https://github.com/yamadashy/repomix">Repomix</a> - Pack codebases into AI-friendly context</li>
 </ul>
-<p><strong>Browser Automation</strong> (6 tools, <a href="#browser-automation">benchmarked</a>):</p>
+<p><strong>Browser Automation</strong> (6 tools + anti-detect stack, <a href="#browser-automation">benchmarked</a>):</p>
 <ul>
 <li><a href="https://playwright.dev/">Playwright</a> - Fastest engine (0.9s form fill), parallel contexts, extensions, proxy (auto-installed)</li>
 <li><a href="https://github.com/nicholasgriffintn/dev-browser">dev-browser</a> - Persistent profile, stays logged in, ARIA snapshots, pairs with DevTools</li>
@@ -1020,6 +1020,13 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><a href="https://github.com/browserbase/stagehand">Stagehand</a> - Natural language automation, self-healing selectors</li>
 <li><a href="https://github.com/nicholasgriffintn/chrome-devtools-mcp">Chrome DevTools MCP</a> - Companion: Lighthouse, network throttling, CSS coverage (pairs with any tool)</li>
 <li><a href="https://developers.cloudflare.com/browser-rendering/">Cloudflare Browser Rendering</a> - Server-side web scraping</li>
+<li><strong>Anti-Detect Stack</strong> (<a href="#anti-detect-browser">details</a>):<ul>
+<li><a href="https://github.com/daijro/camoufox">Camoufox</a> (4.9k stars) - Firefox anti-detect, C++ fingerprint injection, WebRTC/Canvas/WebGL spoofing</li>
+<li><a href="https://github.com/nicedayfor/rebrowser-patches">rebrowser-patches</a> (1.2k stars) - Chromium CDP leak prevention, automation signal removal</li>
+<li>Multi-profile management - Persistent/clean/warm/disposable profiles (like AdsPower/GoLogin)</li>
+<li>Proxy integration - Residential, SOCKS5, VPN per profile with geo-targeting</li>
+</ul>
+</li>
 </ul>
 <p><strong>SEO &amp; Research:</strong></p>
 <ul>
@@ -1082,7 +1089,7 @@ cargo install toon-lsp                        # TOON syntax validation
 </code></pre>
 <p>These catch formatting and syntax issues during editing, reducing preflight/postflight fix cycles.</p>
 <h2><strong>Browser Automation</strong></h2>
-<p>6 browser tools benchmarked and integrated for AI-assisted web automation, dev testing, and data extraction. Agents automatically select the optimal tool based on task requirements.</p>
+<p>6 browser tools + anti-detect stack, benchmarked and integrated for AI-assisted web automation, dev testing, data extraction, and bot detection evasion. Agents automatically select the optimal tool based on task requirements.</p>
 <h3>Performance Benchmarks</h3>
 <p>Tested on macOS ARM64, all headless, warm daemon:</p>
 <table>
@@ -1273,6 +1280,16 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>Chrome DevTools MCP</td>
 <td>Companion tool, pairs with any browser</td>
 </tr>
+<tr>
+<td><strong>Bot detection evasion</strong></td>
+<td>Anti-detect stack</td>
+<td>Camoufox (full) or rebrowser-patches (quick)</td>
+</tr>
+<tr>
+<td><strong>Multi-account</strong></td>
+<td>Browser profiles</td>
+<td>Persistent fingerprint + proxy per account</td>
+</tr>
 </tbody></table>
 <h3>AI Page Understanding</h3>
 <p>Agents use lightweight methods instead of expensive vision API calls:</p>
@@ -1311,6 +1328,90 @@ cargo install toon-lsp                        # TOON syntax validation
 </tr>
 </tbody></table>
 <p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-automation.md"><code>.agent/tools/browser/browser-automation.md</code></a> for the full decision tree and <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-benchmark.md"><code>browser-benchmark.md</code></a> for reproducible benchmark scripts.</p>
+<h3>Anti-Detect Browser</h3>
+<p>Open-source alternative to AdsPower, GoLogin, and OctoBrowser for multi-account automation and bot detection evasion.</p>
+<p><strong>Architecture:</strong></p>
+<pre><code class="language-text">Layer 4: CAPTCHA Solving    → CapSolver (existing)
+Layer 3: Network Identity   → Proxies (residential/SOCKS5/VPN per profile)
+Layer 2: Browser Identity   → Camoufox (C++ fingerprint injection)
+Layer 1: Automation Stealth → rebrowser-patches (CDP leak prevention)
+Layer 0: Browser Engine     → Playwright (existing)
+</code></pre>
+<p><strong>Profile Types:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Cookies</th>
+<th>Fingerprint</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Persistent</strong></td>
+<td>Saved</td>
+<td>Fixed per profile</td>
+<td>Account management, stay logged in</td>
+</tr>
+<tr>
+<td><strong>Clean</strong></td>
+<td>None</td>
+<td>Random each launch</td>
+<td>Scraping, one-off tasks</td>
+</tr>
+<tr>
+<td><strong>Warm</strong></td>
+<td>Saved</td>
+<td>Fixed</td>
+<td>Pre-warmed accounts (browsing history)</td>
+</tr>
+<tr>
+<td><strong>Disposable</strong></td>
+<td>None</td>
+<td>Random</td>
+<td>Single-use, maximum anonymity</td>
+</tr>
+</tbody></table>
+<p><strong>Quick Start:</strong></p>
+<pre><code class="language-bash"># Setup
+anti-detect-helper.sh setup
+
+# Create profile with proxy
+anti-detect-helper.sh profile create &quot;my-account&quot; --type persistent --os macos
+
+# Launch (Camoufox with auto-generated fingerprint)
+anti-detect-helper.sh launch --profile &quot;my-account&quot; --headless
+
+# Test detection (BrowserScan, SannyBot)
+anti-detect-helper.sh test --profile &quot;my-account&quot;
+
+# Warm up profile with browsing history
+anti-detect-helper.sh warmup &quot;my-account&quot; --duration 30m
+</code></pre>
+<p><strong>Engine Selection:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Engine</th>
+<th>Stealth Level</th>
+<th>Speed</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Camoufox</strong> (Firefox)</td>
+<td>High (C++ level)</td>
+<td>Medium</td>
+<td>Full anti-detect, fingerprint rotation</td>
+</tr>
+<tr>
+<td><strong>rebrowser-patches</strong> (Chromium)</td>
+<td>Medium (CDP patches)</td>
+<td>Fast</td>
+<td>Quick stealth on existing Playwright code</td>
+</tr>
+</tbody></table>
+<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/anti-detect-browser.md"><code>.agent/tools/browser/anti-detect-browser.md</code></a> for the full decision tree and subagent index.</p>
 <h2><strong>Repomix - AI Context Generation</strong></h2>
 <p><a href="https://repomix.com/">Repomix</a> packages your codebase into AI-friendly formats for sharing with AI assistants. This framework includes optimized Repomix configuration for consistent context generation.</p>
 <h3>Why Repomix?</h3>
@@ -1602,7 +1703,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 18 primary agents, 530+ subagents, and 139+ helper scripts.</p>
+<p>This installs the complete framework: 18 primary agents, 536+ subagents, and 141+ helper scripts.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from any GitHub repository using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -1792,7 +1893,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 </tbody></table>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agent/</code> for the full list of 530+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agent/</code> for the full list of 536+ subagents organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -2536,7 +2637,8 @@ bash .agent/scripts/continue-cli.sh review
 <p><strong>Agent Guides</strong> (in <code>.agent/</code>):</p>
 <ul>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/aidevops/api-integrations.md">API Integrations</a></strong> - Service APIs</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-automation.md">Browser Automation</a></strong> - 6 tools benchmarked: decision tree, parallel, extensions, AI understanding</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-automation.md">Browser Automation</a></strong> - 6 tools + anti-detect stack: decision tree, parallel, extensions, fingerprinting</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/anti-detect-browser.md">Anti-Detect Browser</a></strong> - Multi-profile management, fingerprint rotation, proxy integration</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/pagespeed.md">PageSpeed</a></strong> - Performance auditing</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/conversion/pandoc.md">Pandoc</a></strong> - Document format conversion</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/aidevops/security.md">Security</a></strong> - Enterprise security standards</li>
@@ -2549,7 +2651,7 @@ bash .agent/scripts/continue-cli.sh review
 ├── .agent/                        # Agents and documentation
 │   ├── AGENTS.md                  # User guide (deployed to ~/.aidevops/agents/)
 │   ├── *.md                       # 18 primary agents
-│   ├── scripts/                   # 139+ helper scripts
+│   ├── scripts/                   # 141+ helper scripts
 │   ├── tools/                     # Cross-domain utilities (video, browser, git, etc.)
 │   ├── services/                  # External service integrations
 │   └── workflows/                 # Development process guides
