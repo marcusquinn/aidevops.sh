@@ -967,13 +967,15 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><a href="https://context7.com/">Context7</a> - Real-time documentation access for thousands of libraries</li>
 <li><a href="https://github.com/yamadashy/repomix">Repomix</a> - Pack codebases into AI-friendly context</li>
 </ul>
-<p><strong>Browser Automation:</strong></p>
+<p><strong>Browser Automation</strong> (6 tools, <a href="#browser-automation">benchmarked</a>):</p>
 <ul>
-<li><a href="https://github.com/browserbase/stagehand">Stagehand (JavaScript)</a> - AI-powered browser automation with natural language</li>
-<li><a href="https://github.com/anthropics/stagehand-python">Stagehand (Python)</a> - Python version with Pydantic validation</li>
-<li><a href="https://chromedevtools.github.io/devtools-protocol/">Chrome DevTools</a> - Browser automation, performance analysis, debugging</li>
-<li><a href="https://playwright.dev/">Playwright</a> - Cross-browser testing and automation (auto-installed via <code>setup.sh</code>)</li>
-<li><a href="https://github.com/unclecode/crawl4ai">Crawl4AI</a> - Async web crawler optimized for AI</li>
+<li><a href="https://playwright.dev/">Playwright</a> - Fastest engine (0.9s form fill), parallel contexts, extensions, proxy (auto-installed)</li>
+<li><a href="https://github.com/nicholasgriffintn/dev-browser">dev-browser</a> - Persistent profile, stays logged in, ARIA snapshots, pairs with DevTools</li>
+<li><a href="https://github.com/vercel-labs/agent-browser">agent-browser</a> - CLI/CI/CD, <code>--session</code> parallel, ref-based element targeting</li>
+<li><a href="https://github.com/unclecode/crawl4ai">Crawl4AI</a> - Bulk extraction, <code>arun_many</code> parallel (1.7x), LLM-ready markdown</li>
+<li><a href="https://github.com/nicholasgriffintn/playwriter">Playwriter</a> - Your browser&#39;s extensions/passwords/proxy, already unlocked</li>
+<li><a href="https://github.com/browserbase/stagehand">Stagehand</a> - Natural language automation, self-healing selectors</li>
+<li><a href="https://github.com/nicholasgriffintn/chrome-devtools-mcp">Chrome DevTools MCP</a> - Companion: Lighthouse, network throttling, CSS coverage (pairs with any tool)</li>
 <li><a href="https://developers.cloudflare.com/browser-rendering/">Cloudflare Browser Rendering</a> - Server-side web scraping</li>
 </ul>
 <p><strong>SEO &amp; Research:</strong></p>
@@ -1016,6 +1018,236 @@ bash .agent/scripts/setup-mcp-integrations.sh stagehand-python   # Python versio
 bash .agent/scripts/setup-mcp-integrations.sh stagehand-both     # Both versions
 bash .agent/scripts/setup-mcp-integrations.sh chrome-devtools
 </code></pre>
+<h2><strong>Browser Automation</strong></h2>
+<p>6 browser tools benchmarked and integrated for AI-assisted web automation, dev testing, and data extraction. Agents automatically select the optimal tool based on task requirements.</p>
+<h3>Performance Benchmarks</h3>
+<p>Tested on macOS ARM64, all headless, warm daemon:</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Playwright</th>
+<th>dev-browser</th>
+<th>agent-browser</th>
+<th>Crawl4AI</th>
+<th>Playwriter</th>
+<th>Stagehand</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Navigate + Screenshot</strong></td>
+<td><strong>1.43s</strong></td>
+<td>1.39s</td>
+<td>1.90s</td>
+<td>2.78s</td>
+<td>2.95s</td>
+<td>7.72s</td>
+</tr>
+<tr>
+<td><strong>Form Fill</strong> (4 fields)</td>
+<td><strong>0.90s</strong></td>
+<td>1.34s</td>
+<td>1.37s</td>
+<td>N/A</td>
+<td>2.24s</td>
+<td>2.58s</td>
+</tr>
+<tr>
+<td><strong>Data Extraction</strong> (5 items)</td>
+<td>1.33s</td>
+<td><strong>1.08s</strong></td>
+<td>1.53s</td>
+<td>2.53s</td>
+<td>2.68s</td>
+<td>3.48s</td>
+</tr>
+<tr>
+<td><strong>Multi-step</strong> (click + nav)</td>
+<td><strong>1.49s</strong></td>
+<td>1.49s</td>
+<td>3.06s</td>
+<td>N/A</td>
+<td>4.37s</td>
+<td>4.48s</td>
+</tr>
+<tr>
+<td><strong>Parallel</strong> (3 sessions)</td>
+<td><strong>1.6s</strong></td>
+<td>N/A</td>
+<td>2.0s</td>
+<td>3.0s</td>
+<td>N/A</td>
+<td>Slow</td>
+</tr>
+</tbody></table>
+<h3>Feature Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Playwright</th>
+<th>dev-browser</th>
+<th>agent-browser</th>
+<th>Crawl4AI</th>
+<th>Playwriter</th>
+<th>Stagehand</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Headless</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No (your browser)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Proxy/VPN</strong></td>
+<td>Full</td>
+<td>Via args</td>
+<td>No</td>
+<td>Full</td>
+<td>Your browser</td>
+<td>Via args</td>
+</tr>
+<tr>
+<td><strong>Extensions</strong></td>
+<td>Yes (persistent)</td>
+<td>Yes (profile)</td>
+<td>No</td>
+<td>No</td>
+<td>Yes (yours)</td>
+<td>Possible</td>
+</tr>
+<tr>
+<td><strong>Password managers</strong></td>
+<td>Partial (needs unlock)</td>
+<td>Partial</td>
+<td>No</td>
+<td>No</td>
+<td><strong>Yes</strong> (unlocked)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Parallel sessions</strong></td>
+<td>5 ctx/2.1s</td>
+<td>Shared</td>
+<td>3 sess/2.0s</td>
+<td>arun_many 1.7x</td>
+<td>Shared</td>
+<td>Per-instance</td>
+</tr>
+<tr>
+<td><strong>Session persistence</strong></td>
+<td>storageState</td>
+<td>Profile dir</td>
+<td>state save/load</td>
+<td>user_data_dir</td>
+<td>Your browser</td>
+<td>Per-instance</td>
+</tr>
+<tr>
+<td><strong>Natural language</strong></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>LLM extraction</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Self-healing</strong></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<h3>Tool Selection</h3>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Tool</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Fastest automation</strong></td>
+<td>Playwright</td>
+<td>0.9s form fill, parallel contexts</td>
+</tr>
+<tr>
+<td><strong>Stay logged in</strong></td>
+<td>dev-browser</td>
+<td>Profile persists across restarts</td>
+</tr>
+<tr>
+<td><strong>Your extensions/passwords</strong></td>
+<td>Playwriter</td>
+<td>Already unlocked in your browser</td>
+</tr>
+<tr>
+<td><strong>Bulk extraction</strong></td>
+<td>Crawl4AI</td>
+<td>Purpose-built, parallel, LLM-ready output</td>
+</tr>
+<tr>
+<td><strong>CLI/CI/CD</strong></td>
+<td>agent-browser</td>
+<td>No server needed, <code>--session</code> isolation</td>
+</tr>
+<tr>
+<td><strong>Unknown pages</strong></td>
+<td>Stagehand</td>
+<td>Natural language, self-healing</td>
+</tr>
+<tr>
+<td><strong>Performance debugging</strong></td>
+<td>Chrome DevTools MCP</td>
+<td>Companion tool, pairs with any browser</td>
+</tr>
+</tbody></table>
+<h3>AI Page Understanding</h3>
+<p>Agents use lightweight methods instead of expensive vision API calls:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Speed</th>
+<th>Token Cost</th>
+<th>Use For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ARIA snapshot</td>
+<td>~0.01s</td>
+<td>50-200 tokens</td>
+<td>Forms, navigation, interactive elements</td>
+</tr>
+<tr>
+<td>Text extraction</td>
+<td>~0.002s</td>
+<td>Text length</td>
+<td>Reading content</td>
+</tr>
+<tr>
+<td>Element scan</td>
+<td>~0.002s</td>
+<td>~20/element</td>
+<td>Form filling, clicking</td>
+</tr>
+<tr>
+<td>Screenshot</td>
+<td>~0.05s</td>
+<td>~1K tokens (vision)</td>
+<td>Visual debugging only</td>
+</tr>
+</tbody></table>
+<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-automation.md"><code>.agent/tools/browser/browser-automation.md</code></a> for the full decision tree and <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-benchmark.md"><code>browser-benchmark.md</code></a> for reproducible benchmark scripts.</p>
 <h2><strong>Repomix - AI Context Generation</strong></h2>
 <p><a href="https://repomix.com/">Repomix</a> packages your codebase into AI-friendly formats for sharing with AI assistants. This framework includes optimized Repomix configuration for consistent context generation.</p>
 <h3>Why Repomix?</h3>
@@ -2238,7 +2470,7 @@ bash .agent/scripts/continue-cli.sh review
 <p><strong>Agent Guides</strong> (in <code>.agent/</code>):</p>
 <ul>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/aidevops/api-integrations.md">API Integrations</a></strong> - Service APIs</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-automation.md">Browser Automation</a></strong> - Web scraping and automation</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-automation.md">Browser Automation</a></strong> - 6 tools benchmarked: decision tree, parallel, extensions, AI understanding</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/pagespeed.md">PageSpeed</a></strong> - Performance auditing</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/conversion/pandoc.md">Pandoc</a></strong> - Document format conversion</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/aidevops/security.md">Security</a></strong> - Enterprise security standards</li>
