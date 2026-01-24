@@ -167,7 +167,7 @@
 <p><a href="#comprehensive-service-coverage"><img src="https://img.shields.io/badge/Services%20Supported-30+-brightgreen.svg" alt="Services Supported"></a>
 <a href="https://agents.md/"><img src="https://img.shields.io/badge/AGENTS.md-Compliant-blue.svg" alt="AGENTS.md"></a>
 <a href="https://github.com/marcusquinn/aidevops/blob/main/AGENTS.md"><img src="https://img.shields.io/badge/AI%20Optimized-Yes-brightgreen.svg" alt="AI Optimized"></a>
-<a href="#mcp-integrations"><img src="https://img.shields.io/badge/MCP%20Servers-20+-orange.svg" alt="MCP Servers"></a>
+<a href="#mcp-integrations"><img src="https://img.shields.io/badge/MCP%20Servers-18-orange.svg" alt="MCP Servers"></a>
 <a href="#comprehensive-service-coverage"><img src="https://img.shields.io/badge/API%20Integrations-30+-blue.svg" alt="API Integrations"></a></p>
 <!-- AI-CONTEXT-START -->
 
@@ -845,11 +845,137 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 </ul>
 <h2><strong>MCP Integrations</strong></h2>
 <p><strong>Model Context Protocol servers for real-time AI assistant integration.</strong> The framework configures these MCPs primarily for <strong><a href="https://opencode.ai/">OpenCode</a></strong> (recommended). Configuration support is also available for 17 other AI assistants including Cursor, Claude Code/Desktop, Windsurf, Continue.dev, Cody, Zed, GitHub Copilot, Kilo Code, Kiro, AntiGravity, Gemini CLI, Droid, Warp AI, Aider, and Qwen.</p>
-<h3><strong>All Supported MCPs</strong></h3>
+<h3><strong>All Supported MCPs (18 active)</strong></h3>
+<p>MCP packages are installed globally via <code>bun install -g</code> for instant startup (no <code>npx</code> registry lookups). Run <code>setup.sh</code> or <code>aidevops update-tools</code> to update to latest versions.</p>
 <table>
 <thead>
 <tr>
 <th>MCP</th>
+<th>Purpose</th>
+<th>Tier</th>
+<th>API Key Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://docs.augmentcode.com/context-services/mcp/overview">Augment Context Engine</a></td>
+<td>Semantic codebase retrieval</td>
+<td>Global</td>
+<td>Yes (Augment account)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/steipete/claude-code-mcp">Claude Code MCP</a></td>
+<td>Claude as sub-agent</td>
+<td>Global</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ryandonofrio3/osgrep">osgrep</a></td>
+<td>Local semantic search</td>
+<td>Global</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://github.com/marcusquinn/amazon-order-history-csv-download-mcp">Amazon Order History</a></td>
+<td>Order data extraction</td>
+<td>Per-agent</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://chromedevtools.github.io/devtools-protocol/">Chrome DevTools</a></td>
+<td>Browser debugging &amp; automation</td>
+<td>Per-agent</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://context7.com/">Context7</a></td>
+<td>Library documentation lookup</td>
+<td>Per-agent</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://docs.docker.com/ai/mcp-catalog/">Docker MCP</a></td>
+<td>Container management</td>
+<td>Per-agent</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://developers.google.com/analytics">Google Analytics</a></td>
+<td>Analytics data</td>
+<td>Per-agent</td>
+<td>Yes (Google API)</td>
+</tr>
+<tr>
+<td><a href="https://developers.google.com/webmaster-tools">Google Search Console</a></td>
+<td>Search performance data</td>
+<td>Per-agent</td>
+<td>Yes (Google API)</td>
+</tr>
+<tr>
+<td><a href="https://grep.app/">Grep by Vercel</a></td>
+<td>GitHub code search</td>
+<td>Per-agent</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://localwp.com/">LocalWP</a></td>
+<td>WordPress database access</td>
+<td>Per-agent</td>
+<td>No (local)</td>
+</tr>
+<tr>
+<td><a href="https://github.com/steipete/macos-automator-mcp">macOS Automator</a></td>
+<td>macOS automation</td>
+<td>Per-agent</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://outscraper.com/">Outscraper</a></td>
+<td>Google Maps &amp; business data</td>
+<td>Per-agent</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="https://github.com/nicholasgriffintn/playwriter">Playwriter</a></td>
+<td>Browser with extensions</td>
+<td>Per-agent</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://github.com/marcusquinn/quickfile-mcp">QuickFile</a></td>
+<td>Accounting API</td>
+<td>Per-agent</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="https://github.com/yamadashy/repomix">Repomix</a></td>
+<td>Codebase packing for AI context</td>
+<td>Per-agent</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://sentry.io/">Sentry</a></td>
+<td>Error tracking</td>
+<td>Per-agent</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="https://socket.dev/">Socket</a></td>
+<td>Dependency security</td>
+<td>Per-agent</td>
+<td>No</td>
+</tr>
+</tbody></table>
+<p><strong>Tier explanation:</strong></p>
+<ul>
+<li><strong>Global</strong> - Tools always available (loaded into every session)</li>
+<li><strong>Per-agent</strong> - Tools disabled globally, enabled per-agent via config (zero context overhead when unused)</li>
+</ul>
+<h3><strong>SEO Integrations (curl subagents - no MCP overhead)</strong></h3>
+<p>These use direct API calls via curl, avoiding MCP server startup entirely:</p>
+<table>
+<thead>
+<tr>
+<th>Integration</th>
 <th>Purpose</th>
 <th>API Key Required</th>
 </tr>
@@ -860,79 +986,9 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <td>Yes</td>
 </tr>
 <tr>
-<td><a href="https://docs.augmentcode.com/context-services/mcp/overview">Augment Context Engine</a></td>
-<td>Semantic codebase retrieval</td>
-<td>Yes (Augment account)</td>
-</tr>
-<tr>
 <td><a href="https://dataforseo.com/">DataForSEO</a></td>
 <td>SERP, keywords, backlinks, on-page</td>
 <td>Yes</td>
-</tr>
-<tr>
-<td><a href="https://chromedevtools.github.io/devtools-protocol/">Chrome DevTools</a></td>
-<td>Browser debugging &amp; automation</td>
-<td>No</td>
-</tr>
-<tr>
-<td><a href="https://developers.cloudflare.com/browser-rendering/">Cloudflare Browser</a></td>
-<td>Server-side rendering</td>
-<td>Yes (Cloudflare)</td>
-</tr>
-<tr>
-<td><a href="https://context7.com/">Context7</a></td>
-<td>Library documentation lookup</td>
-<td>No</td>
-</tr>
-<tr>
-<td><a href="https://github.com/unclecode/crawl4ai">Crawl4AI</a></td>
-<td>Web crawling &amp; scraping</td>
-<td>No</td>
-</tr>
-<tr>
-<td><a href="https://developers.google.com/webmaster-tools">Google Search Console</a></td>
-<td>Search performance data</td>
-<td>Yes (Google API)</td>
-</tr>
-<tr>
-<td><a href="https://grep.app/">Grep by Vercel</a></td>
-<td>GitHub code search</td>
-<td>No</td>
-</tr>
-<tr>
-<td><a href="https://localwp.com/">LocalWP</a></td>
-<td>WordPress database access</td>
-<td>No (local)</td>
-</tr>
-<tr>
-<td><a href="https://nextjs.org/docs">Next.js DevTools</a></td>
-<td>React/Next.js assistance</td>
-<td>No</td>
-</tr>
-<tr>
-<td><a href="https://outscraper.com/">Outscraper</a></td>
-<td>Google Maps &amp; business data extraction</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td><a href="https://developers.google.com/speed/docs/insights/v5/get-started">PageSpeed Insights</a></td>
-<td>Performance auditing</td>
-<td>Yes (Google API)</td>
-</tr>
-<tr>
-<td><a href="https://docs.perplexity.ai/">Perplexity</a></td>
-<td>AI-powered research</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td><a href="https://playwright.dev/">Playwright</a></td>
-<td>Cross-browser testing (auto-installed by setup.sh)</td>
-<td>No</td>
-</tr>
-<tr>
-<td><a href="https://github.com/yamadashy/repomix">Repomix</a></td>
-<td>Codebase packing for AI context</td>
-<td>No</td>
 </tr>
 <tr>
 <td><a href="https://serper.dev/">Serper</a></td>
@@ -940,29 +996,9 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <td>Yes</td>
 </tr>
 <tr>
-<td><a href="https://ui.shadcn.com/">shadcn/ui</a></td>
-<td>UI component library browsing &amp; installation</td>
-<td>No</td>
-</tr>
-<tr>
-<td><a href="https://snyk.io/">Snyk</a></td>
-<td>Security vulnerability scanning</td>
+<td><a href="https://developers.hostinger.com/">Hostinger</a></td>
+<td>Hosting management</td>
 <td>Yes</td>
-</tr>
-<tr>
-<td><a href="https://github.com/browserbase/stagehand">Stagehand (JS)</a></td>
-<td>AI browser automation</td>
-<td>Optional (Browserbase)</td>
-</tr>
-<tr>
-<td><a href="https://github.com/anthropics/stagehand-python">Stagehand (Python)</a></td>
-<td>AI browser automation</td>
-<td>Optional (Browserbase)</td>
-</tr>
-<tr>
-<td><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a></td>
-<td>Semantic code analysis (95% token savings)</td>
-<td>No</td>
 </tr>
 </tbody></table>
 <h3><strong>By Category</strong></h3>
@@ -987,12 +1023,11 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 </ul>
 <p><strong>SEO &amp; Research:</strong></p>
 <ul>
-<li><a href="https://ahrefs.com/api">Ahrefs</a> - SEO analysis, backlink research, keyword data</li>
-<li><a href="https://dataforseo.com/">DataForSEO</a> - Comprehensive SEO data APIs (SERP, keywords, backlinks, on-page)</li>
-<li><a href="https://serper.dev/">Serper</a> - Google Search API (web, images, news, places, shopping)</li>
-<li><a href="https://developers.google.com/webmaster-tools">Google Search Console</a> - Search performance insights</li>
-<li><a href="https://docs.perplexity.ai/">Perplexity</a> - AI-powered web search and research</li>
-<li><a href="https://grep.app/">Grep by Vercel</a> - Search code snippets across GitHub repositories</li>
+<li><a href="https://developers.google.com/webmaster-tools">Google Search Console</a> - Search performance insights (MCP)</li>
+<li><a href="https://grep.app/">Grep by Vercel</a> - Search code snippets across GitHub repositories (MCP)</li>
+<li><a href="https://ahrefs.com/api">Ahrefs</a> - SEO analysis, backlink research, keyword data (curl subagent)</li>
+<li><a href="https://dataforseo.com/">DataForSEO</a> - Comprehensive SEO data APIs (curl subagent)</li>
+<li><a href="https://serper.dev/">Serper</a> - Google Search API (curl subagent)</li>
 <li><strong>Keyword Research</strong> - Strategic keyword research with SERP weakness detection (via DataForSEO + Serper + Ahrefs)</li>
 <li><strong>Site Crawler</strong> - Screaming Frog-like SEO auditing: broken links, redirects, meta issues, structured data</li>
 <li><strong>Domain Research</strong> - DNS intelligence via THC (4.51B records) and Reconeer APIs: rDNS, subdomains, CNAMEs</li>
@@ -1011,9 +1046,10 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><a href="https://localwp.com/">LocalWP</a> - Direct WordPress database access</li>
 <li><a href="https://nextjs.org/docs">Next.js DevTools</a> - React/Next.js development assistance</li>
 </ul>
-<p><strong>UI Components:</strong></p>
+<p><strong>Accounts &amp; Finance:</strong></p>
 <ul>
-<li><a href="https://ui.shadcn.com/">shadcn/ui</a> - Browse, search, and install shadcn/ui components directly via MCP</li>
+<li><a href="https://github.com/marcusquinn/quickfile-mcp">QuickFile</a> - Accounting API integration (MCP)</li>
+<li><a href="https://github.com/marcusquinn/amazon-order-history-csv-download-mcp">Amazon Order History</a> - Order data extraction (MCP)</li>
 </ul>
 <h3><strong>Quick Setup</strong></h3>
 <pre><code class="language-bash"># Install all MCP integrations
@@ -1351,11 +1387,14 @@ npx repomix --compress
 <pre><code class="language-json">{
   &quot;repomix&quot;: {
     &quot;type&quot;: &quot;local&quot;,
-    &quot;command&quot;: [&quot;npx&quot;, &quot;-y&quot;, &quot;repomix@latest&quot;, &quot;--mcp&quot;],
+    &quot;command&quot;: [&quot;repomix&quot;, &quot;--mcp&quot;],
     &quot;enabled&quot;: true
   }
 }
 </code></pre>
+<blockquote>
+<p>Install globally first: <code>bun install -g repomix</code> (done automatically by <code>setup.sh</code>)</p>
+</blockquote>
 <p>See <code>.agent/tools/context/context-builder.md</code> for complete documentation.</p>
 <h2><strong>Augment Context Engine - Semantic Codebase Search</strong></h2>
 <p><a href="https://docs.augmentcode.com/context-services/mcp/overview">Augment Context Engine</a> provides semantic codebase retrieval - understanding your code at a deeper level than simple text search. It&#39;s the recommended tool for real-time interactive coding sessions.</p>
