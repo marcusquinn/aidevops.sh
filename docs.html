@@ -548,7 +548,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <li><strong>Uptime Monitoring</strong>: Updown.io integration for website and SSL monitoring</li>
 </ul>
 <h2><strong>Imported Skills</strong></h2>
-<p>aidevops includes curated skills imported from external repositories. Skills from GitHub repos support automatic update tracking:</p>
+<p>aidevops includes curated skills imported from external sources. Skills support automatic update tracking:</p>
 <table>
 <thead>
 <tr>
@@ -582,20 +582,32 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <td><a href="https://animejs.com">animejs.com</a></td>
 <td>JavaScript animation library patterns and API (via Context7)</td>
 </tr>
+<tr>
+<td><strong>caldav-calendar</strong></td>
+<td><a href="https://clawdhub.com/Asleep123/caldav-calendar">ClawdHub</a></td>
+<td>CalDAV calendar sync via vdirsyncer + khal (iCloud, Google, Fastmail, Nextcloud)</td>
+</tr>
+<tr>
+<td><strong>proxmox-full</strong></td>
+<td><a href="https://clawdhub.com/mSarheed/proxmox-full">ClawdHub</a></td>
+<td>Complete Proxmox VE hypervisor management via REST API</td>
+</tr>
 </tbody></table>
 <p><strong>CLI Commands:</strong></p>
 <pre><code class="language-bash">aidevops skill add &lt;owner/repo&gt;    # Import a skill from GitHub
+aidevops skill add clawdhub:&lt;slug&gt; # Import a skill from ClawdHub
 aidevops skill list                # List imported skills
 aidevops skill check               # Check for upstream updates
 aidevops skill update [name]       # Update specific or all skills
 aidevops skill remove &lt;name&gt;       # Remove an imported skill
 </code></pre>
-<p>Skills are registered in <code>~/.aidevops/agents/configs/skill-sources.json</code> with upstream commit tracking for update detection. Telemetry is disabled - no data is sent to third parties.</p>
-<p><strong>Browse community skills:</strong> <a href="https://skills.sh">skills.sh</a> | <strong>Specification:</strong> <a href="https://agentskills.io">agentskills.io</a></p>
+<p>Skills are registered in <code>~/.aidevops/agents/configs/skill-sources.json</code> with upstream tracking for update detection. Telemetry is disabled - no data is sent to third parties.</p>
+<p><strong>Browse community skills:</strong> <a href="https://skills.sh">skills.sh</a> | <a href="https://clawdhub.com">ClawdHub</a> | <strong>Specification:</strong> <a href="https://agentskills.io">agentskills.io</a></p>
 <p><strong>Reference:</strong></p>
 <ul>
 <li><a href="https://agentskills.io/specification">Agent Skills Specification</a> - The open format for SKILL.md files</li>
 <li><a href="https://skills.sh">skills.sh Leaderboard</a> - Discover popular community skills</li>
+<li><a href="https://clawdhub.com">ClawdHub</a> - Skill registry with vector search (Clawdbot ecosystem)</li>
 <li><a href="https://github.com/vercel-labs/add-skill">vercel-labs/add-skill</a> - The upstream CLI tool (aidevops uses its own implementation)</li>
 <li><a href="https://github.com/anthropics/skills">anthropics/skills</a> - Official Anthropic example skills</li>
 <li><a href="https://github.com/agentskills/agentskills">agentskills/agentskills</a> - Specification source and reference library</li>
@@ -1705,16 +1717,25 @@ tldr impact src/auth.py validate   # What would change affect?
 </code></pre>
 <p>This installs the complete framework: 18 primary agents, 536+ subagents, and 141+ helper scripts.</p>
 <h3>Importing External Skills</h3>
-<p>Import skills from any GitHub repository using the <code>aidevops skill</code> CLI:</p>
+<p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
 aidevops skill add owner/repo
 
-# Examples
+# Import from ClawdHub (skill registry with vector search)
+aidevops skill add clawdhub:caldav-calendar
+aidevops skill add https://clawdhub.com/owner/slug
+
+# More examples
 aidevops skill add anthropics/skills/pdf           # Specific skill from multi-skill repo
 aidevops skill add vercel-labs/agent-skills         # All skills from a repo
 aidevops skill add expo/skills --name expo-dev      # Custom name
 aidevops skill add owner/repo --dry-run             # Preview without changes
 </code></pre>
+<p><strong>Supported sources:</strong></p>
+<ul>
+<li>GitHub repos (<code>owner/repo</code> or full URL) — fetched via <code>git clone</code></li>
+<li><a href="https://clawdhub.com">ClawdHub</a> (<code>clawdhub:slug</code> or full URL) — fetched via Playwright browser automation</li>
+</ul>
 <p><strong>Supported formats:</strong></p>
 <ul>
 <li><code>SKILL.md</code> - <a href="https://agentskills.io/specification">Agent Skills standard</a> (preferred)</li>
