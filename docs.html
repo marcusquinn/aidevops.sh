@@ -228,7 +228,7 @@
 <li>Configure your AI assistants automatically</li>
 <li>Guide you through recommended tools (Tabby, Zed, Git CLIs)</li>
 </ul>
-<p><strong>New users: Start OpenCode and type <code>/onboarding</code></strong> to configure your services interactively. The onboarding wizard will:</p>
+<p><strong>New users: Start <a href="https://opencode.ai/">OpenCode</a> and type <code>/onboarding</code></strong> to configure your services interactively. OpenCode is the recommended tool for aidevops - all features, agents, and workflows are designed and tested for it first. The onboarding wizard will:</p>
 <ul>
 <li>Explain what <strong><a href="https://aidevops.sh">aidevops</a></strong> can do</li>
 <li>Ask about your work to give personalized recommendations</li>
@@ -482,12 +482,12 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 </tr>
 </tbody></table>
 <p>See <code>.agent/tools/git/opencode-github-security.md</code> for the full security documentation.</p>
-<p><strong>Supported AI Assistants:</strong> (OpenCode &amp; Zed are our daily drivers and preferred tools, so will have the most continual testing. All 18 assistants below have MCP configuration support.)</p>
-<p><strong>Preferred:</strong></p>
+<p><strong>Supported AI Assistants:</strong> OpenCode is the recommended and primary-tested tool. All 18 assistants below have MCP configuration support, but only OpenCode receives continual testing and first-class integration. Other tools are supported as a courtesy for users evaluating aidevops capabilities.</p>
+<p><strong>Recommended:</strong></p>
 <ul>
-<li><strong><a href="https://tabby.sh/">Tabby</a></strong> - Modern terminal with colour-coded Profiles. Use different profile colours per project/repo to visually distinguish which codebase you&#39;re working in. <strong>Auto-syncs tab title with git repo/branch.</strong></li>
-<li><strong><a href="https://opencode.ai/">OpenCode</a></strong> - Primary choice. Powerful agentic TUI/CLI with native MCP support, Tab-based agent switching, and excellent DX.</li>
-<li><strong><a href="https://zed.dev/">Zed</a></strong> - High-performance editor with AI (Preferred, with the OpenCode Agent Extension)</li>
+<li><strong><a href="https://opencode.ai/">OpenCode</a></strong> - The recommended AI coding agent. Powerful agentic TUI/CLI with native MCP support, Tab-based agent switching, LSP integration, plugin ecosystem, and excellent DX. All aidevops features are designed and tested for OpenCode first.</li>
+<li><strong><a href="https://tabby.sh/">Tabby</a></strong> - Recommended terminal. Colour-coded Profiles per project/repo, <strong>auto-syncs tab title with git repo/branch.</strong></li>
+<li><strong><a href="https://zed.dev/">Zed</a></strong> - Recommended editor. High-performance with AI integration (use with the OpenCode Agent Extension).</li>
 </ul>
 <h3>Terminal Tab Title Sync</h3>
 <p>Your terminal tab/window title automatically shows <code>repo/branch</code> context when working in git repositories. This helps identify which codebase and branch you&#39;re working on across multiple terminal sessions.</p>
@@ -495,6 +495,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <p><strong>How it works:</strong> The <code>pre-edit-check.sh</code> script&#39;s primary role is enforcing git workflow protection (blocking edits on main/master branches). As a secondary, non-blocking action, it updates the terminal title via escape sequences. No configuration needed - it&#39;s automatic.</p>
 <p><strong>Example format:</strong> <code>{repo}/{branch-type}/{description}</code></p>
 <p>See <code>.agent/tools/terminal/terminal-title.md</code> for customization options.</p>
+<p><strong>Also Supported (community-tested):</strong></p>
 <p><strong>IDE-Based:</strong></p>
 <ul>
 <li><strong><a href="https://cursor.sh/">Cursor</a></strong> - AI-first IDE with MCP support</li>
@@ -843,7 +844,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><strong><a href="https://context7.io/">Context7</a></strong>: Real-time documentation access for libraries and frameworks</li>
 </ul>
 <h2><strong>MCP Integrations</strong></h2>
-<p><strong>Model Context Protocol servers for real-time AI assistant integration.</strong> The framework helps configure these MCPs for <strong>18 AI assistants</strong> including OpenCode (preferred), Cursor, Claude Code/Desktop, Windsurf, Continue.dev, Cody, Zed, GitHub Copilot, Kilo Code, Kiro, AntiGravity, Gemini CLI, Droid, Warp AI, Aider, and Qwen.</p>
+<p><strong>Model Context Protocol servers for real-time AI assistant integration.</strong> The framework configures these MCPs primarily for <strong><a href="https://opencode.ai/">OpenCode</a></strong> (recommended). Configuration support is also available for 17 other AI assistants including Cursor, Claude Code/Desktop, Windsurf, Continue.dev, Cody, Zed, GitHub Copilot, Kilo Code, Kiro, AntiGravity, Gemini CLI, Droid, Warp AI, Aider, and Qwen.</p>
 <h3><strong>All Supported MCPs</strong></h3>
 <table>
 <thead>
@@ -1024,6 +1025,26 @@ bash .agent/scripts/setup-mcp-integrations.sh stagehand-python   # Python versio
 bash .agent/scripts/setup-mcp-integrations.sh stagehand-both     # Both versions
 bash .agent/scripts/setup-mcp-integrations.sh chrome-devtools
 </code></pre>
+<h3>OpenCode LSP Configuration</h3>
+<p>OpenCode includes <a href="https://opencode.ai/docs/lsp/">built-in LSP servers</a> for 35+ languages. For aidevops projects that use Markdown and TOON extensively, add these optional LSP servers to your <code>opencode.json</code> for real-time diagnostics during editing:</p>
+<pre><code class="language-json">{
+  &quot;lsp&quot;: {
+    &quot;markdownlint&quot;: {
+      &quot;command&quot;: [&quot;markdownlint-language-server&quot;, &quot;--stdio&quot;],
+      &quot;extensions&quot;: [&quot;.md&quot;]
+    },
+    &quot;toon-lsp&quot;: {
+      &quot;command&quot;: [&quot;toon-lsp&quot;],
+      &quot;extensions&quot;: [&quot;.toon&quot;]
+    }
+  }
+}
+</code></pre>
+<p><strong>Install the servers:</strong></p>
+<pre><code class="language-bash">npm install -g markdownlint-language-server  # Markdown diagnostics
+cargo install toon-lsp                        # TOON syntax validation
+</code></pre>
+<p>These catch formatting and syntax issues during editing, reducing preflight/postflight fix cycles.</p>
 <h2><strong>Browser Automation</strong></h2>
 <p>6 browser tools benchmarked and integrated for AI-assisted web automation, dev testing, and data extraction. Agents automatically select the optimal tool based on task requirements.</p>
 <h3>Performance Benchmarks</h3>
