@@ -269,6 +269,7 @@ aidevops upgrade-planning --dry-run # Preview changes without modifying
 aidevops upgrade-planning --force   # Skip confirmation prompt
 </code></pre>
 <p>This preserves your existing tasks while adding TOON-enhanced parsing, dependency tracking, and better structure.</p>
+<p><strong>Automatic detection:</strong> <code>aidevops update</code> now scans all registered projects for outdated planning templates (comparing TOON meta version numbers) and offers to upgrade them in-place with backups.</p>
 <h3>Task Graph Visualization with Beads</h3>
 <p><a href="https://github.com/steveyegge/beads">Beads</a> provides task dependency tracking and graph visualization:</p>
 <pre><code class="language-bash">aidevops init beads              # Enable beads (includes planning)
@@ -615,7 +616,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <tr>
 <td><strong>Progressive Disclosure</strong></td>
 <td>Load context on-demand</td>
-<td>Subagent tables, YAML frontmatter, read-on-demand</td>
+<td>Subagent routing with content summaries, YAML frontmatter, read-on-demand</td>
 </tr>
 <tr>
 <td><strong>Offload Context</strong></td>
@@ -1707,7 +1708,33 @@ code-quality, browser-automation, git-platforms.
 <td>One-line per task</td>
 </tr>
 </tbody></table>
-<p><strong>Time Tracking</strong>: Tasks support time estimates and actuals with the format <code>~4h (ai:2h test:1h) started:2025-01-15T10:30Z</code>. Configure per-repo via <code>.aidevops.json</code>.</p>
+<p><strong>Time Tracking</strong>: Tasks support time estimates as active session time (excluding AFK gaps) with the format <code>~4h started:2025-01-15T10:30Z</code>. The <code>session-time-helper.sh</code> analyses real session data to calibrate estimates vs actuals.</p>
+<p><strong>Risk Levels</strong>: Tasks support <code>risk:low/med/high</code> indicating human oversight needed:</p>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Oversight</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>low</code></td>
+<td>Autonomous</td>
+<td>Docs, formatting, simple refactors</td>
+</tr>
+<tr>
+<td><code>med</code></td>
+<td>Supervised</td>
+<td>Feature implementation, API changes</td>
+</tr>
+<tr>
+<td><code>high</code></td>
+<td>Engaged</td>
+<td>Security, data migrations, infrastructure</td>
+</tr>
+</tbody></table>
+<p>Configure time tracking per-repo via <code>.aidevops.json</code>.</p>
 <p><strong>Development Workflow</strong> (typical order):</p>
 <table>
 <thead>
