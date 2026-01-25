@@ -993,7 +993,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><strong>Global</strong> - Tools always available (loaded into every session)</li>
 <li><strong>Per-agent</strong> - Tools disabled globally, enabled per-agent via config (zero context overhead when unused)</li>
 </ul>
-<p><strong>Performance optimization:</strong> MCP packages are installed globally via <code>bun install -g</code> for instant startup (~0.1s vs 2-3s with <code>npx</code>). The framework uses a three-tier loading strategy: 8 MCPs load eagerly at startup, 12 MCPs load on-demand when their subagent is invoked. This reduces OpenCode startup time by 12-24 seconds.</p>
+<p><strong>Performance optimization:</strong> MCP packages are installed globally via <code>bun install -g</code> for instant startup (~0.1s vs 2-3s with <code>npx</code>). The framework uses a three-tier loading strategy: 7 MCPs load eagerly at startup, 13 MCPs load on-demand when their subagent is invoked. This reduces OpenCode startup time by 12-24 seconds.</p>
 <h3><strong>SEO Integrations (curl subagents - no MCP overhead)</strong></h3>
 <p>These use direct API calls via curl, avoiding MCP server startup entirely:</p>
 <table>
