@@ -186,7 +186,7 @@
 </ul>
 <h3>Agent Structure</h3>
 <ul>
-<li>15 primary agents (Plan+, Build+, SEO, Marketing, etc.)</li>
+<li>Primary agents (Build+, SEO, Marketing, etc.) with @plan-plus subagent for planning-only mode</li>
 <li>552+ subagent markdown files organized by domain</li>
 <li>147 helper scripts in <code>.agent/scripts/</code></li>
 <li>14 slash commands for common workflows</li>
@@ -1896,9 +1896,9 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 </thead>
 <tbody><tr>
-<td>Plan+</td>
+<td>@plan-plus</td>
 <td><code>plan-plus.md</code></td>
-<td>Planning with semantic search, writes to TODO.md/todo/</td>
+<td>Planning-only subagent (Build+ handles planning by default)</td>
 <td>context7, augment, repomix</td>
 </tr>
 <tr>
