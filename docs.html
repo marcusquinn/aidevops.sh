@@ -187,8 +187,8 @@
 <h3>Agent Structure</h3>
 <ul>
 <li>18 primary agents (Plan+, Build+, SEO, WordPress, etc.)</li>
-<li>560+ subagent markdown files organized by domain</li>
-<li>146+ helper scripts in <code>.agent/scripts/</code></li>
+<li>500+ subagent markdown files organized by domain</li>
+<li>140+ helper scripts in <code>.agent/scripts/</code></li>
 <li>41 slash commands for common workflows</li>
 </ul>
 <!-- AI-CONTEXT-END -->
@@ -625,7 +625,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 141+ helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 140+ helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -1786,7 +1786,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 18 primary agents, 536+ subagents, and 141+ helper scripts.</p>
+<p>This installs the complete framework: 18 primary agents, 500+ subagents, and 140+ helper scripts.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -1985,7 +1985,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 </tbody></table>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agent/</code> for the full list of 536+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agent/</code> for the full list of 500+ subagents organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -2743,7 +2743,7 @@ bash .agent/scripts/continue-cli.sh review
 ├── .agent/                        # Agents and documentation
 │   ├── AGENTS.md                  # User guide (deployed to ~/.aidevops/agents/)
 │   ├── *.md                       # 18 primary agents
-│   ├── scripts/                   # 141+ helper scripts
+│   ├── scripts/                   # 140+ helper scripts
 │   ├── tools/                     # Cross-domain utilities (video, browser, git, etc.)
 │   ├── services/                  # External service integrations
 │   └── workflows/                 # Development process guides
