@@ -1034,9 +1034,10 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><a href="https://context7.com/">Context7</a> - Real-time documentation access for thousands of libraries</li>
 <li><a href="https://github.com/yamadashy/repomix">Repomix</a> - Pack codebases into AI-friendly context</li>
 </ul>
-<p><strong>Browser Automation</strong> (7 tools + anti-detect stack, <a href="#browser-automation">benchmarked</a>):</p>
+<p><strong>Browser Automation</strong> (8 tools + anti-detect stack, <a href="#browser-automation">benchmarked</a>):</p>
 <ul>
 <li><a href="https://playwright.dev/">Playwright</a> - Fastest engine (0.9s form fill), parallel contexts, extensions, proxy (auto-installed)</li>
+<li><a href="https://github.com/microsoft/playwright-cli">playwright-cli</a> - Microsoft official CLI for AI agents, <code>--session</code> isolation, built-in tracing</li>
 <li><a href="https://github.com/nicholasgriffintn/dev-browser">dev-browser</a> - Persistent profile, stays logged in, ARIA snapshots, pairs with DevTools</li>
 <li><a href="https://github.com/vercel-labs/agent-browser">agent-browser</a> - CLI/CI/CD, <code>--session</code> parallel, ref-based element targeting</li>
 <li><a href="https://github.com/unclecode/crawl4ai">Crawl4AI</a> - Bulk extraction, <code>arun_many</code> parallel (1.7x), LLM-ready markdown</li>
@@ -1126,7 +1127,7 @@ cargo install toon-lsp                        # TOON syntax validation
 </code></pre>
 <p>These catch formatting and syntax issues during editing, reducing preflight/postflight fix cycles.</p>
 <h2><strong>Browser Automation</strong></h2>
-<p>7 browser tools + anti-detect stack, benchmarked and integrated for AI-assisted web automation, dev testing, data extraction, and bot detection evasion. Agents automatically select the optimal tool based on task requirements.</p>
+<p>8 browser tools + anti-detect stack, benchmarked and integrated for AI-assisted web automation, dev testing, data extraction, and bot detection evasion. Agents automatically select the optimal tool based on task requirements.</p>
 <h3>Performance Benchmarks</h3>
 <p>Tested on macOS ARM64, all headless, warm daemon:</p>
 <table>
@@ -1134,6 +1135,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <tr>
 <th>Test</th>
 <th>Playwright</th>
+<th>playwright-cli</th>
 <th>dev-browser</th>
 <th>agent-browser</th>
 <th>Crawl4AI</th>
@@ -1144,6 +1146,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <tbody><tr>
 <td><strong>Navigate + Screenshot</strong></td>
 <td><strong>1.43s</strong></td>
+<td>~1.9s</td>
 <td>1.39s</td>
 <td>1.90s</td>
 <td>2.78s</td>
@@ -1153,6 +1156,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <tr>
 <td><strong>Form Fill</strong> (4 fields)</td>
 <td><strong>0.90s</strong></td>
+<td>~1.4s</td>
 <td>1.34s</td>
 <td>1.37s</td>
 <td>N/A</td>
@@ -1162,6 +1166,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <tr>
 <td><strong>Data Extraction</strong> (5 items)</td>
 <td>1.33s</td>
+<td>~1.5s</td>
 <td><strong>1.08s</strong></td>
 <td>1.53s</td>
 <td>2.53s</td>
@@ -1171,6 +1176,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <tr>
 <td><strong>Multi-step</strong> (click + nav)</td>
 <td><strong>1.49s</strong></td>
+<td>~2.0s</td>
 <td>1.49s</td>
 <td>3.06s</td>
 <td>N/A</td>
@@ -1180,6 +1186,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <tr>
 <td><strong>Parallel</strong> (3 sessions)</td>
 <td><strong>1.6s</strong></td>
+<td>~2.0s</td>
 <td>N/A</td>
 <td>2.0s</td>
 <td>3.0s</td>
@@ -1193,6 +1200,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <tr>
 <th>Feature</th>
 <th>Playwright</th>
+<th>playwright-cli</th>
 <th>dev-browser</th>
 <th>agent-browser</th>
 <th>Crawl4AI</th>
@@ -1203,8 +1211,9 @@ cargo install toon-lsp                        # TOON syntax validation
 <tbody><tr>
 <td><strong>Headless</strong></td>
 <td>Yes</td>
+<td>Yes (default)</td>
 <td>Yes</td>
-<td>Yes</td>
+<td>Yes (default)</td>
 <td>Yes</td>
 <td>No (your browser)</td>
 <td>Yes</td>
@@ -1212,6 +1221,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <tr>
 <td><strong>Proxy/VPN</strong></td>
 <td>Full</td>
+<td>No</td>
 <td>Via args</td>
 <td>No</td>
 <td>Full</td>
@@ -1221,6 +1231,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <tr>
 <td><strong>Extensions</strong></td>
 <td>Yes (persistent)</td>
+<td>No</td>
 <td>Yes (profile)</td>
 <td>No</td>
 <td>No</td>
@@ -1230,6 +1241,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <tr>
 <td><strong>Password managers</strong></td>
 <td>Partial (needs unlock)</td>
+<td>No</td>
 <td>Partial</td>
 <td>No</td>
 <td>No</td>
@@ -1239,6 +1251,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <tr>
 <td><strong>Parallel sessions</strong></td>
 <td>5 ctx/2.1s</td>
+<td>--session</td>
 <td>Shared</td>
 <td>3 sess/2.0s</td>
 <td>arun_many 1.7x</td>
@@ -1249,13 +1262,25 @@ cargo install toon-lsp                        # TOON syntax validation
 <td><strong>Session persistence</strong></td>
 <td>storageState</td>
 <td>Profile dir</td>
+<td>Profile dir</td>
 <td>state save/load</td>
 <td>user_data_dir</td>
 <td>Your browser</td>
 <td>Per-instance</td>
 </tr>
 <tr>
+<td><strong>Tracing</strong></td>
+<td>Full API</td>
+<td>Built-in CLI</td>
+<td>Via Playwright</td>
+<td>Via Playwright</td>
+<td>No</td>
+<td>Via CDP</td>
+<td>Via Playwright</td>
+</tr>
+<tr>
 <td><strong>Natural language</strong></td>
+<td>No</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
@@ -1270,7 +1295,18 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td>No</td>
 <td>No</td>
+<td>No</td>
 <td>Yes</td>
+</tr>
+<tr>
+<td><strong>Maintainer</strong></td>
+<td>Microsoft</td>
+<td>Microsoft</td>
+<td>Community</td>
+<td>Vercel</td>
+<td>Community</td>
+<td>Community</td>
+<td>Browserbase</td>
 </tr>
 </tbody></table>
 <h3>Tool Selection</h3>
@@ -1286,6 +1322,11 @@ cargo install toon-lsp                        # TOON syntax validation
 <td><strong>Fastest automation</strong></td>
 <td>Playwright</td>
 <td>0.9s form fill, parallel contexts</td>
+</tr>
+<tr>
+<td><strong>AI agent (CLI)</strong></td>
+<td>playwright-cli</td>
+<td>Microsoft official, <code>--session</code> isolation, built-in tracing</td>
 </tr>
 <tr>
 <td><strong>Stay logged in</strong></td>
@@ -1309,7 +1350,7 @@ cargo install toon-lsp                        # TOON syntax validation
 </tr>
 <tr>
 <td><strong>CLI/CI/CD</strong></td>
-<td>agent-browser</td>
+<td>playwright-cli or agent-browser</td>
 <td>No server needed, <code>--session</code> isolation</td>
 </tr>
 <tr>
