@@ -544,7 +544,9 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <p><strong>Quality Control &amp; Monitoring:</strong></p>
 <ul>
 <li><strong>Multi-Platform Analysis</strong>: SonarCloud, CodeFactor, Codacy, CodeRabbit, Qlty, Gemini Code Assist, Snyk</li>
-<li><strong>Performance Auditing</strong>: PageSpeed Insights and Lighthouse integration</li>
+<li><strong>Performance Auditing</strong>: PageSpeed Insights, Lighthouse, Core Web Vitals (<code>/performance</code> command)</li>
+<li><strong>SEO Debugging</strong>: Open Graph validation, favicon checker, social preview testing</li>
+<li><strong>Email Deliverability</strong>: SPF/DKIM/DMARC/MX validation, blacklist checking</li>
 <li><strong>Uptime Monitoring</strong>: Updown.io integration for website and SSL monitoring</li>
 </ul>
 <h2><strong>Imported Skills</strong></h2>
@@ -2277,6 +2279,10 @@ code-quality, browser-automation, git-platforms.
 <td>List all configured API keys and their storage locations</td>
 </tr>
 <tr>
+<td><code>/performance</code></td>
+<td>Web performance audit (Core Web Vitals, Lighthouse, PageSpeed)</td>
+</tr>
+<tr>
 <td><code>/pr</code></td>
 <td>Unified PR workflow (orchestrates all checks)</td>
 </tr>
@@ -2319,6 +2325,36 @@ code-quality, browser-automation, git-platforms.
 <td>Keywords from GSC + Bing for your verified sites</td>
 </tr>
 </tbody></table>
+<p><strong>SEO Debugging</strong> (subagents in <code>seo/</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Subagent</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@debug-opengraph</code></td>
+<td>Validate Open Graph meta tags, preview social sharing</td>
+</tr>
+<tr>
+<td><code>@debug-favicon</code></td>
+<td>Validate favicon setup across platforms (ico, apple-touch, manifest)</td>
+</tr>
+</tbody></table>
+<p><strong>Email Deliverability</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/email-health-check</code></td>
+<td>Check SPF/DKIM/DMARC/MX records and blacklist status</td>
+</tr>
+</tbody></table>
 <p><strong>Release Workflow</strong> (in order):</p>
 <table>
 <thead>
@@ -2348,6 +2384,7 @@ code-quality, browser-automation, git-platforms.
 <td>Verify release health after deployment</td>
 </tr>
 </tbody></table>
+<p><strong>Auto-Task Completion</strong>: The release workflow automatically marks tasks as complete when commit messages reference them (e.g., <code>Closes t037</code>, <code>Fixes t042</code>). Tasks in <code>TODO.md</code> are updated with <code>completed:</code> timestamps.</p>
 <p><strong>Documentation</strong>:</p>
 <table>
 <thead>
