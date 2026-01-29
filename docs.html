@@ -187,9 +187,9 @@
 <h3>Agent Structure</h3>
 <ul>
 <li>Primary agents (Build+, SEO, Marketing, etc.) with @plan-plus subagent for planning-only mode</li>
-<li>539+ subagent markdown files organized by domain</li>
-<li>148 helper scripts in <code>.agent/scripts/</code></li>
-<li>16 slash commands for common workflows</li>
+<li>547+ subagent markdown files organized by domain</li>
+<li>155 helper scripts in <code>.agent/scripts/</code></li>
+<li>20 slash commands for common workflows</li>
 </ul>
 <!-- AI-CONTEXT-END -->
 
@@ -613,7 +613,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 146 helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 155 helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -1781,7 +1781,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 15 primary agents, 552+ subagents, and 147 helper scripts.</p>
+<p>This installs the complete framework: 14 primary agents, 547+ subagents, and 155 helper scripts.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -1980,7 +1980,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 </tbody></table>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agent/</code> for the full list of 552+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agent/</code> for the full list of 547+ subagents organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -2339,6 +2339,18 @@ code-quality, browser-automation, git-platforms.
 <td><code>/neuronwriter</code></td>
 <td>Content optimization with NLP term recommendations and scoring</td>
 </tr>
+<tr>
+<td><code>/seo-export</code></td>
+<td>Export SEO data from GSC, Bing, Ahrefs, DataForSEO to TOON format</td>
+</tr>
+<tr>
+<td><code>/seo-analyze</code></td>
+<td>Analyze exported data for quick wins, striking distance, low CTR</td>
+</tr>
+<tr>
+<td><code>/seo-opportunities</code></td>
+<td>Combined export + analysis workflow</td>
+</tr>
 </tbody></table>
 <p><strong>SEO Debugging</strong> (subagents in <code>seo/</code>):</p>
 <table>
@@ -2440,6 +2452,10 @@ code-quality, browser-automation, git-platforms.
 <tr>
 <td><code>/preflight-loop</code></td>
 <td>Run preflight checks iteratively until all pass</td>
+</tr>
+<tr>
+<td><code>/log-issue-aidevops</code></td>
+<td>Report issues with aidevops (gathers diagnostics, checks duplicates, creates GitHub issue)</td>
 </tr>
 </tbody></table>
 <h3>Ralph Loop - Iterative AI Development</h3>
