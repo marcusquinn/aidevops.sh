@@ -187,7 +187,7 @@
 <h3>Agent Structure</h3>
 <ul>
 <li>Primary agents (Build+, SEO, Marketing, etc.) with @plan-plus subagent for planning-only mode</li>
-<li>547+ subagent markdown files organized by domain</li>
+<li>566+ subagent markdown files organized by domain</li>
 <li>155 helper scripts in <code>.agent/scripts/</code></li>
 <li>20 slash commands for common workflows</li>
 </ul>
@@ -1057,6 +1057,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><a href="https://ahrefs.com/api">Ahrefs</a> - SEO analysis, backlink research, keyword data (curl subagent)</li>
 <li><a href="https://dataforseo.com/">DataForSEO</a> - Comprehensive SEO data APIs (curl subagent)</li>
 <li><a href="https://serper.dev/">Serper</a> - Google Search API (curl subagent)</li>
+<li><strong>SEO Audit</strong> - Comprehensive technical SEO auditing: crawlability, indexation, Core Web Vitals, on-page optimization, E-E-A-T signals (imported skill from <a href="https://github.com/coreyhaines31/marketingskills">marketingskills</a>)</li>
 <li><strong>Keyword Research</strong> - Strategic keyword research with SERP weakness detection (via DataForSEO + Serper + Ahrefs)</li>
 <li><strong>Site Crawler</strong> - Screaming Frog-like SEO auditing: broken links, redirects, meta issues, structured data</li>
 <li><strong>Domain Research</strong> - DNS intelligence via THC (4.51B records) and Reconeer APIs: rDNS, subdomains, CNAMEs</li>
@@ -1781,7 +1782,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 14 primary agents, 547+ subagents, and 155 helper scripts.</p>
+<p>This installs the complete framework: 14 primary agents, 566+ subagents, and 155 helper scripts.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -1980,7 +1981,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 </tbody></table>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agent/</code> for the full list of 547+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agent/</code> for the full list of 566+ subagents organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -2352,7 +2353,7 @@ code-quality, browser-automation, git-platforms.
 <td>Combined export + analysis workflow</td>
 </tr>
 </tbody></table>
-<p><strong>SEO Debugging</strong> (subagents in <code>seo/</code>):</p>
+<p><strong>SEO Debugging &amp; Auditing</strong> (subagents in <code>seo/</code>):</p>
 <table>
 <thead>
 <tr>
@@ -2361,6 +2362,10 @@ code-quality, browser-automation, git-platforms.
 </tr>
 </thead>
 <tbody><tr>
+<td><code>@seo-audit</code></td>
+<td>Comprehensive SEO audit: technical, on-page, content quality, E-E-A-T</td>
+</tr>
+<tr>
 <td><code>@debug-opengraph</code></td>
 <td>Validate Open Graph meta tags, preview social sharing</td>
 </tr>
