@@ -658,7 +658,17 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <tr>
 <td><strong>Evolve Context</strong></td>
 <td>Learn from sessions</td>
-<td><code>/remember</code>, <code>/recall</code> with SQLite FTS5</td>
+<td><code>/remember</code>, <code>/recall</code> with SQLite FTS5 + opt-in semantic search</td>
+</tr>
+<tr>
+<td><strong>Pattern Tracking</strong></td>
+<td>Learn what works/fails</td>
+<td><code>pattern-tracker-helper.sh</code>, <code>/patterns</code> command</td>
+</tr>
+<tr>
+<td><strong>Cost-Aware Routing</strong></td>
+<td>Match model to task complexity</td>
+<td><code>model-routing.md</code> with 5-tier guidance, <code>/route</code> command</td>
 </tr>
 </tbody></table>
 <p><strong>Key insight</strong>: Context is a finite resource with diminishing returns. aidevops treats every token as precious - loading only what&#39;s needed, when it&#39;s needed.</p>
@@ -700,8 +710,8 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 </tr>
 <tr>
 <td>Model routing</td>
-<td><code>generate-opencode-agents.sh</code></td>
-<td>Maps agent tiers to cost-effective models</td>
+<td><code>model-routing.md</code>, <code>/route</code></td>
+<td>Cost-aware 5-tier routing guidance (haiku/flash/sonnet/pro/opus)</td>
 </tr>
 </tbody></table>
 <p><strong>How it works:</strong></p>
@@ -765,7 +775,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 </thead>
 <tbody><tr>
 <td><strong>Review</strong></td>
-<td>Analyze memory for success/failure patterns</td>
+<td>Analyze memory for success/failure patterns (<code>pattern-tracker-helper.sh</code>)</td>
 </tr>
 <tr>
 <td><strong>Refine</strong></td>
@@ -2796,7 +2806,7 @@ wt switch -c -x opencode feature/next-feature  # Worktrunk: create + start AI CL
 </code></pre>
 <p>See <code>.agent/workflows/session-manager.md</code> for the complete guide.</p>
 <h3>Cross-Session Memory System</h3>
-<p><strong>&quot;Compound, then clear&quot;</strong> - Sessions should build on each other. The memory system stores knowledge, patterns, and learnings for future sessions using SQLite FTS5 for fast full-text search.</p>
+<p><strong>&quot;Compound, then clear&quot;</strong> - Sessions should build on each other. The memory system stores knowledge, patterns, and learnings for future sessions using SQLite FTS5 for fast full-text search, with opt-in semantic similarity search via vector embeddings.</p>
 <p><strong>Slash commands:</strong></p>
 <table>
 <thead>
@@ -2820,6 +2830,14 @@ wt switch -c -x opencode feature/next-feature  # Worktrunk: create + start AI CL
 <tr>
 <td><code>/recall --stats</code></td>
 <td>Show memory statistics</td>
+</tr>
+<tr>
+<td><code>/patterns {task}</code></td>
+<td>Show success/failure patterns for a task type</td>
+</tr>
+<tr>
+<td><code>/route {task}</code></td>
+<td>Suggest optimal model tier for a task</td>
 </tr>
 </tbody></table>
 <p><strong>Memory types:</strong></p>
@@ -2858,13 +2876,39 @@ wt switch -c -x opencode feature/next-feature  # Worktrunk: create + start AI CL
 <td><code>CONTEXT</code></td>
 <td>Background info</td>
 </tr>
+<tr>
+<td><code>SUCCESS_PATTERN</code></td>
+<td>Approaches that consistently work</td>
+</tr>
+<tr>
+<td><code>FAILURE_PATTERN</code></td>
+<td>Approaches that consistently fail</td>
+</tr>
 </tbody></table>
+<p><strong>Semantic search (opt-in):</strong></p>
+<pre><code class="language-bash"># Enable semantic similarity search (~90MB model download)
+memory-embeddings-helper.sh setup
+
+# Search by meaning, not just keywords
+memory-helper.sh recall &quot;how to optimize queries&quot; --semantic
+</code></pre>
+<p><strong>Pattern tracking:</strong></p>
+<pre><code class="language-bash"># Record what worked
+pattern-tracker-helper.sh record --outcome success --task-type bugfix \
+    --model sonnet --description &quot;Structured debugging found root cause&quot;
+
+# Get suggestions for a new task
+pattern-tracker-helper.sh suggest &quot;refactor the auth middleware&quot;
+</code></pre>
 <p><strong>CLI usage:</strong></p>
 <pre><code class="language-bash"># Store a memory
 ~/.aidevops/agents/scripts/memory-helper.sh store &quot;WORKING_SOLUTION&quot; &quot;Fixed CORS with nginx headers&quot; &quot;cors,nginx&quot;
 
-# Recall memories
+# Recall memories (keyword search - default)
 ~/.aidevops/agents/scripts/memory-helper.sh recall &quot;cors&quot;
+
+# Recall memories (semantic similarity - opt-in)
+~/.aidevops/agents/scripts/memory-helper.sh recall &quot;cors&quot; --semantic
 
 # View statistics
 ~/.aidevops/agents/scripts/memory-helper.sh stats
@@ -2873,7 +2917,7 @@ wt switch -c -x opencode feature/next-feature  # Worktrunk: create + start AI CL
 ~/.aidevops/agents/scripts/memory-helper.sh validate   # Check for stale entries
 ~/.aidevops/agents/scripts/memory-helper.sh prune      # Remove stale memories
 </code></pre>
-<p><strong>Storage:</strong> <code>~/.aidevops/.agent-workspace/memory/memory.db</code></p>
+<p><strong>Storage:</strong> <code>~/.aidevops/.agent-workspace/memory/memory.db</code> (+ optional <code>embeddings.db</code> for semantic search)</p>
 <p>See <code>.agent/memory/README.md</code> for complete documentation.</p>
 <h3><strong>Installation</strong></h3>
 <p>Slash commands are automatically installed by <code>setup.sh</code>:</p>
