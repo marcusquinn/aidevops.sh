@@ -188,7 +188,7 @@
 <ul>
 <li>Primary agents (Build+, SEO, Marketing, etc.) with @plan-plus subagent for planning-only mode</li>
 <li>614+ subagent markdown files organized by domain</li>
-<li>163 helper scripts in <code>.agent/scripts/</code></li>
+<li>164 helper scripts in <code>.agent/scripts/</code></li>
 <li>28 slash commands for common workflows</li>
 </ul>
 <!-- AI-CONTEXT-END -->
@@ -613,7 +613,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 163 helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 164 helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -823,7 +823,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <h3>Scheduled Agent Tasks</h3>
 <p>Cron-based agent dispatch for automated workflows:</p>
 <pre><code class="language-bash"># Example: Daily SEO report at 9am
-0 9 * * * ~/.aidevops/agents/scripts/droid-helper.sh dispatch &quot;seo-analyst&quot; &quot;Generate daily SEO report&quot;
+0 9 * * * ~/.aidevops/agents/scripts/runner-helper.sh run &quot;seo-analyst&quot; &quot;Generate daily SEO report&quot;
 </code></pre>
 <p><strong>See:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/TODO.md">TODO.md</a> tasks t109-t118 for implementation status.</p>
 <h2><strong>Requirements</strong></h2>
