@@ -727,7 +727,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <p><strong>Subagent index</strong> (<code>.agent/subagent-index.toon</code>): Compressed TOON routing table listing all agents, subagents, workflows, and scripts with model tier assignments - enables fast agent discovery without loading full markdown files.</p>
 <h2><strong>Advanced Capabilities</strong> (Planned)</h2>
 <h3>Parallel Agents &amp; Headless Dispatch</h3>
-<p>Run multiple AI sessions concurrently with isolated contexts:</p>
+<p>Run multiple AI sessions concurrently with isolated contexts. Named <strong>runners</strong> provide persistent agent identities with their own instructions and memory.</p>
 <table>
 <thead>
 <tr>
@@ -737,33 +737,61 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 </thead>
 <tbody><tr>
 <td><strong>Headless dispatch</strong></td>
-<td><code>claude -p</code> / OpenCode server API for non-interactive execution</td>
+<td><code>opencode run</code> for one-shot tasks, <code>opencode serve</code> + <code>--attach</code> for warm server</td>
+</tr>
+<tr>
+<td><strong>Runners</strong></td>
+<td>Named agent instances with per-runner AGENTS.md, config, and run logs (<code>runner-helper.sh</code>)</td>
 </tr>
 <tr>
 <td><strong>Session management</strong></td>
-<td>Deterministic session IDs, resume with <code>--resume</code></td>
+<td>Resume sessions with <code>-s &lt;id&gt;</code> or <code>-c</code>, fork with SDK</td>
 </tr>
 <tr>
 <td><strong>Memory namespaces</strong></td>
-<td>Per-agent memory isolation with shared access when needed</td>
+<td>Per-runner memory isolation with shared access when needed</td>
+</tr>
+<tr>
+<td><strong>SDK orchestration</strong></td>
+<td><code>@opencode-ai/sdk</code> for TypeScript parallel dispatch via <code>Promise.all</code></td>
 </tr>
 <tr>
 <td><strong>Matrix integration</strong></td>
 <td>Chat-triggered dispatch via self-hosted Matrix (optional)</td>
 </tr>
 </tbody></table>
+<pre><code class="language-bash"># Create a named runner
+runner-helper.sh create code-reviewer --description &quot;Reviews code for security and quality&quot;
+
+# Dispatch a task (one-shot)
+runner-helper.sh run code-reviewer &quot;Review src/auth/ for vulnerabilities&quot;
+
+# Dispatch against warm server (faster, no MCP cold boot)
+opencode serve --port 4096 &amp;
+runner-helper.sh run code-reviewer &quot;Review src/auth/&quot; --attach http://localhost:4096
+
+# Parallel dispatch via CLI
+opencode run --attach http://localhost:4096 --title &quot;Review&quot; &quot;Review src/auth/&quot; &amp;
+opencode run --attach http://localhost:4096 --title &quot;Tests&quot; &quot;Generate tests for src/utils/&quot; &amp;
+wait
+
+# List runners and status
+runner-helper.sh list
+runner-helper.sh status code-reviewer
+</code></pre>
 <p><strong>Architecture:</strong></p>
 <pre><code class="language-text">OpenCode Server (opencode serve)
-├── Session 1 (code-reviewer)
-├── Session 2 (seo-analyst)
+├── Session 1 (runner/code-reviewer)
+├── Session 2 (runner/seo-analyst)
 └── Session 3 (scheduled-task)
          ↑
     HTTP API / SSE Events
          ↑
 ┌────────┴────────┐
-│  Dispatch Layer │ ← Matrix bot, cron, CLI
+│  Dispatch Layer │ ← runner-helper.sh, cron, Matrix bot, SDK
 └─────────────────┘
 </code></pre>
+<p><strong>See:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/ai-assistants/headless-dispatch.md">headless-dispatch.md</a> for full documentation including SDK examples, CI/CD integration, and custom agent configuration.</p>
 <h3>Self-Improving Agent System</h3>
 <p>Agents that learn from experience and contribute improvements:</p>
 <table>
