@@ -2944,8 +2944,13 @@ pattern-tracker-helper.sh suggest &quot;refactor the auth middleware&quot;
 # Maintenance
 ~/.aidevops/agents/scripts/memory-helper.sh validate   # Check for stale entries
 ~/.aidevops/agents/scripts/memory-helper.sh prune      # Remove stale memories
+
+# Namespaces (per-runner memory isolation)
+~/.aidevops/agents/scripts/memory-helper.sh --namespace my-runner store --content &quot;Runner learning&quot;
+~/.aidevops/agents/scripts/memory-helper.sh --namespace my-runner recall &quot;query&quot; --shared
+~/.aidevops/agents/scripts/memory-helper.sh namespaces  # List all namespaces
 </code></pre>
-<p><strong>Storage:</strong> <code>~/.aidevops/.agent-workspace/memory/memory.db</code> (+ optional <code>embeddings.db</code> for semantic search)</p>
+<p><strong>Storage:</strong> <code>~/.aidevops/.agent-workspace/memory/memory.db</code> (+ optional <code>embeddings.db</code> for semantic search, <code>namespaces/</code> for per-runner isolation)</p>
 <p>See <code>.agent/memory/README.md</code> for complete documentation.</p>
 <h3><strong>Installation</strong></h3>
 <p>Slash commands are automatically installed by <code>setup.sh</code>:</p>
