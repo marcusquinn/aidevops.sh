@@ -2871,8 +2871,16 @@ wt switch -c -x opencode feature/next-feature  # Worktrunk: create + start AI CL
 <td>Show 10 most recent memories</td>
 </tr>
 <tr>
+<td><code>/recall --auto-only</code></td>
+<td>Search only auto-captured memories</td>
+</tr>
+<tr>
 <td><code>/recall --stats</code></td>
 <td>Show memory statistics</td>
+</tr>
+<tr>
+<td><code>/memory-log</code></td>
+<td>Show recent auto-captured memories</td>
 </tr>
 <tr>
 <td><code>/patterns {task}</code></td>
@@ -2943,9 +2951,13 @@ pattern-tracker-helper.sh record --outcome success --task-type bugfix \
 # Get suggestions for a new task
 pattern-tracker-helper.sh suggest &quot;refactor the auth middleware&quot;
 </code></pre>
+<p><strong>Auto-capture:</strong> AI agents automatically store memories using <code>--auto</code> flag when they detect working solutions, failed approaches, or decisions. Privacy filters strip <code>&lt;private&gt;</code> tags and reject secret patterns.</p>
 <p><strong>CLI usage:</strong></p>
 <pre><code class="language-bash"># Store a memory
-~/.aidevops/agents/scripts/memory-helper.sh store &quot;WORKING_SOLUTION&quot; &quot;Fixed CORS with nginx headers&quot; &quot;cors,nginx&quot;
+~/.aidevops/agents/scripts/memory-helper.sh store --type &quot;WORKING_SOLUTION&quot; --content &quot;Fixed CORS with nginx headers&quot; --tags &quot;cors,nginx&quot;
+
+# Store auto-captured memory (from AI agent)
+~/.aidevops/agents/scripts/memory-helper.sh store --auto --content &quot;Fixed CORS with nginx headers&quot; --type WORKING_SOLUTION
 
 # Recall memories (keyword search - default)
 ~/.aidevops/agents/scripts/memory-helper.sh recall &quot;cors&quot;
@@ -2953,7 +2965,10 @@ pattern-tracker-helper.sh suggest &quot;refactor the auth middleware&quot;
 # Recall memories (semantic similarity - opt-in)
 ~/.aidevops/agents/scripts/memory-helper.sh recall &quot;cors&quot; --semantic
 
-# View statistics
+# Show auto-capture log
+~/.aidevops/agents/scripts/memory-helper.sh log
+
+# View statistics (includes auto-capture counts)
 ~/.aidevops/agents/scripts/memory-helper.sh stats
 
 # Maintenance
