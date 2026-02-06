@@ -182,6 +182,7 @@
 <ul>
 <li><code>aidevops init</code> - Initialize in any project</li>
 <li><code>aidevops update</code> - Update framework</li>
+<li><code>aidevops secret</code> - Manage secrets (gopass encrypted, AI-safe)</li>
 <li><code>/onboarding</code> - Interactive setup wizard (in AI assistant)</li>
 </ul>
 <h3>Agent Structure</h3>
@@ -1148,6 +1149,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 </ul>
 <h3><strong>Security &amp; Code Quality</strong></h3>
 <ul>
+<li><strong><a href="https://github.com/gopasspw/gopass">gopass</a></strong>: GPG-encrypted secret management with AI-native wrapper (<code>aidevops secret</code>) - subprocess injection + output redaction keeps secrets out of AI context</li>
 <li><strong><a href="https://github.com/dani-garcia/vaultwarden">Vaultwarden</a></strong>: Password and secrets management</li>
 <li><strong><a href="https://sonarcloud.io/">SonarCloud</a></strong>: Security and quality analysis (A-grade ratings)</li>
 <li><strong><a href="https://www.codefactor.io/">CodeFactor</a></strong>: Code quality metrics (A+ score)</li>
