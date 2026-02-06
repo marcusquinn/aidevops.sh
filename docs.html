@@ -678,7 +678,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <p><strong>Architecture:</strong></p>
 <pre><code class="language-text">Coordinator (pulse loop)
 ├── Agent Registry (TOON format - who&#39;s active, what branch, idle/busy)
-├── Mailbox System (file-based, per-agent inbox/outbox)
+├── Mailbox System (SQLite WAL-mode, indexed queries)
 │   ├── task_assignment → worker inbox
 │   ├── status_report → coordinator outbox
 │   └── broadcast → all agents
@@ -696,7 +696,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <tbody><tr>
 <td>Mailbox</td>
 <td><code>mail-helper.sh</code></td>
-<td>TOON-based inter-agent messaging (send, check, broadcast, archive)</td>
+<td>SQLite-backed inter-agent messaging (send, check, broadcast, archive)</td>
 </tr>
 <tr>
 <td>Coordinator</td>
@@ -719,8 +719,8 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <li>Each agent registers on startup (<code>mail-helper.sh register --role worker</code>)</li>
 <li>Coordinator runs periodic pulses (<code>coordinator-helper.sh pulse</code>)</li>
 <li>Pulse collects status reports, dispatches queued tasks to idle workers</li>
-<li>Agents send completion reports back via outbox</li>
-<li>File locking (<code>noclobber</code> + retry) prevents race conditions</li>
+<li>Agents send completion reports back via mailbox</li>
+<li>SQLite WAL mode + <code>busy_timeout</code> handles concurrent access (79x faster than previous file-based system)</li>
 </ol>
 <p><strong>Compaction plugin</strong> (<code>.agent/plugins/opencode-aidevops/</code>): When OpenCode compacts context (at ~200K tokens), the plugin injects current session state - agent registry, pending mailbox messages, git context, and relevant memories - ensuring continuity across compaction boundaries.</p>
 <p><strong>Custom system prompt</strong> (<code>.agent/prompts/build.txt</code>): Based on upstream OpenCode with aidevops-specific overrides for tool preferences, professional objectivity, and per-model reinforcements for weaker models.</p>
@@ -1001,10 +1001,11 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <h3><strong>Document Processing &amp; OCR</strong></h3>
 <ul>
 <li><strong><a href="https://libpdf.dev/">LibPDF</a></strong>: PDF form filling, digital signatures (PAdES B-B/T/LT/LTA), encryption, merge/split, text extraction</li>
+<li><strong><a href="https://github.com/opendatalab/MinerU">MinerU</a></strong>: Layout-aware PDF-to-markdown/JSON conversion with OCR (109 languages), formula-to-LaTeX, and table extraction (53k+ stars, AGPL-3.0)</li>
 <li><strong><a href="https://github.com/Zipstack/unstract">Unstract</a></strong>: LLM-powered structured data extraction from unstructured documents (PDF, images, DOCX)</li>
 <li><strong><a href="https://ollama.com/library/glm-ocr">GLM-OCR</a></strong>: Local OCR via Ollama - purpose-built for document text extraction (tables, forms, complex layouts) with zero cloud dependency</li>
 </ul>
-<p><strong>OCR Tool Selection:</strong></p>
+<p><strong>PDF/OCR Tool Selection:</strong></p>
 <table>
 <thead>
 <tr>
@@ -1014,6 +1015,11 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 </tr>
 </thead>
 <tbody><tr>
+<td><strong>Complex PDF to markdown</strong></td>
+<td>MinerU</td>
+<td>Layout-aware, formulas, tables, 109-language OCR</td>
+</tr>
+<tr>
 <td><strong>Quick text extraction</strong></td>
 <td>GLM-OCR</td>
 <td>Local, fast, no API keys, privacy-first</td>
@@ -1032,6 +1038,11 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <td><strong>PDF text extraction</strong></td>
 <td>LibPDF</td>
 <td>Native PDF parsing, no AI needed</td>
+</tr>
+<tr>
+<td><strong>Simple format conversion</strong></td>
+<td>Pandoc</td>
+<td>Lightweight, broad format support</td>
 </tr>
 </tbody></table>
 <p><strong>Quick start:</strong></p>
@@ -1278,6 +1289,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <p><strong>Data Extraction:</strong></p>
 <ul>
 <li><a href="https://outscraper.com/">Outscraper</a> - Google Maps, business data, reviews extraction</li>
+<li><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/curl-copy.md">curl-copy</a> - Authenticated scraping via DevTools &quot;Copy as cURL&quot; (no browser automation needed)</li>
 </ul>
 <p><strong>Performance &amp; Security:</strong></p>
 <ul>
@@ -1601,6 +1613,11 @@ cargo install toon-lsp                        # TOON syntax validation
 <td><strong>Mobile/tablet emulation</strong></td>
 <td>Playwright</td>
 <td>100+ device presets, viewport, touch, geolocation, locale</td>
+</tr>
+<tr>
+<td><strong>Authenticated one-off scrape</strong></td>
+<td>curl-copy</td>
+<td>DevTools &quot;Copy as cURL&quot; → paste to terminal/AI</td>
 </tr>
 <tr>
 <td><strong>Bot detection evasion</strong></td>
