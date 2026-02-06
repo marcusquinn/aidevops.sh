@@ -142,20 +142,63 @@
     });
 })();
 
-// Smooth scroll for anchor links
+// Auto-generate heading IDs and smooth scroll for anchor links
 (function() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    // Generate GitHub-style slug from heading text
+    // GitHub preserves consecutive dashes (e.g. " - " becomes "---")
+    function slugify(text) {
+        return text
+            .toLowerCase()
+            .trim()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/^-|-$/g, '');
+    }
+
+    // Add id attributes to all headings that don't have one
+    var slugCounts = {};
+    document.querySelectorAll('.docs-content h1, .docs-content h2, .docs-content h3, .docs-content h4').forEach(function(heading) {
+        if (heading.id) return;
+        var slug = slugify(heading.textContent);
+        if (!slug) return;
+        // Handle duplicate slugs by appending a counter
+        if (slugCounts[slug]) {
+            slugCounts[slug]++;
+            slug = slug + '-' + slugCounts[slug];
+        } else {
+            slugCounts[slug] = 1;
+        }
+        heading.id = slug;
+    });
+
+    // Smooth scroll for anchor links, update URL hash
+    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            var href = this.getAttribute('href');
+            if (href === '#') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                history.replaceState(null, '', window.location.pathname);
+                return;
+            }
+            var target = document.querySelector(href);
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                history.replaceState(null, '', href);
             }
         });
     });
+
+    // On page load, scroll to hash target if present
+    if (window.location.hash) {
+        var hashTarget = document.querySelector(window.location.hash);
+        if (hashTarget) {
+            setTimeout(function() {
+                hashTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    }
 })();
 
 // Add intersection observer for fade-in animations
