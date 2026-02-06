@@ -188,7 +188,7 @@
 <ul>
 <li>Primary agents (Build+, SEO, Marketing, etc.) with @plan-plus subagent for planning-only mode</li>
 <li>614+ subagent markdown files organized by domain</li>
-<li>167 helper scripts in <code>.agent/scripts/</code></li>
+<li>167 helper scripts in <code>.agents/scripts/</code></li>
 <li>28 slash commands for common workflows</li>
 </ul>
 <!-- AI-CONTEXT-END -->
@@ -257,7 +257,7 @@ aidevops init planning,time-tracking  # Enable specific features
 <p>This creates:</p>
 <ul>
 <li><code>.aidevops.json</code> - Configuration with enabled features</li>
-<li><code>.agent</code> symlink → <code>~/.aidevops/agents/</code></li>
+<li><code>.agents</code> symlink → <code>~/.aidevops/agents/</code></li>
 <li><code>TODO.md</code> - Quick task tracking with time estimates</li>
 <li><code>todo/PLANS.md</code> - Complex execution plans</li>
 <li><code>.beads/</code> - Task graph database (if beads enabled)</li>
@@ -337,7 +337,7 @@ aidevops upgrade-planning --force   # Skip confirmation prompt
 <li><code>bdui</code> (React/Ink TUI) - Modern terminal UI</li>
 <li><code>perles</code> (Rust TUI) - BQL query language</li>
 </ul>
-<p>See <code>.agent/tools/task-management/beads.md</code> for complete documentation and installation commands.</p>
+<p>See <code>.agents/tools/task-management/beads.md</code> for complete documentation and installation commands.</p>
 <p><strong>Your AI assistant now has agentic access to 30+ service integrations.</strong></p>
 <h3>OpenCode Antigravity OAuth Plugin</h3>
 <p>The setup automatically installs the <a href="https://github.com/NoeFabris/opencode-antigravity-auth">opencode-antigravity-auth</a> plugin, enabling Google OAuth authentication for OpenCode. This gives you access to Antigravity rate limits and premium models.</p>
@@ -414,7 +414,7 @@ aidevops upgrade-planning --force   # Skip confirmation prompt
 &gt; @librarian find examples of this pattern on GitHub
 &gt; @explore search for authentication handling
 </code></pre>
-<p>See <code>.agent/tools/opencode/oh-my-opencode.md</code> for the full compatibility guide.</p>
+<p>See <code>.agents/tools/opencode/oh-my-opencode.md</code> for the full compatibility guide.</p>
 <h3>GitHub AI Agent Integration</h3>
 <p>Enable AI-powered issue resolution directly from GitHub. Comment <code>/oc fix this</code> on any issue and the AI creates a branch, implements the fix, and opens a PR.</p>
 <p><strong>Security-first design</strong> - The workflow includes:</p>
@@ -467,7 +467,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <td>Line-specific fix</td>
 </tr>
 </tbody></table>
-<p>See <code>.agent/tools/git/opencode-github-security.md</code> for the full security documentation.</p>
+<p>See <code>.agents/tools/git/opencode-github-security.md</code> for the full security documentation.</p>
 <p><strong>Supported AI Assistants:</strong> OpenCode is the recommended and primary-tested tool. All 18 assistants below have MCP configuration support, but only OpenCode receives continual testing and first-class integration. Other tools are supported as a courtesy for users evaluating aidevops capabilities.</p>
 <p><strong>Recommended:</strong></p>
 <ul>
@@ -480,7 +480,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <p><strong>Supported terminals:</strong> Tabby, iTerm2, Windows Terminal, Kitty, Alacritty, WezTerm, Hyper, and most xterm-compatible terminals.</p>
 <p><strong>How it works:</strong> The <code>pre-edit-check.sh</code> script&#39;s primary role is enforcing git workflow protection (blocking edits on main/master branches). As a secondary, non-blocking action, it updates the terminal title via escape sequences. No configuration needed - it&#39;s automatic.</p>
 <p><strong>Example format:</strong> <code>{repo}/{branch-type}/{description}</code></p>
-<p>See <code>.agent/tools/terminal/terminal-title.md</code> for customization options.</p>
+<p>See <code>.agents/tools/terminal/terminal-title.md</code> for customization options.</p>
 <p><strong>Also Supported (community-tested):</strong></p>
 <p><strong>IDE-Based:</strong></p>
 <ul>
@@ -681,7 +681,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 </tr>
 </tbody></table>
 <p><strong>Key insight</strong>: Context is a finite resource with diminishing returns. aidevops treats every token as precious - loading only what&#39;s needed, when it&#39;s needed.</p>
-<p>See <code>.agent/aidevops/architecture.md</code> for detailed implementation notes and references.</p>
+<p>See <code>.agents/aidevops/architecture.md</code> for detailed implementation notes and references.</p>
 <h3>Multi-Agent Orchestration</h3>
 <p>Run multiple AI agents in parallel on separate branches, coordinated through a lightweight mailbox system. Each agent works independently in its own git worktree while a stateless coordinator manages task distribution and status reporting.</p>
 <p><strong>Architecture:</strong></p>
@@ -736,9 +736,9 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <li>Agents send completion reports back via mailbox</li>
 <li>SQLite WAL mode + <code>busy_timeout</code> handles concurrent access (79x faster than previous file-based system)</li>
 </ol>
-<p><strong>Compaction plugin</strong> (<code>.agent/plugins/opencode-aidevops/</code>): When OpenCode compacts context (at ~200K tokens), the plugin injects current session state - agent registry, pending mailbox messages, git context, and relevant memories - ensuring continuity across compaction boundaries.</p>
-<p><strong>Custom system prompt</strong> (<code>.agent/prompts/build.txt</code>): Based on upstream OpenCode with aidevops-specific overrides for tool preferences, professional objectivity, and per-model reinforcements for weaker models.</p>
-<p><strong>Subagent index</strong> (<code>.agent/subagent-index.toon</code>): Compressed TOON routing table listing all agents, subagents, workflows, and scripts with model tier assignments - enables fast agent discovery without loading full markdown files.</p>
+<p><strong>Compaction plugin</strong> (<code>.agents/plugins/opencode-aidevops/</code>): When OpenCode compacts context (at ~200K tokens), the plugin injects current session state - agent registry, pending mailbox messages, git context, and relevant memories - ensuring continuity across compaction boundaries.</p>
+<p><strong>Custom system prompt</strong> (<code>.agents/prompts/build.txt</code>): Based on upstream OpenCode with aidevops-specific overrides for tool preferences, professional objectivity, and per-model reinforcements for weaker models.</p>
+<p><strong>Subagent index</strong> (<code>.agents/subagent-index.toon</code>): Compressed TOON routing table listing all agents, subagents, workflows, and scripts with model tier assignments - enables fast agent discovery without loading full markdown files.</p>
 <h2><strong>Autonomous Orchestration &amp; Parallel Agents</strong></h2>
 <p><strong>Why this matters:</strong> Long-running tasks -- batch PR reviews, multi-site SEO audits, large refactors -- are where AI agents deliver the most value. Instead of babysitting one task at a time, the supervisor dispatches work to parallel agents, each in its own git worktree, with automatic retry, progress tracking, and batch completion reporting.</p>
 <h3>Parallel Agents &amp; Headless Dispatch</h3>
@@ -806,7 +806,7 @@ runner-helper.sh status code-reviewer
 │  Dispatch Layer │ ← runner-helper.sh, cron, Matrix bot, SDK
 └─────────────────┘
 </code></pre>
-<p><strong>Example runner templates:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/ai-assistants/runners/code-reviewer.md">code-reviewer</a>, <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/ai-assistants/runners/seo-analyst.md">seo-analyst</a> - copy and customize for your own runners.</p>
+<p><strong>Example runner templates:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/ai-assistants/runners/code-reviewer.md">code-reviewer</a>, <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/ai-assistants/runners/seo-analyst.md">seo-analyst</a> - copy and customize for your own runners.</p>
 <p><strong>Matrix bot dispatch</strong> (optional): Bridge Matrix chat rooms to runners for chat-triggered AI.</p>
 <pre><code class="language-bash"># Setup Matrix bot (interactive wizard)
 matrix-dispatch-helper.sh setup
@@ -820,7 +820,7 @@ matrix-dispatch-helper.sh start --daemon
 
 # In Matrix room: &quot;!ai Review src/auth.ts for security issues&quot;
 </code></pre>
-<p><strong>See:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/ai-assistants/headless-dispatch.md">headless-dispatch.md</a> for full documentation including parallel vs sequential decision guide, SDK examples, CI/CD integration, and custom agent configuration. <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/services/communications/matrix-bot.md">matrix-bot.md</a> for Matrix bot setup including Cloudron Synapse guide.</p>
+<p><strong>See:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/ai-assistants/headless-dispatch.md">headless-dispatch.md</a> for full documentation including parallel vs sequential decision guide, SDK examples, CI/CD integration, and custom agent configuration. <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/services/communications/matrix-bot.md">matrix-bot.md</a> for Matrix bot setup including Cloudron Synapse guide.</p>
 <h3>Self-Improving Agent System</h3>
 <p>Agents that learn from experience and contribute improvements:</p>
 <table>
@@ -986,9 +986,9 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 </ul>
 <p><strong>Git CLI Enhancement Features:</strong></p>
 <ul>
-<li><strong>.agent/scripts/github-cli-helper.sh</strong>: Advanced GitHub repository, issue, PR, and branch management</li>
-<li><strong>.agent/scripts/gitlab-cli-helper.sh</strong>: Complete GitLab project, issue, MR, and branch management</li>
-<li><strong>.agent/scripts/gitea-cli-helper.sh</strong>: Full Gitea repository, issue, PR, and branch management</li>
+<li><strong>.agents/scripts/github-cli-helper.sh</strong>: Advanced GitHub repository, issue, PR, and branch management</li>
+<li><strong>.agents/scripts/gitlab-cli-helper.sh</strong>: Complete GitLab project, issue, MR, and branch management</li>
+<li><strong>.agents/scripts/gitea-cli-helper.sh</strong>: Full Gitea repository, issue, PR, and branch management</li>
 </ul>
 <h3><strong>Security &amp; Code Quality</strong></h3>
 <ul>
@@ -1011,7 +1011,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><strong><a href="https://repomix.com/">Repomix</a></strong>: Pack codebases into AI-friendly context (80% token reduction with compress mode)</li>
 <li><strong><a href="https://dspy.ai/">DSPy</a></strong>: Framework for programming with language models</li>
 <li><strong><a href="https://dspyground.com/">DSPyGround</a></strong>: Interactive playground for prompt optimization</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/toon-format.md">TOON Format</a></strong>: Token-Oriented Object Notation - 20-60% token reduction for LLM prompts</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/toon-format.md">TOON Format</a></strong>: Token-Oriented Object Notation - 20-60% token reduction for LLM prompts</li>
 </ul>
 <h3><strong>Document Processing &amp; OCR</strong></h3>
 <ul>
@@ -1064,7 +1064,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <pre><code class="language-bash">ollama pull glm-ocr
 ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </code></pre>
-<p>See <code>.agent/tools/ocr/glm-ocr.md</code> for batch processing, PDF workflows, and Peekaboo integration.</p>
+<p>See <code>.agents/tools/ocr/glm-ocr.md</code> for batch processing, PDF workflows, and Peekaboo integration.</p>
 <h3><strong>Communications</strong></h3>
 <ul>
 <li><strong><a href="https://www.twilio.com/">Twilio</a></strong>: SMS, voice calls, WhatsApp, phone verification (Verify API), call recording &amp; transcription</li>
@@ -1320,7 +1320,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <p><strong>Data Extraction:</strong></p>
 <ul>
 <li><a href="https://outscraper.com/">Outscraper</a> - Google Maps, business data, reviews extraction</li>
-<li><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/curl-copy.md">curl-copy</a> - Authenticated scraping via DevTools &quot;Copy as cURL&quot; (no browser automation needed)</li>
+<li><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/curl-copy.md">curl-copy</a> - Authenticated scraping via DevTools &quot;Copy as cURL&quot; (no browser automation needed)</li>
 </ul>
 <p><strong>Performance &amp; Security:</strong></p>
 <ul>
@@ -1350,13 +1350,13 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </ul>
 <h3><strong>Quick Setup</strong></h3>
 <pre><code class="language-bash"># Install all MCP integrations
-bash .agent/scripts/setup-mcp-integrations.sh all
+bash .agents/scripts/setup-mcp-integrations.sh all
 
 # Install specific integration
-bash .agent/scripts/setup-mcp-integrations.sh stagehand          # JavaScript version
-bash .agent/scripts/setup-mcp-integrations.sh stagehand-python   # Python version
-bash .agent/scripts/setup-mcp-integrations.sh stagehand-both     # Both versions
-bash .agent/scripts/setup-mcp-integrations.sh chrome-devtools
+bash .agents/scripts/setup-mcp-integrations.sh stagehand          # JavaScript version
+bash .agents/scripts/setup-mcp-integrations.sh stagehand-python   # Python version
+bash .agents/scripts/setup-mcp-integrations.sh stagehand-both     # Both versions
+bash .agents/scripts/setup-mcp-integrations.sh chrome-devtools
 </code></pre>
 <h3>OpenCode LSP Configuration</h3>
 <p>OpenCode includes <a href="https://opencode.ai/docs/lsp/">built-in LSP servers</a> for 35+ languages. For aidevops projects that use Markdown and TOON extensively, add these optional LSP servers to your <code>opencode.json</code> for real-time diagnostics during editing:</p>
@@ -1697,7 +1697,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>Visual debugging only</td>
 </tr>
 </tbody></table>
-<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-automation.md"><code>.agent/tools/browser/browser-automation.md</code></a> for the full decision tree and <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-benchmark.md"><code>browser-benchmark.md</code></a> for reproducible benchmark scripts.</p>
+<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/browser-automation.md"><code>.agents/tools/browser/browser-automation.md</code></a> for the full decision tree and <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/browser-benchmark.md"><code>browser-benchmark.md</code></a> for reproducible benchmark scripts.</p>
 <h3>Device Emulation</h3>
 <p>Test responsive layouts and mobile-specific behavior using Playwright&#39;s built-in device emulation. Supports 100+ device presets with viewport, user agent, touch events, device scale factor, geolocation, locale/timezone, permissions, color scheme, offline mode, and network throttling.</p>
 <p><strong>Common device presets:</strong></p>
@@ -1783,7 +1783,7 @@ cargo install toon-lsp                        # TOON syntax validation
 </tr>
 </tbody></table>
 <p><strong>Recipes included:</strong> Responsive breakpoint testing, multi-device parallel testing, touch gesture testing, geolocation-dependent features, dark mode visual regression, and network condition emulation.</p>
-<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/playwright-emulation.md"><code>.agent/tools/browser/playwright-emulation.md</code></a> for complete documentation with code examples.</p>
+<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/playwright-emulation.md"><code>.agents/tools/browser/playwright-emulation.md</code></a> for complete documentation with code examples.</p>
 <h3>Anti-Detect Browser</h3>
 <p>Open-source alternative to AdsPower, GoLogin, and OctoBrowser for multi-account automation and bot detection evasion.</p>
 <p><strong>Architecture:</strong></p>
@@ -1867,7 +1867,7 @@ anti-detect-helper.sh warmup &quot;my-account&quot; --duration 30m
 <td>Quick stealth on existing Playwright code</td>
 </tr>
 </tbody></table>
-<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/anti-detect-browser.md"><code>.agent/tools/browser/anti-detect-browser.md</code></a> for the full decision tree and subagent index.</p>
+<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/anti-detect-browser.md"><code>.agents/tools/browser/anti-detect-browser.md</code></a> for the full decision tree and subagent index.</p>
 <h2><strong>Repomix - AI Context Generation</strong></h2>
 <p><a href="https://repomix.com/">Repomix</a> packages your codebase into AI-friendly formats for sharing with AI assistants. This framework includes optimized Repomix configuration for consistent context generation.</p>
 <h3>Why Repomix?</h3>
@@ -1908,8 +1908,8 @@ npx repomix
 npx repomix --compress
 
 # Or use the helper script
-.agent/scripts/context-builder-helper.sh pack      # Full context
-.agent/scripts/context-builder-helper.sh compress  # Compressed
+.agents/scripts/context-builder-helper.sh pack      # Full context
+.agents/scripts/context-builder-helper.sh compress  # Compressed
 </code></pre>
 <h3>Configuration Files</h3>
 <table>
@@ -1937,7 +1937,7 @@ npx repomix --compress
 <li><strong>No pre-generated files</strong>: Outputs are generated on-demand to avoid staleness</li>
 <li><strong>Inherits .gitignore</strong>: Security patterns automatically respected</li>
 <li><strong>Secretlint enabled</strong>: Scans for exposed credentials before output</li>
-<li><strong>Symlinks excluded</strong>: Avoids duplicating <code>.agent/</code> content</li>
+<li><strong>Symlinks excluded</strong>: Avoids duplicating <code>.agents/</code> content</li>
 </ul>
 <h3>MCP Integration</h3>
 <p>Repomix runs as an MCP server for direct AI assistant integration:</p>
@@ -1952,7 +1952,7 @@ npx repomix --compress
 <blockquote>
 <p>Install globally first: <code>bun install -g repomix</code> (done automatically by <code>setup.sh</code>)</p>
 </blockquote>
-<p>See <code>.agent/tools/context/context-builder.md</code> for complete documentation.</p>
+<p>See <code>.agents/tools/context/context-builder.md</code> for complete documentation.</p>
 <h2><strong>Augment Context Engine - Semantic Codebase Search</strong></h2>
 <p><a href="https://docs.augmentcode.com/context-services/mcp/overview">Augment Context Engine</a> provides semantic codebase retrieval - understanding your code at a deeper level than simple text search. It&#39;s the recommended tool for real-time interactive coding sessions.</p>
 <h3>Why Augment Context Engine?</h3>
@@ -2063,7 +2063,7 @@ auggie token print
 <td>Automated context in releases</td>
 </tr>
 </tbody></table>
-<p>See <code>.agent/tools/context/augment-context-engine.md</code> for complete documentation including configurations for Zed, GitHub Copilot, Kilo Code, Kiro, AntiGravity, Gemini CLI, and Factory.AI Droid.</p>
+<p>See <code>.agents/tools/context/augment-context-engine.md</code> for complete documentation including configurations for Zed, GitHub Copilot, Kilo Code, Kiro, AntiGravity, Gemini CLI, and Factory.AI Droid.</p>
 <h3>osgrep - Local Alternative (Experimental)</h3>
 <p><a href="https://github.com/Ryandonofrio3/osgrep">osgrep</a> provides 100% local semantic search with no cloud dependency:</p>
 <pre><code class="language-bash">npm install -g osgrep &amp;&amp; osgrep setup
@@ -2093,7 +2093,7 @@ osgrep &quot;where is authentication handled?&quot;
 <td>22+</td>
 </tr>
 </tbody></table>
-<p>See <code>.agent/tools/context/osgrep.md</code> for complete documentation and AI tool configurations.</p>
+<p>See <code>.agents/tools/context/osgrep.md</code> for complete documentation and AI tool configurations.</p>
 <h3>llm-tldr - Semantic Code Analysis</h3>
 <p><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a> extracts code structure and semantics, saving ~95% tokens compared to raw code. From the <a href="https://github.com/parcadei/Continuous-Claude-v3">Continuous-Claude</a> project.</p>
 <pre><code class="language-bash"># Install
@@ -2143,7 +2143,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <td>Change risk assessment</td>
 </tr>
 </tbody></table>
-<p>See <code>.agent/tools/context/llm-tldr.md</code> for complete documentation.</p>
+<p>See <code>.agents/tools/context/llm-tldr.md</code> for complete documentation.</p>
 <h2><strong>Cross-Tool Compatibility</strong></h2>
 <h3>Agent Skills Standard</h3>
 <p>aidevops implements the <a href="https://agentskills.io/">Agent Skills</a> standard for cross-tool compatibility. Skills are auto-discovered by compatible AI assistants.</p>
@@ -2192,7 +2192,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <li>Conflict detection with merge/replace/rename options</li>
 <li>Upstream commit tracking for update detection (<code>aidevops skill check</code>)</li>
 <li>Conversion to aidevops subagent format with YAML frontmatter</li>
-<li>Registry stored in <code>.agent/configs/skill-sources.json</code></li>
+<li>Registry stored in <code>.agents/configs/skill-sources.json</code></li>
 <li>Telemetry disabled (no data sent to skills.sh or other services)</li>
 </ul>
 <p><strong>How it differs from <code>npx add-skill</code>:</strong></p>
@@ -2206,7 +2206,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </thead>
 <tbody><tr>
 <td><strong>Target</strong></td>
-<td>Converts to aidevops format in <code>.agent/</code></td>
+<td>Converts to aidevops format in <code>.agents/</code></td>
 <td>Copies SKILL.md to agent-specific dirs</td>
 </tr>
 <tr>
@@ -2230,7 +2230,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <td><code>npx skills check</code> (Vercel API)</td>
 </tr>
 </tbody></table>
-<p>See <code>.agent/scripts/add-skill-helper.sh</code> for implementation details.</p>
+<p>See <code>.agents/scripts/add-skill-helper.sh</code> for implementation details.</p>
 <h2><strong>AI Agents &amp; Subagents</strong></h2>
 <p><strong>Agents are specialized AI personas with focused knowledge and tool access.</strong> Instead of giving your AI assistant access to everything at once (which wastes context tokens), agents provide targeted capabilities for specific tasks.</p>
 <p>Call them in your AI assistant conversation with a simple @mention</p>
@@ -2358,7 +2358,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 </tbody></table>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agent/</code> for the full list of 614+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 614+ subagents organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -2465,10 +2465,10 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tbody></table>
 <h3><strong>Setup for OpenCode</strong></h3>
 <pre><code class="language-bash"># Install aidevops agents for OpenCode
-.agent/scripts/generate-opencode-agents.sh
+.agents/scripts/generate-opencode-agents.sh
 
 # Check status
-.agent/scripts/generate-opencode-agents.sh  # Shows status after generation
+.agents/scripts/generate-opencode-agents.sh  # Shows status after generation
 </code></pre>
 <h3><strong>Setup for Other AI Assistants</strong></h3>
 <p><strong>Claude Code</strong> (recommended):</p>
@@ -2481,7 +2481,7 @@ Skills are auto-discovered from <code>~/.aidevops/agents/</code> via SKILL.md fi
 Add to your AI assistant&#39;s system prompt:</p>
 <pre><code class="language-text">Before any DevOps operations, read ~/git/aidevops/AGENTS.md for authoritative guidance.
 
-When working with specific services, read the corresponding .agent/[service].md file
+When working with specific services, read the corresponding .agents/[service].md file
 for focused guidance. Available services: hostinger, hetzner, wordpress, seo,
 code-quality, browser-automation, git-platforms.
 </code></pre>
@@ -2887,7 +2887,7 @@ code-quality, browser-automation, git-platforms.
 </code></pre>
 <p><strong>Usage:</strong></p>
 <pre><code class="language-bash"># Run quality checks iteratively until all pass
-.agent/scripts/quality-loop-helper.sh preflight --auto-fix --max-iterations &lt;MAX_ITERATIONS&gt;
+.agents/scripts/quality-loop-helper.sh preflight --auto-fix --max-iterations &lt;MAX_ITERATIONS&gt;
 
 # Or use the slash command
 /preflight-loop --auto-fix --max-iterations &lt;MAX_ITERATIONS&gt;
@@ -2900,7 +2900,7 @@ code-quality, browser-automation, git-platforms.
 <li>Works with any quality check (linting, tests, builds)</li>
 <li>Detailed logging of each iteration</li>
 </ul>
-<p>See <code>.agent/workflows/ralph-loop.md</code> for the full workflow guide.</p>
+<p>See <code>.agents/workflows/ralph-loop.md</code> for the full workflow guide.</p>
 <h3>Full Loop - End-to-End Development Automation</h3>
 <p>The <strong>Full Loop</strong> chains all development phases into a single automated workflow:</p>
 <pre><code class="language-text">Task Development → Preflight → PR Create → PR Review → Postflight → Deploy
@@ -2938,7 +2938,7 @@ code-quality, browser-automation, git-platforms.
 </tr>
 </tbody></table>
 <p>The loop pauses for human input at merge approval, rollback decisions, and scope changes.</p>
-<p>See <code>.agent/scripts/commands/full-loop.md</code> for complete documentation.</p>
+<p>See <code>.agents/scripts/commands/full-loop.md</code> for complete documentation.</p>
 <h3>Git Worktrees - Parallel Branch Development</h3>
 <p>Work on multiple branches simultaneously without stashing or switching. Each branch gets its own directory.</p>
 <p><strong>Recommended: <a href="https://worktrunk.dev">Worktrunk</a></strong> (<code>wt</code>) - Git worktree management with shell integration, CI status, and PR links:</p>
@@ -2972,7 +2972,7 @@ wt merge
 <li>Each AI session can work on a different branch</li>
 </ul>
 <p><strong>Worktree-first workflow:</strong> The pre-edit check now <strong>enforces</strong> worktrees as the default when creating branches, keeping your main directory on <code>main</code>. This prevents uncommitted changes from blocking branch switches and ensures parallel sessions don&#39;t inherit wrong branch state.</p>
-<p>See <code>.agent/workflows/worktree.md</code> for the complete guide and <code>.agent/tools/git/worktrunk.md</code> for Worktrunk documentation.</p>
+<p>See <code>.agents/workflows/worktree.md</code> for the complete guide and <code>.agents/tools/git/worktrunk.md</code> for Worktrunk documentation.</p>
 <h3>Session Management - Parallel AI Sessions</h3>
 <p>Spawn new AI sessions for parallel work or fresh context. The framework detects natural session completion points and suggests next steps.</p>
 <p><strong>Completion signals:</strong></p>
@@ -3018,7 +3018,7 @@ wt switch -c -x opencode feature/next-feature  # Worktrunk: create + start AI CL
 <pre><code class="language-markdown">## Continuation Prompt
 [Copy this to start a new session with full context]
 </code></pre>
-<p>See <code>.agent/workflows/session-manager.md</code> for the complete guide.</p>
+<p>See <code>.agents/workflows/session-manager.md</code> for the complete guide.</p>
 <h3>Cross-Session Memory System</h3>
 <p><strong>&quot;Compound, then clear&quot;</strong> - Sessions should build on each other. The memory system stores knowledge, patterns, and learnings for future sessions using SQLite FTS5 for fast full-text search, with opt-in semantic similarity search via vector embeddings.</p>
 <p><strong>Slash commands:</strong></p>
@@ -3152,14 +3152,14 @@ pattern-tracker-helper.sh suggest &quot;refactor the auth middleware&quot;
 ~/.aidevops/agents/scripts/memory-helper.sh namespaces  # List all namespaces
 </code></pre>
 <p><strong>Storage:</strong> <code>~/.aidevops/.agent-workspace/memory/memory.db</code> (+ optional <code>embeddings.db</code> for semantic search, <code>namespaces/</code> for per-runner isolation)</p>
-<p>See <code>.agent/memory/README.md</code> for complete documentation.</p>
+<p>See <code>.agents/memory/README.md</code> for complete documentation.</p>
 <h3><strong>Installation</strong></h3>
 <p>Slash commands are automatically installed by <code>setup.sh</code>:</p>
 <pre><code class="language-bash"># Commands are deployed to:
 ~/.config/opencode/commands/
 
 # Regenerate commands manually:
-.agent/scripts/generate-opencode-commands.sh
+.agents/scripts/generate-opencode-commands.sh
 </code></pre>
 <h3><strong>Usage</strong></h3>
 <p>In OpenCode, type the command at the prompt:</p>
@@ -3184,53 +3184,53 @@ tools:
 
 Detailed instructions for the agent...
 </code></pre>
-<p>See <code>.agent/opencode-integration.md</code> for complete documentation.</p>
+<p>See <code>.agents/opencode-integration.md</code> for complete documentation.</p>
 <hr>
 <h2><strong>Usage Examples</strong></h2>
 <h3><strong>Server Management</strong></h3>
 <pre><code class="language-bash"># List all servers across providers
-./.agent/scripts/servers-helper.sh list
+./.agents/scripts/servers-helper.sh list
 
 # Connect to specific servers
-./.agent/scripts/hostinger-helper.sh connect example.com
-./.agent/scripts/hetzner-helper.sh connect main web-server
+./.agents/scripts/hostinger-helper.sh connect example.com
+./.agents/scripts/hetzner-helper.sh connect main web-server
 
 # Execute commands remotely
-./.agent/scripts/hostinger-helper.sh exec example.com &quot;uptime&quot;
+./.agents/scripts/hostinger-helper.sh exec example.com &quot;uptime&quot;
 </code></pre>
 <h3><strong>Monitoring &amp; Uptime (Updown.io)</strong></h3>
 <pre><code class="language-bash"># List all monitors
-./.agent/scripts/updown-helper.sh list
+./.agents/scripts/updown-helper.sh list
 
 # Add a new website check
-./.agent/scripts/updown-helper.sh add https://example.com &quot;My Website&quot;
+./.agents/scripts/updown-helper.sh add https://example.com &quot;My Website&quot;
 </code></pre>
 <h3><strong>Domain &amp; DNS Management</strong></h3>
 <pre><code class="language-bash"># Purchase and configure domain
-./.agent/scripts/spaceship-helper.sh purchase example.com
-./.agent/scripts/dns-helper.sh cloudflare add-record example.com A 192.168.1.1
+./.agents/scripts/spaceship-helper.sh purchase example.com
+./.agents/scripts/dns-helper.sh cloudflare add-record example.com A 192.168.1.1
 
 # Check domain availability
-./.agent/scripts/101domains-helper.sh check-availability example.com
+./.agents/scripts/101domains-helper.sh check-availability example.com
 </code></pre>
 <h3><strong>Strategic Keyword Research</strong></h3>
 <pre><code class="language-bash"># Basic keyword research with volume, CPC, difficulty
-./.agent/scripts/keyword-research-helper.sh research &quot;seo tools&quot; --limit 20
+./.agents/scripts/keyword-research-helper.sh research &quot;seo tools&quot; --limit 20
 
 # Google autocomplete long-tail discovery
-./.agent/scripts/keyword-research-helper.sh autocomplete &quot;how to&quot; --provider both
+./.agents/scripts/keyword-research-helper.sh autocomplete &quot;how to&quot; --provider both
 
 # Extended research with SERP weakness detection
-./.agent/scripts/keyword-research-helper.sh extended &quot;keywords&quot; --quick
+./.agents/scripts/keyword-research-helper.sh extended &quot;keywords&quot; --quick
 
 # Competitor keyword research
-./.agent/scripts/keyword-research-helper.sh extended --competitor ahrefs.com --limit 50
+./.agents/scripts/keyword-research-helper.sh extended --competitor ahrefs.com --limit 50
 
 # Keyword gap analysis (find keywords competitor ranks for but you don&#39;t)
-./.agent/scripts/keyword-research-helper.sh extended --gap semrush.com,ahrefs.com
+./.agents/scripts/keyword-research-helper.sh extended --gap semrush.com,ahrefs.com
 
 # Domain research (all keywords a domain ranks for)
-./.agent/scripts/keyword-research-helper.sh extended --domain example.com --limit 100
+./.agents/scripts/keyword-research-helper.sh extended --domain example.com --limit 100
 </code></pre>
 <p><strong>Features:</strong></p>
 <ul>
@@ -3243,19 +3243,19 @@ Detailed instructions for the agent...
 </ul>
 <h3><strong>Quality Control &amp; Performance</strong></h3>
 <pre><code class="language-bash"># Run quality analysis with auto-fixes
-bash .agent/scripts/qlty-cli.sh check 10
-bash .agent/scripts/qlty-cli.sh fix
+bash .agents/scripts/qlty-cli.sh check 10
+bash .agents/scripts/qlty-cli.sh fix
 
 # Run chunked Codacy analysis for large repositories
-bash .agent/scripts/codacy-cli-chunked.sh quick    # Fast analysis
-bash .agent/scripts/codacy-cli-chunked.sh chunked # Full analysis
+bash .agents/scripts/codacy-cli-chunked.sh quick    # Fast analysis
+bash .agents/scripts/codacy-cli-chunked.sh chunked # Full analysis
 
 # AI coding assistance
-bash .agent/scripts/ampcode-cli.sh scan ./src
-bash .agent/scripts/continue-cli.sh review
+bash .agents/scripts/ampcode-cli.sh scan ./src
+bash .agents/scripts/continue-cli.sh review
 
 # Audit website performance
-./.agent/scripts/pagespeed-helper.sh wordpress https://example.com
+./.agents/scripts/pagespeed-helper.sh wordpress https://example.com
 </code></pre>
 <h2><strong>Documentation &amp; Resources</strong></h2>
 <p><strong>Wiki Guides:</strong></p>
@@ -3268,23 +3268,23 @@ bash .agent/scripts/continue-cli.sh review
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.wiki/The-Agent-Directory.md">The Agent Directory</a></strong> - Agent file structure</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.wiki/Understanding-AGENTS-md.md">Understanding AGENTS.md</a></strong> - How agents work</li>
 </ul>
-<p><strong>Agent Guides</strong> (in <code>.agent/</code>):</p>
+<p><strong>Agent Guides</strong> (in <code>.agents/</code>):</p>
 <ul>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/aidevops/api-integrations.md">API Integrations</a></strong> - Service APIs</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-automation.md">Browser Automation</a></strong> - 8 tools + anti-detect stack: decision tree, parallel, extensions, fingerprinting</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/playwright-emulation.md">Device Emulation</a></strong> - Mobile/tablet testing: 100+ device presets, viewport, geolocation, locale, dark mode</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/anti-detect-browser.md">Anti-Detect Browser</a></strong> - Multi-profile management, fingerprint rotation, proxy integration</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/performance/performance.md">Web Performance</a></strong> - Core Web Vitals, network dependencies, accessibility (Chrome DevTools MCP)</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/pagespeed.md">PageSpeed</a></strong> - Lighthouse CLI and PageSpeed Insights API</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/conversion/pandoc.md">Pandoc</a></strong> - Document format conversion</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/aidevops/security.md">Security</a></strong> - Enterprise security standards</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/aidevops/api-integrations.md">API Integrations</a></strong> - Service APIs</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/browser-automation.md">Browser Automation</a></strong> - 8 tools + anti-detect stack: decision tree, parallel, extensions, fingerprinting</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/playwright-emulation.md">Device Emulation</a></strong> - Mobile/tablet testing: 100+ device presets, viewport, geolocation, locale, dark mode</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/anti-detect-browser.md">Anti-Detect Browser</a></strong> - Multi-profile management, fingerprint rotation, proxy integration</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/performance/performance.md">Web Performance</a></strong> - Core Web Vitals, network dependencies, accessibility (Chrome DevTools MCP)</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/pagespeed.md">PageSpeed</a></strong> - Lighthouse CLI and PageSpeed Insights API</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/conversion/pandoc.md">Pandoc</a></strong> - Document format conversion</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/aidevops/security.md">Security</a></strong> - Enterprise security standards</li>
 </ul>
-<p><strong>Provider-Specific Guides:</strong> Hostinger, Hetzner, Cloudflare, WordPress, Git platforms, Vercel CLI, Coolify CLI, and more in <code>.agent/</code></p>
+<p><strong>Provider-Specific Guides:</strong> Hostinger, Hetzner, Cloudflare, WordPress, Git platforms, Vercel CLI, Coolify CLI, and more in <code>.agents/</code></p>
 <h2><strong>Architecture</strong></h2>
 <pre><code class="language-text">aidevops/
 ├── setup.sh                       # Main setup script
 ├── AGENTS.md                      # AI agent guidance (dev)
-├── .agent/                        # Agents and documentation
+├── .agents/                        # Agents and documentation
 │   ├── AGENTS.md                  # User guide (deployed to ~/.aidevops/agents/)
 │   ├── *.md                       # 15 primary agents
 │   ├── scripts/                   # 146 helper scripts
@@ -3302,10 +3302,10 @@ cp configs/hetzner-config.json.txt configs/hetzner-config.json
 # Edit with your actual credentials
 
 # 2. Test connections
-./.agent/scripts/servers-helper.sh list
+./.agents/scripts/servers-helper.sh list
 
 # 3. Install MCP integrations (optional)
-bash .agent/scripts/setup-mcp-integrations.sh all
+bash .agents/scripts/setup-mcp-integrations.sh all
 </code></pre>
 <h2><strong>Security &amp; Best Practices</strong></h2>
 <p><strong>Credential Management:</strong></p>
@@ -3333,7 +3333,7 @@ echo &quot;client-acme&quot; &gt; .aidevops-tenant
 source &lt;(credential-helper.sh export)
 </code></pre>
 <p><strong>Resolution priority:</strong> Project <code>.aidevops-tenant</code> → Global active tenant → Default</p>
-<p>See <code>.agent/tools/credentials/multi-tenant.md</code> for complete documentation.</p>
+<p>See <code>.agents/tools/credentials/multi-tenant.md</code> for complete documentation.</p>
 <p><strong>Quality Assurance:</strong></p>
 <ul>
 <li>Multi-platform analysis (SonarCloud, CodeFactor, Codacy, CodeRabbit, Qlty, Snyk, Gemini Code Assist)</li>
