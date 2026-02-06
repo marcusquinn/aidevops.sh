@@ -596,9 +596,10 @@ aidevops skill add clawdhub:&lt;slug&gt; # Import a skill from ClawdHub
 aidevops skill list                # List imported skills
 aidevops skill check               # Check for upstream updates
 aidevops skill update [name]       # Update specific or all skills
+aidevops skill scan [name]         # Security scan skills (Cisco Skill Scanner)
 aidevops skill remove &lt;name&gt;       # Remove an imported skill
 </code></pre>
-<p>Skills are registered in <code>~/.aidevops/agents/configs/skill-sources.json</code> with upstream tracking for update detection. Telemetry is disabled - no data is sent to third parties.</p>
+<p>Skills are registered in <code>~/.aidevops/agents/configs/skill-sources.json</code> with upstream tracking for update detection. Imported skills are automatically security-scanned using <a href="https://github.com/cisco-ai-defense/skill-scanner">Cisco Skill Scanner</a> when installed (CRITICAL/HIGH findings block import). Telemetry is disabled - no data is sent to third parties.</p>
 <p><strong>Browse community skills:</strong> <a href="https://skills.sh">skills.sh</a> | <a href="https://clawdhub.com">ClawdHub</a> | <strong>Specification:</strong> <a href="https://agentskills.io">agentskills.io</a></p>
 <p><strong>Reference:</strong></p>
 <ul>
@@ -1000,6 +1001,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><strong><a href="https://snyk.io/">Snyk</a></strong>: Security vulnerability scanning</li>
 <li><strong><a href="https://socket.dev/">Socket</a></strong>: Dependency security and supply chain protection</li>
 <li><strong><a href="https://sentry.io/">Sentry</a></strong>: Error monitoring and performance tracking</li>
+<li><strong><a href="https://github.com/cisco-ai-defense/skill-scanner">Cisco Skill Scanner</a></strong>: Security scanner for AI agent skills (prompt injection, exfiltration, malicious code)</li>
 <li><strong><a href="https://github.com/secretlint/secretlint">Secretlint</a></strong>: Detect exposed secrets in code</li>
 <li><strong><a href="https://google.github.io/osv-scanner/">OSV Scanner</a></strong>: Google&#39;s vulnerability database scanner</li>
 <li><strong><a href="https://qlty.sh/">Qlty</a></strong>: Universal code quality platform (70+ linters, auto-fixes)</li>
