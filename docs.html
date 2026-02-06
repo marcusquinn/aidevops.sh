@@ -792,7 +792,20 @@ runner-helper.sh status code-reviewer
 └─────────────────┘
 </code></pre>
 <p><strong>Example runner templates:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/ai-assistants/runners/code-reviewer.md">code-reviewer</a>, <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/ai-assistants/runners/seo-analyst.md">seo-analyst</a> - copy and customize for your own runners.</p>
-<p><strong>See:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/ai-assistants/headless-dispatch.md">headless-dispatch.md</a> for full documentation including parallel vs sequential decision guide, SDK examples, CI/CD integration, and custom agent configuration.</p>
+<p><strong>Matrix bot dispatch</strong> (optional): Bridge Matrix chat rooms to runners for chat-triggered AI.</p>
+<pre><code class="language-bash"># Setup Matrix bot (interactive wizard)
+matrix-dispatch-helper.sh setup
+
+# Map rooms to runners
+matrix-dispatch-helper.sh map &#39;!dev-room:server&#39; code-reviewer
+matrix-dispatch-helper.sh map &#39;!seo-room:server&#39; seo-analyst
+
+# Start bot (daemon mode)
+matrix-dispatch-helper.sh start --daemon
+
+# In Matrix room: &quot;!ai Review src/auth.ts for security issues&quot;
+</code></pre>
+<p><strong>See:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/ai-assistants/headless-dispatch.md">headless-dispatch.md</a> for full documentation including parallel vs sequential decision guide, SDK examples, CI/CD integration, and custom agent configuration. <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/services/communications/matrix-bot.md">matrix-bot.md</a> for Matrix bot setup including Cloudron Synapse guide.</p>
 <h3>Self-Improving Agent System</h3>
 <p>Agents that learn from experience and contribute improvements:</p>
 <table>
@@ -1012,6 +1025,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <ul>
 <li><strong><a href="https://www.twilio.com/">Twilio</a></strong>: SMS, voice calls, WhatsApp, phone verification (Verify API), call recording &amp; transcription</li>
 <li><strong><a href="https://mytelfon.com/">Telfon</a></strong>: Twilio-powered cloud phone system with iOS/Android/Chrome apps for end-user calling interface</li>
+<li><strong><a href="https://matrix.org/">Matrix</a></strong>: Self-hosted chat with bot integration for AI runner dispatch (<code>matrix-dispatch-helper.sh</code>)</li>
 </ul>
 <h3><strong>Animation &amp; Video</strong></h3>
 <ul>
