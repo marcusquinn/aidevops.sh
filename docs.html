@@ -521,6 +521,14 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <li>Git platform management, domain purchasing, setup automation</li>
 <li><a href="https://wordpress.org/">WordPress</a> management, credential security, code auditing</li>
 </ul>
+<p><strong>Autonomous Orchestration:</strong></p>
+<ul>
+<li><strong>Supervisor</strong> - SQLite state machine dispatches tasks to parallel AI agents with retry cycles, batch management, and cron scheduling</li>
+<li><strong>Runners</strong> - Named headless agent instances with persistent identity, instructions, and memory namespaces</li>
+<li><strong><code>/runners</code> command</strong> - Batch dispatch from task IDs, PR URLs, or descriptions with concurrency control and progress monitoring</li>
+<li><strong>Mailbox</strong> - SQLite-backed inter-agent messaging for coordination across parallel sessions</li>
+<li><strong>Worktree isolation</strong> - Each agent works on its own branch in a separate directory, no merge conflicts</li>
+</ul>
 <p><strong>Unified Interface:</strong></p>
 <ul>
 <li>Standardized commands across all providers</li>
@@ -530,7 +538,8 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <p><strong>Quality Control &amp; Monitoring:</strong></p>
 <ul>
 <li><strong>Multi-Platform Analysis</strong>: SonarCloud, CodeFactor, Codacy, CodeRabbit, Qlty, Gemini Code Assist, Snyk</li>
-<li><strong>Performance Auditing</strong>: PageSpeed Insights, Lighthouse, Core Web Vitals (<code>/performance</code> command)</li>
+<li><strong>Performance Auditing</strong>: PageSpeed Insights, Lighthouse, WebPageTest, Core Web Vitals (<code>/performance</code> command)</li>
+<li><strong>SEO Toolchain</strong>: 13 SEO subagents including Semrush, Ahrefs, ContentKing, Screaming Frog, Bing Webmaster Tools, Rich Results Test, programmatic SEO, analytics tracking, schema validation</li>
 <li><strong>SEO Debugging</strong>: Open Graph validation, favicon checker, social preview testing</li>
 <li><strong>Email Deliverability</strong>: SPF/DKIM/DMARC/MX validation, blacklist checking</li>
 <li><strong>Uptime Monitoring</strong>: Updown.io integration for website and SSL monitoring</li>
@@ -730,7 +739,8 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <p><strong>Compaction plugin</strong> (<code>.agent/plugins/opencode-aidevops/</code>): When OpenCode compacts context (at ~200K tokens), the plugin injects current session state - agent registry, pending mailbox messages, git context, and relevant memories - ensuring continuity across compaction boundaries.</p>
 <p><strong>Custom system prompt</strong> (<code>.agent/prompts/build.txt</code>): Based on upstream OpenCode with aidevops-specific overrides for tool preferences, professional objectivity, and per-model reinforcements for weaker models.</p>
 <p><strong>Subagent index</strong> (<code>.agent/subagent-index.toon</code>): Compressed TOON routing table listing all agents, subagents, workflows, and scripts with model tier assignments - enables fast agent discovery without loading full markdown files.</p>
-<h2><strong>Advanced Capabilities</strong> (Planned)</h2>
+<h2><strong>Autonomous Orchestration &amp; Parallel Agents</strong></h2>
+<p><strong>Why this matters:</strong> Long-running tasks -- batch PR reviews, multi-site SEO audits, large refactors -- are where AI agents deliver the most value. Instead of babysitting one task at a time, the supervisor dispatches work to parallel agents, each in its own git worktree, with automatic retry, progress tracking, and batch completion reporting.</p>
 <h3>Parallel Agents &amp; Headless Dispatch</h3>
 <p>Run multiple AI sessions concurrently with isolated contexts. Named <strong>runners</strong> provide persistent agent identities with their own instructions and memory.</p>
 <table>
@@ -1071,6 +1081,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <ul>
 <li><strong><a href="https://pagespeed.web.dev/">PageSpeed Insights</a></strong>: Website performance auditing</li>
 <li><strong><a href="https://developer.chrome.com/docs/lighthouse/">Lighthouse</a></strong>: Comprehensive web app analysis</li>
+<li><strong><a href="https://www.webpagetest.org/">WebPageTest</a></strong>: Real-world performance testing from 40+ global locations with filmstrip, waterfall, and Core Web Vitals</li>
 <li><strong><a href="https://updown.io/">Updown.io</a></strong>: Website uptime and SSL monitoring</li>
 </ul>
 <h3><strong>AI &amp; Documentation</strong></h3>
@@ -1234,6 +1245,21 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <tr>
 <td><a href="https://serper.dev/">Serper</a></td>
 <td>Google Search API (web, images, news)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="https://www.semrush.com/api-documentation/">Semrush</a></td>
+<td>Domain analytics, keywords, backlinks, competitor research</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="https://www.contentkingapp.com/">ContentKing</a></td>
+<td>Real-time SEO monitoring, change tracking, issues</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="https://www.webpagetest.org/">WebPageTest</a></td>
+<td>Real-world performance testing from 40+ global locations</td>
 <td>Yes</td>
 </tr>
 <tr>
@@ -2842,6 +2868,10 @@ code-quality, browser-automation, git-platforms.
 <tr>
 <td><code>/preflight-loop</code></td>
 <td>Run preflight checks iteratively until all pass</td>
+</tr>
+<tr>
+<td><code>/runners</code></td>
+<td>Batch dispatch tasks to parallel agents (task IDs, PR URLs, or descriptions)</td>
 </tr>
 <tr>
 <td><code>/log-issue-aidevops</code></td>
