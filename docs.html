@@ -840,6 +840,24 @@ matrix-dispatch-helper.sh start --daemon
 <li>Dry-run default, explicit opt-in for PR creation</li>
 <li>Audit log to memory</li>
 </ul>
+<h3>Agent Testing Framework</h3>
+<p>Test agent behavior through isolated AI sessions with automated validation:</p>
+<pre><code class="language-bash"># Create a test suite
+agent-test-helper.sh create my-tests
+
+# Run tests (auto-detects claude or opencode CLI)
+agent-test-helper.sh run my-tests
+
+# Quick single-prompt test
+agent-test-helper.sh run-one &quot;What tools do you have?&quot; --expect &quot;bash&quot;
+
+# Before/after comparison for agent changes
+agent-test-helper.sh baseline my-tests   # Save current behavior
+# ... modify agents ...
+agent-test-helper.sh compare my-tests    # Detect regressions
+</code></pre>
+<p>Test suites are JSON files with prompts and validation rules (<code>expect_contains</code>, <code>expect_not_contains</code>, <code>expect_regex</code>, <code>min_length</code>, <code>max_length</code>). Results are saved for historical tracking.</p>
+<p><strong>See:</strong> <code>agent-testing.md</code> subagent for full documentation and example test suites.</p>
 <h3>Voice Integration</h3>
 <p>Speech-to-speech AI conversations:</p>
 <table>
