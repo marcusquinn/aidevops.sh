@@ -188,7 +188,7 @@
 <ul>
 <li>Primary agents (Build+, SEO, Marketing, etc.) with @plan-plus subagent for planning-only mode</li>
 <li>614+ subagent markdown files organized by domain</li>
-<li>165 helper scripts in <code>.agent/scripts/</code></li>
+<li>167 helper scripts in <code>.agent/scripts/</code></li>
 <li>28 slash commands for common workflows</li>
 </ul>
 <!-- AI-CONTEXT-END -->
@@ -613,7 +613,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 165 helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 167 helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -702,6 +702,11 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <td>Coordinator</td>
 <td><code>coordinator-helper.sh</code></td>
 <td>Stateless pulse loop: collect reports, dispatch tasks, track idle workers</td>
+</tr>
+<tr>
+<td>Supervisor</td>
+<td><code>supervisor-helper.sh</code></td>
+<td>Autonomous multi-task orchestration with SQLite state machine, batches, retry cycles</td>
 </tr>
 <tr>
 <td>Registry</td>
