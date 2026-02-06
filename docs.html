@@ -912,7 +912,75 @@ agent-test-helper.sh compare my-tests    # Detect regressions
 <p>Test suites are JSON files with prompts and validation rules (<code>expect_contains</code>, <code>expect_not_contains</code>, <code>expect_regex</code>, <code>min_length</code>, <code>max_length</code>). Results are saved for historical tracking.</p>
 <p><strong>See:</strong> <code>agent-testing.md</code> subagent for full documentation and example test suites.</p>
 <h3>Voice Integration</h3>
-<p>Speech-to-speech AI conversations:</p>
+<p>Open-source speech-to-speech pipeline based on <a href="https://github.com/huggingface/speech-to-speech">huggingface/speech-to-speech</a> (Apache-2.0). Modular four-stage architecture with swappable components:</p>
+<pre><code class="language-text">Microphone → [VAD] → [STT] → [LLM] → [TTS] → Speaker
+              Silero   Whisper  Any HF   Parler/Melo/
+              VAD v5   variants instruct Kokoro/ChatTTS
+</code></pre>
+<p><strong>Quick start:</strong></p>
+<pre><code class="language-bash"># Install the pipeline
+speech-to-speech-helper.sh setup
+
+# Run locally on Mac (auto-configures MPS acceleration)
+speech-to-speech-helper.sh start --local-mac
+
+# Run on NVIDIA GPU with torch compile
+speech-to-speech-helper.sh start --cuda
+
+# Server mode (clients connect remotely)
+speech-to-speech-helper.sh start --server
+speech-to-speech-helper.sh client --host 192.168.1.100
+
+# Configuration presets
+speech-to-speech-helper.sh config low-latency   # Fastest (CUDA + OpenAI API)
+speech-to-speech-helper.sh config low-vram       # Minimal GPU (~4GB)
+speech-to-speech-helper.sh config quality        # Best quality (24GB+ VRAM)
+speech-to-speech-helper.sh config mac            # Apple Silicon optimal
+speech-to-speech-helper.sh config multilingual   # Auto language detection (6 langs)
+</code></pre>
+<p><strong>Recommended hardware for voice:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Setup</th>
+<th>CPU</th>
+<th>RAM</th>
+<th>GPU</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mac (local)</td>
+<td>Apple M1+</td>
+<td>16GB+</td>
+<td>MPS (unified)</td>
+<td>Development, personal use</td>
+</tr>
+<tr>
+<td>Workstation (CUDA)</td>
+<td>Any modern</td>
+<td>16GB+</td>
+<td>NVIDIA 8GB+ VRAM</td>
+<td>Low-latency local voice</td>
+</tr>
+<tr>
+<td>Quality (CUDA)</td>
+<td>Any modern</td>
+<td>32GB+</td>
+<td>NVIDIA 24GB+ VRAM</td>
+<td>Full Whisper large-v3 + Parler</td>
+</tr>
+<tr>
+<td>Cloud GPU</td>
+<td>-</td>
+<td>-</td>
+<td>A100/H100</td>
+<td>Production server, multi-user</td>
+</tr>
+</tbody></table>
+<p><strong>Cloud GPU providers</strong> for server/client deployment: NVIDIA Cloud, Vast.ai, RunPod, Lambda.</p>
+<p><strong>Supported languages:</strong> English, French, Spanish, Chinese, Japanese, Korean (auto-detect or fixed).</p>
+<p><strong>Additional voice methods:</strong></p>
 <table>
 <thead>
 <tr>
@@ -933,6 +1001,7 @@ agent-test-helper.sh compare my-tests    # Detect regressions
 <td>Full voice pipeline: Soniox STT → AI → Cartesia TTS</td>
 </tr>
 </tbody></table>
+<p><strong>See:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/voice/speech-to-speech.md">speech-to-speech.md</a> for full component options, CLI parameters, and integration patterns (Twilio phone, video narration, voice-driven DevOps).</p>
 <h3>Scheduled Agent Tasks</h3>
 <p>Cron-based agent dispatch for automated workflows:</p>
 <pre><code class="language-bash"># Example: Daily SEO report at 9am
@@ -940,6 +1009,55 @@ agent-test-helper.sh compare my-tests    # Detect regressions
 </code></pre>
 <p><strong>See:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/TODO.md">TODO.md</a> tasks t109-t118 for implementation status.</p>
 <h2><strong>Requirements</strong></h2>
+<h3><strong>Recommended Hardware</strong></h3>
+<p>aidevops itself is lightweight (shell scripts + markdown), but AI model workloads benefit from capable hardware:</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Machine</th>
+<th>CPU</th>
+<th>RAM</th>
+<th>GPU</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Minimum</strong></td>
+<td>Any modern laptop</td>
+<td>4+ cores</td>
+<td>8GB</td>
+<td>None</td>
+<td>Framework only, cloud AI APIs</td>
+</tr>
+<tr>
+<td><strong>Recommended</strong></td>
+<td>Mac Studio / desktop</td>
+<td>Apple M1+ or 8+ cores</td>
+<td>16GB+</td>
+<td>MPS (Apple) or NVIDIA 8GB+</td>
+<td>Local voice, browser automation, dev servers</td>
+</tr>
+<tr>
+<td><strong>Power User</strong></td>
+<td>Workstation</td>
+<td>8+ cores</td>
+<td>32GB+</td>
+<td>NVIDIA 24GB+ VRAM</td>
+<td>Full voice pipeline, local LLMs, parallel agents</td>
+</tr>
+<tr>
+<td><strong>Server</strong></td>
+<td>Cloud GPU</td>
+<td>Any</td>
+<td>16GB+</td>
+<td>A100 / H100</td>
+<td>Production voice, multi-user, batch processing</td>
+</tr>
+</tbody></table>
+<p><strong>Cloud GPU providers</strong> for on-demand GPU access: <a href="https://www.nvidia.com/en-us/gpu-cloud/">NVIDIA Cloud</a>, <a href="https://vast.ai/">Vast.ai</a>, <a href="https://www.runpod.io/">RunPod</a>, <a href="https://lambdalabs.com/">Lambda</a>.</p>
+<p><strong>Note:</strong> Most aidevops features (infrastructure management, SEO, code quality, Git workflows) require no GPU. GPU is only needed for local AI model inference (voice pipeline, vision models, local LLMs).</p>
+<h3><strong>Software Dependencies</strong></h3>
 <pre><code class="language-bash"># Install dependencies (auto-detected by setup.sh)
 brew install sshpass jq curl mkcert dnsmasq fd ripgrep  # macOS
 sudo apt-get install sshpass jq curl dnsmasq fd-find ripgrep  # Ubuntu/Debian
@@ -1115,6 +1233,11 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <li><strong><a href="https://animejs.com/">Anime.js</a></strong>: Lightweight JavaScript animation library for CSS, SVG, DOM attributes, and JS objects</li>
 <li><strong><a href="https://remotion.dev/">Remotion</a></strong>: Programmatic video creation with React - create videos using code with 29 specialized rule files</li>
 <li><strong><a href="https://github.com/snubroot/Veo-3-Meta-Framework">Video Prompt Design</a></strong>: Structured prompt engineering for AI video generation (Veo 3, 7-component framework, character consistency, audio design)</li>
+</ul>
+<h3><strong>Voice AI</strong></h3>
+<ul>
+<li><strong><a href="https://github.com/huggingface/speech-to-speech">Speech-to-Speech</a></strong>: Open-source modular voice pipeline (VAD → STT → LLM → TTS) with local GPU and cloud GPU deployment</li>
+<li><strong><a href="https://github.com/pipecat-ai/pipecat">Pipecat</a></strong>: Real-time voice agent framework with Soniox STT, Cartesia TTS, and multi-LLM support</li>
 </ul>
 <h3><strong>Performance &amp; Monitoring</strong></h3>
 <ul>
