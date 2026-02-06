@@ -1318,7 +1318,7 @@ cargo install toon-lsp                        # TOON syntax validation
 </code></pre>
 <p>These catch formatting and syntax issues during editing, reducing preflight/postflight fix cycles.</p>
 <h2><strong>Browser Automation</strong></h2>
-<p>8 browser tools + anti-detect stack, benchmarked and integrated for AI-assisted web automation, dev testing, data extraction, and bot detection evasion. Agents automatically select the optimal tool based on task requirements.</p>
+<p>8 browser tools + anti-detect stack + device emulation, benchmarked and integrated for AI-assisted web automation, dev testing, mobile/responsive testing, data extraction, and bot detection evasion. Agents automatically select the optimal tool based on task requirements.</p>
 <h3>Performance Benchmarks</h3>
 <p>Tested on macOS ARM64, all headless, warm daemon:</p>
 <table>
@@ -1438,6 +1438,16 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td><strong>Yes</strong> (unlocked)</td>
 <td>No</td>
+</tr>
+<tr>
+<td><strong>Device emulation</strong></td>
+<td><strong>Full</strong> (100+ devices)</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Via Playwright</td>
 </tr>
 <tr>
 <td><strong>Parallel sessions</strong></td>
@@ -1570,6 +1580,11 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>Companion tool, pairs with any browser</td>
 </tr>
 <tr>
+<td><strong>Mobile/tablet emulation</strong></td>
+<td>Playwright</td>
+<td>100+ device presets, viewport, touch, geolocation, locale</td>
+</tr>
+<tr>
 <td><strong>Bot detection evasion</strong></td>
 <td>Anti-detect stack</td>
 <td>Camoufox (full) or rebrowser-patches (quick)</td>
@@ -1617,6 +1632,92 @@ cargo install toon-lsp                        # TOON syntax validation
 </tr>
 </tbody></table>
 <p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-automation.md"><code>.agent/tools/browser/browser-automation.md</code></a> for the full decision tree and <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-benchmark.md"><code>browser-benchmark.md</code></a> for reproducible benchmark scripts.</p>
+<h3>Device Emulation</h3>
+<p>Test responsive layouts and mobile-specific behavior using Playwright&#39;s built-in device emulation. Supports 100+ device presets with viewport, user agent, touch events, device scale factor, geolocation, locale/timezone, permissions, color scheme, offline mode, and network throttling.</p>
+<p><strong>Common device presets:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Viewport</th>
+<th>Scale</th>
+<th>Touch</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>iPhone 15</code></td>
+<td>393x852</td>
+<td>3</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>iPad Pro 11</code></td>
+<td>834x1194</td>
+<td>2</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>Pixel 7</code></td>
+<td>412x915</td>
+<td>2.625</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>Galaxy S9+</code></td>
+<td>320x658</td>
+<td>4.5</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>Desktop Chrome</code></td>
+<td>1280x720</td>
+<td>1</td>
+<td>No</td>
+</tr>
+</tbody></table>
+<p><strong>Emulation capabilities:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Device presets</strong></td>
+<td><code>devices[&#39;iPhone 13&#39;]</code> - viewport, UA, touch, scale</td>
+</tr>
+<tr>
+<td><strong>Viewport/HiDPI</strong></td>
+<td><code>viewport: { width: 2560, height: 1440 }, deviceScaleFactor: 2</code></td>
+</tr>
+<tr>
+<td><strong>Geolocation</strong></td>
+<td><code>geolocation: { longitude: -74.006, latitude: 40.7128 }</code></td>
+</tr>
+<tr>
+<td><strong>Locale/timezone</strong></td>
+<td><code>locale: &#39;de-DE&#39;, timezoneId: &#39;Europe/Berlin&#39;</code></td>
+</tr>
+<tr>
+<td><strong>Color scheme</strong></td>
+<td><code>colorScheme: &#39;dark&#39;</code></td>
+</tr>
+<tr>
+<td><strong>Offline mode</strong></td>
+<td><code>offline: true</code></td>
+</tr>
+<tr>
+<td><strong>Permissions</strong></td>
+<td><code>permissions: [&#39;geolocation&#39;, &#39;notifications&#39;]</code></td>
+</tr>
+<tr>
+<td><strong>Network throttling</strong></td>
+<td>CDP-based Slow 3G / Fast 3G emulation</td>
+</tr>
+</tbody></table>
+<p><strong>Recipes included:</strong> Responsive breakpoint testing, multi-device parallel testing, touch gesture testing, geolocation-dependent features, dark mode visual regression, and network condition emulation.</p>
+<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/playwright-emulation.md"><code>.agent/tools/browser/playwright-emulation.md</code></a> for complete documentation with code examples.</p>
 <h3>Anti-Detect Browser</h3>
 <p>Open-source alternative to AdsPower, GoLogin, and OctoBrowser for multi-account automation and bot detection evasion.</p>
 <p><strong>Architecture:</strong></p>
@@ -3100,7 +3201,8 @@ bash .agent/scripts/continue-cli.sh review
 <p><strong>Agent Guides</strong> (in <code>.agent/</code>):</p>
 <ul>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/aidevops/api-integrations.md">API Integrations</a></strong> - Service APIs</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-automation.md">Browser Automation</a></strong> - 6 tools + anti-detect stack: decision tree, parallel, extensions, fingerprinting</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/browser-automation.md">Browser Automation</a></strong> - 8 tools + anti-detect stack: decision tree, parallel, extensions, fingerprinting</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/playwright-emulation.md">Device Emulation</a></strong> - Mobile/tablet testing: 100+ device presets, viewport, geolocation, locale, dark mode</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/anti-detect-browser.md">Anti-Detect Browser</a></strong> - Multi-profile management, fingerprint rotation, proxy integration</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/performance/performance.md">Web Performance</a></strong> - Core Web Vitals, network dependencies, accessibility (Chrome DevTools MCP)</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agent/tools/browser/pagespeed.md">PageSpeed</a></strong> - Lighthouse CLI and PageSpeed Insights API</li>
