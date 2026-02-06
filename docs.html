@@ -638,6 +638,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 </tr>
 </tbody></table>
 <p>The <code>--force</code> flag only controls file overwrite behavior (replacing an existing skill without prompting). To bypass security blocking, use <code>--skip-security</code> explicitly -- this separation ensures that routine updates and re-imports never silently skip security checks.</p>
+<p>Scan results are logged to <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/SKILL-SCAN-RESULTS.md"><code>.agents/SKILL-SCAN-RESULTS.md</code></a> automatically on each batch scan and skill import, providing a transparent audit trail of security posture over time.</p>
 <p><strong>Browse community skills:</strong> <a href="https://skills.sh">skills.sh</a> | <a href="https://clawdhub.com">ClawdHub</a> | <strong>Specification:</strong> <a href="https://agentskills.io">agentskills.io</a></p>
 <p><strong>Reference:</strong></p>
 <ul>
