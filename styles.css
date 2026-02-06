@@ -1083,6 +1083,13 @@ body {
     line-height: 1.6;
 }
 
+.docs-content h1,
+.docs-content h2,
+.docs-content h3,
+.docs-content h4 {
+    scroll-margin-top: 5rem;
+}
+
 .docs-content h2 {
     font-size: 1.5rem;
     font-weight: 700;
