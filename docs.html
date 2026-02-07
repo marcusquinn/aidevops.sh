@@ -188,8 +188,8 @@
 <h3>Agent Structure</h3>
 <ul>
 <li>Primary agents (Build+, SEO, Marketing, etc.) with @plan-plus subagent for planning-only mode</li>
-<li>614+ subagent markdown files organized by domain</li>
-<li>167 helper scripts in <code>.agents/scripts/</code></li>
+<li>765+ subagent markdown files organized by domain</li>
+<li>172 helper scripts in <code>.agents/scripts/</code></li>
 <li>28 slash commands for common workflows</li>
 </ul>
 <!-- AI-CONTEXT-END -->
@@ -422,7 +422,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 </tr>
 </tbody></table>
 <p>See <code>.agents/tools/git/opencode-github-security.md</code> for the full security documentation.</p>
-<p><strong>Supported AI Assistants:</strong> OpenCode is the recommended and primary-tested tool. All 18 assistants below have MCP configuration support, but only OpenCode receives continual testing and first-class integration. Other tools are supported as a courtesy for users evaluating aidevops capabilities.</p>
+<p><strong>Supported AI Assistant:</strong> <a href="https://opencode.ai/">OpenCode</a> is the only tested and supported AI coding tool for aidevops. All features, agents, and workflows are designed and tested for OpenCode first. The claude-code CLI is used as a companion tool called from within OpenCode.</p>
 <p><strong>Recommended:</strong></p>
 <ul>
 <li><strong><a href="https://opencode.ai/">OpenCode</a></strong> - The recommended AI coding agent. Powerful agentic TUI/CLI with native MCP support, Tab-based agent switching, LSP integration, plugin ecosystem, and excellent DX. All aidevops features are designed and tested for OpenCode first.</li>
@@ -589,7 +589,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 167 helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 172 helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -1181,7 +1181,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </ul>
 <h2><strong>MCP Integrations</strong></h2>
 <p><strong>Model Context Protocol servers for real-time AI assistant integration.</strong> The framework configures these MCPs for <strong><a href="https://opencode.ai/">OpenCode</a></strong> (TUI, Desktop, and Extension for Zed/VSCode/AntiGravity).</p>
-<h3><strong>All Supported MCPs (19 active)</strong></h3>
+<h3><strong>All Supported MCPs (19 available)</strong></h3>
 <p>MCP packages are installed globally via <code>bun install -g</code> for instant startup (no <code>npx</code> registry lookups). Run <code>setup.sh</code> or <code>aidevops update-tools</code> to update to latest versions.</p>
 <table>
 <thead>
@@ -1265,12 +1265,6 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <td>No</td>
 </tr>
 <tr>
-<td><a href="https://outscraper.com/">Outscraper</a></td>
-<td>Google Maps &amp; business data</td>
-<td>Per-agent</td>
-<td>Yes</td>
-</tr>
-<tr>
 <td><a href="https://github.com/nicholasgriffintn/playwriter">Playwriter</a></td>
 <td>Browser with extensions</td>
 <td>Per-agent</td>
@@ -1295,6 +1289,12 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <td>Yes</td>
 </tr>
 <tr>
+<td><a href="https://ui.shadcn.com/">shadcn</a></td>
+<td>UI component library</td>
+<td>Per-agent</td>
+<td>No</td>
+</tr>
+<tr>
 <td><a href="https://socket.dev/">Socket</a></td>
 <td>Dependency security</td>
 <td>Per-agent</td>
@@ -1312,7 +1312,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <li><strong>Global</strong> - Tools always available (loaded into every session)</li>
 <li><strong>Per-agent</strong> - Tools disabled globally, enabled per-agent via config (zero context overhead when unused)</li>
 </ul>
-<p><strong>Performance optimization:</strong> MCP packages are installed globally via <code>bun install -g</code> for instant startup (~0.1s vs 2-3s with <code>npx</code>). The framework uses a three-tier loading strategy: 7 MCPs load eagerly at startup, 13 MCPs load on-demand when their subagent is invoked. This reduces OpenCode startup time by 12-24 seconds.</p>
+<p><strong>Performance optimization:</strong> MCP packages are installed globally via <code>bun install -g</code> for instant startup (~0.1s vs 2-3s with <code>npx</code>). The framework uses a three-tier loading strategy: MCPs load eagerly at startup or on-demand when their subagent is invoked. This reduces OpenCode startup time significantly.</p>
 <h3><strong>SEO Integrations (curl subagents - no MCP overhead)</strong></h3>
 <p>These use direct API calls via curl, avoiding MCP server startup entirely:</p>
 <table>
@@ -1363,6 +1363,11 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <td>Content optimization &amp; NLP analysis</td>
 <td>Yes</td>
 </tr>
+<tr>
+<td><a href="https://outscraper.com/">Outscraper</a></td>
+<td>Google Maps &amp; business data extraction</td>
+<td>Yes</td>
+</tr>
 </tbody></table>
 <h3><strong>By Category</strong></h3>
 <p><strong>Context &amp; Codebase:</strong></p>
@@ -1410,7 +1415,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </ul>
 <p><strong>Data Extraction:</strong></p>
 <ul>
-<li><a href="https://outscraper.com/">Outscraper</a> - Google Maps, business data, reviews extraction</li>
+<li><a href="https://outscraper.com/">Outscraper</a> - Google Maps, business data, reviews extraction (curl subagent)</li>
 <li><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/curl-copy.md">curl-copy</a> - Authenticated scraping via DevTools &quot;Copy as cURL&quot; (no browser automation needed)</li>
 </ul>
 <p><strong>Performance &amp; Security:</strong></p>
@@ -2234,7 +2239,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 14 primary agents, 614+ subagents, and 163 helper scripts.</p>
+<p>This installs the complete framework: 15 primary agents, 765+ subagents, and 172 helper scripts.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -2417,7 +2422,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <td>SEO</td>
 <td><code>seo.md</code></td>
 <td>SEO optimization, Search Console, keyword research</td>
-<td>gsc, ahrefs, dataforseo, serper, context7, augment</td>
+<td>gsc, ahrefs, serper, context7, augment</td>
 </tr>
 <tr>
 <td>Video</td>
@@ -2433,7 +2438,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 </tbody></table>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 614+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 765+ subagents organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -2460,12 +2465,12 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <tr>
 <td><code>@seo</code></td>
 <td>Search Console, keyword research, domain intelligence</td>
-<td>gsc, ahrefs, dataforseo, serper, context7</td>
+<td>gsc, ahrefs, serper, context7</td>
 </tr>
 <tr>
 <td><code>@dataforseo</code></td>
 <td>SERP, keywords, backlinks, on-page analysis</td>
-<td>dataforseo</td>
+<td>(curl subagent)</td>
 </tr>
 <tr>
 <td><code>@domain-research</code></td>
@@ -3235,6 +3240,37 @@ pattern-tracker-helper.sh suggest &quot;refactor the auth middleware&quot;
 </code></pre>
 <p>Commands invoke the corresponding workflow subagent with appropriate context.</p>
 <hr>
+<h3><strong>Agent Lifecycle (Three Tiers)</strong></h3>
+<p>User-created agents survive <code>aidevops update</code>. Agents progress through tiers as they mature:</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Location</th>
+<th>Purpose</th>
+<th>Survives Update</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Draft</strong></td>
+<td><code>~/.aidevops/agents/draft/</code></td>
+<td>R&amp;D, experimental, auto-created by orchestration tasks</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Custom</strong></td>
+<td><code>~/.aidevops/agents/custom/</code></td>
+<td>User&#39;s permanent private agents</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Shared</strong></td>
+<td><code>.agents/</code> in repo</td>
+<td>Open-source, distributed to all users</td>
+<td>Managed by repo</td>
+</tr>
+</tbody></table>
+<p><strong>Promotion workflow:</strong> Draft agents that prove useful can be promoted to custom (private) or shared (open-source via PR). Orchestration agents can create drafts in <code>draft/</code> for reusable parallel processing context.</p>
 <h3><strong>Creating Custom Agents</strong></h3>
 <p>Create a markdown file in <code>~/.config/opencode/agent/</code> (OpenCode) or reference in your AI&#39;s system prompt:</p>
 <pre><code class="language-markdown">---
@@ -3353,7 +3389,7 @@ bash .agents/scripts/continue-cli.sh review
 ├── .agents/                        # Agents and documentation
 │   ├── AGENTS.md                  # User guide (deployed to ~/.aidevops/agents/)
 │   ├── *.md                       # 15 primary agents
-│   ├── scripts/                   # 146 helper scripts
+│   ├── scripts/                   # 172 helper scripts
 │   ├── tools/                     # Cross-domain utilities (video, browser, git, etc.)
 │   ├── services/                  # External service integrations
 │   └── workflows/                 # Development process guides
