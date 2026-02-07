@@ -838,74 +838,71 @@ agent-test-helper.sh compare my-tests    # Detect regressions
 </code></pre>
 <p>Test suites are JSON files with prompts and validation rules (<code>expect_contains</code>, <code>expect_not_contains</code>, <code>expect_regex</code>, <code>min_length</code>, <code>max_length</code>). Results are saved for historical tracking.</p>
 <p><strong>See:</strong> <code>agent-testing.md</code> subagent for full documentation and example test suites.</p>
-<h3>Voice Integration</h3>
-<p>Open-source speech-to-speech pipeline based on <a href="https://github.com/huggingface/speech-to-speech">huggingface/speech-to-speech</a> (Apache-2.0). Modular four-stage architecture with swappable components:</p>
-<pre><code class="language-text">Microphone → [VAD] → [STT] → [LLM] → [TTS] → Speaker
-              Silero   Whisper  Any HF   Parler/Melo/
-              VAD v5   variants instruct Kokoro/ChatTTS
+<h3>Voice Bridge - Talk to Your AI Agent</h3>
+<p>Speak naturally to your AI coding agent and hear it respond. The voice bridge connects your microphone to OpenCode via a fast local pipeline -- ask questions, give instructions, execute tasks, all by voice.</p>
+<pre><code class="language-text">Mic → Silero VAD → Whisper MLX (1.4s) → OpenCode (4-6s) → Edge TTS (0.4s) → Speaker
 </code></pre>
+<p><strong>Round-trip: ~6-8 seconds</strong> on Apple Silicon. The agent can edit files, run commands, create PRs, and confirm what it did -- all via voice.</p>
 <p><strong>Quick start:</strong></p>
-<pre><code class="language-bash"># Install the pipeline
-speech-to-speech-helper.sh setup
+<pre><code class="language-bash"># Start a voice conversation (installs deps automatically)
+voice-helper.sh talk
 
-# Run locally on Mac (auto-configures MPS acceleration)
-speech-to-speech-helper.sh start --local-mac
+# Choose engines and voice
+voice-helper.sh talk whisper-mlx edge-tts en-GB-SoniaNeural
+voice-helper.sh talk whisper-mlx macos-say    # Offline mode
 
-# Run on NVIDIA GPU with torch compile
-speech-to-speech-helper.sh start --cuda
-
-# Server mode (clients connect remotely)
-speech-to-speech-helper.sh start --server
-speech-to-speech-helper.sh client --host 192.168.1.100
-
-# Configuration presets
-speech-to-speech-helper.sh config low-latency   # Fastest (CUDA + OpenAI API)
-speech-to-speech-helper.sh config low-vram       # Minimal GPU (~4GB)
-speech-to-speech-helper.sh config quality        # Best quality (24GB+ VRAM)
-speech-to-speech-helper.sh config mac            # Apple Silicon optimal
-speech-to-speech-helper.sh config multilingual   # Auto language detection (6 langs)
+# Utilities
+voice-helper.sh devices      # List audio input/output devices
+voice-helper.sh voices       # List available TTS voices
+voice-helper.sh benchmark    # Test STT/TTS/LLM speeds
+voice-helper.sh status       # Check component availability
 </code></pre>
-<p><strong>Recommended hardware for voice:</strong></p>
+<p><strong>Features:</strong></p>
 <table>
 <thead>
 <tr>
-<th>Setup</th>
-<th>CPU</th>
-<th>RAM</th>
-<th>GPU</th>
-<th>Use Case</th>
+<th>Feature</th>
+<th>Details</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Mac (local)</td>
-<td>Apple M1+</td>
-<td>16GB+</td>
-<td>MPS (unified)</td>
-<td>Development, personal use</td>
+<td><strong>Swappable STT</strong></td>
+<td>whisper-mlx (fastest on Apple Silicon), faster-whisper (CPU)</td>
 </tr>
 <tr>
-<td>Workstation (CUDA)</td>
-<td>Any modern</td>
-<td>16GB+</td>
-<td>NVIDIA 8GB+ VRAM</td>
-<td>Low-latency local voice</td>
+<td><strong>Swappable TTS</strong></td>
+<td>edge-tts (best quality), macos-say (offline), facebookMMS (local)</td>
 </tr>
 <tr>
-<td>Quality (CUDA)</td>
-<td>Any modern</td>
-<td>32GB+</td>
-<td>NVIDIA 24GB+ VRAM</td>
-<td>Full Whisper large-v3 + Parler</td>
+<td><strong>Voice exit</strong></td>
+<td>Say &quot;that&#39;s all&quot;, &quot;goodbye&quot;, &quot;all for now&quot; to end naturally</td>
 </tr>
 <tr>
-<td>Cloud GPU</td>
-<td>-</td>
-<td>-</td>
-<td>A100/H100</td>
-<td>Production server, multi-user</td>
+<td><strong>STT correction</strong></td>
+<td>LLM sanity-checks transcription errors before acting (e.g. &quot;test.txte&quot; → &quot;test.txt&quot;)</td>
+</tr>
+<tr>
+<td><strong>Task execution</strong></td>
+<td>Full tool access -- edit files, git operations, run commands</td>
+</tr>
+<tr>
+<td><strong>Session handback</strong></td>
+<td>Conversation transcript output on exit for calling agent context</td>
+</tr>
+<tr>
+<td><strong>TUI compatible</strong></td>
+<td>Graceful degradation when launched from AI tool&#39;s Bash (no tty)</td>
 </tr>
 </tbody></table>
-<p><strong>Cloud GPU providers</strong> for server/client deployment: NVIDIA Cloud, Vast.ai, RunPod, Lambda.</p>
+<p><strong>How it works:</strong> The bridge uses <code>opencode run --attach</code> to connect to a running OpenCode server for low-latency responses (~4-6s vs ~30s cold start). It automatically starts <code>opencode serve</code> if not already running.</p>
+<p><strong>Requirements:</strong> Apple Silicon Mac (for whisper-mlx), Python 3.10+, internet (for edge-tts). The voice helper installs Python dependencies automatically into the S2S venv.</p>
+<h3>Speech-to-Speech Pipeline (Advanced)</h3>
+<p>For advanced use cases (custom LLMs, server/client deployment, multi-language, phone integration), the full <a href="https://github.com/huggingface/speech-to-speech">huggingface/speech-to-speech</a> pipeline is also available:</p>
+<pre><code class="language-bash">speech-to-speech-helper.sh setup              # Install pipeline
+speech-to-speech-helper.sh start --local-mac  # Run on Apple Silicon
+speech-to-speech-helper.sh start --cuda       # Run on NVIDIA GPU
+speech-to-speech-helper.sh start --server     # Server mode (remote clients)
+</code></pre>
 <p><strong>Supported languages:</strong> English, French, Spanish, Chinese, Japanese, Korean (auto-detect or fixed).</p>
 <p><strong>Additional voice methods:</strong></p>
 <table>
@@ -1165,6 +1162,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </ul>
 <h3><strong>Voice AI</strong></h3>
 <ul>
+<li><strong>Voice Bridge</strong>: Talk to your AI coding agent via speech -- Silero VAD → Whisper MLX → OpenCode → Edge TTS (~6-8s round-trip)</li>
 <li><strong><a href="https://github.com/huggingface/speech-to-speech">Speech-to-Speech</a></strong>: Open-source modular voice pipeline (VAD → STT → LLM → TTS) with local GPU and cloud GPU deployment</li>
 <li><strong><a href="https://github.com/pipecat-ai/pipecat">Pipecat</a></strong>: Real-time voice agent framework with Soniox STT, Cartesia TTS, and multi-LLM support</li>
 </ul>
