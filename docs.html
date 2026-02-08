@@ -981,7 +981,7 @@ speech-to-speech-helper.sh start --server     # Server mode (remote clients)
 <td>Production voice, multi-user, batch processing</td>
 </tr>
 </tbody></table>
-<p><strong>Cloud GPU providers</strong> for on-demand GPU access: <a href="https://www.nvidia.com/en-us/gpu-cloud/">NVIDIA Cloud</a>, <a href="https://vast.ai/">Vast.ai</a>, <a href="https://www.runpod.io/">RunPod</a>, <a href="https://lambdalabs.com/">Lambda</a>.</p>
+<p><strong>Cloud GPU providers</strong> for on-demand GPU access: <a href="https://www.nvidia.com/en-us/gpu-cloud/">NVIDIA Cloud</a>, <a href="https://vast.ai/">Vast.ai</a>, <a href="https://www.runpod.io/">RunPod</a>, <a href="https://lambdalabs.com/">Lambda</a>. See <code>.agents/tools/infrastructure/cloud-gpu.md</code> for the full deployment guide (SSH setup, Docker, model caching, cost optimization).</p>
 <p><strong>Note:</strong> Most aidevops features (infrastructure management, SEO, code quality, Git workflows) require no GPU. GPU is only needed for local AI model inference (voice pipeline, vision models, local LLMs).</p>
 <h3><strong>Software Dependencies</strong></h3>
 <pre><code class="language-bash"># Install dependencies (auto-detected by setup.sh)
