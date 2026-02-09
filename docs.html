@@ -187,10 +187,10 @@
 </ul>
 <h3>Agent Structure</h3>
 <ul>
-<li>Primary agents (Build+, SEO, Marketing, etc.) with @plan-plus subagent for planning-only mode</li>
-<li>765+ subagent markdown files organized by domain</li>
-<li>172 helper scripts in <code>.agents/scripts/</code></li>
-<li>28 slash commands for common workflows</li>
+<li>13 primary agents (Build+, SEO, Marketing, etc.) with @plan-plus for planning-only mode</li>
+<li>735+ subagent markdown files organized by domain</li>
+<li>194 helper scripts in <code>.agents/scripts/</code></li>
+<li>39 slash commands for common workflows</li>
 </ul>
 <!-- AI-CONTEXT-END -->
 
@@ -593,7 +593,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 172 helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 194 helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -2243,7 +2243,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 15 primary agents, 765+ subagents, and 172 helper scripts.</p>
+<p>This installs the complete framework: 13 primary agents, 735+ subagents, and 194 helper scripts.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -2340,109 +2340,98 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 </tbody></table>
 <h3><strong>Main Agents</strong></h3>
-<p>Ordered as they appear in OpenCode Tab selector and other AI assistants (15 total):</p>
+<p>Primary agents as registered in <code>subagent-index.toon</code> (13 total). MCPs are loaded on-demand per subagent, not per primary agent:</p>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>File</th>
 <th>Purpose</th>
-<th>MCPs Enabled</th>
+<th>Model Tier</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>@plan-plus</td>
+<td>Plan+</td>
 <td><code>plan-plus.md</code></td>
-<td>Planning-only subagent (Build+ handles planning by default)</td>
-<td>context7, augment, repomix</td>
+<td>Read-only planning with semantic codebase search</td>
+<td>sonnet</td>
 </tr>
 <tr>
 <td>Build+</td>
 <td><code>build-plus.md</code></td>
-<td>Enhanced Build with context tools</td>
-<td>context7, augment, repomix</td>
-</tr>
-<tr>
-<td>Build-Agent</td>
-<td><code>build-agent.md</code></td>
-<td>Design and improve AI agents</td>
-<td>context7, augment, repomix</td>
-</tr>
-<tr>
-<td>Build-MCP</td>
-<td><code>build-mcp.md</code></td>
-<td>Build MCP servers with TS+Bun+ElysiaJS</td>
-<td>context7, augment, repomix</td>
-</tr>
-<tr>
-<td>Accounts</td>
-<td><code>accounts.md</code></td>
-<td>Financial operations</td>
-<td>quickfile, augment</td>
+<td>Enhanced Build with context tools (default agent)</td>
+<td>sonnet</td>
 </tr>
 <tr>
 <td>AI-DevOps</td>
 <td><code>aidevops.md</code></td>
-<td>Framework operations, meta-agents, setup</td>
-<td>context7, augment, repomix</td>
+<td>Framework operations and meta-agents</td>
+<td>sonnet</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td><code>seo.md</code></td>
+<td>SEO optimization and analysis</td>
+<td>sonnet</td>
 </tr>
 <tr>
 <td>Content</td>
 <td><code>content.md</code></td>
-<td>Content creation, humanise AI text</td>
-<td>augment</td>
-</tr>
-<tr>
-<td>Health</td>
-<td><code>health.md</code></td>
-<td>Health and wellness guidance</td>
-<td>augment</td>
-</tr>
-<tr>
-<td>Legal</td>
-<td><code>legal.md</code></td>
-<td>Legal compliance and documentation</td>
-<td>augment</td>
-</tr>
-<tr>
-<td>Marketing</td>
-<td><code>marketing.md</code></td>
-<td>Marketing strategy and automation</td>
-<td>augment</td>
+<td>Content creation workflows</td>
+<td>sonnet</td>
 </tr>
 <tr>
 <td>Research</td>
 <td><code>research.md</code></td>
 <td>Research and analysis tasks</td>
-<td>context7, augment</td>
+<td>flash</td>
+</tr>
+<tr>
+<td>Marketing</td>
+<td><code>marketing.md</code></td>
+<td>Marketing strategy and email campaigns</td>
+<td>sonnet</td>
 </tr>
 <tr>
 <td>Sales</td>
 <td><code>sales.md</code></td>
-<td>Sales operations and CRM</td>
-<td>augment</td>
+<td>Sales operations and CRM pipeline</td>
+<td>sonnet</td>
 </tr>
 <tr>
-<td>SEO</td>
-<td><code>seo.md</code></td>
-<td>SEO optimization, Search Console, keyword research</td>
-<td>gsc, ahrefs, serper, context7, augment</td>
+<td>Legal</td>
+<td><code>legal.md</code></td>
+<td>Legal compliance</td>
+<td>sonnet</td>
+</tr>
+<tr>
+<td>Accounts</td>
+<td><code>accounts.md</code></td>
+<td>Financial operations</td>
+<td>sonnet</td>
+</tr>
+<tr>
+<td>Health</td>
+<td><code>health.md</code></td>
+<td>Health and wellness</td>
+<td>sonnet</td>
+</tr>
+<tr>
+<td>Social-Media</td>
+<td><code>social-media.md</code></td>
+<td>Social media management</td>
+<td>sonnet</td>
 </tr>
 <tr>
 <td>Video</td>
 <td><code>video.md</code></td>
-<td>AI video generation, prompt engineering, programmatic video</td>
-<td>augment</td>
-</tr>
-<tr>
-<td>WordPress</td>
-<td><code>wordpress.md</code></td>
-<td>WordPress ecosystem (dev, admin, MainWP, LocalWP)</td>
-<td>localwp, context7, augment</td>
+<td>AI video generation and prompt engineering</td>
+<td>sonnet</td>
 </tr>
 </tbody></table>
+<p><strong>Specialist subagents</strong> (Build-Agent, Build-MCP, WordPress, etc.) live under <code>tools/</code> and are invoked via @mention when domain expertise is needed. See <code>subagent-index.toon</code> for the full listing.</p>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 765+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 735+ subagents organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -3392,8 +3381,8 @@ bash .agents/scripts/continue-cli.sh review
 ├── AGENTS.md                      # AI agent guidance (dev)
 ├── .agents/                        # Agents and documentation
 │   ├── AGENTS.md                  # User guide (deployed to ~/.aidevops/agents/)
-│   ├── *.md                       # 15 primary agents
-│   ├── scripts/                   # 172 helper scripts
+│   ├── *.md                       # 13 primary agents
+│   ├── scripts/                   # 194 helper scripts
 │   ├── tools/                     # Cross-domain utilities (video, browser, git, etc.)
 │   ├── services/                  # External service integrations
 │   └── workflows/                 # Development process guides
