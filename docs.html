@@ -776,11 +776,11 @@ runner-helper.sh status code-reviewer
 └─────────────────┘
 </code></pre>
 <p><strong>Example runner templates:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/ai-assistants/runners/code-reviewer.md">code-reviewer</a>, <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/ai-assistants/runners/seo-analyst.md">seo-analyst</a> - copy and customize for your own runners.</p>
-<p><strong>Matrix bot dispatch</strong> (optional): Bridge Matrix chat rooms to runners for chat-triggered AI.</p>
+<p><strong>Matrix bot dispatch</strong> (optional): Bridge Matrix chat rooms to runners for chat-triggered AI. Each room maintains persistent conversation context via SQLite -- on idle timeout, the session is compacted (summarised) and stored, so the next message resumes with full context.</p>
 <pre><code class="language-bash"># Setup Matrix bot (interactive wizard)
 matrix-dispatch-helper.sh setup
 
-# Map rooms to runners
+# Map rooms to runners (each room = separate session)
 matrix-dispatch-helper.sh map &#39;!dev-room:server&#39; code-reviewer
 matrix-dispatch-helper.sh map &#39;!seo-room:server&#39; seo-analyst
 
@@ -788,8 +788,12 @@ matrix-dispatch-helper.sh map &#39;!seo-room:server&#39; seo-analyst
 matrix-dispatch-helper.sh start --daemon
 
 # In Matrix room: &quot;!ai Review src/auth.ts for security issues&quot;
+
+# Manage sessions
+matrix-dispatch-helper.sh sessions list
+matrix-dispatch-helper.sh sessions stats
 </code></pre>
-<p><strong>See:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/ai-assistants/headless-dispatch.md">headless-dispatch.md</a> for full documentation including parallel vs sequential decision guide, SDK examples, CI/CD integration, and custom agent configuration. <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/services/communications/matrix-bot.md">matrix-bot.md</a> for Matrix bot setup including Cloudron Synapse guide.</p>
+<p><strong>See:</strong> <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/ai-assistants/headless-dispatch.md">headless-dispatch.md</a> for full documentation including parallel vs sequential decision guide, SDK examples, CI/CD integration, and custom agent configuration. <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/services/communications/matrix-bot.md">matrix-bot.md</a> for Matrix bot setup including Cloudron Synapse guide and session persistence.</p>
 <h3>Self-Improving Agent System</h3>
 <p>Agents that learn from experience and contribute improvements:</p>
 <table>
