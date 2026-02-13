@@ -1109,6 +1109,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 </ul>
 <h3><strong>Document Processing &amp; OCR</strong></h3>
 <ul>
+<li><strong>Document Creation Agent</strong> (<code>document-creation-helper.sh</code>): Unified document format conversion, template-based creation, and OCR for scanned PDFs/images. Routes to the best available tool (pandoc, odfpy, LibreOffice, Tesseract, EasyOCR, GLM-OCR) based on format pair and availability. Supports 13+ formats (ODT, DOCX, PDF, MD, HTML, EPUB, PPTX, ODP, XLSX, ODS, RTF, CSV, TSV).</li>
 <li><strong><a href="https://libpdf.dev/">LibPDF</a></strong>: PDF form filling, digital signatures (PAdES B-B/T/LT/LTA), encryption, merge/split, text extraction</li>
 <li><strong><a href="https://github.com/opendatalab/MinerU">MinerU</a></strong>: Layout-aware PDF-to-markdown/JSON conversion with OCR (109 languages), formula-to-LaTeX, and table extraction (53k+ stars, AGPL-3.0)</li>
 <li><strong><a href="https://github.com/Zipstack/unstract">Unstract</a></strong>: LLM-powered structured data extraction from unstructured documents (PDF, images, DOCX)</li>
@@ -1124,6 +1125,11 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 </tr>
 </thead>
 <tbody><tr>
+<td><strong>Format conversion</strong></td>
+<td>Document Creation Agent</td>
+<td>Auto-selects best tool, 13+ formats</td>
+</tr>
+<tr>
 <td><strong>Complex PDF to markdown</strong></td>
 <td>MinerU</td>
 <td>Layout-aware, formulas, tables, 109-language OCR</td>
@@ -1153,9 +1159,22 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <td>Pandoc</td>
 <td>Lightweight, broad format support</td>
 </tr>
+<tr>
+<td><strong>Scanned PDF OCR</strong></td>
+<td>Document Creation Agent</td>
+<td>Auto-detects, routes to Tesseract/EasyOCR/GLM-OCR</td>
+</tr>
 </tbody></table>
 <p><strong>Quick start:</strong></p>
-<pre><code class="language-bash">ollama pull glm-ocr
+<pre><code class="language-bash"># Document creation agent
+document-creation-helper.sh status                          # Check available tools
+document-creation-helper.sh install --standard              # Install core tools
+document-creation-helper.sh convert report.pdf --to odt     # Convert formats
+document-creation-helper.sh convert scan.pdf --to md --ocr  # OCR scanned PDF
+document-creation-helper.sh template draft --type letter     # Generate template
+
+# GLM-OCR direct
+ollama pull glm-ocr
 ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </code></pre>
 <p>See <code>.agents/tools/ocr/glm-ocr.md</code> for batch processing, PDF workflows, and Peekaboo integration.</p>
