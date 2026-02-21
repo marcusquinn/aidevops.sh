@@ -3256,15 +3256,20 @@ pattern-tracker-helper.sh suggest &quot;refactor the auth middleware&quot;
 <p><strong>Storage:</strong> <code>~/.aidevops/.agent-workspace/memory/memory.db</code> (+ optional <code>embeddings.db</code> for semantic search, <code>namespaces/</code> for per-runner isolation)</p>
 <p>See <code>.agents/memory/README.md</code> for complete documentation.</p>
 <h3><strong>Installation</strong></h3>
-<p>Slash commands are automatically installed by <code>setup.sh</code>:</p>
-<pre><code class="language-bash"># Commands are deployed to:
-~/.config/opencode/commands/
+<p>Slash commands are automatically installed by <code>setup.sh</code> for both OpenCode and Claude Code:</p>
+<pre><code class="language-bash"># OpenCode commands deployed to:
+~/.config/opencode/command/
+
+# Claude Code commands deployed to:
+~/.claude/commands/
 
 # Regenerate commands manually:
 .agents/scripts/generate-opencode-commands.sh
+.agents/scripts/generate-claude-commands.sh
 </code></pre>
+<p>Both generators read from the same source (<code>.agents/scripts/commands/*.md</code>), ensuring command parity across tools.</p>
 <h3><strong>Usage</strong></h3>
-<p>In OpenCode, type the command at the prompt:</p>
+<p>In OpenCode or Claude Code, type the command at the prompt:</p>
 <pre><code class="language-text">/preflight
 /release minor
 /feature add-user-authentication
