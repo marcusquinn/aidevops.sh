@@ -1234,12 +1234,6 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <td>No</td>
 </tr>
 <tr>
-<td><a href="https://github.com/Ryandonofrio3/osgrep">osgrep</a></td>
-<td>Local semantic search</td>
-<td>Global</td>
-<td>No</td>
-</tr>
-<tr>
 <td><a href="https://github.com/marcusquinn/amazon-order-history-csv-download-mcp">Amazon Order History</a></td>
 <td>Order data extraction</td>
 <td>Per-agent</td>
@@ -1403,7 +1397,6 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <ul>
 <li><a href="https://docs.augmentcode.com/context-services/mcp/overview">Augment Context Engine</a> - Semantic codebase retrieval with deep code understanding</li>
 <li><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a> - Semantic code analysis with 95% token savings (tree, structure, CFG, DFG, impact analysis)</li>
-<li><a href="https://github.com/Ryandonofrio3/osgrep">osgrep</a> - Local semantic search (100% private, no cloud)</li>
 <li><a href="https://context7.com/">Context7</a> - Real-time documentation access for thousands of libraries</li>
 <li><a href="https://github.com/yamadashy/repomix">Repomix</a> - Pack codebases into AI-friendly context</li>
 </ul>
@@ -2179,36 +2172,6 @@ auggie token print
 </tr>
 </tbody></table>
 <p>See <code>.agents/tools/context/augment-context-engine.md</code> for complete documentation.</p>
-<h3>osgrep - Local Alternative (Experimental)</h3>
-<p><a href="https://github.com/Ryandonofrio3/osgrep">osgrep</a> provides 100% local semantic search with no cloud dependency:</p>
-<pre><code class="language-bash">npm install -g osgrep &amp;&amp; osgrep setup
-osgrep &quot;where is authentication handled?&quot;
-</code></pre>
-<table>
-<thead>
-<tr>
-<th>Feature</th>
-<th>osgrep</th>
-<th>Augment</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Privacy</td>
-<td>100% local</td>
-<td>Cloud-based</td>
-</tr>
-<tr>
-<td>Auth</td>
-<td>None required</td>
-<td>Account + login</td>
-</tr>
-<tr>
-<td>Node.js</td>
-<td>18+</td>
-<td>22+</td>
-</tr>
-</tbody></table>
-<p>See <code>.agents/tools/context/osgrep.md</code> for complete documentation and AI tool configurations.</p>
 <h3>llm-tldr - Semantic Code Analysis</h3>
 <p><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a> extracts code structure and semantics, saving ~95% tokens compared to raw code. From the <a href="https://github.com/parcadei/Continuous-Claude-v3">Continuous-Claude</a> project.</p>
 <pre><code class="language-bash"># Install
