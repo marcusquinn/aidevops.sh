@@ -624,7 +624,7 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <tr>
 <td><strong>Ralph Loop</strong></td>
 <td>Iterative execution until complete</td>
-<td><code>ralph-loop-helper.sh</code>, <code>full-loop-helper.sh</code></td>
+<td><code>/full-loop</code>, <code>full-loop-helper.sh</code></td>
 </tr>
 <tr>
 <td><strong>Evolve Context</strong></td>
@@ -2952,10 +2952,10 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </code></pre>
 <p><strong>Usage:</strong></p>
 <pre><code class="language-bash"># Run quality checks iteratively until all pass
-.agents/scripts/quality-loop-helper.sh preflight --auto-fix --max-iterations &lt;MAX_ITERATIONS&gt;
-
-# Or use the slash command
 /preflight-loop --auto-fix --max-iterations &lt;MAX_ITERATIONS&gt;
+
+# Or run linters directly
+.agents/scripts/linters-local.sh
 </code></pre>
 <p><strong>Note:</strong> Store any API credentials securely via environment variables or <code>.env</code> files (never commit credentials to version control).</p>
 <p><strong>Key features:</strong></p>
