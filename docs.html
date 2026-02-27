@@ -435,6 +435,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <li><strong><a href="https://claude.ai/">claude-code CLI</a></strong> - Called from within OpenCode for sub-tasks and headless dispatch</li>
 </ul>
 <p><strong>Collaborator compatibility:</strong> Projects initialized with <code>aidevops init</code> include pointer files (<code>.cursorrules</code>, <code>.windsurfrules</code>, etc.) that reference <code>AGENTS.md</code>, helping collaborators using other editors find project context. aidevops does not install into or configure those tools.</p>
+<p><strong>Repo courtesy files:</strong> <code>aidevops init</code> scaffolds standard repo files if they don&#39;t exist: <code>README.md</code>, <code>LICENCE</code> (MIT), <code>CHANGELOG.md</code>, <code>CONTRIBUTING.md</code>, <code>SECURITY.md</code>, <code>CODE_OF_CONDUCT.md</code>. Author name and email are auto-detected from git config. Existing files are never overwritten.</p>
 <h2><strong>Core Capabilities</strong></h2>
 <p><strong>AI-First Infrastructure Management:</strong></p>
 <ul>
@@ -571,6 +572,16 @@ aidevops skill remove &lt;name&gt;       # Remove an imported skill
 <li><a href="https://github.com/anthropics/skills">anthropics/skills</a> - Official Anthropic example skills</li>
 <li><a href="https://github.com/agentskills/agentskills">agentskills/agentskills</a> - Specification source and reference library</li>
 </ul>
+<h2><strong>Agent Sources (Private Repos)</strong></h2>
+<p>Sync agents from private Git repositories into the framework. Private repos keep their own agents, helper scripts, and slash commands — <code>aidevops sources sync</code> deploys them alongside the core agents.</p>
+<pre><code class="language-bash">aidevops sources add ~/Git/my-private-agents     # Register a local repo
+aidevops sources add-remote git@github.com:u/r.git  # Clone and register a remote repo
+aidevops sources list                             # List configured sources
+aidevops sources sync                             # Sync all sources
+aidevops sources remove my-private-agents         # Remove a source
+</code></pre>
+<p><strong>How it works:</strong> Private repos contain a <code>.agents/</code> directory with agent subdirectories. Agents with <code>mode: primary</code> in their frontmatter are symlinked to the agents root for auto-discovery as primary agent tabs. Markdown files with <code>agent:</code> frontmatter are deployed as <code>/slash</code> commands. All sources sync automatically during <code>aidevops update</code>.</p>
+<p><strong>Reference:</strong> <code>.agents/aidevops/agent-sources.md</code></p>
 <h2><strong>Agent Design Patterns</strong></h2>
 <p>aidevops implements proven agent design patterns identified by <a href="https://x.com/RLanceMartin/status/2009683038272401719">Lance Martin (LangChain)</a>.</p>
 <table>
