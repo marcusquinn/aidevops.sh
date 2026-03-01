@@ -54,11 +54,8 @@ Compatible with [todo-md](https://github.com/todo-md/todo-md), [todomd](https://
 
 ## Backlog
 
-<!--TOON:backlog[1]{id,desc,owner,tags,est,risk,logged,status}:
-t001,Audit README.md — ensure content accurately describes site purpose and links to main repo and has correct install/usage instructions,marcus,docs audit,~15m,,2026-03-01,pending
+<!--TOON:backlog[0]{id,desc,owner,tags,est,risk,logged,status}:
 -->
-
-- [ ] t001 Audit README.md — ensure content accurately describes the site purpose, links to the main aidevops repo correctly, and has correct install/usage instructions. #docs #audit #auto-dispatch ~15m model:sonnet ref:GH#12 logged:2026-03-01
 
 ## In Progress
 
@@ -74,8 +71,11 @@ t001,Audit README.md — ensure content accurately describes site purpose and li
 
 ## Done
 
-<!--TOON:done[0]{id,desc,owner,tags,est,actual,logged,started,completed,status}:
+<!--TOON:done[1]{id,desc,owner,tags,est,actual,logged,started,completed,status}:
+t001,Audit README.md — ensure content accurately describes site purpose and links to main repo and has correct install/usage instructions,marcus,docs audit,~15m,~15m,2026-03-01,,2026-03-01,done
 -->
+
+- [x] t001 Audit README.md — ensure content accurately describes the site purpose, links to the main aidevops repo correctly, and has correct install/usage instructions. #docs #audit ref:GH#12 logged:2026-03-01 completed:2026-03-01
 
 ## Declined
 
@@ -93,5 +93,5 @@ t001,Audit README.md — ensure content accurately describes site purpose and li
 <!--/TOON:subtasks-->
 
 <!--TOON:summary{total,ready,pending,in_progress,in_review,done,declined,total_est,total_actual}:
-0,0,0,0,0,0,0,,
+1,0,0,0,0,1,0,~15m,~15m
 -->
