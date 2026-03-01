@@ -54,8 +54,11 @@ Compatible with [todo-md](https://github.com/todo-md/todo-md), [todomd](https://
 
 ## Backlog
 
-<!--TOON:backlog[0]{id,desc,owner,tags,est,risk,logged,status}:
+<!--TOON:backlog[1]{id,desc,owner,tags,est,risk,logged,status}:
+t001,Audit README.md — ensure content accurately describes site purpose and links to main repo and has correct install/usage instructions,marcus,docs audit,~15m,,2026-03-01,pending
 -->
+
+- [ ] t001 Audit README.md — ensure content accurately describes the site purpose, links to the main aidevops repo correctly, and has correct install/usage instructions. #docs #audit #auto-dispatch ~15m model:sonnet ref:GH#12 logged:2026-03-01
 
 ## In Progress
 
