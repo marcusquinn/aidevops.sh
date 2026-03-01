@@ -170,7 +170,7 @@
 <p><a href="#comprehensive-service-coverage"><img src="https://img.shields.io/badge/Services%20Supported-30+-brightgreen.svg" alt="Services Supported"></a>
 <a href="https://agents.md/"><img src="https://img.shields.io/badge/AGENTS.md-Compliant-blue.svg" alt="AGENTS.md"></a>
 <a href="https://github.com/marcusquinn/aidevops/blob/main/AGENTS.md"><img src="https://img.shields.io/badge/AI%20Optimized-Yes-brightgreen.svg" alt="AI Optimized"></a>
-<a href="#mcp-integrations"><img src="https://img.shields.io/badge/MCP%20Servers-19-orange.svg" alt="MCP Servers"></a>
+<a href="#mcp-integrations"><img src="https://img.shields.io/badge/MCP%20Servers-20-orange.svg" alt="MCP Servers"></a>
 <a href="#comprehensive-service-coverage"><img src="https://img.shields.io/badge/API%20Integrations-30+-blue.svg" alt="API Integrations"></a></p>
 <!-- AI-CONTEXT-START -->
 
@@ -192,9 +192,9 @@
 <h3>Agent Structure</h3>
 <ul>
 <li>11 primary agents (Build+, SEO, Marketing, etc.) with specialist @subagents on demand</li>
-<li>735+ subagent markdown files organized by domain</li>
-<li>201 helper scripts in <code>.agents/scripts/</code></li>
-<li>53 slash commands for common workflows</li>
+<li>780+ subagent markdown files organized by domain</li>
+<li>290+ helper scripts in <code>.agents/scripts/</code></li>
+<li>58 slash commands for common workflows</li>
 </ul>
 <!-- AI-CONTEXT-END -->
 
@@ -446,11 +446,42 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 </ul>
 <p><strong>Autonomous Orchestration:</strong></p>
 <ul>
+<li><strong>Missions</strong> - Multi-day autonomous projects: <code>/mission</code> scopes a high-level goal into milestones and features, dispatched by the supervisor (<code>mission-dashboard-helper.sh</code>)</li>
 <li><strong>Supervisor</strong> - SQLite state machine dispatches tasks to parallel AI agents with retry cycles, batch management, and cron scheduling</li>
 <li><strong>Runners</strong> - Named headless agent instances with persistent identity, instructions, and memory namespaces</li>
 <li><strong><code>/runners</code> command</strong> - Batch dispatch from task IDs, PR URLs, or descriptions with concurrency control and progress monitoring</li>
 <li><strong>Mailbox</strong> - SQLite-backed inter-agent messaging for coordination across parallel sessions</li>
 <li><strong>Worktree isolation</strong> - Each agent works on its own branch in a separate directory, no merge conflicts</li>
+<li><strong>Budget tracking</strong> - Append-only cost log (<code>budget-tracker-helper.sh</code>) with burn-rate analysis and <code>/budget-analysis</code> command for model routing decisions</li>
+<li><strong>Observability</strong> - LLM request capture plugin (<code>observability.mjs</code>) for cost tracking, performance analysis, and debugging</li>
+<li><strong>Rate limits</strong> - Per-provider rate limit configuration (<code>rate-limits.json</code>) with throttle-risk warnings</li>
+</ul>
+<p><strong>Project Intelligence:</strong></p>
+<ul>
+<li><strong>Bundles</strong> - Project-type presets (web-app, library, cli-tool, content-site, infrastructure, agent) that auto-configure model tiers, quality gates, and agent routing per repo (<code>bundle-helper.sh</code>)</li>
+<li><strong>TTSR rules</strong> - Soft rule engine (<code>ttsr-rule-loader.sh</code>) with <code>.agents/rules/</code> directory for AI output correction (e.g., no-edit-on-main, no-glob-for-discovery)</li>
+<li><strong>Cross-review</strong> - <code>/cross-review</code> dispatches the same prompt to multiple AI models in parallel, diffs results, and optionally auto-scores via a judge model</li>
+<li><strong>Local models</strong> - Run AI models locally via llama.cpp for free, private, offline inference (<code>local-model-helper.sh</code>) with HuggingFace GGUF model management</li>
+<li><strong>Tech stack lookup</strong> - <code>/tech-stack</code> detects technology stacks of URLs or finds sites using specific technologies (Wappalyzer, httpx, nuclei, BuiltWith)</li>
+<li><strong>IP reputation</strong> - <code>ip-reputation-helper.sh</code> checks IP addresses against multiple reputation databases (Spamhaus, ProxyCheck, AbuseIPDB) before VPS purchase or deployment</li>
+</ul>
+<p><strong>Conversational Memory &amp; Entity System:</strong></p>
+<ul>
+<li><strong>Entity memory</strong> - Cross-channel relationship continuity (<code>entity-helper.sh</code>): people, agents, and services tracked across Matrix, SimpleX, email, and CLI with versioned profiles</li>
+<li><strong>Conversational memory</strong> - Per-conversation context management (<code>conversation-helper.sh</code>): idle detection, immutable summaries, tone profile extraction</li>
+<li><strong>Three-layer architecture</strong> - Layer 0 (immutable raw log), Layer 1 (tactical summaries), Layer 2 (strategic entity profiles) in shared SQLite</li>
+</ul>
+<p><strong>Communications:</strong></p>
+<ul>
+<li><strong>SimpleX bot</strong> - Channel-agnostic gateway with SimpleX Chat as first adapter for AI agent dispatch (<code>simplex-bot/</code>)</li>
+<li><strong>Matterbridge</strong> - Multi-platform chat bridge connecting 20+ platforms including Matrix, Discord, Telegram, Slack, IRC, WhatsApp, XMPP (<code>matterbridge-helper.sh</code>)</li>
+<li><strong>Localdev</strong> - Local development environment manager with dnsmasq, Traefik, mkcert for production-like <code>.local</code> domains with HTTPS (<code>localdev-helper.sh</code>)</li>
+</ul>
+<p><strong>MCP Toolkit:</strong></p>
+<ul>
+<li><strong>MCPorter</strong> - Discover, call, compose, and generate CLIs/typed clients for MCP servers (<code>mcporter</code> npm package)</li>
+<li><strong>OpenAPI Search</strong> - Search and explore any OpenAPI specification via MCP (zero install, Cloudflare Worker)</li>
+<li><strong>Cloudflare Code Mode</strong> - Full Cloudflare API (2,500+ endpoints) via 2 tools in ~1,000 tokens</li>
 </ul>
 <p><strong>Unified Interface:</strong></p>
 <ul>
@@ -595,7 +626,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 201 helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 290+ helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -625,7 +656,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tr>
 <td><strong>Multi-Agent Orchestration</strong></td>
 <td>Coordinate parallel agents</td>
-<td>TOON mailbox, agent registry, stateless coordinator</td>
+<td>TOON mailbox, agent registry, supervisor dispatch</td>
 </tr>
 <tr>
 <td><strong>Compaction Resilience</strong></td>
@@ -645,7 +676,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tr>
 <td><strong>Pattern Tracking</strong></td>
 <td>Learn what works/fails</td>
-<td><code>pattern-tracker-helper.sh</code>, <code>/patterns</code> command</td>
+<td><code>/patterns</code> command, memory system</td>
 </tr>
 <tr>
 <td><strong>Cost-Aware Routing</strong></td>
@@ -666,9 +697,9 @@ aidevops sources remove my-private-agents         # Remove a source
 <p><strong>Key insight</strong>: Context is a finite resource with diminishing returns. aidevops treats every token as precious - loading only what&#39;s needed, when it&#39;s needed.</p>
 <p>See <code>.agents/aidevops/architecture.md</code> for detailed implementation notes and references.</p>
 <h3>Multi-Agent Orchestration</h3>
-<p>Run multiple AI agents in parallel on separate branches, coordinated through a lightweight mailbox system. Each agent works independently in its own git worktree while a stateless coordinator manages task distribution and status reporting.</p>
+<p>Run multiple AI agents in parallel on separate branches, coordinated through a lightweight mailbox system. Each agent works independently in its own git worktree while the supervisor manages task distribution and status reporting.</p>
 <p><strong>Architecture:</strong></p>
-<pre><code class="language-text">Coordinator (pulse loop)
+<pre><code class="language-text">Supervisor (pulse loop)
 ├── Agent Registry (TOON format - who&#39;s active, what branch, idle/busy)
 ├── Mailbox System (SQLite WAL-mode, indexed queries)
 │   ├── task_assignment → worker inbox
@@ -691,11 +722,6 @@ aidevops sources remove my-private-agents         # Remove a source
 <td>SQLite-backed inter-agent messaging (send, check, broadcast, archive)</td>
 </tr>
 <tr>
-<td>Coordinator</td>
-<td><code>coordinator-helper.sh</code></td>
-<td>Stateless pulse loop: collect reports, dispatch tasks, track idle workers</td>
-</tr>
-<tr>
 <td>Supervisor</td>
 <td><code>supervisor-helper.sh</code></td>
 <td>Autonomous multi-task orchestration with SQLite state machine, batches, retry cycles, cron scheduling, auto-pickup from TODO.md</td>
@@ -710,11 +736,21 @@ aidevops sources remove my-private-agents         # Remove a source
 <td><code>model-routing.md</code>, <code>/route</code></td>
 <td>Cost-aware 5-tier routing guidance (haiku/flash/sonnet/pro/opus)</td>
 </tr>
+<tr>
+<td>Budget tracking</td>
+<td><code>budget-tracker-helper.sh</code></td>
+<td>Append-only cost log for model routing decisions</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td><code>observability.mjs</code> plugin</td>
+<td>LLM request capture for cost tracking and performance analysis</td>
+</tr>
 </tbody></table>
 <p><strong>How it works:</strong></p>
 <ol>
 <li>Each agent registers on startup (<code>mail-helper.sh register --role worker</code>)</li>
-<li>Coordinator runs periodic pulses (<code>coordinator-helper.sh pulse</code>)</li>
+<li>Supervisor runs periodic pulses (<code>supervisor-helper.sh pulse</code>)</li>
 <li>Pulse collects status reports, dispatches queued tasks to idle workers</li>
 <li>Agents send completion reports back via mailbox</li>
 <li>SQLite WAL mode + <code>busy_timeout</code> handles concurrent access (79x faster than previous file-based system)</li>
@@ -819,7 +855,7 @@ matrix-dispatch-helper.sh sessions stats
 </thead>
 <tbody><tr>
 <td><strong>Review</strong></td>
-<td>Analyze memory for success/failure patterns (<code>pattern-tracker-helper.sh</code>)</td>
+<td>Analyze memory for success/failure patterns (memory system)</td>
 </tr>
 <tr>
 <td><strong>Refine</strong></td>
@@ -1195,6 +1231,8 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <li><strong><a href="https://www.twilio.com/">Twilio</a></strong>: SMS, voice calls, WhatsApp, phone verification (Verify API), call recording &amp; transcription</li>
 <li><strong><a href="https://mytelfon.com/">Telfon</a></strong>: Twilio-powered cloud phone system with iOS/Android/Chrome apps for end-user calling interface</li>
 <li><strong><a href="https://matrix.org/">Matrix</a></strong>: Self-hosted chat with bot integration for AI runner dispatch (<code>matrix-dispatch-helper.sh</code>)</li>
+<li><strong><a href="https://simplex.chat/">SimpleX Chat</a></strong>: Privacy-first messaging with AI bot gateway for agent dispatch (<code>simplex-bot/</code>)</li>
+<li><strong><a href="https://github.com/42wim/matterbridge">Matterbridge</a></strong>: Multi-platform chat bridge connecting 20+ platforms (Matrix, Discord, Telegram, Slack, IRC, WhatsApp, XMPP) with SimpleX adapter (<code>matterbridge-helper.sh</code>)</li>
 </ul>
 <h3><strong>Animation &amp; Video</strong></h3>
 <ul>
@@ -1218,10 +1256,15 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <h3><strong>AI &amp; Documentation</strong></h3>
 <ul>
 <li><strong><a href="https://context7.io/">Context7</a></strong>: Real-time documentation access for libraries and frameworks</li>
+<li><strong><a href="https://github.com/ggml-org/llama.cpp">Local Models</a></strong>: Run AI models locally via llama.cpp for free, private, offline inference with HuggingFace GGUF model management (<code>local-model-helper.sh</code>)</li>
+</ul>
+<h3><strong>Local Development</strong></h3>
+<ul>
+<li><strong><a href="https://mkcert.dev/">Localdev</a></strong>: Local development environment manager with dnsmasq, Traefik, and mkcert for production-like <code>.local</code> domains with HTTPS on port 443 (<code>localdev-helper.sh</code>)</li>
 </ul>
 <h2><strong>MCP Integrations</strong></h2>
 <p><strong>Model Context Protocol servers for real-time AI assistant integration.</strong> The framework configures these MCPs for <strong><a href="https://opencode.ai/">OpenCode</a></strong> (TUI, Desktop, and Extension for Zed/VSCode).</p>
-<h3><strong>All Supported MCPs (19 available)</strong></h3>
+<h3><strong>All Supported MCPs (20 available)</strong></h3>
 <p>MCP packages are installed globally via <code>bun install -g</code> for instant startup (no <code>npx</code> registry lookups). Run <code>setup.sh</code> or <code>aidevops update-tools</code> to update to latest versions.</p>
 <table>
 <thead>
@@ -1340,6 +1383,18 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <td>Per-agent</td>
 <td>Yes</td>
 </tr>
+<tr>
+<td><a href="https://openapi-mcp.openapisearch.com/mcp">OpenAPI Search</a></td>
+<td>Search and explore any OpenAPI spec</td>
+<td>Per-agent</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="https://mcp.cloudflare.com/mcp">Cloudflare Code Mode</a></td>
+<td>Full Cloudflare API (2,500+ endpoints via 2 tools)</td>
+<td>Per-agent</td>
+<td>Yes (Cloudflare)</td>
+</tr>
 </tbody></table>
 <p><strong>Tier explanation:</strong></p>
 <ul>
@@ -1410,6 +1465,8 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <li><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a> - Semantic code analysis with 95% token savings (tree, structure, CFG, DFG, impact analysis)</li>
 <li><a href="https://context7.com/">Context7</a> - Real-time documentation access for thousands of libraries</li>
 <li><a href="https://github.com/yamadashy/repomix">Repomix</a> - Pack codebases into AI-friendly context</li>
+<li><a href="https://openapi-mcp.openapisearch.com/mcp">OpenAPI Search</a> - Search and explore any OpenAPI specification (zero install, Cloudflare Worker)</li>
+<li><a href="https://github.com/steipete/mcporter">MCPorter</a> - Discover, call, compose, and generate CLIs/typed clients for MCP servers</li>
 </ul>
 <p><strong>Browser Automation</strong> (8 tools + anti-detect stack, <a href="#browser-automation">benchmarked</a>):</p>
 <ul>
@@ -1455,6 +1512,8 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <ul>
 <li><a href="https://developers.google.com/speed/docs/insights/v5/get-started">PageSpeed Insights</a> - Website performance auditing</li>
 <li><a href="https://snyk.io/">Snyk</a> - Security vulnerability scanning</li>
+<li><a href="https://mcp.cloudflare.com/mcp">Cloudflare Code Mode</a> - Full Cloudflare API (2,500+ endpoints) via 2 tools in ~1,000 tokens (DNS, WAF, DDoS, R2, Workers, Zero Trust)</li>
+<li><strong>IP Reputation</strong> - Multi-provider IP reputation checking (Spamhaus, ProxyCheck, AbuseIPDB) for VPS/proxy vetting (<code>ip-reputation-helper.sh</code>)</li>
 </ul>
 <p><strong>WordPress &amp; Development:</strong></p>
 <ul>
@@ -2242,7 +2301,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 11 primary agents, 735+ subagents, and 201 helper scripts.</p>
+<p>This installs the complete framework: 11 primary agents, 780+ subagents, and 290+ helper scripts.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -2418,7 +2477,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tbody></table>
 <p><strong>Specialist subagents</strong> (@plan-plus, @aidevops, @wordpress, Build-Agent, Build-MCP, etc.) live under <code>tools/</code> or as <code>mode: subagent</code> files and are invoked via @mention when domain expertise is needed. See <code>subagent-index.toon</code> for the full listing.</p>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 735+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 780+ subagents organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -2742,6 +2801,22 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <tr>
 <td><code>/pr</code></td>
 <td>Unified PR workflow (orchestrates all checks)</td>
+</tr>
+<tr>
+<td><code>/cross-review</code></td>
+<td>Dispatch prompt to multiple AI models, diff results, auto-score</td>
+</tr>
+<tr>
+<td><code>/tech-stack</code></td>
+<td>Detect technology stacks of URLs or find sites using specific technologies</td>
+</tr>
+<tr>
+<td><code>/mission</code></td>
+<td>Scope a high-level goal into milestones and features for autonomous execution</td>
+</tr>
+<tr>
+<td><code>/budget-analysis</code></td>
+<td>Analyze AI model spend, burn rate, and cost optimization opportunities</td>
 </tr>
 </tbody></table>
 <p><strong>Content Workflow</strong>:</p>
@@ -3191,12 +3266,14 @@ memory-embeddings-helper.sh setup
 memory-helper.sh recall &quot;how to optimize queries&quot; --semantic
 </code></pre>
 <p><strong>Pattern tracking:</strong></p>
-<pre><code class="language-bash"># Record what worked
-pattern-tracker-helper.sh record --outcome success --task-type bugfix \
-    --model sonnet --description &quot;Structured debugging found root cause&quot;
+<pre><code class="language-bash"># Record what worked (via memory system)
+memory-helper.sh store --type SUCCESS_PATTERN --content &quot;Structured debugging found root cause&quot; --tags &quot;bugfix,sonnet&quot;
+
+# Record what failed
+memory-helper.sh store --type FAILURE_PATTERN --content &quot;Blind refactor without tests caused regressions&quot; --tags &quot;refactor&quot;
 
 # Get suggestions for a new task
-pattern-tracker-helper.sh suggest &quot;refactor the auth middleware&quot;
+memory-helper.sh recall &quot;refactor auth middleware&quot; --semantic
 </code></pre>
 <p><strong>Auto-capture:</strong> AI agents automatically store memories using <code>--auto</code> flag when they detect working solutions, failed approaches, or decisions. Privacy filters strip <code>&lt;private&gt;</code> tags and reject secret patterns.</p>
 <p><strong>CLI usage:</strong></p>
@@ -3399,7 +3476,7 @@ bash .agents/scripts/continue-cli.sh review
 ├── .agents/                        # Agents and documentation
 │   ├── AGENTS.md                  # User guide (deployed to ~/.aidevops/agents/)
 │   ├── *.md                       # 11 primary agents
-│   ├── scripts/                   # 201 helper scripts
+│   ├── scripts/                   # 290+ helper scripts
 │   ├── tools/                     # Cross-domain utilities (video, browser, git, etc.)
 │   ├── services/                  # External service integrations
 │   └── workflows/                 # Development process guides
