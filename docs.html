@@ -111,30 +111,34 @@
     <main class="docs-container">
         <div class="docs-content">
 <h1>AI DevOps Framework</h1>
-<p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> — Maximise development and operations efficiency across everything you do. &quot;Dev&quot; means all development: personal, business, and technical. AI agents that handle the automatable work so your time is preserved for real-world discovery and decisions that AI cannot yet reach.</p>
-<p><em>&quot;List all my servers and websites, and check each for theme and plugin update needs, SEO and page loading performance scores, and give me a list of recommended priorities&quot;</em> - <strong>One conversation, complete operations management.</strong></p>
+<p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> — An AI operations platform for launching and managing development, business, marketing, and creative projects. 11 specialist AI agents handle the automatable work across every domain so your time is preserved for real-world discovery and decisions that AI cannot yet reach.</p>
+<p><em>&quot;Scope a mission to redesign the landing pages — break it into milestones, dispatch workers in parallel, validate each milestone, and track budget across the whole project&quot;</em> - <strong>One conversation, autonomous multi-day project execution.</strong></p>
 <h2><strong>The Philosophy</strong></h2>
 <p><strong>Maximum value for your time and money.</strong> <strong><a href="https://aidevops.sh">aidevops</a></strong> is built on these principles:</p>
 <ul>
-<li><strong>Resource efficiency</strong> - Use the right model tier, avoid redundant work, minimise waste. Then maximise utilisation — idle capacity is wasted potential</li>
+<li><strong>Autonomous orchestration</strong> - An AI supervisor runs every 2 minutes, dispatching parallel workers, merging PRs, detecting stuck processes, and advancing multi-day missions — no human babysitting required</li>
+<li><strong>Multi-domain agents</strong> - 11 specialist agents (code, SEO, marketing, content, legal, sales, research, video, business, accounts, health) with 780+ subagents loaded on demand</li>
+<li><strong>Multi-model safety</strong> - High-stakes operations (force push, production deploy, data migration) are verified by a second cross-provider model before execution — different providers have different failure modes, so correlated hallucinations are rare</li>
+<li><strong>Resource efficiency</strong> - Cost-aware model routing (local → haiku → flash → sonnet → pro → opus), project-type bundles that auto-configure quality gates and model tiers, budget tracking with burn-rate analysis</li>
 <li><strong>Self-healing</strong> - When something breaks, diagnose the root cause, create tasks, and fix it. Every error is a live test case for a permanent solution</li>
-<li><strong>Self-improving</strong> - When patterns of failure or inefficiency emerge, improve the framework itself</li>
+<li><strong>Self-improving</strong> - When patterns of failure or inefficiency emerge, improve the framework itself. Session mining extracts learnings from past sessions automatically</li>
 <li><strong>Gap awareness</strong> - Every session is an opportunity to identify what&#39;s missing — gaps in automation, documentation, coverage, or processes — and create tasks to fill them</li>
 <li><strong>Git-first workflow</strong> - Protected branches, PR reviews, quality gates before merge. Sane vibe-coding through structure</li>
 <li><strong>Parallel agents</strong> - Multiple AI sessions running full <a href="#ralph-loop---iterative-ai-development">Ralph loops</a> on separate branches via <a href="#git-worktrees---parallel-branch-development">git worktrees</a></li>
 <li><strong>Progressive discovery</strong> - <code>/slash</code> commands and <code>@subagent</code> mentions load knowledge into context only when needed</li>
 <li><strong>Open-source ready</strong> - Contribute to any project the same way you work on your own. Clone a repo, develop solutions to issues locally, and submit pull requests — the same full-loop workflow works everywhere</li>
 </ul>
-<p>The result: AI agents that work <em>with</em> your development process, not around it — absorbing everything automatable so you can focus on what matters.</p>
+<p>The result: an AI operations platform that manages projects across every business domain — absorbing everything automatable so you can focus on what matters.</p>
 <p><strong>Built on proven patterns</strong>: aidevops implements <a href="#agent-design-patterns">industry-standard agent design patterns</a> - including multi-layer action spaces, context isolation, and iterative execution loops.</p>
 <h2><strong>Why This Framework?</strong></h2>
-<p><strong>Beyond Single-Repo Limitations:</strong> VS Code and Web UIs work on one repo at a time. CLI AI assistants can manage your entire infrastructure when given the right tools, access, and guidance.</p>
-<p><strong>DevOps Superpowers for AI:</strong></p>
+<p><strong>Beyond single-task AI.</strong> Most AI coding tools handle one conversation, one repo, one task at a time. aidevops manages your entire operation — dispatching parallel AI agents across multiple repos, routing tasks to domain-specialist agents, and running autonomously for days on multi-milestone projects.</p>
+<p><strong>What makes it different:</strong></p>
 <ul>
-<li><strong>Multi-Service Management</strong>: 30+ APIs (hosting, Git, security, monitoring, deployment)</li>
-<li><strong>Real-Time Operations</strong>: SSH, domain management, database operations</li>
-<li><strong>Cross-Service Intelligence</strong>: Connect patterns across your entire ecosystem</li>
-<li><strong>Unlimited Scope</strong>: Full access to your development infrastructure for bug fixes and feature development</li>
+<li><strong>Autonomous supervisor</strong> - AI pulse runs every 2 minutes: merges ready PRs, dispatches workers, kills stuck processes, advances missions, triages quality findings — no human in the loop</li>
+<li><strong>Cross-domain intelligence</strong> - 11 agents spanning code, business, marketing, legal, sales, content, video, research, SEO, health, and accounts — each with domain expertise and specialist subagents</li>
+<li><strong>Multi-model safety</strong> - Destructive operations verified by a second AI model from a different provider before execution</li>
+<li><strong>30+ service integrations</strong> - Hosting, Git platforms, DNS, security, monitoring, deployment, payments, communications</li>
+<li><strong>Mission orchestration</strong> - Multi-day autonomous projects broken into milestones with validation, budget tracking, and automatic advancement</li>
 </ul>
 <hr>
 <!-- Build & Quality Status -->
@@ -446,7 +450,9 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 </ul>
 <p><strong>Autonomous Orchestration:</strong></p>
 <ul>
-<li><strong>Missions</strong> - Multi-day autonomous projects: <code>/mission</code> scopes a high-level goal into milestones and features, dispatched by the supervisor (<code>mission-dashboard-helper.sh</code>)</li>
+<li><strong><a href="#pulse-supervisor-autonomous-ai-operations">Pulse supervisor</a></strong> - Autonomous AI supervisor runs every 2 minutes via launchd — merges ready PRs, dispatches workers, kills stuck processes, detects orphaned PRs, syncs TODO state with GitHub, triages quality findings, and advances missions. No human in the loop</li>
+<li><strong><a href="#missions-multi-day-autonomous-projects">Missions</a></strong> - Multi-day autonomous projects: <code>/mission</code> scopes a high-level goal into milestones and features. The pulse dispatches workers, validates milestones, tracks budget, and advances through the project automatically (<code>mission-dashboard-helper.sh</code>)</li>
+<li><strong><a href="#multi-model-verification-cross-provider-safety">Multi-model verification</a></strong> - Destructive operations (force push, production deploy, data migration) are verified by a second AI model from a different provider before execution. Different providers have different failure modes, so correlated hallucinations are rare</li>
 <li><strong>Supervisor</strong> - SQLite state machine dispatches tasks to parallel AI agents with retry cycles, batch management, and cron scheduling</li>
 <li><strong>Runners</strong> - Named headless agent instances with persistent identity, instructions, and memory namespaces</li>
 <li><strong><code>/runners</code> command</strong> - Batch dispatch from task IDs, PR URLs, or descriptions with concurrency control and progress monitoring</li>
@@ -458,7 +464,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 </ul>
 <p><strong>Project Intelligence:</strong></p>
 <ul>
-<li><strong>Bundles</strong> - Project-type presets (web-app, library, cli-tool, content-site, infrastructure, agent) that auto-configure model tiers, quality gates, and agent routing per repo (<code>bundle-helper.sh</code>)</li>
+<li><strong><a href="#project-bundles-auto-configuration">Bundles</a></strong> - Project-type presets that auto-configure model tiers, quality gates, and agent routing per repo. 6 built-in bundles (web-app, library, cli-tool, content-site, infrastructure, agent) with auto-detection from marker files (<code>bundle-helper.sh</code>)</li>
 <li><strong>TTSR rules</strong> - Soft rule engine (<code>ttsr-rule-loader.sh</code>) with <code>.agents/rules/</code> directory for AI output correction (e.g., no-edit-on-main, no-glob-for-discovery)</li>
 <li><strong>Cross-review</strong> - <code>/cross-review</code> dispatches the same prompt to multiple AI models in parallel, diffs results, and optionally auto-scores via a judge model</li>
 <li><strong>Local models</strong> - Run AI models locally via llama.cpp for free, private, offline inference (<code>local-model-helper.sh</code>) with HuggingFace GGUF model management</li>
@@ -759,7 +765,215 @@ aidevops sources remove my-private-agents         # Remove a source
 <p><strong>Custom system prompt</strong> (<code>.agents/prompts/build.txt</code>): Based on upstream OpenCode with aidevops-specific overrides for tool preferences, professional objectivity, and per-model reinforcements for weaker models.</p>
 <p><strong>Subagent index</strong> (<code>.agents/subagent-index.toon</code>): Compressed TOON routing table listing all agents, subagents, workflows, and scripts with model tier assignments - enables fast agent discovery without loading full markdown files.</p>
 <h2><strong>Autonomous Orchestration &amp; Parallel Agents</strong></h2>
-<p><strong>Why this matters:</strong> Long-running tasks -- batch PR reviews, multi-site SEO audits, large refactors -- are where AI agents deliver the most value. Instead of babysitting one task at a time, the supervisor dispatches work to parallel agents, each in its own git worktree, with automatic retry, progress tracking, and batch completion reporting.</p>
+<p><strong>Why this matters:</strong> Long-running tasks -- batch PR reviews, multi-site audits, large refactors, multi-day feature projects -- are where AI agents deliver the most value. Instead of babysitting one task at a time, the supervisor dispatches work to parallel agents, each in its own git worktree, with automatic retry, progress tracking, and batch completion reporting.</p>
+<h3>Pulse Supervisor: Autonomous AI Operations</h3>
+<p>The pulse is the heartbeat of aidevops — an autonomous AI supervisor that runs every 2 minutes via launchd. There is no human at the terminal. It manages the entire development pipeline across all repos registered with <code>pulse: true</code>.</p>
+<p><strong>What it does each cycle:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Capacity check</strong></td>
+<td>Circuit breaker, dynamic worker slots calculated from available RAM</td>
+</tr>
+<tr>
+<td><strong>Merge ready PRs</strong></td>
+<td>Green CI + no blocking reviews → squash merge (free — no worker slot needed)</td>
+</tr>
+<tr>
+<td><strong>Fix failing PRs</strong></td>
+<td>Dispatch a worker to fix CI failures or address review feedback</td>
+</tr>
+<tr>
+<td><strong>Detect stuck work</strong></td>
+<td>PRs open 6+ hours with no activity → flag or close and re-file</td>
+</tr>
+<tr>
+<td><strong>Dispatch workers</strong></td>
+<td>Route open issues to available worker slots, respecting priority and <code>blocked-by:</code> dependencies</td>
+</tr>
+<tr>
+<td><strong>Advance missions</strong></td>
+<td>Check active multi-day missions, dispatch features, validate milestones, track budget</td>
+</tr>
+<tr>
+<td><strong>Triage quality</strong></td>
+<td>Read daily quality sweep findings (ShellCheck, SonarCloud, Codacy, CodeRabbit), create issues for actionable findings</td>
+</tr>
+<tr>
+<td><strong>Sync TODOs</strong></td>
+<td>Create GitHub issues for unsynced TODO entries, commit ref changes</td>
+</tr>
+<tr>
+<td><strong>Kill stuck workers</strong></td>
+<td>Workers running 3+ hours with no PR are killed to free slots</td>
+</tr>
+<tr>
+<td><strong>Detect orphaned PRs</strong></td>
+<td>Open PRs with no active worker and no activity for 6+ hours are flagged for re-dispatch</td>
+</tr>
+</tbody></table>
+<p><strong>Operational intelligence:</strong></p>
+<ul>
+<li><strong>Struggle-ratio</strong> — computes <code>messages / max(1, commits)</code> for each active worker. High ratio (&gt;30) with &gt;30 min elapsed and zero commits flags the worker as &quot;struggling&quot;. Ratio &gt;50 after 1 hour flags &quot;thrashing&quot;. Informational signal — the supervisor LLM decides the action (kill, wait, re-dispatch with more context)</li>
+<li><strong>Circuit breaker</strong> — prevents cascading failures by tracking success/failure rates and tripping when error rate exceeds threshold</li>
+<li><strong>Dynamic concurrency</strong> — worker slot count adapts to available RAM, not a hardcoded constant</li>
+<li><strong>Stale assignment recovery</strong> — tasks assigned to workers that died (no active process, no PR, 3+ hours stale) are automatically unassigned and made available for re-dispatch</li>
+<li><strong>Priority ordering</strong> — green PRs (free merge) &gt; failing PRs (closer to done) &gt; high-priority/bug issues &gt; active mission features &gt; product repos &gt; smaller tasks &gt; oldest</li>
+</ul>
+<p><strong>The pulse is an LLM, not a script.</strong> It reads issue bodies, assesses context, and uses judgment. When it encounters something unexpected — an issue body that says &quot;completed&quot;, a task with no clear description, a label that doesn&#39;t match reality — it handles it the way a competent human manager would.</p>
+<pre><code class="language-bash"># Pulse runs automatically via launchd (every 2 minutes)
+# Manual trigger:
+opencode run &quot;/pulse&quot;
+</code></pre>
+<p><strong>See:</strong> <code>.agents/scripts/commands/pulse.md</code> for the full supervisor specification.</p>
+<h3>Missions: Multi-Day Autonomous Projects</h3>
+<p>Missions are the highest-level orchestration primitive — autonomous multi-day projects that break a high-level goal into milestones, features, and validation criteria. The pulse supervisor advances them automatically.</p>
+<pre><code class="language-bash"># Scope a mission interactively
+/mission &quot;Redesign the landing pages for mobile-first with A/B testing&quot;
+</code></pre>
+<p><strong>How missions work:</strong></p>
+<ol>
+<li><code>/mission</code> scopes the goal into milestones with features and acceptance criteria</li>
+<li>Each feature becomes a TODO entry tagged <code>mission:mNNN</code> with a GitHub issue</li>
+<li>The pulse dispatches features as regular workers (respecting <code>MAX_WORKERS</code>)</li>
+<li>When all features in a milestone complete, the pulse dispatches a <strong>validation worker</strong> to verify integration</li>
+<li>Passed milestones advance automatically — the next milestone&#39;s features are dispatched</li>
+<li>Budget tracking pauses the mission if any category exceeds the alert threshold (default 80%)</li>
+</ol>
+<p><strong>Two execution modes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Workflow</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Full</strong></td>
+<td>Worktree + PR per feature, standard review flow</td>
+<td>Production code, collaborative projects</td>
+</tr>
+<tr>
+<td><strong>POC</strong></td>
+<td>Direct commits, skip ceremony</td>
+<td>Prototypes, experiments, proof-of-concept</td>
+</tr>
+</tbody></table>
+<p><strong>Mission state</strong> is tracked in a JSON file committed to the repo. Each pulse cycle reads the state, acts on it, and commits updates — so any session (or the next pulse) can pick up where the last one left off.</p>
+<p><strong>See:</strong> <code>.agents/workflows/mission-orchestrator.md</code> for the full orchestrator specification, <code>.agents/scripts/commands/dashboard.md</code> for the mission progress dashboard.</p>
+<h3>Multi-Model Verification: Cross-Provider Safety</h3>
+<p>High-stakes operations are verified by a second AI model from a different provider before execution. This catches single-model hallucinations before destructive operations cause irreversible damage.</p>
+<p><strong>When verification triggers:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Risk Level</th>
+<th>Examples</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Critical</strong></td>
+<td><code>git push --force</code> to main, <code>DROP DATABASE</code>, production deploy</td>
+<td>Blocked unless second model agrees</td>
+</tr>
+<tr>
+<td><strong>High</strong></td>
+<td>Force push to feature branch, data migration, secret exposure</td>
+<td>Warned, verification recommended</td>
+</tr>
+<tr>
+<td><strong>Medium</strong></td>
+<td>Bulk file deletion, config changes</td>
+<td>Logged</td>
+</tr>
+<tr>
+<td><strong>Low</strong></td>
+<td>Normal edits, test runs</td>
+<td>No verification</td>
+</tr>
+</tbody></table>
+<p><strong>How it works:</strong></p>
+<ol>
+<li><code>pre-edit-check.sh</code> screens operations against the high-stakes taxonomy</li>
+<li>For critical/high operations, <code>verify-operation-helper.sh</code> sends the operation context to a second model (different provider than the primary)</li>
+<li>The verifier independently assesses whether the operation is safe</li>
+<li>On disagreement, the operation is blocked (critical) or warned (high)</li>
+<li>All verification decisions are logged for audit</li>
+</ol>
+<p><strong>Why cross-provider?</strong> Same-provider models share training data and failure modes. A Claude hallucination is unlikely to be reproduced by Gemini or GPT, and vice versa. The verification uses the cheapest model tier (haiku-equivalent) — cost is minimal per check.</p>
+<p><strong>Configuration:</strong> Per-repo via <code>.agents/reference/high-stakes-operations.md</code>. Opt-out with <code>VERIFY_ENABLED=false</code> (not recommended).</p>
+<p><strong>See:</strong> <code>.agents/tools/verification/parallel-verify.md</code> for the verification agent specification.</p>
+<h3>Project Bundles: Auto-Configuration</h3>
+<p>Bundles are project-type presets that auto-configure model tiers, quality gates, and agent routing per repo. Instead of manually configuring each project, bundles detect what kind of project you&#39;re working on and apply sensible defaults.</p>
+<p><strong>Built-in bundles:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Bundle</th>
+<th>Auto-detected by</th>
+<th>Model default</th>
+<th>Quality gates</th>
+<th>Agent routing</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>web-app</code></td>
+<td><code>package.json</code> + framework markers</td>
+<td>sonnet</td>
+<td>Full (lint, test, build, a11y)</td>
+<td>Build+ default</td>
+</tr>
+<tr>
+<td><code>library</code></td>
+<td><code>package.json</code> with <code>main</code>/<code>exports</code></td>
+<td>sonnet</td>
+<td>Full + API docs check</td>
+<td>Build+ default</td>
+</tr>
+<tr>
+<td><code>cli-tool</code></td>
+<td><code>bin</code> field in package.json</td>
+<td>sonnet</td>
+<td>ShellCheck, test</td>
+<td>Build+ default</td>
+</tr>
+<tr>
+<td><code>content-site</code></td>
+<td>CMS markers, <code>wp-config.php</code></td>
+<td>haiku</td>
+<td>Lighthouse, SEO</td>
+<td>Marketing for content tasks</td>
+</tr>
+<tr>
+<td><code>infrastructure</code></td>
+<td><code>Dockerfile</code>, <code>terraform/</code>, <code>ansible/</code></td>
+<td>sonnet</td>
+<td>ShellCheck, security scan</td>
+<td>Build+ default</td>
+</tr>
+<tr>
+<td><code>agent</code></td>
+<td><code>AGENTS.md</code>, <code>.agents/</code></td>
+<td>opus</td>
+<td>Agent review, prompt quality</td>
+<td>Build+ default</td>
+</tr>
+</tbody></table>
+<p><strong>Resolution priority:</strong> Explicit <code>bundle</code> field in <code>repos.json</code> &gt; <code>.aidevops.json</code> project config &gt; auto-detection from marker files.</p>
+<p><strong>CLI:</strong></p>
+<pre><code class="language-bash">bundle-helper.sh detect &lt;repo-path&gt;    # Auto-detect bundle type
+bundle-helper.sh resolve &lt;repo-path&gt;   # Show resolved config (with overrides)
+bundle-helper.sh show &lt;bundle-name&gt;    # Show bundle defaults
+bundle-helper.sh list                  # List all available bundles
+</code></pre>
+<p><strong>See:</strong> <code>.agents/bundles/</code> for bundle definitions, <code>.agents/scripts/bundle-helper.sh</code> for the CLI.</p>
 <h3>Parallel Agents &amp; Headless Dispatch</h3>
 <p>Run multiple AI sessions concurrently with isolated contexts. Named <strong>runners</strong> provide persistent agent identities with their own instructions and memory.</p>
 <table>
@@ -1100,7 +1314,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <h3><strong>Development &amp; Git Platforms with CLI Integration</strong></h3>
 <ul>
 <li><strong><a href="https://github.com/">GitHub</a></strong> <em>Enhanced with CLI</em>: Repository management, actions, API, GitHub CLI (gh) integration</li>
-<li><strong><a href="https://gitlab.com/">GitLab</a></strong> <em>Enhanced with CLI</em>: Self-hosted and cloud Git platform with GitLab CLI (glab) integration  </li>
+<li><strong><a href="https://gitlab.com/">GitLab</a></strong> <em>Enhanced with CLI</em>: Self-hosted and cloud Git platform with GitLab CLI (glab) integration</li>
 <li><strong><a href="https://gitea.io/">Gitea</a></strong> <em>Enhanced with CLI</em>: Lightweight Git service with Gitea CLI (tea) integration</li>
 <li><strong><a href="https://agno.com/">Agno</a></strong>: Local AI agent operating system for DevOps automation</li>
 <li><strong><a href="https://pandoc.org/">Pandoc</a></strong>: Document conversion to markdown for AI processing</li>
@@ -3543,17 +3757,19 @@ source &lt;(credential-helper.sh export)
 <h2><strong>What This Framework Achieves</strong></h2>
 <p><strong>For You:</strong></p>
 <ul>
-<li>Unified infrastructure management across all services</li>
-<li>AI-powered automation with standardized commands</li>
-<li>Enterprise-grade security and quality assurance</li>
-<li>Time savings through consistent interfaces</li>
+<li>Autonomous project management — dispatch a mission and let AI agents handle milestones, validation, and delivery across days</li>
+<li>Cross-domain operations — code, business, marketing, legal, sales, content, video, research, SEO, health, and accounts managed through one platform</li>
+<li>Multi-model safety — destructive operations verified by a second AI provider before execution</li>
+<li>Enterprise-grade quality — multi-platform analysis, automated security monitoring, continual improvement loops</li>
+<li>Infrastructure management — 30+ service integrations with standardized commands across all providers</li>
 </ul>
-<p><strong>For Your AI Assistant:</strong></p>
+<p><strong>For Your AI Agents:</strong></p>
 <ul>
-<li>Structured access to entire DevOps ecosystem</li>
-<li>Real-time documentation via Context7 MCP</li>
-<li>Quality control with automated fixes</li>
-<li>Performance monitoring with and continual improvement of agents&#39; token efficiency, tool use, and file location consistency</li>
+<li>Autonomous supervisor — pulse runs every 2 minutes, merging PRs, dispatching workers, killing stuck processes, advancing missions</li>
+<li>Operational intelligence — struggle-ratio detection, orphaned PR recovery, circuit breaker, dynamic concurrency</li>
+<li>Cost-aware routing — 6-tier model selection (local → haiku → flash → sonnet → pro → opus) with budget tracking</li>
+<li>Progressive context — 780+ subagents loaded on demand, project bundles auto-configuring quality gates and model tiers</li>
+<li>Self-improving — session mining extracts learnings, quality findings auto-create tasks, patterns feed back into agent prompts</li>
 </ul>
 <p><strong>Get Started:</strong></p>
 <pre><code class="language-bash"># npm (recommended)
@@ -3568,7 +3784,7 @@ brew install marcusquinn/tap/aidevops &amp;&amp; aidevops update
 # Direct from source
 bash &lt;(curl -fsSL https://aidevops.sh/install)
 </code></pre>
-<p><strong>Transform your AI assistant into a powerful infrastructure management tool with seamless access to all your servers and services.</strong></p>
+<p><strong>An AI operations platform for launching and managing projects across every business domain — from code to content, infrastructure to invoicing.</strong></p>
 
             <div class="back-to-top">
                 <a href="#">Back to top</a>
