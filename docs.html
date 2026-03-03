@@ -3664,6 +3664,7 @@ bash .agents/scripts/continue-cli.sh review
 <p><strong>Wiki Guides:</strong></p>
 <ul>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.wiki/Getting-Started.md">Getting Started</a></strong> - Installation and setup</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/docs/configuration.md">Configuration Reference</a></strong> - All JSONC/JSON config options, types, defaults, and examples</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.wiki/CLI-Reference.md">CLI Reference</a></strong> - aidevops command documentation</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.wiki/MCP-Integrations.md">MCP Integrations</a></strong> - MCP servers setup</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.wiki/Providers.md">Providers</a></strong> - Service provider configurations</li>
@@ -3699,6 +3700,42 @@ bash .agents/scripts/continue-cli.sh review
 └── templates/                     # Reusable templates
 </code></pre>
 <h2><strong>Configuration &amp; Setup</strong></h2>
+<p>aidevops is configured through two JSONC/JSON files that control framework behaviour, model routing, quality gates, and user preferences. Both are optional -- sensible defaults apply out of the box.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+<th>CLI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/marcusquinn/aidevops/blob/main/docs/configuration.md#configjsonc--full-reference"><code>~/.config/aidevops/config.jsonc</code></a></td>
+<td>Framework config: updates, models, safety, quality, orchestration, paths</td>
+<td><code>aidevops config</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/marcusquinn/aidevops/blob/main/docs/configuration.md#settingsjson--full-reference"><code>~/.config/aidevops/settings.json</code></a></td>
+<td>User preferences: onboarding, UI, model routing defaults</td>
+<td><code>settings-helper.sh</code></td>
+</tr>
+</tbody></table>
+<p><strong>Quick examples:</strong></p>
+<pre><code class="language-bash"># Disable automatic updates
+aidevops config set updates.auto_update false
+
+# Use opus-tier verification for destructive operations
+aidevops config set safety.verification_tier opus
+
+# View all current config values
+aidevops config list
+
+# Validate config against schema
+aidevops config validate
+</code></pre>
+<p><strong>Precedence:</strong> Environment variables (<code>AIDEVOPS_*</code>) &gt; config file &gt; built-in defaults. See the <strong><a href="https://github.com/marcusquinn/aidevops/blob/main/docs/configuration.md">full configuration reference</a></strong> for every option, type, default, and example.</p>
+<h3>Service Credentials</h3>
+<p>Service-specific credentials (hosting, DNS, Git platforms, etc.) use a separate template system:</p>
 <pre><code class="language-bash"># 1. Copy and customize configuration templates
 cp configs/hostinger-config.json.txt configs/hostinger-config.json
 cp configs/hetzner-config.json.txt configs/hetzner-config.json
@@ -3710,6 +3747,7 @@ cp configs/hetzner-config.json.txt configs/hetzner-config.json
 # 3. Install MCP integrations (optional)
 bash .agents/scripts/setup-mcp-integrations.sh all
 </code></pre>
+<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/docs/configuration.md#service-configuration-templates">docs/configuration.md</a> for details on the template system and credential security.</p>
 <h2><strong>Security &amp; Best Practices</strong></h2>
 <p><strong>Credential Management:</strong></p>
 <ul>
