@@ -186,7 +186,7 @@
                 <p class="hero-tagline">Unleash your AI assistant's true potential with specialist AI DevOps agents</p>
                 <p class="hero-description">One conversation, complete infrastructure management and a guided professional development workflow.</p>
                 
-                <div class="install-box">
+                <div class="install-box" id="install-box-source">
                     <div class="install-header">
                         <div class="install-dots">
                             <span class="dot red"></span>
@@ -463,89 +463,8 @@
         <section class="cta" id="install">
             <div class="container">
                 <h2>Get Started with AI DevOps Today</h2>
-                <div class="install-box">
-                    <div class="install-header">
-                        <div class="install-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
-                        <div class="install-tabs" role="tablist">
-                            <button class="install-tab active" role="tab" aria-selected="true" data-tab="curl">curl</button>
-                            <button class="install-tab" role="tab" aria-selected="false" data-tab="npm">npm</button>
-                            <button class="install-tab" role="tab" aria-selected="false" data-tab="brew">brew</button>
-                            <button class="install-tab" role="tab" aria-selected="false" data-tab="bun">bun</button>
-                            <button class="install-tab" role="tab" aria-selected="false" data-tab="git">git</button>
-                        </div>
-                    </div>
-                    <div class="install-panels">
-                        <div class="install-panel active" data-panel="curl">
-                            <button class="install-command" data-command="bash <(curl -fsSL https://aidevops.sh/install)">
-                                <span class="command-text"><span class="command-dim">bash &lt;(curl -fsSL</span> <span class="command-highlight">https://aidevops.sh/install</span><span class="command-dim">)</span></span>
-                                <span class="copy-status">
-                                    <svg class="copy-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
-                                        <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
-                                    </svg>
-                                    <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-                                        <path d="M2.75 15.0938L9 20.25L21.25 3.75" stroke="#B2E969"/>
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
-                        <div class="install-panel" data-panel="npm">
-                            <button class="install-command" data-command="npm install -g aidevops && aidevops update">
-                                <span class="command-text"><span class="command-dim">npm install -g</span> <span class="command-highlight">aidevops</span> <span class="command-dim">&&</span> <span class="command-highlight">aidevops</span> <span class="command-dim">update</span></span>
-                                <span class="copy-status">
-                                    <svg class="copy-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
-                                        <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
-                                    </svg>
-                                    <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-                                        <path d="M2.75 15.0938L9 20.25L21.25 3.75" stroke="#B2E969"/>
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
-                        <div class="install-panel" data-panel="brew">
-                            <button class="install-command" data-command="brew install marcusquinn/tap/aidevops && aidevops update">
-                                <span class="command-text"><span class="command-dim">brew install marcusquinn/tap/</span><span class="command-highlight">aidevops</span> <span class="command-dim">&&</span> <span class="command-highlight">aidevops</span> <span class="command-dim">update</span></span>
-                                <span class="copy-status">
-                                    <svg class="copy-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
-                                        <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
-                                    </svg>
-                                    <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-                                        <path d="M2.75 15.0938L9 20.25L21.25 3.75" stroke="#B2E969"/>
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
-                        <div class="install-panel" data-panel="bun">
-                            <button class="install-command" data-command="bun install -g aidevops && aidevops update">
-                                <span class="command-text"><span class="command-dim">bun install -g</span> <span class="command-highlight">aidevops</span> <span class="command-dim">&&</span> <span class="command-highlight">aidevops</span> <span class="command-dim">update</span></span>
-                                <span class="copy-status">
-                                    <svg class="copy-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
-                                        <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
-                                    </svg>
-                                    <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-                                        <path d="M2.75 15.0938L9 20.25L21.25 3.75" stroke="#B2E969"/>
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
-                        <div class="install-panel" data-panel="git">
-                            <button class="install-command" data-command="git clone https://github.com/marcusquinn/aidevops.git ~/Git/aidevops && ~/Git/aidevops/setup.sh">
-                                <span class="command-text"><span class="command-dim">git clone</span> <span class="command-highlight">https://github.com/marcusquinn/aidevops</span></span>
-                                <span class="copy-status">
-                                    <svg class="copy-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
-                                        <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
-                                    </svg>
-                                    <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-                                        <path d="M2.75 15.0938L9 20.25L21.25 3.75" stroke="#B2E969"/>
-                                    </svg>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <!-- Cloned from #install-box-source by script.js to avoid duplication -->
+                <div id="install-box-clone"></div>
             </div>
         </section>
     </main>
