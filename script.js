@@ -45,29 +45,50 @@
     }
 })();
 
-// Install Tabs
+// Clone Install Box — single source of truth for install commands
+// The hero section (#install-box-source) is the canonical install component.
+// The CTA section (#install-box-clone) receives a deep clone so commands
+// only need to be updated in one place.
 (function() {
-    const tabs = document.querySelectorAll('.install-tab');
-    const panels = document.querySelectorAll('.install-panel');
-    
-    tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const targetPanel = this.dataset.tab;
-            
-            // Update tabs
-            tabs.forEach(t => {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-            });
-            this.classList.add('active');
-            this.setAttribute('aria-selected', 'true');
-            
-            // Update panels
-            panels.forEach(p => {
-                p.classList.remove('active');
-                if (p.dataset.panel === targetPanel) {
-                    p.classList.add('active');
-                }
+    var source = document.getElementById('install-box-source');
+    var target = document.getElementById('install-box-clone');
+    if (!source || !target) return;
+
+    var clone = source.cloneNode(true);
+    // Remove the source id to avoid duplicate IDs in the DOM
+    clone.removeAttribute('id');
+    // Strip all id attributes from cloned children (e.g. copyBtnCurl)
+    clone.querySelectorAll('[id]').forEach(function(el) {
+        el.removeAttribute('id');
+    });
+    target.replaceWith(clone);
+})();
+
+// Install Tabs — scoped per install-box so each operates independently
+(function() {
+    document.querySelectorAll('.install-box').forEach(function(box) {
+        var tabs = box.querySelectorAll('.install-tab');
+        var panels = box.querySelectorAll('.install-panel');
+
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                var targetPanel = this.dataset.tab;
+
+                // Update tabs within this box only
+                tabs.forEach(function(t) {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                this.classList.add('active');
+                this.setAttribute('aria-selected', 'true');
+
+                // Update panels within this box only
+                panels.forEach(function(p) {
+                    p.classList.remove('active');
+                    if (p.dataset.panel === targetPanel) {
+                        p.classList.add('active');
+                    }
+                });
             });
         });
     });
@@ -106,40 +127,8 @@
         }, 2000);
     }
     
-    // Setup install command buttons
+    // Setup install command buttons (includes cloned CTA buttons)
     document.querySelectorAll('.install-command').forEach(setupCopyButton);
-    
-    // Setup old-style copy buttons (for CTA section)
-    document.querySelectorAll('.copy-btn').forEach(btn => {
-        btn.addEventListener('click', async function() {
-            const command = 'bash <(curl -fsSL https://aidevops.sh/install)';
-            try {
-                await navigator.clipboard.writeText(command);
-            } catch (err) {
-                const textarea = document.createElement('textarea');
-                textarea.value = command;
-                textarea.style.position = 'fixed';
-                textarea.style.opacity = '0';
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-            }
-            
-            const copyIcon = this.querySelector('.copy-icon');
-            const checkIcon = this.querySelector('.check-icon');
-            if (copyIcon && checkIcon) {
-                copyIcon.style.display = 'none';
-                checkIcon.style.display = 'block';
-                this.classList.add('copied');
-                setTimeout(() => {
-                    copyIcon.style.display = 'block';
-                    checkIcon.style.display = 'none';
-                    this.classList.remove('copied');
-                }, 2000);
-            }
-        });
-    });
 })();
 
 // Auto-generate heading IDs and smooth scroll for anchor links
