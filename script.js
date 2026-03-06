@@ -57,10 +57,24 @@
     var clone = source.cloneNode(true);
     // Remove the source id to avoid duplicate IDs in the DOM
     clone.removeAttribute('id');
-    // Strip all id attributes from cloned children (e.g. copyBtnCurl)
+
+    // Re-key ARIA IDs on the clone so tab/panel linkage works without
+    // duplicating the source IDs. Prefix cloned IDs with "cta-".
     clone.querySelectorAll('[id]').forEach(function(el) {
-        el.removeAttribute('id');
+        var oldId = el.id;
+        var newId = 'cta-' + oldId;
+        el.id = newId;
+
+        // Update aria-controls on tabs pointing to the old panel ID
+        clone.querySelectorAll('[aria-controls="' + oldId + '"]').forEach(function(ref) {
+            ref.setAttribute('aria-controls', newId);
+        });
+        // Update aria-labelledby on panels pointing to the old tab ID
+        clone.querySelectorAll('[aria-labelledby="' + oldId + '"]').forEach(function(ref) {
+            ref.setAttribute('aria-labelledby', newId);
+        });
     });
+
     target.replaceWith(clone);
 })();
 
