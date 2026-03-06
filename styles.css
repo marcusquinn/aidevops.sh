@@ -537,6 +537,15 @@ body {
     align-items: center;
     gap: 0.25rem;
     font-size: 0.9rem;
+    list-style: none;
+    padding: 0;
+}
+
+.supported-tools-list li:not(:last-child)::after {
+    content: '/';
+    color: var(--text-muted);
+    opacity: 0.5;
+    margin-left: 0.25rem;
 }
 
 .supported-tools-list a {
@@ -550,11 +559,6 @@ body {
 .supported-tools-list a:hover,
 .supported-tools-list a:focus {
     color: var(--accent);
-}
-
-.tool-separator {
-    color: var(--text-muted);
-    opacity: 0.5;
 }
 
 @media (max-width: 640px) {
