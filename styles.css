@@ -400,8 +400,8 @@ body {
     background: var(--bg-secondary);
 }
 
-[data-theme="light"] .install-command.copied .check-icon path {
-    stroke: var(--accent);
+[data-theme="light"] .install-command.copied .check-icon {
+    color: var(--accent);
 }
 
 /* Code Box */

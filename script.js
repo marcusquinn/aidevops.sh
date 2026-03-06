@@ -57,9 +57,17 @@
     var clone = source.cloneNode(true);
     // Remove the source id to avoid duplicate IDs in the DOM
     clone.removeAttribute('id');
-    // Strip all id attributes from cloned children (e.g. copyBtnCurl)
+    // Re-namespace all id, aria-controls, and aria-labelledby attributes
+    // with a "-cta" suffix so the cloned install box has unique ARIA linkage
+    var suffix = '-cta';
     clone.querySelectorAll('[id]').forEach(function(el) {
-        el.removeAttribute('id');
+        el.id = el.id + suffix;
+    });
+    clone.querySelectorAll('[aria-controls]').forEach(function(el) {
+        el.setAttribute('aria-controls', el.getAttribute('aria-controls') + suffix);
+    });
+    clone.querySelectorAll('[aria-labelledby]').forEach(function(el) {
+        el.setAttribute('aria-labelledby', el.getAttribute('aria-labelledby') + suffix);
     });
     target.replaceWith(clone);
 })();

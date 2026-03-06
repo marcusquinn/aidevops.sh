@@ -143,6 +143,16 @@
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="ekYN3eglUcM+Nu8Kg2NlJw" async></script>
 </head>
 <body>
+    <!-- SVG symbol definitions — referenced via <use> to avoid duplication -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <symbol id="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
+            <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
+        </symbol>
+        <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+            <path d="M2.75 15.0938L9 20.25L21.25 3.75"/>
+        </symbol>
+    </svg>
+
     <nav class="nav">
         <div class="nav-container">
             <a href="/" class="nav-logo"><svg class="nav-logo-icon" viewBox="0 0 576 512" width="20" height="20"><path fill="currentColor" d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg>aidevops</a>
@@ -194,76 +204,56 @@
                             <span class="dot green"></span>
                         </div>
                         <div class="install-tabs" role="tablist">
-                            <button class="install-tab active" role="tab" aria-selected="true" data-tab="curl">curl</button>
-                            <button class="install-tab" role="tab" aria-selected="false" data-tab="npm">npm</button>
-                            <button class="install-tab" role="tab" aria-selected="false" data-tab="brew">brew</button>
-                            <button class="install-tab" role="tab" aria-selected="false" data-tab="bun">bun</button>
-                            <button class="install-tab" role="tab" aria-selected="false" data-tab="git">git</button>
+                            <button class="install-tab active" role="tab" aria-selected="true" aria-controls="panel-curl" id="tab-curl" data-tab="curl">curl</button>
+                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-npm" id="tab-npm" data-tab="npm">npm</button>
+                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-brew" id="tab-brew" data-tab="brew">brew</button>
+                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-bun" id="tab-bun" data-tab="bun">bun</button>
+                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-git" id="tab-git" data-tab="git">git</button>
                         </div>
                     </div>
                     <div class="install-panels">
-                        <div class="install-panel active" data-panel="curl">
+                        <div class="install-panel active" role="tabpanel" id="panel-curl" aria-labelledby="tab-curl" data-panel="curl">
                             <button class="install-command" id="copyBtnCurl" data-command="bash <(curl -fsSL https://aidevops.sh/install)">
                                 <span class="command-text"><span class="command-dim">bash &lt;(curl -fsSL</span> <span class="command-highlight">https://aidevops.sh/install</span><span class="command-dim">)</span></span>
                                 <span class="copy-status">
-                                    <svg class="copy-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
-                                        <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
-                                    </svg>
-                                    <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-                                        <path d="M2.75 15.0938L9 20.25L21.25 3.75" stroke="#B2E969"/>
-                                    </svg>
+                                    <svg class="copy-icon" width="20" height="20" aria-hidden="true"><use href="#icon-copy"/></svg>
+                                    <svg class="check-icon" width="20" height="20" color="#B2E969" aria-hidden="true"><use href="#icon-check"/></svg>
                                 </span>
                             </button>
                         </div>
-                        <div class="install-panel" data-panel="npm">
+                        <div class="install-panel" role="tabpanel" id="panel-npm" aria-labelledby="tab-npm" data-panel="npm">
                             <button class="install-command" id="copyBtnNpm" data-command="npm install -g aidevops && aidevops update">
                                 <span class="command-text"><span class="command-dim">npm install -g</span> <span class="command-highlight">aidevops</span> <span class="command-dim">&&</span> <span class="command-highlight">aidevops</span> <span class="command-dim">update</span></span>
                                 <span class="copy-status">
-                                    <svg class="copy-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
-                                        <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
-                                    </svg>
-                                    <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-                                        <path d="M2.75 15.0938L9 20.25L21.25 3.75" stroke="#B2E969"/>
-                                    </svg>
+                                    <svg class="copy-icon" width="20" height="20" aria-hidden="true"><use href="#icon-copy"/></svg>
+                                    <svg class="check-icon" width="20" height="20" color="#B2E969" aria-hidden="true"><use href="#icon-check"/></svg>
                                 </span>
                             </button>
                         </div>
-                        <div class="install-panel" data-panel="brew">
+                        <div class="install-panel" role="tabpanel" id="panel-brew" aria-labelledby="tab-brew" data-panel="brew">
                             <button class="install-command" id="copyBtnBrew" data-command="brew install marcusquinn/tap/aidevops && aidevops update">
                                 <span class="command-text"><span class="command-dim">brew install marcusquinn/tap/</span><span class="command-highlight">aidevops</span> <span class="command-dim">&&</span> <span class="command-highlight">aidevops</span> <span class="command-dim">update</span></span>
                                 <span class="copy-status">
-                                    <svg class="copy-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
-                                        <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
-                                    </svg>
-                                    <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-                                        <path d="M2.75 15.0938L9 20.25L21.25 3.75" stroke="#B2E969"/>
-                                    </svg>
+                                    <svg class="copy-icon" width="20" height="20" aria-hidden="true"><use href="#icon-copy"/></svg>
+                                    <svg class="check-icon" width="20" height="20" color="#B2E969" aria-hidden="true"><use href="#icon-check"/></svg>
                                 </span>
                             </button>
                         </div>
-                        <div class="install-panel" data-panel="bun">
+                        <div class="install-panel" role="tabpanel" id="panel-bun" aria-labelledby="tab-bun" data-panel="bun">
                             <button class="install-command" id="copyBtnBun" data-command="bun install -g aidevops && aidevops update">
                                 <span class="command-text"><span class="command-dim">bun install -g</span> <span class="command-highlight">aidevops</span> <span class="command-dim">&&</span> <span class="command-highlight">aidevops</span> <span class="command-dim">update</span></span>
                                 <span class="copy-status">
-                                    <svg class="copy-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
-                                        <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
-                                    </svg>
-                                    <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-                                        <path d="M2.75 15.0938L9 20.25L21.25 3.75" stroke="#B2E969"/>
-                                    </svg>
+                                    <svg class="copy-icon" width="20" height="20" aria-hidden="true"><use href="#icon-copy"/></svg>
+                                    <svg class="check-icon" width="20" height="20" color="#B2E969" aria-hidden="true"><use href="#icon-check"/></svg>
                                 </span>
                             </button>
                         </div>
-                        <div class="install-panel" data-panel="git">
+                        <div class="install-panel" role="tabpanel" id="panel-git" aria-labelledby="tab-git" data-panel="git">
                             <button class="install-command" id="copyBtnGit" data-command="git clone https://github.com/marcusquinn/aidevops.git ~/Git/aidevops && ~/Git/aidevops/setup.sh">
                                 <span class="command-text"><span class="command-dim">git clone</span> <span class="command-highlight">https://github.com/marcusquinn/aidevops</span></span>
                                 <span class="copy-status">
-                                    <svg class="copy-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square">
-                                        <path d="M8.75 8.75V2.75H21.25V15.25H15.25M15.25 8.75H2.75V21.25H15.25V8.75Z"/>
-                                    </svg>
-                                    <svg class="check-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-                                        <path d="M2.75 15.0938L9 20.25L21.25 3.75" stroke="#B2E969"/>
-                                    </svg>
+                                    <svg class="copy-icon" width="20" height="20" aria-hidden="true"><use href="#icon-copy"/></svg>
+                                    <svg class="check-icon" width="20" height="20" color="#B2E969" aria-hidden="true"><use href="#icon-check"/></svg>
                                 </span>
                             </button>
                         </div>
