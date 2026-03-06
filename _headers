@@ -3,7 +3,7 @@
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Cross-Origin-Opener-Policy: same-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), accelerometer=(), gyroscope=(), magnetometer=(), payment=(), usb=(), autoplay=()
   Content-Security-Policy: default-src 'none'; script-src 'self' https://analytics.ahrefs.com; style-src 'self' 'sha256-zeaO0rOrQuLP2CGkGqtyd40xKjdM1wHv/fQCwOKvZ7k='; img-src 'self' data: https://img.shields.io https://sonarcloud.io https://app.codacy.com https://www.codefactor.io https://qlty.sh https://github.com; font-src 'self'; connect-src 'self' https://analytics.ahrefs.com; manifest-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
