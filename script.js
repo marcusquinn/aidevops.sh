@@ -135,42 +135,43 @@
 (function() {
     // Generate GitHub-style slug from heading text
     // GitHub preserves consecutive dashes (e.g. " - " becomes "---")
-    function slugify(text) {
+    const slugify = (text) => {
         return text
             .toLowerCase()
             .trim()
             .replace(/[^\w\s-]/g, '')
             .replace(/\s+/g, '-')
             .replace(/^-|-$/g, '');
-    }
+    };
 
-    // Add id attributes to all headings that don't have one
-    var slugCounts = {};
-    document.querySelectorAll('.docs-content h1, .docs-content h2, .docs-content h3, .docs-content h4').forEach(function(heading) {
+    // Add id attributes to all headings that don't have one.
+    // Uses DOM-based uniqueness check to avoid duplicate IDs when a heading's
+    // text naturally produces a slug matching a previous duplicate's suffixed
+    // slug (e.g. headings "My Title", "My Title", "My Title-2").
+    document.querySelectorAll('.docs-content h1, .docs-content h2, .docs-content h3, .docs-content h4').forEach((heading) => {
         if (heading.id) return;
-        var slug = slugify(heading.textContent);
-        if (!slug) return;
-        // Handle duplicate slugs by appending a counter
-        if (slugCounts[slug]) {
-            slugCounts[slug]++;
-            slug = slug + '-' + slugCounts[slug];
-        } else {
-            slugCounts[slug] = 1;
+        const baseSlug = slugify(heading.textContent);
+        if (!baseSlug) return;
+
+        let slug = baseSlug;
+        let counter = 1;
+        while (document.getElementById(slug)) {
+            slug = `${baseSlug}-${counter++}`;
         }
         heading.id = slug;
     });
 
     // Smooth scroll for anchor links, update URL hash
-    document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
-            var href = this.getAttribute('href');
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', (e) => {
+            const href = anchor.getAttribute('href');
             if (href === '#') {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 history.replaceState(null, '', window.location.pathname);
                 return;
             }
-            var target = document.querySelector(href);
+            const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -179,15 +180,16 @@
         });
     });
 
-    // On page load, scroll to hash target if present
-    if (window.location.hash) {
-        var hashTarget = document.querySelector(window.location.hash);
-        if (hashTarget) {
-            setTimeout(function() {
+    // On page load, scroll to hash target after all resources (CSS, images)
+    // are loaded so layout is stable and scrollIntoView positions correctly.
+    window.addEventListener('load', () => {
+        if (window.location.hash) {
+            const hashTarget = document.querySelector(window.location.hash);
+            if (hashTarget) {
                 hashTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+            }
         }
-    }
+    });
 })();
 
 // Add intersection observer for fade-in animations
