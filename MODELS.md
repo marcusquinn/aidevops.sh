@@ -38,9 +38,9 @@ Active model assignments for each dispatch tier:
 | Tier | Primary Model | Relative Cost |
 |------|---------------|---------------|
 | haiku | claude-haiku-4-5 | ~0.33x |
-| flash | gemini-2.5-flash-preview-05-20 | ~0.20x |
+| flash | gemini-2.5-flash | ~0.20x |
 | sonnet | claude-sonnet-4-6 | 1x (baseline) |
-| pro | gemini-2.5-pro-preview-06-05 | ~1.5x |
+| pro | gemini-2.5-pro | ~1.5x |
 | opus | claude-opus-4-6 | ~1.7x |
 
 ## Performance Leaderboard
