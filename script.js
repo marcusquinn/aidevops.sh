@@ -27,7 +27,7 @@
     
     // Toggle theme on button click
     if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
+        themeToggle.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             applyTheme(newTheme);
@@ -36,7 +36,7 @@
     
     // Listen for system preference changes
     if (window.matchMedia) {
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
             // Only apply if user hasn't manually set a preference
             if (!localStorage.getItem(THEME_KEY)) {
                 applyTheme(e.matches ? 'dark' : 'light');
@@ -52,24 +52,24 @@
 // and ARIA cross-references (aria-controls, aria-labelledby) are updated
 // to point at the new IDs, keeping both tab widgets independently accessible.
 (function() {
-    var source = document.getElementById('install-box-source');
-    var target = document.getElementById('install-box-clone');
+    const source = document.getElementById('install-box-source');
+    const target = document.getElementById('install-box-clone');
     if (!source || !target) return;
 
-    var clone = source.cloneNode(true);
-    var PREFIX = 'cta-';
+    const clone = source.cloneNode(true);
+    const PREFIX = 'cta-';
 
     // Re-prefix all IDs so the clone has its own unique set
     clone.removeAttribute('id');
-    clone.querySelectorAll('[id]').forEach(function(el) {
+    clone.querySelectorAll('[id]').forEach((el) => {
         el.id = PREFIX + el.id;
     });
 
     // Update ARIA cross-references to match the new IDs
-    clone.querySelectorAll('[aria-controls]').forEach(function(el) {
+    clone.querySelectorAll('[aria-controls]').forEach((el) => {
         el.setAttribute('aria-controls', PREFIX + el.getAttribute('aria-controls'));
     });
-    clone.querySelectorAll('[aria-labelledby]').forEach(function(el) {
+    clone.querySelectorAll('[aria-labelledby]').forEach((el) => {
         el.setAttribute('aria-labelledby', PREFIX + el.getAttribute('aria-labelledby'));
     });
 
@@ -78,24 +78,24 @@
 
 // Install Tabs — scoped per install-box so each operates independently
 (function() {
-    document.querySelectorAll('.install-box').forEach(function(box) {
-        var tabs = box.querySelectorAll('.install-tab');
-        var panels = box.querySelectorAll('.install-panel');
+    document.querySelectorAll('.install-box').forEach((box) => {
+        const tabs = box.querySelectorAll('.install-tab');
+        const panels = box.querySelectorAll('.install-panel');
 
-        tabs.forEach(function(tab) {
-            tab.addEventListener('click', function() {
-                var targetPanel = this.dataset.tab;
+        tabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                const targetPanel = tab.dataset.tab;
 
                 // Update tabs within this box only
-                tabs.forEach(function(t) {
+                tabs.forEach((t) => {
                     t.classList.remove('active');
                     t.setAttribute('aria-selected', 'false');
                 });
-                this.classList.add('active');
-                this.setAttribute('aria-selected', 'true');
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
 
                 // Update panels within this box only
-                panels.forEach(function(p) {
+                panels.forEach((p) => {
                     p.classList.remove('active');
                     if (p.dataset.panel === targetPanel) {
                         p.classList.add('active');
@@ -111,12 +111,12 @@
     function setupCopyButton(button) {
         if (!button) return;
         
-        button.addEventListener('click', async function() {
-            const command = this.dataset.command;
+        button.addEventListener('click', async () => {
+            const command = button.dataset.command;
             
             try {
                 await navigator.clipboard.writeText(command);
-                showCopied(this);
+                showCopied(button);
             } catch (err) {
                 // Fallback for older browsers
                 const textarea = document.createElement('textarea');
@@ -127,7 +127,7 @@
                 textarea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
-                showCopied(this);
+                showCopied(button);
             }
         });
     }
