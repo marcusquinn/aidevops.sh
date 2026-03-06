@@ -48,19 +48,31 @@
 // Clone Install Box — single source of truth for install commands
 // The hero section (#install-box-source) is the canonical install component.
 // The CTA section (#install-box-clone) receives a deep clone so commands
-// only need to be updated in one place.
+// only need to be updated in one place.  IDs are re-prefixed with "cta-"
+// and ARIA cross-references (aria-controls, aria-labelledby) are updated
+// to point at the new IDs, keeping both tab widgets independently accessible.
 (function() {
     var source = document.getElementById('install-box-source');
     var target = document.getElementById('install-box-clone');
     if (!source || !target) return;
 
     var clone = source.cloneNode(true);
-    // Remove the source id to avoid duplicate IDs in the DOM
+    var PREFIX = 'cta-';
+
+    // Re-prefix all IDs so the clone has its own unique set
     clone.removeAttribute('id');
-    // Strip all id attributes from cloned children (e.g. copyBtnCurl)
     clone.querySelectorAll('[id]').forEach(function(el) {
-        el.removeAttribute('id');
+        el.id = PREFIX + el.id;
     });
+
+    // Update ARIA cross-references to match the new IDs
+    clone.querySelectorAll('[aria-controls]').forEach(function(el) {
+        el.setAttribute('aria-controls', PREFIX + el.getAttribute('aria-controls'));
+    });
+    clone.querySelectorAll('[aria-labelledby]').forEach(function(el) {
+        el.setAttribute('aria-labelledby', PREFIX + el.getAttribute('aria-labelledby'));
+    });
+
     target.replaceWith(clone);
 })();
 
