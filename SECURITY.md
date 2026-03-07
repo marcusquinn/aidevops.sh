@@ -23,7 +23,7 @@ Include:
 
 ## Response Timeline
 
-- **Acknowledgement**: within 48 hours
+- **Acknowledgement**: within 2 business days
 - **Initial assessment**: within 5 business days
 - **Fix or mitigation**: depends on severity, targeting 30 days for critical issues
 
