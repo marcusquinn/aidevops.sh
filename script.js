@@ -59,18 +59,18 @@
     const clone = source.cloneNode(true);
     const PREFIX = 'cta-';
 
-    // Re-prefix all IDs so the clone has its own unique set
+    // Re-prefix IDs and update ARIA cross-references in a single pass
     clone.removeAttribute('id');
-    clone.querySelectorAll('[id]').forEach((el) => {
-        el.id = PREFIX + el.id;
-    });
-
-    // Update ARIA cross-references to match the new IDs
-    clone.querySelectorAll('[aria-controls]').forEach((el) => {
-        el.setAttribute('aria-controls', PREFIX + el.getAttribute('aria-controls'));
-    });
-    clone.querySelectorAll('[aria-labelledby]').forEach((el) => {
-        el.setAttribute('aria-labelledby', PREFIX + el.getAttribute('aria-labelledby'));
+    clone.querySelectorAll('[id], [aria-controls], [aria-labelledby]').forEach((el) => {
+        if (el.id) {
+            el.id = PREFIX + el.id;
+        }
+        if (el.hasAttribute('aria-controls')) {
+            el.setAttribute('aria-controls', PREFIX + el.getAttribute('aria-controls'));
+        }
+        if (el.hasAttribute('aria-labelledby')) {
+            el.setAttribute('aria-labelledby', PREFIX + el.getAttribute('aria-labelledby'));
+        }
     });
 
     target.replaceWith(clone);
