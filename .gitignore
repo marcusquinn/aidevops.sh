@@ -17,3 +17,6 @@ credentials.json
 secrets.json
 *.p12
 *.pfx
+
+# Log files
+*.log
