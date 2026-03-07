@@ -76,33 +76,83 @@
     target.replaceWith(clone);
 })();
 
-// Install Tabs — scoped per install-box so each operates independently
+// Install Tabs — WAI-ARIA tabs pattern with keyboard navigation
+// Implements roving tabindex, Arrow Left/Right (wrapping), Home/End,
+// and Enter/Space activation per WAI-ARIA Authoring Practices.
+// Scoped per install-box so hero and CTA clones operate independently.
 (function() {
     document.querySelectorAll('.install-box').forEach((box) => {
-        const tabs = box.querySelectorAll('.install-tab');
+        const tabs = Array.from(box.querySelectorAll('.install-tab'));
         const panels = box.querySelectorAll('.install-panel');
 
+        // Activate a tab: update ARIA state, roving tabindex, panels, and focus
+        const activateTab = (tab, moveFocus) => {
+            const targetPanel = tab.dataset.tab;
+
+            // Deactivate all tabs in this box
+            tabs.forEach((t) => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+
+            // Activate the target tab
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            tab.setAttribute('tabindex', '0');
+
+            // Switch panels and update aria-hidden
+            panels.forEach((p) => {
+                const isTarget = p.dataset.panel === targetPanel;
+                p.classList.toggle('active', isTarget);
+                if (isTarget) {
+                    p.removeAttribute('aria-hidden');
+                } else {
+                    p.setAttribute('aria-hidden', 'true');
+                }
+            });
+
+            if (moveFocus) {
+                tab.focus();
+            }
+        };
+
+        // Click handler — activate on click (mouse or implicit Enter/Space on button)
         tabs.forEach((tab) => {
             tab.addEventListener('click', () => {
-                const targetPanel = tab.dataset.tab;
-
-                // Update tabs within this box only
-                tabs.forEach((t) => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-selected', 'false');
-                });
-                tab.classList.add('active');
-                tab.setAttribute('aria-selected', 'true');
-
-                // Update panels within this box only
-                panels.forEach((p) => {
-                    p.classList.remove('active');
-                    if (p.dataset.panel === targetPanel) {
-                        p.classList.add('active');
-                    }
-                });
+                activateTab(tab, false);
             });
         });
+
+        // Keyboard handler on the tablist for arrow navigation
+        const tablist = box.querySelector('[role="tablist"]');
+        if (tablist) {
+            tablist.addEventListener('keydown', (e) => {
+                const currentIndex = tabs.indexOf(e.target);
+                if (currentIndex === -1) return;
+
+                let nextIndex;
+                switch (e.key) {
+                    case 'ArrowRight':
+                        nextIndex = (currentIndex + 1) % tabs.length;
+                        break;
+                    case 'ArrowLeft':
+                        nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                        break;
+                    case 'Home':
+                        nextIndex = 0;
+                        break;
+                    case 'End':
+                        nextIndex = tabs.length - 1;
+                        break;
+                    default:
+                        return; // Let other keys propagate normally
+                }
+
+                e.preventDefault();
+                activateTab(tabs[nextIndex], true);
+            });
+        }
     });
 })();
 
