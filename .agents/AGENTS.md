@@ -26,3 +26,9 @@ Create `.md` files in this directory for domain-specific context:
 ```
 
 Each file is read on demand by AI assistants when relevant to the task.
+
+## Security
+
+This is a static website project. No AI/LLM dependencies or features that process untrusted content through language models. Standard web security practices apply (CSP headers, input sanitization, dependency auditing).
+
+For framework-level security guidance (prompt injection defense, credential isolation, worker sandboxing), see the [aidevops framework docs](https://github.com/marcusquinn/aidevops) `tools/security/prompt-injection-defender.md`.
