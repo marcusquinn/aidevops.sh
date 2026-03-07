@@ -204,11 +204,11 @@
                             <span class="dot green"></span>
                         </div>
                         <div class="install-tabs" role="tablist">
-                            <button class="install-tab active" role="tab" aria-selected="true" aria-controls="panel-curl" id="tab-curl" data-tab="curl">curl</button>
-                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-npm" id="tab-npm" data-tab="npm">npm</button>
-                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-brew" id="tab-brew" data-tab="brew">brew</button>
-                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-bun" id="tab-bun" data-tab="bun">bun</button>
-                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-git" id="tab-git" data-tab="git">git</button>
+                            <button class="install-tab active" role="tab" aria-selected="true" aria-controls="panel-curl" id="tab-curl" tabindex="0" data-tab="curl">curl</button>
+                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-npm" id="tab-npm" tabindex="-1" data-tab="npm">npm</button>
+                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-brew" id="tab-brew" tabindex="-1" data-tab="brew">brew</button>
+                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-bun" id="tab-bun" tabindex="-1" data-tab="bun">bun</button>
+                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-git" id="tab-git" tabindex="-1" data-tab="git">git</button>
                         </div>
                     </div>
                     <div class="install-panels">
@@ -221,7 +221,7 @@
                                 </span>
                             </button>
                         </div>
-                        <div class="install-panel" data-panel="npm" role="tabpanel" id="panel-npm" aria-labelledby="tab-npm">
+                        <div class="install-panel" data-panel="npm" role="tabpanel" id="panel-npm" aria-labelledby="tab-npm" aria-hidden="true">
                             <button class="install-command" id="copyBtnNpm" data-command="npm install -g aidevops && aidevops update">
                                 <span class="command-text"><span class="command-dim">npm install -g</span> <span class="command-highlight">aidevops</span> <span class="command-dim">&&</span> <span class="command-highlight">aidevops</span> <span class="command-dim">update</span></span>
                                 <span class="copy-status">
@@ -230,7 +230,7 @@
                                 </span>
                             </button>
                         </div>
-                        <div class="install-panel" data-panel="brew" role="tabpanel" id="panel-brew" aria-labelledby="tab-brew">
+                        <div class="install-panel" data-panel="brew" role="tabpanel" id="panel-brew" aria-labelledby="tab-brew" aria-hidden="true">
                             <button class="install-command" id="copyBtnBrew" data-command="brew install marcusquinn/tap/aidevops && aidevops update">
                                 <span class="command-text"><span class="command-dim">brew install marcusquinn/tap/</span><span class="command-highlight">aidevops</span> <span class="command-dim">&&</span> <span class="command-highlight">aidevops</span> <span class="command-dim">update</span></span>
                                 <span class="copy-status">
@@ -239,7 +239,7 @@
                                 </span>
                             </button>
                         </div>
-                        <div class="install-panel" data-panel="bun" role="tabpanel" id="panel-bun" aria-labelledby="tab-bun">
+                        <div class="install-panel" data-panel="bun" role="tabpanel" id="panel-bun" aria-labelledby="tab-bun" aria-hidden="true">
                             <button class="install-command" id="copyBtnBun" data-command="bun install -g aidevops && aidevops update">
                                 <span class="command-text"><span class="command-dim">bun install -g</span> <span class="command-highlight">aidevops</span> <span class="command-dim">&&</span> <span class="command-highlight">aidevops</span> <span class="command-dim">update</span></span>
                                 <span class="copy-status">
@@ -248,7 +248,7 @@
                                 </span>
                             </button>
                         </div>
-                        <div class="install-panel" data-panel="git" role="tabpanel" id="panel-git" aria-labelledby="tab-git">
+                        <div class="install-panel" data-panel="git" role="tabpanel" id="panel-git" aria-labelledby="tab-git" aria-hidden="true">
                             <button class="install-command" id="copyBtnGit" data-command="git clone https://github.com/marcusquinn/aidevops.git ~/Git/aidevops && ~/Git/aidevops/setup.sh">
                                 <span class="command-text"><span class="command-dim">git clone</span> <span class="command-highlight">https://github.com/marcusquinn/aidevops</span></span>
                                 <span class="copy-status">
