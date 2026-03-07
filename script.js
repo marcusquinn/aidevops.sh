@@ -183,7 +183,7 @@
                 history.replaceState(null, '', window.location.pathname);
                 return;
             }
-            const target = document.querySelector(href);
+            const target = document.getElementById(href.slice(1));
             if (target) {
                 e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -196,7 +196,7 @@
     // are loaded so layout is stable and scrollIntoView positions correctly.
     window.addEventListener('load', () => {
         if (window.location.hash) {
-            const hashTarget = document.querySelector(window.location.hash);
+            const hashTarget = document.getElementById(window.location.hash.slice(1));
             if (hashTarget) {
                 hashTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
