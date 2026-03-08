@@ -1676,7 +1676,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <p><strong>Context &amp; Codebase:</strong></p>
 <ul>
 <li><a href="https://docs.augmentcode.com/context-services/mcp/overview">Augment Context Engine</a> - Semantic codebase retrieval with deep code understanding</li>
-<li><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a> - Semantic code analysis with 95% token savings (tree, structure, CFG, DFG, impact analysis)</li>
+<li><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a> - Semantic code analysis with 95% token savings (<a href="#llm-tldr---semantic-code-analysis">details below</a>)</li>
 <li><a href="https://context7.com/">Context7</a> - Real-time documentation access for thousands of libraries</li>
 <li><a href="https://github.com/yamadashy/repomix">Repomix</a> - Pack codebases into AI-friendly context</li>
 <li><a href="https://openapi-mcp.openapisearch.com/mcp">OpenAPI Search</a> - Search and explore any OpenAPI specification (zero install, Cloudflare Worker)</li>
@@ -2492,7 +2492,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <tr>
 <td>Context analysis</td>
 <td>95%</td>
-<td>Deep code understanding</td>
+<td>Comprehensive code understanding</td>
 </tr>
 <tr>
 <td>Semantic search</td>
@@ -3457,11 +3457,23 @@ wt switch -c -x opencode feature/next-feature  # Worktrunk: create + start AI CL
 </tr>
 <tr>
 <td><code>DECISION</code></td>
-<td>Architecture decisions</td>
+<td>Process, workflow, or policy choices (naming, release cadence, branching)</td>
 </tr>
 <tr>
 <td><code>CONTEXT</code></td>
 <td>Background info</td>
+</tr>
+<tr>
+<td><code>ARCHITECTURAL_DECISION</code></td>
+<td>System-level architecture (service boundaries, data flow, tech stack)</td>
+</tr>
+<tr>
+<td><code>ERROR_FIX</code></td>
+<td>Bug fixes and patches</td>
+</tr>
+<tr>
+<td><code>OPEN_THREAD</code></td>
+<td>Unresolved questions or follow-ups</td>
 </tr>
 <tr>
 <td><code>SUCCESS_PATTERN</code></td>
