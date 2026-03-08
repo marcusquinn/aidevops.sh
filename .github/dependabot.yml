@@ -10,4 +10,6 @@ updates:
       include: "scope"
     labels:
       - "dependencies"
+    reviewers:
+      - "marcusquinn"
     open-pull-requests-limit: 5
