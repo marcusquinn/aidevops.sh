@@ -111,13 +111,17 @@
     <main class="docs-container">
         <div class="docs-content">
 <h1>AI DevOps Framework</h1>
-<p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> — An AI operations platform for launching and managing development, business, marketing, and creative projects. 11 specialist AI agents handle the automatable work across every domain so your time is preserved for real-world discovery and decisions that AI cannot yet reach.</p>
-<p><em>&quot;Scope a mission to redesign the landing pages — break it into milestones, dispatch workers in parallel, validate each milestone, and track budget across the whole project&quot;</em> - <strong>One conversation, autonomous multi-day project execution.</strong></p>
+<p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> — An <a href="https://opencode.ai/">OpenCode</a> plugin and AI operations platform for launching and managing development, business, marketing, and creative projects. 13 specialist AI agents handle the automatable work across every domain so your time is preserved for real-world discovery and decisions that AI cannot yet reach.</p>
+<blockquote>
+<p><strong>Recommended setup:</strong> <a href="https://opencode.ai/">OpenCode</a> + <a href="https://claude.ai/">Claude</a> models (Anthropic). All features, agents, and workflows are designed and tested for OpenCode first. Claude models (haiku, sonnet, opus) deliver the best results across all agent tiers.</p>
+</blockquote>
+<p><em>&quot;Scope a mission to redesign the landing pages — break it into milestones, dispatch workers in parallel, validate each milestone, and track budget across the whole project&quot;</em>
+<strong>One conversation, autonomous multi-day project execution.</strong></p>
 <h2><strong>The Philosophy</strong></h2>
 <p><strong>Maximum value for your time and money.</strong> <strong><a href="https://aidevops.sh">aidevops</a></strong> is built on these principles:</p>
 <ul>
 <li><strong>Autonomous orchestration</strong> - An AI supervisor runs every 2 minutes, dispatching parallel workers, merging PRs, detecting stuck processes, and advancing multi-day missions — no human babysitting required</li>
-<li><strong>Multi-domain agents</strong> - 11 specialist agents (code, SEO, marketing, content, legal, sales, research, video, business, accounts, health) with 780+ subagents loaded on demand</li>
+<li><strong>Multi-domain agents</strong> - 13 specialist agents (code, automation, SEO, marketing, content, legal, sales, research, video, business, accounts, social media, health) with 900+ subagents loaded on demand</li>
 <li><strong>Multi-model safety</strong> - High-stakes operations (force push, production deploy, data migration) are verified by a second cross-provider model before execution — different providers have different failure modes, so correlated hallucinations are rare</li>
 <li><strong>Resource efficiency</strong> - Cost-aware model routing (local → haiku → flash → sonnet → pro → opus), project-type bundles that auto-configure quality gates and model tiers, budget tracking with burn-rate analysis</li>
 <li><strong>Self-healing</strong> - When something breaks, diagnose the root cause, create tasks, and fix it. Every error is a live test case for a permanent solution</li>
@@ -135,7 +139,7 @@
 <p><strong>What makes it different:</strong></p>
 <ul>
 <li><strong>Autonomous supervisor</strong> - AI pulse runs every 2 minutes: merges ready PRs, dispatches workers, kills stuck processes, advances missions, triages quality findings — no human in the loop</li>
-<li><strong>Cross-domain intelligence</strong> - 11 agents spanning code, business, marketing, legal, sales, content, video, research, SEO, health, and accounts — each with domain expertise and specialist subagents</li>
+<li><strong>Cross-domain intelligence</strong> - 13 agents spanning code, automation, business, marketing, legal, sales, content, video, research, SEO, social media, health, and accounts — each with domain expertise and specialist subagents</li>
 <li><strong>Multi-model safety</strong> - Destructive operations verified by a second AI model from a different provider before execution</li>
 <li><strong>30+ service integrations</strong> - Hosting, Git platforms, DNS, security, monitoring, deployment, payments, communications</li>
 <li><strong>Mission orchestration</strong> - Multi-day autonomous projects broken into milestones with validation, budget tracking, and automatic advancement</li>
@@ -195,10 +199,10 @@
 </ul>
 <h3>Agent Structure</h3>
 <ul>
-<li>11 primary agents (Build+, SEO, Marketing, etc.) with specialist @subagents on demand</li>
-<li>780+ subagent markdown files organized by domain</li>
-<li>290+ helper scripts in <code>.agents/scripts/</code></li>
-<li>58 slash commands for common workflows</li>
+<li>13 primary agents (Build+, Automate, SEO, Marketing, etc.) with specialist @subagents on demand</li>
+<li>900+ subagent markdown files organized by domain</li>
+<li>390+ helper scripts in <code>.agents/scripts/</code></li>
+<li>69 slash commands for common workflows</li>
 </ul>
 <!-- AI-CONTEXT-END -->
 
@@ -421,10 +425,11 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 </tr>
 </tbody></table>
 <p>See <code>.agents/tools/git/opencode-github-security.md</code> for the full security documentation.</p>
-<p><strong>Supported AI Assistant:</strong> <a href="https://opencode.ai/">OpenCode</a> is the only tested and supported AI coding tool for aidevops. All features, agents, and workflows are designed and tested for OpenCode first. The claude-code CLI is used as a companion tool called from within OpenCode.</p>
-<p><strong>Recommended:</strong></p>
+<p><strong>Supported AI tool:</strong> <a href="https://opencode.ai/">OpenCode</a> is the recommended and tested AI coding tool for aidevops. All features, agents, and workflows are designed and tested for OpenCode first. We recommend <a href="https://claude.ai/">Claude</a> models (Anthropic) for the best results across all agent tiers -- haiku for triage, sonnet for implementation, opus for complex reasoning.</p>
+<p><strong>Recommended stack:</strong></p>
 <ul>
 <li><strong><a href="https://opencode.ai/">OpenCode</a></strong> - The recommended AI coding agent. Powerful agentic TUI/CLI with native MCP support, Tab-based agent switching, LSP integration, plugin ecosystem, and excellent DX. All aidevops features are designed and tested for OpenCode first.</li>
+<li><strong><a href="https://claude.ai/">Claude models</a></strong> - Recommended AI models. Claude haiku, sonnet, and opus deliver the best results across all aidevops agent tiers and workflows.</li>
 <li><strong><a href="https://tabby.sh/">Tabby</a></strong> - Recommended terminal. Colour-coded Profiles per project/repo, <strong>auto-syncs tab title with git repo/branch.</strong></li>
 <li><strong><a href="https://zed.dev/">Zed</a></strong> - Recommended editor. High-performance with AI integration (use with the OpenCode Agent Extension).</li>
 </ul>
@@ -464,7 +469,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 </ul>
 <p><strong>Project Intelligence:</strong></p>
 <ul>
-<li><strong><a href="#project-bundles-auto-configuration">Bundles</a></strong> - Project-type presets that auto-configure model tiers, quality gates, and agent routing per repo. 6 built-in bundles (web-app, library, cli-tool, content-site, infrastructure, agent) with auto-detection from marker files (<code>bundle-helper.sh</code>)</li>
+<li><strong><a href="#project-bundles-auto-configuration">Bundles</a></strong> - Project-type presets that auto-configure model tiers, quality gates, and agent routing per repo. 7 built-in bundles (web-app, library, cli-tool, content-site, infrastructure, agent, schema) with auto-detection from marker files (<code>bundle-helper.sh</code>)</li>
 <li><strong>TTSR rules</strong> - Soft rule engine (<code>ttsr-rule-loader.sh</code>) with <code>.agents/rules/</code> directory for AI output correction (e.g., no-edit-on-main, no-glob-for-discovery)</li>
 <li><strong>Cross-review</strong> - <code>/cross-review</code> dispatches the same prompt to multiple AI models in parallel, diffs results, and optionally auto-scores via a judge model</li>
 <li><strong>Local models</strong> - Run AI models locally via llama.cpp for free, private, offline inference (<code>local-model-helper.sh</code>) with HuggingFace GGUF model management</li>
@@ -499,7 +504,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <ul>
 <li><strong>Multi-Platform Analysis</strong>: SonarCloud, CodeFactor, Codacy, CodeRabbit, Qlty, Gemini Code Assist, Snyk</li>
 <li><strong>Performance Auditing</strong>: PageSpeed Insights, Lighthouse, WebPageTest, Core Web Vitals (<code>/performance</code> command)</li>
-<li><strong>SEO Toolchain</strong>: 13 SEO subagents including Semrush, Ahrefs, ContentKing, Screaming Frog, Bing Webmaster Tools, Rich Results Test, programmatic SEO, analytics tracking, schema validation</li>
+<li><strong>SEO Toolchain</strong>: 40+ SEO subagents including Semrush, Ahrefs, ContentKing, Screaming Frog, Bing Webmaster Tools, Rich Results Test, programmatic SEO, analytics tracking, schema validation, content analysis, keyword mapping, and AI readiness</li>
 <li><strong>SEO Debugging</strong>: Open Graph validation, favicon checker, social preview testing</li>
 <li><strong>Email Deliverability</strong>: SPF/DKIM/DMARC/MX validation, blacklist checking</li>
 <li><strong>Uptime Monitoring</strong>: Updown.io integration for website and SSL monitoring</li>
@@ -632,7 +637,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 290+ helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 390+ helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -687,7 +692,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tr>
 <td><strong>Cost-Aware Routing</strong></td>
 <td>Match model to task complexity</td>
-<td><code>model-routing.md</code> with 5-tier guidance, <code>/route</code> command</td>
+<td><code>model-routing.md</code> with 7-tier guidance, <code>/route</code> command</td>
 </tr>
 <tr>
 <td><strong>Model Comparison</strong></td>
@@ -740,7 +745,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tr>
 <td>Model routing</td>
 <td><code>model-routing.md</code>, <code>/route</code></td>
-<td>Cost-aware 5-tier routing guidance (haiku/flash/sonnet/pro/opus)</td>
+<td>Cost-aware 7-tier routing guidance (local/haiku/flash/sonnet/pro/opus/grok)</td>
 </tr>
 <tr>
 <td>Budget tracking</td>
@@ -2516,7 +2521,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 11 primary agents, 780+ subagents, and 290+ helper scripts.</p>
+<p>This installs the complete framework: 13 primary agents, 900+ subagents, and 390+ helper scripts.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -2613,7 +2618,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 </tbody></table>
 <h3><strong>Main Agents</strong></h3>
-<p>Primary agents as registered in <code>subagent-index.toon</code> (11 total). MCPs are loaded on-demand per subagent, not per primary agent:</p>
+<p>Primary agents as registered in <code>subagent-index.toon</code> (13 total). MCPs are loaded on-demand per subagent, not per primary agent:</p>
 <table>
 <thead>
 <tr>
@@ -2630,10 +2635,22 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <td>opus</td>
 </tr>
 <tr>
+<td>Automate</td>
+<td><code>automate.md</code></td>
+<td>Scheduling, dispatch, monitoring, background orchestration</td>
+<td>sonnet</td>
+</tr>
+<tr>
 <td>Accounts</td>
 <td><code>accounts.md</code></td>
 <td>Financial operations</td>
 <td>opus</td>
+</tr>
+<tr>
+<td>Business</td>
+<td><code>business.md</code></td>
+<td>Company orchestration via AI runners</td>
+<td>sonnet</td>
 </tr>
 <tr>
 <td>Content</td>
@@ -2656,7 +2673,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <tr>
 <td>Marketing</td>
 <td><code>marketing.md</code></td>
-<td>Marketing strategy and email campaigns</td>
+<td>Marketing strategy, email campaigns, paid ads, CRO</td>
 <td>opus</td>
 </tr>
 <tr>
@@ -2692,7 +2709,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tbody></table>
 <p><strong>Specialist subagents</strong> (@plan-plus, @aidevops, @wordpress, Build-Agent, Build-MCP, etc.) live under <code>tools/</code> or as <code>mode: subagent</code> files and are invoked via @mention when domain expertise is needed. See <code>subagent-index.toon</code> for the full listing.</p>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 780+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 900+ subagents organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -3703,8 +3720,8 @@ bash .agents/scripts/continue-cli.sh review
 ├── AGENTS.md                      # AI agent guidance (dev)
 ├── .agents/                        # Agents and documentation
 │   ├── AGENTS.md                  # User guide (deployed to ~/.aidevops/agents/)
-│   ├── *.md                       # 11 primary agents
-│   ├── scripts/                   # 290+ helper scripts
+│   ├── *.md                       # 13 primary agents
+│   ├── scripts/                   # 390+ helper scripts
 │   ├── tools/                     # Cross-domain utilities (video, browser, git, etc.)
 │   ├── services/                  # External service integrations
 │   └── workflows/                 # Development process guides
@@ -3809,7 +3826,7 @@ source &lt;(credential-helper.sh export)
 <p><strong>For You:</strong></p>
 <ul>
 <li>Autonomous project management — dispatch a mission and let AI agents handle milestones, validation, and delivery across days</li>
-<li>Cross-domain operations — code, business, marketing, legal, sales, content, video, research, SEO, health, and accounts managed through one platform</li>
+<li>Cross-domain operations — code, automation, business, marketing, legal, sales, content, video, research, SEO, social media, health, and accounts managed through one platform</li>
 <li>Multi-model safety — destructive operations verified by a second AI provider before execution</li>
 <li>Enterprise-grade quality — multi-platform analysis, automated security monitoring, continual improvement loops</li>
 <li>Infrastructure management — 30+ service integrations with standardized commands across all providers</li>
@@ -3818,8 +3835,8 @@ source &lt;(credential-helper.sh export)
 <ul>
 <li>Autonomous supervisor — pulse runs every 2 minutes, merging PRs, dispatching workers, killing stuck processes, advancing missions</li>
 <li>Operational intelligence — struggle-ratio detection, orphaned PR recovery, circuit breaker, dynamic concurrency</li>
-<li>Cost-aware routing — 6-tier model selection (local → haiku → flash → sonnet → pro → opus) with budget tracking</li>
-<li>Progressive context — 780+ subagents loaded on demand, project bundles auto-configuring quality gates and model tiers</li>
+<li>Cost-aware routing — 7-tier model selection (local → haiku → flash → sonnet → pro → opus → grok) with budget tracking</li>
+<li>Progressive context — 900+ subagents loaded on demand, project bundles auto-configuring quality gates and model tiers</li>
 <li>Self-improving — session mining extracts learnings, quality findings auto-create tasks, patterns feed back into agent prompts</li>
 </ul>
 <p><strong>Get Started:</strong></p>
