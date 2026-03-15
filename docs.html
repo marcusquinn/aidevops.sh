@@ -115,8 +115,8 @@
 <blockquote>
 <p><strong>Recommended setup:</strong> <a href="https://opencode.ai/">OpenCode</a> + <a href="https://claude.ai/">Claude</a> models (Anthropic). All features, agents, and workflows are designed and tested for OpenCode first. Claude models (haiku, sonnet, opus) deliver the best results across all agent tiers.</p>
 </blockquote>
-<p><em>&quot;Scope a mission to redesign the landing pages — break it into milestones, dispatch workers in parallel, validate each milestone, and track budget across the whole project&quot;</em>
-<strong>One conversation, autonomous multi-day project execution.</strong></p>
+<p><em>&quot;Scope a mission to redesign the landing pages — break it into milestones, dispatch workers in parallel, validate each milestone, and track budget across the whole project&quot;</em></p>
+<p><strong>One conversation, autonomous project delivery — with enterprise-level security &amp; quality-control.</strong></p>
 <h2><strong>The Philosophy</strong></h2>
 <p><strong>Maximum value for your time and money.</strong> <strong><a href="https://aidevops.sh">aidevops</a></strong> is built on these principles:</p>
 <ul>
@@ -429,13 +429,14 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <p><strong>Recommended stack:</strong></p>
 <ul>
 <li><strong><a href="https://opencode.ai/">OpenCode</a></strong> - The recommended AI coding agent. Powerful agentic TUI/CLI with native MCP support, Tab-based agent switching, LSP integration, plugin ecosystem, and excellent DX. All aidevops features are designed and tested for OpenCode first.</li>
-<li><strong><a href="https://claude.ai/">Claude models</a></strong> - Recommended AI models. Claude haiku, sonnet, and opus deliver the best results across all aidevops agent tiers and workflows.</li>
+<li><strong><a href="https://opencode.ai/">OpenCode Zen</a></strong> - Free tier of OpenCode with included models. Start working with AI straight away at no cost -- no API keys or subscriptions required.</li>
+<li><strong><a href="https://claude.ai/">Claude</a></strong> (Anthropic) - Our most-used and tested model provider. Claude haiku, sonnet, and opus deliver the best results across all aidevops agent tiers and workflows. Recommended for users who want the highest quality output.</li>
 <li><strong><a href="https://tabby.sh/">Tabby</a></strong> - Recommended terminal. Colour-coded Profiles per project/repo, <strong>auto-syncs tab title with git repo/branch.</strong></li>
 <li><strong><a href="https://zed.dev/">Zed</a></strong> - Recommended editor. High-performance with AI integration (use with the OpenCode Agent Extension).</li>
 </ul>
 <h3>Terminal Tab Title Sync</h3>
 <p>Your terminal tab/window title automatically shows <code>repo/branch</code> context when working in git repositories. This helps identify which codebase and branch you&#39;re working on across multiple terminal sessions.</p>
-<p><strong>Supported terminals:</strong> Tabby, iTerm2, Windows Terminal, Kitty, Alacritty, WezTerm, Hyper, and most xterm-compatible terminals.</p>
+<p><strong>Supported terminals:</strong> <a href="https://tabby.sh/">Tabby</a>, <a href="https://github.com/tmux/tmux">tmux</a>, <a href="https://iterm2.com/">iTerm2</a>, <a href="https://github.com/microsoft/terminal">Windows Terminal</a>, <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a>, <a href="https://alacritty.org/">Alacritty</a>, <a href="https://wezfurlong.org/wezterm/">WezTerm</a>, <a href="https://hyper.is/">Hyper</a>, and most xterm-compatible terminals.</p>
 <p><strong>How it works:</strong> The <code>pre-edit-check.sh</code> script&#39;s primary role is enforcing git workflow protection (blocking edits on main/master branches). As a secondary, non-blocking action, it updates the terminal title via escape sequences. No configuration needed - it&#39;s automatic.</p>
 <p><strong>Example format:</strong> <code>{repo}/{branch-type}/{description}</code></p>
 <p>See <code>.agents/tools/terminal/terminal-title.md</code> for customization options.</p>
