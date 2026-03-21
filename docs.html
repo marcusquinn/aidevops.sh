@@ -373,6 +373,30 @@ aidevops upgrade-planning --force   # Skip confirmation prompt
 <li><strong>Automatic token refresh</strong> - No manual re-authentication needed</li>
 <li><strong>Beta features enabled</strong> - Extended thinking modes and latest features</li>
 </ul>
+<h3>Cursor Models via Pool Proxy</h3>
+<p>Access Cursor Pro models (Composer 2, Claude 4.6 Opus/Sonnet, GPT-5.x, Gemini 3.1 Pro) in OpenCode through a local gRPC proxy that translates OpenAI-compatible requests to Cursor&#39;s protobuf/HTTP2 protocol.</p>
+<p><strong>Setup:</strong></p>
+<pre><code class="language-bash"># Add your Cursor account to the pool (reads from local Cursor IDE)
+oauth-pool-helper.sh add cursor
+
+# Restart OpenCode — Cursor models appear in Ctrl+T model picker
+</code></pre>
+<p><strong>How it works:</strong></p>
+<ul>
+<li>Reads Cursor credentials from the local IDE state database</li>
+<li>Starts a gRPC proxy that speaks Cursor&#39;s native protocol (not the cursor-agent CLI)</li>
+<li>Discovers available models via gRPC and registers them as an OpenCode provider</li>
+<li>Supports true streaming, tool calling, and automatic token refresh</li>
+<li>Falls back gracefully if no Cursor accounts are in the pool</li>
+</ul>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li><strong>Zero additional cost</strong> for Cursor Pro subscribers</li>
+<li><strong>True streaming</strong> — responses stream as they arrive (not buffered)</li>
+<li><strong>Tool calling</strong> — Cursor&#39;s native MCP tool protocol works through the proxy</li>
+<li><strong>Model discovery</strong> — automatically detects all models available to your account</li>
+<li><strong>Pool rotation</strong> — multiple accounts with LRU rotation and 429 failover</li>
+</ul>
 <h3>GitHub AI Agent Integration</h3>
 <p>Enable AI-powered issue resolution directly from GitHub. Comment <code>/oc fix this</code> on any issue and the AI creates a branch, implements the fix, and opens a PR.</p>
 <p><strong>Security-first design</strong> - The workflow includes:</p>
