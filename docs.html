@@ -361,17 +361,23 @@ aidevops upgrade-planning --force   # Skip confirmation prompt
 <p>See <code>.agents/tools/task-management/beads.md</code> for complete documentation and installation commands.</p>
 <p><strong>Your AI assistant now has agentic access to 30+ service integrations.</strong></p>
 <h3>OpenCode Anthropic OAuth (Built-in)</h3>
-<p>OpenCode v1.1.36+ includes Anthropic OAuth authentication natively. No external plugin is needed.</p>
-<p><strong>After setup, authenticate:</strong></p>
-<pre><code class="language-bash">opencode auth login
-# Select: Anthropic → Claude Pro/Max
-# Follow OAuth flow in browser
+<p>OpenCode includes Anthropic OAuth authentication natively — no API key needed. OAuth is covered by your Claude Pro/Max subscription at zero additional cost.</p>
+<p><strong>Authenticate via the pool (recommended):</strong></p>
+<pre><code class="language-bash">aidevops model-accounts-pool add anthropic
+# Opens browser OAuth flow — no API key required
+# Restart OpenCode after adding
 </code></pre>
+<p><strong>Or via the OpenCode TUI:</strong></p>
+<p>Open OpenCode → <code>Ctrl+A</code> → Select <strong>Anthropic</strong> → <strong>Login with Claude.ai</strong> → follow browser OAuth flow.</p>
+<blockquote>
+<p><strong>Note:</strong> <code>opencode auth login</code> prompts for an API key, not OAuth. Use the commands above for subscription-based OAuth access.</p>
+</blockquote>
 <p><strong>Benefits:</strong></p>
 <ul>
 <li><strong>Zero cost</strong> for Claude Pro/Max subscribers (covered by subscription)</li>
-<li><strong>Automatic token refresh</strong> - No manual re-authentication needed</li>
-<li><strong>Beta features enabled</strong> - Extended thinking modes and latest features</li>
+<li><strong>Automatic token refresh</strong> — no manual re-authentication needed</li>
+<li><strong>Multiple accounts</strong> — add more accounts to the pool for automatic rotation when one hits rate limits</li>
+<li><strong>Beta features enabled</strong> — extended thinking modes and latest features</li>
 </ul>
 <h3>Cursor Models via Pool Proxy</h3>
 <p>Access Cursor Pro models (Composer 2, Claude 4.6 Opus/Sonnet, GPT-5.x, Gemini 3.1 Pro) in OpenCode through a local gRPC proxy that translates OpenAI-compatible requests to Cursor&#39;s protobuf/HTTP2 protocol.</p>
