@@ -404,6 +404,21 @@ oauth-pool-helper.sh add cursor
 <li><strong>Model discovery</strong> — automatically detects all models available to your account</li>
 <li><strong>Pool rotation</strong> — multiple accounts with LRU rotation and 429 failover</li>
 </ul>
+<h3>Google AI Pool (Gemini CLI / Vertex AI)</h3>
+<p>Use your Google AI Pro, AI Ultra, or Workspace subscription for Gemini models. Tokens are injected as ADC bearer tokens that Gemini CLI, Vertex AI SDK, and the Gemini API pick up automatically.</p>
+<p><strong>Setup:</strong></p>
+<pre><code class="language-bash"># Add your Google account to the pool (browser OAuth flow)
+aidevops model-accounts-pool add google
+
+# Restart OpenCode — token is injected as GOOGLE_OAUTH_ACCESS_TOKEN
+</code></pre>
+<p><strong>Supported plans:</strong></p>
+<ul>
+<li><strong>Google AI Pro</strong> (~$25/mo) — daily Gemini CLI limits</li>
+<li><strong>Google AI Ultra</strong> (~$65/mo) — higher daily limits</li>
+<li><strong>Google Workspace</strong> with Gemini add-on — enterprise daily limits</li>
+</ul>
+<p><strong>Isolation guarantee:</strong> Google auth failures never affect Anthropic/OpenAI/Cursor providers. A Google 429 or auth error only puts the Google pool into cooldown.</p>
 <h3>GitHub AI Agent Integration</h3>
 <p>Enable AI-powered issue resolution directly from GitHub. Comment <code>/oc fix this</code> on any issue and the AI creates a branch, implements the fix, and opens a PR.</p>
 <p><strong>Security-first design</strong> - The workflow includes:</p>
@@ -500,11 +515,20 @@ aidevops model-accounts-pool check        # live token validity test per account
 <td>Recently re-authed, still broken</td>
 <td><code>aidevops model-accounts-pool assign-pending anthropic</code></td>
 </tr>
+<tr>
+<td>Google Gemini CLI rate-limited</td>
+<td><code>aidevops model-accounts-pool rotate google</code></td>
+</tr>
+<tr>
+<td>Google token expired</td>
+<td><code>aidevops model-accounts-pool add google</code> (re-auth)</td>
+</tr>
 </tbody></table>
 <p><strong>Step 3 — If still broken, re-add the account</strong></p>
 <pre><code class="language-bash">aidevops model-accounts-pool add anthropic     # Claude Pro/Max — opens browser OAuth
 aidevops model-accounts-pool add openai        # ChatGPT Plus/Pro
 aidevops model-accounts-pool add cursor        # Cursor Pro (reads from local IDE)
+aidevops model-accounts-pool add google        # Google AI Pro/Ultra/Workspace — browser OAuth
 aidevops model-accounts-pool import claude-cli # Import from existing Claude CLI auth
 </code></pre>
 <p>Restart OpenCode after any <code>add</code>, <code>rotate</code>, or <code>reset-cooldowns</code> to pick up the new credentials.</p>
