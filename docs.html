@@ -3838,7 +3838,7 @@ bash .agents/scripts/continue-cli.sh review
 <p><strong>Wiki Guides:</strong></p>
 <ul>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.wiki/Getting-Started.md">Getting Started</a></strong> - Installation and setup</li>
-<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/docs/configuration.md">Configuration Reference</a></strong> - All JSONC/JSON config options, types, defaults, and examples</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/configuration.md">Configuration Reference</a></strong> - All JSONC/JSON config options, types, defaults, and examples</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.wiki/CLI-Reference.md">CLI Reference</a></strong> - aidevops command documentation</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.wiki/MCP-Integrations.md">MCP Integrations</a></strong> - MCP servers setup</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.wiki/Providers.md">Providers</a></strong> - Service provider configurations</li>
@@ -3884,12 +3884,12 @@ bash .agents/scripts/continue-cli.sh review
 </tr>
 </thead>
 <tbody><tr>
-<td><a href="https://github.com/marcusquinn/aidevops/blob/main/docs/configuration.md#configjsonc--full-reference"><code>~/.config/aidevops/config.jsonc</code></a></td>
+<td><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/configuration.md#configjsonc--full-reference"><code>~/.config/aidevops/config.jsonc</code></a></td>
 <td>Framework config: updates, models, safety, quality, orchestration, paths</td>
 <td><code>aidevops config</code></td>
 </tr>
 <tr>
-<td><a href="https://github.com/marcusquinn/aidevops/blob/main/docs/configuration.md#settingsjson--full-reference"><code>~/.config/aidevops/settings.json</code></a></td>
+<td><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/configuration.md#settingsjson--full-reference"><code>~/.config/aidevops/settings.json</code></a></td>
 <td>User preferences: onboarding, UI, model routing defaults</td>
 <td><code>settings-helper.sh</code></td>
 </tr>
@@ -3907,7 +3907,7 @@ aidevops config list
 # Validate config against schema
 aidevops config validate
 </code></pre>
-<p><strong>Precedence:</strong> Environment variables (<code>AIDEVOPS_*</code>) &gt; config file &gt; built-in defaults. See the <strong><a href="https://github.com/marcusquinn/aidevops/blob/main/docs/configuration.md">full configuration reference</a></strong> for every option, type, default, and example.</p>
+<p><strong>Precedence:</strong> Environment variables (<code>AIDEVOPS_*</code>) &gt; config file &gt; built-in defaults. See the <strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/configuration.md">full configuration reference</a></strong> for every option, type, default, and example.</p>
 <h3>Service Credentials</h3>
 <p>Service-specific credentials (hosting, DNS, Git platforms, etc.) use a separate template system:</p>
 <pre><code class="language-bash"># 1. Copy and customize configuration templates
@@ -3921,7 +3921,7 @@ cp configs/hetzner-config.json.txt configs/hetzner-config.json
 # 3. Install MCP integrations (optional)
 bash .agents/scripts/setup-mcp-integrations.sh all
 </code></pre>
-<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/docs/configuration.md#service-configuration-templates">docs/configuration.md</a> for details on the template system and credential security.</p>
+<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/configuration.md#service-configuration-templates">.agents/reference/configuration.md</a> for details on the template system and credential security.</p>
 <h2><strong>Security &amp; Best Practices</strong></h2>
 <p><strong>Credential Management:</strong></p>
 <ul>
