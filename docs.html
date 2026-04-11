@@ -2755,7 +2755,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 </tbody></table>
 <h3><strong>Main Agents</strong></h3>
-<p>Primary agents as registered in <code>subagent-index.toon</code> (13 total). MCPs are loaded on-demand per subagent, not per primary agent:</p>
+<p>Primary agents live at <code>.agents/&lt;name&gt;.md</code>. Each is a domain expert with its own system prompt, tool permissions, and subagent roster. MCPs are loaded on-demand per subagent, not per primary agent.</p>
 <table>
 <thead>
 <tr>
@@ -2768,7 +2768,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <tbody><tr>
 <td>Build+</td>
 <td><code>build-plus.md</code></td>
-<td>Enhanced Build with context tools (default agent)</td>
+<td>Code: features, bug fixes, refactors, CI, full-loop delivery (default)</td>
 <td>opus</td>
 </tr>
 <tr>
@@ -2778,73 +2778,201 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <td>sonnet</td>
 </tr>
 <tr>
-<td>Accounts</td>
-<td><code>accounts.md</code></td>
-<td>Financial operations</td>
+<td>Aidevops</td>
+<td><code>aidevops.md</code></td>
+<td>Framework development — meta-agent for improving aidevops itself</td>
 <td>opus</td>
 </tr>
 <tr>
 <td>Business</td>
 <td><code>business.md</code></td>
-<td>Company orchestration via AI runners</td>
+<td>Company orchestration, financial ops, invoicing, strategy</td>
 <td>sonnet</td>
 </tr>
 <tr>
 <td>Content</td>
 <td><code>content.md</code></td>
-<td>Content creation workflows</td>
+<td>Content creation across blog, video, audio, image, social</td>
 <td>opus</td>
 </tr>
 <tr>
 <td>Health</td>
 <td><code>health.md</code></td>
-<td>Health and wellness</td>
+<td>Health and wellness content, fitness, nutrition</td>
 <td>opus</td>
 </tr>
 <tr>
 <td>Legal</td>
 <td><code>legal.md</code></td>
-<td>Legal compliance</td>
+<td>Legal compliance, terms, privacy, GDPR</td>
 <td>opus</td>
 </tr>
 <tr>
-<td>Marketing</td>
-<td><code>marketing.md</code></td>
-<td>Marketing strategy, email campaigns, paid ads, CRO</td>
+<td>Marketing-Sales</td>
+<td><code>marketing-sales.md</code></td>
+<td>Email campaigns, CRM, outreach, paid ads, direct response, CRO</td>
+<td>opus</td>
+</tr>
+<tr>
+<td>Product</td>
+<td><code>product.md</code></td>
+<td>Product management, PRDs, roadmaps, requirements capture</td>
 <td>opus</td>
 </tr>
 <tr>
 <td>Research</td>
 <td><code>research.md</code></td>
-<td>Research and analysis tasks</td>
+<td>Technical and market research, competitive analysis</td>
 <td>gemini/grok</td>
-</tr>
-<tr>
-<td>Sales</td>
-<td><code>sales.md</code></td>
-<td>Sales operations and CRM pipeline</td>
-<td>opus</td>
 </tr>
 <tr>
 <td>SEO</td>
 <td><code>seo.md</code></td>
-<td>SEO optimization and analysis</td>
-<td>opus</td>
-</tr>
-<tr>
-<td>Social-Media</td>
-<td><code>social-media.md</code></td>
-<td>Social media management</td>
-<td>opus</td>
-</tr>
-<tr>
-<td>Video</td>
-<td><code>video.md</code></td>
-<td>AI video generation and prompt engineering</td>
+<td>SEO audits, keyword research, GSC, schema, technical SEO</td>
 <td>opus</td>
 </tr>
 </tbody></table>
-<p><strong>Specialist subagents</strong> (@plan-plus, @aidevops, @wordpress, Build-Agent, Build-MCP, etc.) live under <code>tools/</code> or as <code>mode: subagent</code> files and are invoked via @mention when domain expertise is needed. See <code>subagent-index.toon</code> for the full listing.</p>
+<p><strong>Specialist subagents</strong> (e.g. <code>@wordpress</code>, <code>@seo</code>, Build-Agent, Build-MCP, etc.) live under <code>.agents/tools/</code> or as <code>mode: subagent</code> files and are invoked via <code>@mention</code> when domain expertise is needed. See <code>subagent-index.toon</code> for the full roster.</p>
+<h4>How to invoke a main agent</h4>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Invocation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>OpenCode</strong></td>
+<td>Tab through the agent picker in the UI — Build+ is the default. Main agents are registered as top-level agents in OpenCode&#39;s config.</td>
+</tr>
+<tr>
+<td><strong>Claude Code / Codex / Cursor / Droid / Kiro / Continue / Kimi / Qwen / Amp / Windsurf / Gemini CLI</strong></td>
+<td>Slash command, namespaced with the <code>aidevops-</code> prefix: <code>/aidevops-build-plus</code>, <code>/aidevops-automate</code>, <code>/aidevops-seo</code>, etc.</td>
+</tr>
+<tr>
+<td><strong>Aider</strong></td>
+<td>No native slash command support — use a shell alias: <code>alias aider-build=&#39;aider --message-file ~/.aidevops/agents/build-plus.md&#39;</code>.</td>
+</tr>
+</tbody></table>
+<p>The <code>aidevops-</code> prefix differentiates framework commands from each client&#39;s native slash commands and groups them alphabetically in the command picker. It applies to <strong>every</strong> aidevops slash command — not just main agents — so <code>/aidevops-preflight</code>, <code>/aidevops-release</code>, <code>/aidevops-commit</code> etc. all sort together in your <code>/</code> menu.</p>
+<h4>Supported AI clients (14)</h4>
+<p>The framework installs itself across these clients. Slash commands, agent definitions, and (optionally) session-memory mining are wired up per-client by <code>setup.sh</code>, gated on per-client feature flags in <code>.agents/scripts/runtime-registry.sh</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Slash commands</th>
+<th>Agent dir</th>
+<th>Memory mining</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OpenCode</td>
+<td>✅ <code>~/.config/opencode/command/</code></td>
+<td>config-based</td>
+<td>✅ default</td>
+<td>Native tab-through primary agents</td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td>✅ <code>~/.claude/commands/</code></td>
+<td>✅ <code>~/.claude/agents/</code></td>
+<td>✅ default</td>
+<td>Full feature parity</td>
+</tr>
+<tr>
+<td>Codex CLI</td>
+<td>✅ <code>~/.codex/prompts/</code></td>
+<td>—</td>
+<td>✅ default</td>
+<td>Invoked as <code>/prompts:aidevops-&lt;name&gt;</code></td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td>✅ <code>~/.cursor/commands/</code> (≥1.6)</td>
+<td>✅ <code>~/.cursor/agents/</code></td>
+<td>✅ default</td>
+<td>Frontmatter stripped (not supported)</td>
+</tr>
+<tr>
+<td>Droid (Factory)</td>
+<td>✅ <code>~/.factory/commands/</code></td>
+<td>—</td>
+<td>opt-in</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Gemini CLI</td>
+<td>✅ <code>~/.gemini/commands/</code></td>
+<td>—</td>
+<td>opt-in</td>
+<td>Converted to TOML (<code>prompt = &quot;&quot;&quot;...&quot;&quot;&quot;</code>)</td>
+</tr>
+<tr>
+<td>Kimi CLI</td>
+<td>✅ <code>~/.kimi/skills/&lt;name&gt;/SKILL.md</code></td>
+<td>✅ <code>~/.kimi/agents/</code></td>
+<td>opt-in</td>
+<td>Directory-per-skill + auto <code>name:</code> matching</td>
+</tr>
+<tr>
+<td>Qwen Code</td>
+<td>✅ <code>~/.qwen/commands/</code></td>
+<td>✅ <code>~/.qwen/agents/</code></td>
+<td>opt-in</td>
+<td>Sub-agents + skills</td>
+</tr>
+<tr>
+<td>Continue</td>
+<td>✅ <code>~/.continue/prompts/</code></td>
+<td>—</td>
+<td>opt-in</td>
+<td><code>.prompt</code> ext + <code>invokable: true</code></td>
+</tr>
+<tr>
+<td>Kiro</td>
+<td>✅ <code>~/.kiro/steering/</code></td>
+<td>—</td>
+<td>opt-in</td>
+<td><code>inclusion: manual</code> for slash access</td>
+</tr>
+<tr>
+<td>Kilo Code</td>
+<td>custom modes</td>
+<td>—</td>
+<td>opt-in</td>
+<td>Uses modes instead of commands</td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td>repo-local <code>.windsurf/workflows/</code></td>
+<td>—</td>
+<td>❌ (protobuf)</td>
+<td>Symlinked by <code>aidevops init</code></td>
+</tr>
+<tr>
+<td>Amp (Sourcegraph)</td>
+<td>repo-local <code>.agents/commands/</code></td>
+<td>✅ <code>~/.amp/agents/</code></td>
+<td>❌ (cloud)</td>
+<td>Path match is native</td>
+</tr>
+<tr>
+<td>Aider</td>
+<td>shell alias workaround</td>
+<td>—</td>
+<td>❌ (per-repo md)</td>
+<td>Native custom commands open upstream</td>
+</tr>
+</tbody></table>
+<p><strong>Feature flags</strong> per client (<code>agents</code> / <code>commands</code> / <code>memory</code>) live in <code>runtime-registry.sh</code> and can be overridden at install time via environment variables:</p>
+<pre><code class="language-bash">AIDEVOPS_FEATURE_MEMORY_CLAUDE_CODE=no setup.sh
+AIDEVOPS_FEATURE_COMMANDS_CURSOR=no setup.sh
+</code></pre>
+<p>Memory mining defaults are deliberately conservative: only OpenCode, Claude Code, Codex, and Cursor are opted in by default. All other clients default to off — enable them case-by-case after reviewing what the mining job will read.</p>
+<h4>Endgame: progressive disclosure</h4>
+<p>The long-term direction is to make slash commands and <code>@mentions</code> unnecessary altogether. A progressive disclosure layer should load the right domain agents and tools into context based on the nature of the conversation — you should never have to remember agent names or prefix commands. The <code>aidevops-</code> slash commands documented above are a stepping stone: they standardise routing across every client we support, and will eventually be auto-invoked by the router rather than typed by hand.</p>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
 <p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 900+ subagents organized by domain.</p>
 <table>
@@ -3690,6 +3818,109 @@ memory-helper.sh recall &quot;refactor auth middleware&quot; --semantic
 ~/.aidevops/agents/scripts/memory-helper.sh namespaces  # List all namespaces
 </code></pre>
 <p><strong>Storage:</strong> <code>~/.aidevops/.agent-workspace/memory/memory.db</code> (+ optional <code>embeddings.db</code> for semantic search, <code>namespaces/</code> for per-runner isolation)</p>
+<h4>Session mining (cross-client)</h4>
+<p>Beyond explicit <code>/remember</code> calls, aidevops can harvest structured session data from each supported AI client&#39;s on-disk conversation history. This turns every prior session — regardless of which tool you were using — into searchable context for future sessions.</p>
+<p>Per-client storage paths and formats (see <code>runtime-registry.sh</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Storage path</th>
+<th>Format</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OpenCode</td>
+<td><code>~/.local/share/opencode/opencode.db</code></td>
+<td>SQLite</td>
+<td>✅ on</td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td><code>~/.claude/projects/</code></td>
+<td>JSONL per project</td>
+<td>✅ on</td>
+</tr>
+<tr>
+<td>Codex CLI</td>
+<td><code>~/.codex/sessions/</code></td>
+<td>JSONL, date-partitioned</td>
+<td>✅ on</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td><code>~/Library/Application Support/Cursor/User/workspaceStorage/</code></td>
+<td>SQLite (<code>state.vscdb</code>)</td>
+<td>✅ on</td>
+</tr>
+<tr>
+<td>Droid</td>
+<td><code>~/.factory/sessions/</code></td>
+<td>JSONL per session</td>
+<td>opt-in</td>
+</tr>
+<tr>
+<td>Gemini CLI</td>
+<td><code>~/.gemini/tmp/</code></td>
+<td>JSON per session</td>
+<td>opt-in</td>
+</tr>
+<tr>
+<td>Continue</td>
+<td><code>~/.continue/sessions/</code></td>
+<td>JSON per session</td>
+<td>opt-in</td>
+</tr>
+<tr>
+<td>Kilo Code</td>
+<td><code>~/Library/.../kilocode.kilo-code/tasks/</code></td>
+<td>JSON (Anthropic schema)</td>
+<td>opt-in</td>
+</tr>
+<tr>
+<td>Kiro</td>
+<td><code>~/Library/Application Support/Kiro/User/workspaceStorage/</code></td>
+<td>SQLite</td>
+<td>opt-in</td>
+</tr>
+<tr>
+<td>Kimi CLI</td>
+<td><code>~/.kimi/sessions/&lt;id&gt;/context.jsonl</code></td>
+<td>JSONL</td>
+<td>opt-in</td>
+</tr>
+<tr>
+<td>Qwen Code</td>
+<td><code>~/.qwen/tmp/</code></td>
+<td>JSON per session</td>
+<td>opt-in</td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td><code>~/.codeium/windsurf/cascade/</code></td>
+<td>protobuf (opaque)</td>
+<td>❌ unsupported</td>
+</tr>
+<tr>
+<td>Amp</td>
+<td>server-side (cloud)</td>
+<td>needs API auth</td>
+<td>❌ unsupported</td>
+</tr>
+<tr>
+<td>Aider</td>
+<td><code>&lt;repo&gt;/.aider.chat.history.md</code></td>
+<td>markdown transcript</td>
+<td>❌ unsupported</td>
+</tr>
+</tbody></table>
+<p><strong>Defaults are deliberately conservative.</strong> Only the four tier-1 clients — OpenCode, Claude Code, Codex, and Cursor — have memory mining enabled by default. They have the most mature, stable, documented formats and are the ones most likely to contain the full interactive history you&#39;d want to search.</p>
+<p>For every other client, memory mining is <strong>opt-in per runtime</strong>. Enable it with:</p>
+<pre><code class="language-bash">AIDEVOPS_FEATURE_MEMORY_GEMINI_CLI=yes setup.sh
+AIDEVOPS_FEATURE_MEMORY_CONTINUE=yes setup.sh
+</code></pre>
+<p><strong>Privacy note.</strong> Session files contain everything you typed — including secrets, credentials, and file contents pasted into prompts. The mining pipeline runs secretlint-style scrubbing at ingestion and defaults to local-only storage. Never sync the memory DB to a shared or cloud location without reviewing what&#39;s in it.</p>
 <p>See <code>.agents/memory/README.md</code> for complete documentation.</p>
 <h3><strong>Installation</strong></h3>
 <p>Slash commands are automatically installed by <code>setup.sh</code> for both OpenCode and Claude Code:</p>
