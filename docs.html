@@ -254,7 +254,8 @@ aidevops security dismiss &lt;id&gt; # Dismiss a security advisory after taking 
 <li>Configure your AI assistants automatically</li>
 <li>Offer to install Oh My Zsh (optional, opt-in) for enhanced shell experience</li>
 <li>Guide you through recommended tools (Tabby, Zed, Git CLIs)</li>
-<li>Ensure all PATH and alias changes work in both bash and zsh</li>
+<li>Ensure all PATH and alias changes work in both bash, zsh, and fish</li>
+<li>Add a <code>claude</code> alias that runs <code>claude --dangerously-skip-permissions</code> (skips per-tool permission prompts). Re-running setup updates the alias automatically. To grant permissions per-session instead, press <strong>Shift-Tab</strong> inside Claude Code to cycle through permission modes (default → skip permissions → auto-approve).</li>
 </ul>
 <p><strong>New users: Start <a href="https://opencode.ai/">OpenCode</a> and type <code>/onboarding</code></strong> to configure your services interactively. OpenCode is the recommended tool for aidevops - all features, agents, and workflows are designed and tested for it first. The onboarding wizard will:</p>
 <ul>
