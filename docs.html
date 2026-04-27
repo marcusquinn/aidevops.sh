@@ -294,6 +294,19 @@ aidevops init planning,time-tracking  # Enable specific features
 <li><code>.beads/</code> - Task graph database (if beads enabled)</li>
 </ul>
 <p><strong>Available features:</strong> <code>planning</code>, <code>git-workflow</code>, <code>code-quality</code>, <code>time-tracking</code>, <code>beads</code></p>
+<h3>Per-repo platform setup</h3>
+<p>After <code>aidevops init</code> registers a new repo, run <code>/setup-git</code> in your AI assistant
+to apply per-repo platform secrets. Most notably, this sets <code>SYNC_PAT</code> — a
+GitHub Actions secret that lets <code>issue-sync.yml</code> push TODO.md auto-completion
+past branch protection.</p>
+<p>This is distinct from <code>/onboarding</code> (per-account credentials like <code>gh auth login</code>):
+GitHub Actions secrets are scoped per-repo, so each repo needs its own. You need
+<code>gh auth login</code> to succeed before any per-repo helper can run, so <code>/onboarding</code>
+comes first, <code>/setup-git</code> second.</p>
+<p>Run <code>/setup-git</code> again whenever you register a new repo with <code>aidevops repos add</code>
+or when a <code>SYNC_PAT</code> advisory appears in the session greeting toast. If you skip
+this step, <code>issue-sync.yml</code> will post a remediation comment when it hits branch
+protection — <code>/setup-git</code> walks through the fix.</p>
 <h3>Upgrade Planning Files</h3>
 <p>When aidevops templates evolve, upgrade existing projects to the latest format:</p>
 <pre><code class="language-bash">aidevops upgrade-planning           # Interactive upgrade with backup
