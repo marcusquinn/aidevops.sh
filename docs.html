@@ -693,6 +693,7 @@ aidevops model-accounts-pool remove &lt;p&gt; &lt;email&gt;# Remove an account
 <p><strong>Quality Control &amp; Monitoring:</strong></p>
 <ul>
 <li><strong>Multi-Platform Analysis</strong>: SonarCloud, CodeFactor, Codacy, CodeRabbit, Qlty, Gemini Code Assist, Snyk</li>
+<li><strong>Review gate preferences</strong>: choose whether true review-bot rate limits block merges (<code>aidevops review-gate owner/repo wait</code>) or allow merge with follow-up quality coverage (<code>aidevops review-gate owner/repo pass</code>, the default). Per-tool overrides are supported, for example <code>aidevops review-gate owner/repo --tool coderabbitai wait</code>. Failed, skipped, or placeholder bot states are not treated as rate limits and continue to block until a real review/status appears or a human resolves them.</li>
 <li><strong>Performance Auditing</strong>: PageSpeed Insights, Lighthouse, WebPageTest, Core Web Vitals (<code>/performance</code> command)</li>
 <li><strong>SEO Toolchain</strong>: 40+ SEO subagents including Semrush, Ahrefs, ContentKing, Screaming Frog, Bing Webmaster Tools, Rich Results Test, programmatic SEO, analytics tracking, schema validation, content analysis, keyword mapping, and AI readiness</li>
 <li><strong>SEO Debugging</strong>: Open Graph validation, favicon checker, social preview testing</li>
