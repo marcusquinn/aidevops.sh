@@ -200,6 +200,7 @@
 <li><code>/onboarding</code> - Interactive setup wizard (in AI assistant)</li>
 <li><code>/design-artifact</code> - Route artifact-first UI, deck, email, poster, and mobile mockup work</li>
 <li><code>/open-design</code> - Manage the optional Open Design companion studio</li>
+<li><code>/auto-browse</code> - Learn, optimize, and graduate repeatable browser operations and web data-mining workflows</li>
 </ul>
 <h3>Agent Structure</h3>
 <ul>
@@ -1906,6 +1907,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </ul>
 <p><strong>Browser Automation</strong> (8 tools + anti-detect stack, <a href="#browser-automation">benchmarked</a>):</p>
 <ul>
+<li><strong>Auto-browse workflow</strong> - <code>/auto-browse</code> orchestrates the tools below to learn messy browser tasks, choose the cheapest reliable path, preserve private profile/session state under <code>~/.aidevops/</code>, and graduate reusable private agents or sanitized <code>todo/</code> plans</li>
 <li><a href="https://playwright.dev/">Playwright</a> - Fastest engine (0.9s form fill), parallel contexts, extensions, proxy (auto-installed)</li>
 <li><a href="https://github.com/microsoft/playwright-cli">playwright-cli</a> - Microsoft official CLI for AI agents, <code>--session</code> isolation, built-in tracing</li>
 <li><a href="https://github.com/nicholasgriffintn/dev-browser">dev-browser</a> - Persistent profile, stays logged in, ARIA snapshots, pairs with DevTools</li>
@@ -2004,6 +2006,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <p>These catch formatting and syntax issues during editing, reducing preflight/postflight fix cycles.</p>
 <h2><strong>Browser Automation</strong></h2>
 <p>8 browser tools + anti-detect stack + device emulation, benchmarked and integrated for AI-assisted web automation, dev testing, mobile/responsive testing, data extraction, and bot detection evasion. Agents automatically select the optimal tool based on task requirements.</p>
+<p>For repeatable browser operations and web data mining, use <code>/auto-browse</code>. It runs an intake and learning loop that starts with cheap fetch/API/crawler options, escalates to deterministic or high-agency browser tools only when needed, and then graduates the workflow into a private custom agent, helper, schema, or sanitized <code>todo/</code> plan. Account-specific workflows, cookies, profile state, downloads, and traces stay in private aidevops user data; only generalized plans should be committed to the repo.</p>
 <h3>Performance Benchmarks</h3>
 <p>Tested on macOS ARM64, all headless, warm daemon:</p>
 <table>
@@ -2215,6 +2218,11 @@ cargo install toon-lsp                        # TOON syntax validation
 </tr>
 </thead>
 <tbody><tr>
+<td><strong>Repeatable browser workflow</strong></td>
+<td><code>/auto-browse</code></td>
+<td>Learns, optimizes, preserves private profile state, and graduates reusable workflows</td>
+</tr>
+<tr>
 <td><strong>Fastest automation</strong></td>
 <td>Playwright</td>
 <td>0.9s form fill, parallel contexts</td>
