@@ -256,6 +256,7 @@ aidevops security dismiss &lt;id&gt; # Dismiss a security advisory after taking 
 <li>Install the <code>aidevops</code> CLI command</li>
 <li>Configure your AI assistants automatically</li>
 <li>Offer to install Oh My Zsh (optional, opt-in) for enhanced shell experience</li>
+<li>Install recommended token-efficiency tooling by default, including RTK for compact <code>git</code>/<code>gh</code>/test/lint command summaries before output reaches AI context</li>
 <li>Guide you through recommended tools (Tabby, Zed, Git CLIs)</li>
 <li>Ensure all PATH and alias changes work in both bash, zsh, and fish</li>
 <li>When Claude Code is installed, add a <code>claude</code> alias that runs <code>claude --dangerously-skip-permissions</code> (skips per-tool permission prompts). Re-running setup updates the alias automatically. To grant permissions per-session instead, press <strong>Shift-Tab</strong> inside Claude Code to cycle through permission modes (default → skip permissions → auto-approve).</li>
@@ -889,6 +890,11 @@ aidevops sources remove my-private-agents         # Remove a source
 <td><strong>Token-Efficient Serialisation</strong></td>
 <td>Minimise context overhead for structured data</td>
 <td><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/toon-format.md">TOON format</a> — 20-60% token reduction vs JSON/YAML for agent indexes, registries, and data exchange</td>
+</tr>
+<tr>
+<td><strong>Token-Efficient Tool Output</strong></td>
+<td>Summarise noisy terminal output without hiding evidence</td>
+<td>RTK is installed by default during setup for compact <code>git</code>/<code>gh</code>/test/lint summaries; aidevops bypasses compression for file reads, JSON assertions, exact diffs, security scans, and other verbatim evidence</td>
 </tr>
 <tr>
 <td><strong>Cost-Aware Routing</strong></td>
