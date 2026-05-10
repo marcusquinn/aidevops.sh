@@ -1106,7 +1106,7 @@ opencode run &quot;/pulse&quot;
 </tr>
 <tr>
 <td><strong>High</strong></td>
-<td>Force push to feature branch, data migration, secret exposure</td>
+<td>Force push to task ref, data migration, secret exposure</td>
 <td>Warned, verification recommended</td>
 </tr>
 <tr>
@@ -3207,7 +3207,7 @@ AIDEVOPS_FEATURE_COMMANDS_CURSOR=no setup.sh
 <p><strong>Contributing improvements:</strong></p>
 <pre><code class="language-text">@agent-review create a PR for improvement #2
 </code></pre>
-<p>The agent will create a branch, apply changes, and submit a PR to <code>marcusquinn/aidevops</code> with a structured description. Your real-world usage helps improve the framework for everyone.</p>
+<p>The agent will create a safe linked worktree, apply changes, and submit a PR to <code>marcusquinn/aidevops</code> with a structured description. Your real-world usage helps improve the framework for everyone.</p>
 <p><strong>Code quality learning loop:</strong></p>
 <p>The <code>@code-quality</code> agent also learns from issues. After fixing violations from SonarCloud, Codacy, ShellCheck, etc., it analyzes patterns and updates framework guidance to prevent recurrence:</p>
 <pre><code class="language-text">Quality Issue → Fix Applied → Pattern Identified → Framework Updated → Issue Prevented
@@ -3356,11 +3356,11 @@ AIDEVOPS_FEATURE_COMMANDS_CURSOR=no setup.sh
 </tr>
 <tr>
 <td><code>/feature</code></td>
-<td>Start a new feature branch workflow</td>
+<td>Start a new feature linked-worktree workflow</td>
 </tr>
 <tr>
 <td><code>/bugfix</code></td>
-<td>Start a bugfix branch workflow</td>
+<td>Start a bugfix linked-worktree workflow</td>
 </tr>
 <tr>
 <td><code>/hotfix</code></td>
@@ -4281,7 +4281,7 @@ source &lt;(credential-helper.sh export)
 <p><strong>Contributing:</strong></p>
 <ol>
 <li>Fork the repository</li>
-<li>Create feature branch</li>
+<li>Create safe linked worktree for your contribution</li>
 <li>Add provider support or improvements</li>
 <li>Test with your infrastructure</li>
 <li>Submit pull request</li>
