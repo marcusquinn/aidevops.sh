@@ -112,7 +112,7 @@
         <div class="docs-content">
 <!-- SPDX-License-Identifier: MIT -->
 <!-- SPDX-FileCopyrightText: 2025-2026 Marcus Quinn --><h1>AI DevOps Framework</h1>
-<p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> — An <a href="https://opencode.ai/">OpenCode</a> plugin and AI operations platform for launching and managing development, business, marketing, and creative projects. 13 specialist AI agents handle the automatable work across every domain so your time is preserved for real-world discovery and decisions that AI cannot yet reach.</p>
+<p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> — An <a href="https://opencode.ai/">OpenCode</a> plugin and AI operations platform for launching and managing development, business, marketing, and creative projects. 11 primary agents handle automatable work across every domain so your time is preserved for real-world discovery and decisions that AI cannot yet reach.</p>
 <blockquote>
 <p><strong>Recommended setup:</strong> <a href="https://opencode.ai/">OpenCode</a> + OpenAI models. GPT-5.5 is the preferred high-capability model for complex agent work; GPT-5.4 mini is the preferred fast, lower-cost model for triage and routine implementation. Claude models (Anthropic) remain fully supported, and other model providers are evaluated from time to time as their quality, latency, and cost profiles change.</p>
 </blockquote>
@@ -123,7 +123,7 @@
 <p><strong>Maximum value for your time and money.</strong> <strong><a href="https://aidevops.sh">aidevops</a></strong> is built on these principles:</p>
 <ul>
 <li><strong>Autonomous orchestration</strong> - An AI supervisor runs every 2 minutes, dispatching parallel workers, merging PRs, detecting stuck processes, and advancing multi-day missions — no human babysitting required</li>
-<li><strong>Multi-domain agents</strong> - 13 specialist agents (code, automation, SEO, marketing, content, legal, sales, research, video, business, accounts, social media, health) with 900+ subagents loaded on demand</li>
+<li><strong>Multi-domain agents</strong> - 11 primary agents covering code, automation, product, SEO, marketing/sales, content/video/social, legal, research, business/accounts, health, and framework operations with 900+ subagents loaded on demand</li>
 <li><strong>Multi-model safety</strong> - High-stakes operations (force push, production deploy, data migration) are verified by a second cross-provider model before execution — different providers have different failure modes, so correlated hallucinations are rare</li>
 <li><strong>Resource efficiency</strong> - Cost-aware model routing across OpenAI, Anthropic, Gemini, Cursor, and local models; project-type bundles auto-configure quality gates and model tiers, with budget tracking and burn-rate analysis</li>
 <li><strong>Self-healing</strong> - When something breaks, diagnose the root cause, create tasks, and fix it. Every error is a live test case for a permanent solution</li>
@@ -141,7 +141,7 @@
 <p><strong>What makes it different:</strong></p>
 <ul>
 <li><strong>Autonomous supervisor</strong> - AI pulse runs every 2 minutes: merges ready PRs, dispatches workers, kills stuck processes, advances missions, triages quality findings — no human in the loop</li>
-<li><strong>Cross-domain intelligence</strong> - 13 agents spanning code, automation, business, marketing, legal, sales, content, video, research, SEO, social media, health, and accounts — each with domain expertise and specialist subagents</li>
+<li><strong>Cross-domain intelligence</strong> - 11 primary agents spanning code, automation, product, business, marketing/sales, legal, content/video/social, research, SEO, health, and framework operations — each with domain expertise and specialist subagents</li>
 <li><strong>Multi-model safety</strong> - Destructive operations verified by a second AI model from a different provider before execution</li>
 <li><strong>30+ service integrations</strong> - Hosting, Git platforms, DNS, security, monitoring, deployment, payments, communications</li>
 <li><strong>Mission orchestration</strong> - Multi-day autonomous projects broken into milestones with validation, budget tracking, and automatic advancement</li>
@@ -204,10 +204,18 @@
 </ul>
 <h3>Agent Structure</h3>
 <ul>
-<li>13 primary agents (Build+, Automate, SEO, Marketing, etc.) with specialist @subagents on demand</li>
+<li>11 primary agents (Build+, Automate, Product, SEO, Marketing-Sales, etc.) with specialist @subagents on demand</li>
 <li>900+ subagent markdown files organized by domain</li>
 <li>1,200+ helper scripts in <code>.agents/scripts/</code></li>
 <li>90+ slash commands and workflow guides for common operations</li>
+</ul>
+<h3>What You Can Ask aidevops To Do</h3>
+<ul>
+<li>Build, fix, review, release, and maintain software with worktrees, PRs, tests, and quality gates.</li>
+<li>Run infrastructure, hosting, DNS, monitoring, security, and deployment workflows.</li>
+<li>Plan products, PRDs, onboarding, monetisation, growth, analytics, and UI direction.</li>
+<li>Operate business, finance, receipts, invoices, marketing, outreach, SEO, content, video, and personal-productivity routines.</li>
+<li>Discover the right capability with <code>/skills recommend &quot;TASK&quot;</code>, <code>/onboarding</code>, or the OpenCode agent picker.</li>
 </ul>
 <!-- AI-CONTEXT-END --><h2><strong>Enterprise-Grade Quality &amp; Security</strong></h2>
 <p><strong>Comprehensive DevOps framework with tried &amp; tested services integrations, popular and trusted MCP servers, and enterprise-grade infrastructure quality assurance code monitoring and recommendations.</strong></p>
@@ -2745,7 +2753,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 13 primary agents, 900+ subagents, and 1,200+ helper scripts.</p>
+<p>This installs the complete framework: 11 primary agents, 900+ subagents, and 1,200+ helper scripts.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -4179,7 +4187,7 @@ bash .agents/scripts/continue-cli.sh review
 ├── AGENTS.md                      # AI agent guidance (dev)
 ├── .agents/                        # Agents and documentation
 │   ├── AGENTS.md                  # User guide (deployed to ~/.aidevops/agents/)
-│   ├── *.md                       # 13 primary agents
+│   ├── *.md                       # 11 primary agents
 │   ├── scripts/                   # 1,200+ helper scripts
 │   ├── tools/                     # Cross-domain utilities (video, browser, git, etc.)
 │   ├── services/                  # External service integrations
