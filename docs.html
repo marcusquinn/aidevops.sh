@@ -220,15 +220,30 @@
 </ul>
 <!-- AI-CONTEXT-END --><h2><strong>Enterprise-Grade Quality &amp; Security</strong></h2>
 <p><strong>Comprehensive DevOps framework with tried &amp; tested services integrations, popular and trusted MCP servers, and enterprise-grade infrastructure quality assurance code monitoring and recommendations.</strong></p>
-<h3>Report-ready AI search workflow</h3>
-<p>Use aidevops to turn AI search readiness work into a client-ready report without making HTML the source of truth:</p>
+<h3>Report creation, previews, and PDF exports</h3>
+<p>Use aidevops to turn evidence bundles into decision-ready reports while keeping Markdown or JSON as the canonical source. Report agents can produce AI-search audits, SEO/GEO scorecards, delivery reviews, campaign reports, board packs, incident summaries, recurring client handoffs, and before/after remediation evidence.</p>
+<p>New report capabilities include:</p>
+<ul>
+<li>Markdown-first report anatomy with cover pages, executive summaries, evidence ledgers, source cards, action prompts, appendix links, charts, Mermaid/LaTeX fallbacks, and <code>verified</code>, <code>partial</code>, <code>inferred</code>, or <code>missing</code> evidence badges.</li>
+<li>DESIGN.md-backed visual templates plus <code>basic</code> no-CSS output for lightweight handoff.</li>
+<li>Browser preview HTML with sticky contents, source-card links, copy buttons, and light/dark theme variants where a style supports them.</li>
+<li>PDF-ready profiles for A4, US Letter, and 16:9 slides. Generated PDF links use <code>*-a4.pdf</code>, <code>*-usletter.pdf</code>, and <code>*-slides.pdf</code> names.</li>
+<li>Versioned examples under <code>_reports/examples/</code>; open <code>_reports/examples/index.html</code> locally to browse the example reports, rendered styles, and PDF exports.</li>
+</ul>
+<p>Create a report:</p>
 <ol>
-<li>Run <code>/seo-ai-readiness example.com</code> for the domain or priority URLs.</li>
-<li>Request report-ready output with executive summary, method, scorecard, page-type findings, evidence ledger, roadmap, verification, and source IDs.</li>
-<li>Save the Markdown or JSON report, then render it with <code>/report-render report.md</code> or <code>report-render-helper.sh render report.md --output report.html</code>.</li>
-<li>Review the generated HTML for sticky table of contents, source cards, print CSS, and <code>verified</code>, <code>partial</code>, <code>inferred</code>, or <code>missing</code> evidence badges.</li>
-<li>Export or print the HTML to PDF from the browser print dialog.</li>
-<li>After remediation, rerun <code>/seo-ai-readiness</code> and render the updated report for before/after comparison.</li>
+<li>Load <code>reports/general.md</code> for structure, then the matching domain report doc such as <code>reports/seo-geo.md</code>, <code>reports/development.md</code>, <code>reports/marketing.md</code>, or <code>reports/business.md</code>.</li>
+<li>Gather source evidence first. Use deterministic <code>run:</code> steps or service helpers for collection, then ask the domain agent plus <code>agent:Reports</code> to interpret and prioritise.</li>
+<li>Save canonical source as <code>report.md</code> or <code>report.json</code> in <code>_reports/drafts/&lt;report-name&gt;/</code> while working, or in <code>_reports/examples/&lt;example-name&gt;/</code> only after privacy review.</li>
+<li>Render with <code>/report-render report.md</code> or <code>.agents/scripts/report-render-helper.sh render report.md --template &lt;style&gt; --theme auto --pdf-profile a4 --output report.html</code>.</li>
+<li>Export PDFs from Chrome/Chromium using the generated HTML and the A4, US Letter, or slides profiles. Regenerate derived HTML/PDF files instead of hand-editing them.</li>
+</ol>
+<p>Create a repeatable report agent:</p>
+<ol>
+<li>Read <code>reports/routine-handoff.md</code> and <code>tools/build-agent/build-agent.md</code>.</li>
+<li>Define the report cadence, evidence collection commands, source IDs, privacy rules, target template/style, and verification gates.</li>
+<li>Put deterministic collection in <code>run:</code> steps and reserve <code>agent:Reports</code> for narrative, evidence interpretation, recommendations, and handoff tasks.</li>
+<li>Store reusable agent instructions in the appropriate agent tier (<code>custom/</code> for local/client-specific agents; shared <code>.agents/</code> only for broadly reusable framework agents).</li>
 </ol>
 <h2><strong>Security Notice</strong></h2>
 <p><strong>This framework provides agentic AI assistants with powerful infrastructure access. Use responsibly.</strong></p>
