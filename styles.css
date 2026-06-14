@@ -50,6 +50,10 @@ body {
     overflow-x: hidden;
 }
 
+p {
+    text-wrap: pretty;
+}
+
 /* Container */
 .container {
     max-width: 1100px;
