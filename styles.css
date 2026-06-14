@@ -50,10 +50,8 @@ body {
     overflow-x: hidden;
 }
 
-@supports (text-wrap: pretty) {
-    p {
-        text-wrap: pretty;
-    }
+p {
+    text-wrap: pretty;
 }
 
 /* Container */
