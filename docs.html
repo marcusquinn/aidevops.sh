@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary Meta Tags -->
-    <title>AIDevOps Documentation - AI DevOps Assistant Setup &amp; Configuration Guide</title>
-    <meta name="title" content="AIDevOps Documentation - AI DevOps Assistant Setup &amp; Configuration Guide">
-    <meta name="description" content="Complete AIDevOps documentation: setup guide for the open-source AI DevOps assistant framework, OpenCode plugin, MCP servers, services, and automation.">
-    <meta name="keywords" content="ai devops documentation, aidevops guide, ai devops assistant, devops ai assistant, open source ai devops assistant, ai devops setup, mcp server configuration, ai assistant devops, devops framework docs, ai infrastructure guide, aidevops tutorial">
+    <title>AIDevOps Documentation - AI DevOps Framework Setup &amp; Configuration Guide</title>
+    <meta name="title" content="AIDevOps Documentation - AI DevOps Framework Setup & Configuration Guide">
+    <meta name="description" content="Complete AIDevOps documentation: setup guide, MCP server configuration, service integrations, AI assistant compatibility, and DevOps automation tutorials for the AI DevOps framework.">
+    <meta name="keywords" content="ai devops documentation, aidevops guide, ai devops setup, mcp server configuration, ai assistant devops, devops framework docs, ai infrastructure guide, aidevops tutorial">
     <meta name="author" content="Marcus Quinn">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://aidevops.sh/docs.html">
@@ -16,8 +16,8 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://aidevops.sh/docs.html">
-    <meta property="og:title" content="AIDevOps Documentation - AI DevOps Assistant Setup Guide">
-    <meta property="og:description" content="Complete AIDevOps documentation: setup guide for the open-source AI DevOps assistant framework, OpenCode plugin, MCP servers, services, and automation.">
+    <meta property="og:title" content="AIDevOps Documentation - Setup & Configuration Guide">
+    <meta property="og:description" content="Complete AIDevOps documentation: setup guide, MCP server configuration, service integrations, AI assistant compatibility, and DevOps automation tutorials.">
     <meta property="og:image" content="https://aidevops.sh/og-image.png">
     <meta property="og:site_name" content="AI DevOps">
     <meta property="og:locale" content="en_US">
@@ -26,8 +26,8 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://aidevops.sh/docs.html">
-    <meta name="twitter:title" content="AIDevOps Documentation - AI DevOps Assistant Setup Guide">
-    <meta name="twitter:description" content="Complete AIDevOps documentation: setup guide for the open-source AI DevOps assistant framework, OpenCode plugin, MCP servers, services, and automation.">
+    <meta name="twitter:title" content="AIDevOps Documentation - Setup & Configuration Guide">
+    <meta name="twitter:description" content="Complete AIDevOps documentation: setup guide, MCP server configuration, service integrations, AI assistant compatibility, and DevOps automation tutorials.">
     <meta name="twitter:image" content="https://aidevops.sh/og-image.png">
     <meta name="twitter:creator" content="@marcuswquinn">
     
@@ -45,8 +45,8 @@
         "@context": "https://schema.org",
         "@type": "TechArticle",
         "@id": "https://aidevops.sh/docs.html#article",
-        "headline": "AIDevOps AI DevOps Assistant Framework Documentation",
-        "description": "Complete documentation for the AIDevOps open-source AI DevOps assistant framework - setup guide, OpenCode plugin configuration, MCP server configuration, service integrations, and DevOps automation tutorials.",
+        "headline": "AIDevOps Framework Documentation",
+        "description": "Complete documentation for the AIDevOps framework - setup guide, MCP server configuration, service integrations, and DevOps automation tutorials.",
         "url": "https://aidevops.sh/docs.html",
         "author": {
             "@type": "Person",
@@ -67,7 +67,7 @@
             "name": "AIDevOps Framework",
             "applicationCategory": "DeveloperApplication"
         },
-        "keywords": "ai devops, ai devops assistant, devops ai assistant, open source ai devops assistant, aidevops, documentation, setup guide, mcp servers, devops automation"
+        "keywords": "ai devops, aidevops, documentation, setup guide, mcp servers, devops automation"
     }
     </script>
 </head>
@@ -111,14 +111,14 @@
     <main class="docs-container">
         <div class="docs-content">
 <!-- SPDX-License-Identifier: MIT -->
-<!-- SPDX-FileCopyrightText: 2025-2026 Marcus Quinn --><h1>AI DevOps Assistant Framework</h1>
-<p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> is an open-source AI DevOps assistant framework and <a href="https://opencode.ai/">OpenCode</a> plugin for people who want AI to do useful work across code, infrastructure, business, marketing, content, and creative projects without turning every job into another long, fragile chat.</p>
+<!-- SPDX-FileCopyrightText: 2025-2026 Marcus Quinn --><h1>AI DevOps Framework</h1>
+<p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> is an <a href="https://opencode.ai/">OpenCode</a> plugin and AI DevOps framework for people who want AI to do useful work across code, infrastructure, business, marketing, content, and creative projects without turning every job into another long, fragile chat.</p>
 <p>Most AI tools still leave you doing the hard coordination yourself: finding the right context, choosing a model, protecting secrets, managing branches, watching CI, spotting stuck work, and remembering what went wrong last time. aidevops puts structure around that work so agents can share context, work safely in parallel, spend model budget where it matters, and leave the system better than they found it.</p>
 <blockquote>
 <p><strong>Recommended setup:</strong> <a href="https://opencode.ai/">OpenCode</a> + OpenAI models. GPT-5.5 is the preferred high-capability model for complex agent work; GPT-5.4 mini is the preferred fast, lower-cost model for triage and routine implementation. Claude models (Anthropic) remain fully supported, and other model providers are evaluated from time to time as their quality, latency, and cost profiles change.</p>
 </blockquote>
 <p><em>&quot;Scope a mission to redesign the landing pages — break it into milestones, dispatch workers in parallel, validate each milestone, and track budget across the whole project.&quot;</em></p>
-<p><strong>One conversation, one DevOps AI assistant, autonomous project delivery, with security, teamwork, token efficiency, and quality control built in.</strong></p>
+<p><strong>One conversation, autonomous project delivery, with security, teamwork, token efficiency, and quality control built in.</strong></p>
 <p>Founded by <a href="https://github.com/marcusquinn">Marcus Quinn</a> on 9th November 2025 to help anyone level-up their AI &amp; Open-Source game.</p>
 <h2><strong>The Aim</strong></h2>
 <p><strong>Maximum value for your time and money.</strong> <strong><a href="https://aidevops.sh">aidevops</a></strong> is built for the gap between “the model can probably do this” and “the work is actually done, verified, safe, and worth the cost.”</p>
