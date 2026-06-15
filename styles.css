@@ -51,6 +51,7 @@ body {
 }
 
 p {
+    /* Unsupported browsers ignore this declaration, so no @supports wrapper is needed. */
     text-wrap: pretty;
 }
 
