@@ -1951,6 +1951,12 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </ul>
 </li>
 </ul>
+<p><strong>Mobile &amp; Simulator Testing:</strong></p>
+<ul>
+<li><a href="https://github.com/EvanBacon/serve-sim">serve-sim</a> - Apple Simulator browser preview/control for iOS, iPad, and Apple Watch simulators (setup offers global install on supported Macs)</li>
+<li><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/mobile/agent-device.md">agent-device</a> - AI-driven mobile app interaction across iOS and Android</li>
+<li><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/mobile/maestro.md">Maestro</a> - Repeatable YAML E2E flows for mobile apps</li>
+</ul>
 <p><strong>SEO &amp; Research:</strong></p>
 <ul>
 <li><a href="https://developers.google.com/webmaster-tools">Google Search Console</a> - Search performance insights (MCP)</li>
@@ -2284,6 +2290,11 @@ cargo install toon-lsp                        # TOON syntax validation
 <td><strong>iOS mobile testing</strong></td>
 <td>agent-browser</td>
 <td>Real Safari in iOS Simulator (macOS only)</td>
+</tr>
+<tr>
+<td><strong>Apple Simulator streaming</strong></td>
+<td>serve-sim</td>
+<td>Browser-visible iOS/iPad/watch simulator stream and control (macOS Apple Silicon)</td>
 </tr>
 <tr>
 <td><strong>Unknown pages</strong></td>
@@ -4193,6 +4204,7 @@ bash .agents/scripts/continue-cli.sh review
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/aidevops/api-integrations.md">API Integrations</a></strong> - Service APIs</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/browser-automation.md">Browser Automation</a></strong> - 8 tools + anti-detect stack: decision tree, parallel, extensions, fingerprinting</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/playwright-emulation.md">Device Emulation</a></strong> - Mobile/tablet testing: 100+ device presets, viewport, geolocation, locale, dark mode</li>
+<li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/mobile/serve-sim.md">serve-sim</a></strong> - Apple Simulator browser preview/control for mobile app QA</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/anti-detect-browser.md">Anti-Detect Browser</a></strong> - Multi-profile management, fingerprint rotation, proxy integration</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/performance/performance.md">Web Performance</a></strong> - Core Web Vitals, network dependencies, accessibility (Chrome DevTools MCP)</li>
 <li><strong><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/pagespeed.md">PageSpeed</a></strong> - Lighthouse CLI and PageSpeed Insights API</li>
