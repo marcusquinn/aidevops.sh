@@ -155,7 +155,7 @@
 <p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
 <a href="https://github.com/marcusquinn"><img src="https://img.shields.io/badge/Copyright-Marcus%20Quinn%202025--2026-blue.svg" alt="Copyright"></a></p>
 <!-- Release & Version Info -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.21.0-blue.svg" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.21.1-blue.svg" alt="Version"></a>
 <a href="https://www.npmjs.com/package/aidevops"><img src="https://img.shields.io/npm/v/aidevops" alt="npm version"></a>
 <a href="https://github.com/marcusquinn/homebrew-tap"><img src="https://img.shields.io/badge/homebrew-marcusquinn%2Ftap-orange" alt="Homebrew"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/github-repository-181717.svg?logo=github" alt="GitHub repository"></a></p>
@@ -172,6 +172,7 @@
 <li><strong>Recommended runtime/models</strong>: OpenCode + OpenAI GPT-5.5 / GPT-5.4 mini</li>
 <li><strong>Entry</strong>: <code>aidevops</code> CLI, <code>~/.aidevops/agents/AGENTS.md</code></li>
 <li><strong>Stack</strong>: Bash scripts, TypeScript (Bun), MCP servers</li>
+<li><strong>Recent focus</strong>: OpenCode control-plane safety, mobile simulator testing, self-hosted runner operations, and pulse/worker diagnostics</li>
 </ul>
 <h3>Key Commands</h3>
 <ul>
@@ -186,13 +187,15 @@
 <li><code>/auto-browse</code> - Learn, optimize, and graduate repeatable browser operations and web data-mining workflows</li>
 <li><code>/report-render</code> - Render report-ready Markdown or JSON to HTML with sticky TOC, print CSS, evidence badges, and source cards for PDF export</li>
 <li><code>/report-token-use</code> - Generate a local per-session token, model, compaction, and MCP-use report</li>
+<li><code>/pulse</code> - Run the autonomous supervisor loop for dispatch, merge, diagnostics, and stuck-work recovery</li>
+<li><code>/serve-sim</code> / <code>serve-sim-helper.sh</code> - Exercise mobile web flows in simulator-backed local previews</li>
 </ul>
 <h3>Agent Structure</h3>
 <ul>
 <li>12 primary agents (Build+, Automate, Product, SEO, Marketing-Sales, etc.) with specialist @subagents on demand</li>
-<li>2,050+ subagent markdown files organized by domain</li>
-<li>1,480+ helper scripts in <code>.agents/scripts/</code></li>
-<li>90+ slash commands and workflow guides for common operations</li>
+<li>2,200+ agent and subagent markdown files organized by domain</li>
+<li>1,800+ helper scripts in <code>.agents/scripts/</code></li>
+<li>185+ slash commands and workflow guides for common operations</li>
 </ul>
 <h3>What You Can Ask aidevops To Do</h3>
 <ul>
@@ -201,6 +204,16 @@
 <li>Plan products, PRDs, onboarding, monetisation, growth, analytics, and UI direction.</li>
 <li>Operate business, finance, receipts, invoices, marketing, outreach, SEO, content, video, and personal-productivity routines.</li>
 <li>Discover the right capability with <code>/skills recommend &quot;TASK&quot;</code>, <code>/onboarding</code>, or the OpenCode agent picker.</li>
+</ul>
+<h3>Recent framework upgrades</h3>
+<p>Since the last README feature refresh, aidevops has added or expanded:</p>
+<ul>
+<li><strong>OpenCode GUI/control-plane planning</strong>: ADRs, threat model, trust-boundary guidance, and containment rules for a future GUI that stays local-first, auditable, and explicitly separated from secret-bearing helpers (<code>docs/gui/</code>).</li>
+<li><strong>Mobile and simulator workflows</strong>: app-development guidance, App Store Connect support, Expo/Xcode/Swift workflows, Maestro/minisim/iOS Simulator MCP references, and <code>serve-sim</code> mobile web testing support (<code>.agents/tools/mobile/</code>).</li>
+<li><strong>Self-hosted runner operations</strong>: lifecycle and storage runbooks, Docker foreground-mode guidance, systemd timer freshness triage, and ExecStop race-guard documentation (<code>.agents/reference/github-self-hosted-runners.md</code>).</li>
+<li><strong>Pulse diagnostics and reliability</strong>: compact API-budget diagnostics, pulse cadence/API diagnostics, GitHub read ramp pacing, configurable worker floors, Renovate dashboard skipping, and more defensive duplicate/blocked-by/rate-limit handling.</li>
+<li><strong>Worker and PR observability</strong>: worker diagnostic failure families, runtime observability signals, review-thread response scanning, required-check validation, orphan-recovery base handling, and safer automated GitHub write guards.</li>
+<li><strong>OpenCode runtime polish</strong>: versioned session title suffixes, session archive retention, OAuth pool hardening, debug-error preservation, and reusable shell-env version lookup in the OpenCode plugin.</li>
 </ul>
 <!-- AI-CONTEXT-END --><h2><strong>Enterprise-Grade Quality &amp; Security</strong></h2>
 <p><strong>Comprehensive DevOps framework with tried &amp; tested services integrations, popular and trusted MCP servers, and enterprise-grade infrastructure quality assurance code monitoring and recommendations.</strong></p>
@@ -675,11 +688,12 @@ aidevops model-accounts-pool remove &lt;p&gt; &lt;email&gt;# Remove an account
 <li><strong>Supervisor</strong> - SQLite state machine dispatches tasks to parallel AI agents with retry cycles, batch management, and cron scheduling</li>
 <li><strong>Runners</strong> - Named headless agent instances with persistent identity, instructions, and memory namespaces</li>
 <li><strong><code>/runners</code> command</strong> - Batch dispatch from task IDs, PR URLs, or descriptions with concurrency control and progress monitoring</li>
+<li><strong>Self-hosted runner operations</strong> - GitHub runner lifecycle, storage, Docker foreground mode, systemd timers, and cleanup race guidance for reliable local/hosted worker capacity</li>
 <li><strong>Mailbox</strong> - SQLite-backed inter-agent messaging for coordination across parallel sessions</li>
 <li><strong>Worktree isolation</strong> - Each agent works on its own branch in a separate directory, no merge conflicts</li>
 <li><strong>Budget tracking</strong> - Append-only cost log (<code>budget-tracker-helper.sh</code>) with burn-rate analysis and <code>/budget-analysis</code> command for model routing decisions</li>
 <li><strong>Observability</strong> - LLM request capture plugin (<code>observability.mjs</code>) for cost tracking, performance analysis, and debugging</li>
-<li><strong>Rate limits</strong> - Per-provider rate limit configuration (<code>rate-limits.json</code>) with throttle-risk warnings</li>
+<li><strong>Rate limits and API budget diagnostics</strong> - Per-provider rate-limit configuration, secondary cooldown capture, reset-aware pacing, and compact API budget summaries for pulse and worker decisions</li>
 </ul>
 <p><strong>Project Intelligence:</strong></p>
 <ul>
@@ -689,6 +703,8 @@ aidevops model-accounts-pool remove &lt;p&gt; &lt;email&gt;# Remove an account
 <li><strong>Local models</strong> - Run AI models locally via llama.cpp for free, private, offline inference (<code>local-model-helper.sh</code>) with HuggingFace GGUF model management</li>
 <li><strong>Tech stack lookup</strong> - <code>/tech-stack</code> detects technology stacks of URLs or finds sites using specific technologies (Wappalyzer, httpx, nuclei, BuiltWith)</li>
 <li><strong>IP reputation</strong> - <code>ip-reputation-helper.sh</code> checks IP addresses against multiple reputation databases (Spamhaus, ProxyCheck, AbuseIPDB) before VPS purchase or deployment</li>
+<li><strong>Mobile app guidance</strong> - Expo, Swift/Xcode, App Store Connect, simulator automation, push/onboarding/monetisation/testing, and mobile web previews through <code>serve-sim</code></li>
+<li><strong>GUI control plane planning</strong> - Local-first product scope, stack and repo-layout ADRs, GUI trust boundaries, and threat model for future aidevops UI surfaces</li>
 </ul>
 <p><strong>Conversational Memory &amp; Entity System:</strong></p>
 <ul>
@@ -1045,6 +1061,10 @@ aidevops sources remove my-private-agents         # Remove a source
 <td>Create GitHub issues for unsynced TODO entries, commit ref changes</td>
 </tr>
 <tr>
+<td><strong>Respect API budget</strong></td>
+<td>Use cached/prefetched GitHub metadata, cooldown headers, and ramp pacing before spending more API calls</td>
+</tr>
+<tr>
 <td><strong>Kill stuck workers</strong></td>
 <td>Workers running 3+ hours with no PR are killed to free slots</td>
 </tr>
@@ -1058,6 +1078,8 @@ aidevops sources remove my-private-agents         # Remove a source
 <li><strong>Struggle-ratio</strong> — computes <code>messages / max(1, commits)</code> for each active worker. High ratio (&gt;30) with &gt;30 min elapsed and zero commits flags the worker as &quot;struggling&quot;. Ratio &gt;50 after 1 hour flags &quot;thrashing&quot;. Informational signal — the supervisor LLM decides the action (kill, wait, re-dispatch with more context)</li>
 <li><strong>Circuit breaker</strong> — prevents cascading failures by tracking success/failure rates and tripping when error rate exceeds threshold</li>
 <li><strong>Dynamic concurrency</strong> — worker slot count adapts to available RAM, not a hardcoded constant</li>
+<li><strong>API budget diagnostics</strong> — compact reports show GitHub core/search usage, cooldown provenance, cached PR metadata freshness, and pacing decisions before pulse burns through API quota</li>
+<li><strong>Worker failure families</strong> — headless runtime errors, local runtime diagnostics, blocked-by lookup gaps, provider quota/credit exhaustion, and review-thread remediation issues are classified for targeted redispatch</li>
 <li><strong>Stale assignment recovery</strong> — tasks assigned to workers that died (no active process, no PR, 3+ hours stale) are automatically unassigned and made available for re-dispatch</li>
 <li><strong>Priority ordering</strong> — green PRs (free merge) &gt; failing PRs (closer to done) &gt; high-priority/bug issues &gt; active mission features &gt; product repos &gt; smaller tasks &gt; oldest</li>
 </ul>
@@ -1226,6 +1248,10 @@ bundle-helper.sh list                  # List all available bundles
 <tr>
 <td><strong>Runners</strong></td>
 <td>Named agent instances with per-runner AGENTS.md, config, and run logs (<code>runner-helper.sh</code>)</td>
+</tr>
+<tr>
+<td><strong>Self-hosted runner runbooks</strong></td>
+<td>GitHub runner storage, lifecycle, Docker foreground mode, timer freshness, and cleanup-race guidance (<code>.agents/reference/github-self-hosted-runners.md</code>)</td>
 </tr>
 <tr>
 <td><strong>Session management</strong></td>
@@ -1569,6 +1595,13 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><strong><a href="https://github.com/nexu-io/open-design">Open Design</a></strong> <em>Optional peripheral</em>: Local-first design artifact studio by nexu-io (Apache-2.0) for sandboxed previews, design-skill pickers, <code>.od/</code> workspaces, and exports. It installs alongside aidevops only when requested; selected skills are ingested via aidevops build-agent optimisation, not imported verbatim.</li>
 <li><strong>Local HTTPS previews</strong>: <code>localdev-helper.sh</code> can wrap Open Design or other dev servers with mkcert-backed <code>.local</code> routes when tools only expose localhost.</li>
 <li><strong>Verification</strong>: <code>workflows/ui-verification.md</code>, <code>email-design-test-helper.sh</code>, design preview screenshots, and deck/media smoke tests provide evidence before generated artifacts ship.</li>
+</ul>
+<h3><strong>Mobile App &amp; Simulator Testing</strong></h3>
+<ul>
+<li><strong>Mobile app stack guidance</strong>: Expo, Swift/Xcode, backend, analytics, monetisation, onboarding, notification, publishing, and test strategy references for mobile delivery (<code>.agents/tools/mobile/</code>).</li>
+<li><strong>Simulator-backed web testing</strong>: <code>serve-sim</code> guidance and helpers cover local/mobile preview flows, prompt failure handling, and simulator smoke tests before mobile UI changes ship.</li>
+<li><strong>Device and automation options</strong>: agent-device, App Store Connect, Maestro, minisim, iOS Simulator MCP, Xcodebuild MCP, and accessibility tooling references help agents choose the right mobile verification path.</li>
+<li><strong>Mobile-first artifact routing</strong>: <code>/design-artifact</code> can route mobile mockups and app screens through the design stack, then hand implementation to mobile/testing specialists.</li>
 </ul>
 <h3><strong>Video Creation</strong></h3>
 <ul>
