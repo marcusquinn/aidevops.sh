@@ -217,6 +217,13 @@
 </ul>
 <!-- AI-CONTEXT-END --><h2><strong>Enterprise-Grade Quality &amp; Security</strong></h2>
 <p><strong>Comprehensive DevOps framework with tried &amp; tested services integrations, popular and trusted MCP servers, and enterprise-grade infrastructure quality assurance code monitoring and recommendations.</strong></p>
+<p><strong>Vault security model:</strong> aidevops defines protected data classes, provider
+routing labels, trust boundaries, and phased encrypted sync architecture in
+<code>.agents/reference/vault.md</code>. Vault guidance is local-first: third-party AI
+providers can only reason over data that has been decrypted into their prompt or
+tool context, so provider-side logs/retention remain outside Vault&#39;s technical
+control. Future local LLM mode reduces provider exposure but not local host
+compromise risk.</p>
 <h3>Report creation, previews, and PDF exports</h3>
 <p>Use aidevops to turn evidence bundles into decision-ready reports while keeping Markdown or JSON as the canonical source. Report agents can produce AI-search audits, SEO/GEO scorecards, delivery reviews, campaign reports, board packs, incident summaries, recurring client handoffs, and before/after remediation evidence.</p>
 <p>New report capabilities include:</p>
