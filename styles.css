@@ -1,33 +1,67 @@
 /* CSS Variables for theming */
+@font-face {
+    font-family: 'Inter';
+    src: local('Inter Variable'), local('Inter');
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+}
+
 :root {
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #111111;
-    --bg-tertiary: #1a1a1a;
+    color-scheme: dark;
+    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+    --bg-primary: #000000;
+    --bg-secondary: #030707;
+    --bg-tertiary: #0b1012;
+    --surface: #050606;
+    --surface-raised: #0b0d0e;
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --text-muted: rgba(255, 255, 255, 0.4);
-    --accent: #B2E969;
-    --accent-hover: #c5f080;
-    --border: rgba(255, 255, 255, 0.1);
-    --border-hover: rgba(255, 255, 255, 0.2);
-    --code-bg: #0c0c0c;
+    --text-secondary: rgba(255, 255, 255, 0.86);
+    --text-muted: rgba(255, 255, 255, 0.66);
+    --accent: #66d9f2;
+    --accent-hover: #8ce8ff;
+    --accent-strong: #42c8e8;
+    --accent-subtle: rgba(102, 217, 242, 0.16);
+    --accent-glow: rgba(102, 217, 242, 0.18);
+    --accent-hover-bg: rgba(102, 217, 242, 0.22);
+    --accent-command-hover: rgba(102, 217, 242, 0.05);
+    --accent-on-fill: #001014;
+    --accent-shadow: rgba(102, 217, 242, 0.25);
+    --accent-shadow-soft: rgba(102, 217, 242, 0.15);
+    --nav-bg: rgba(0, 0, 0, 0.9);
+    --border: rgba(102, 217, 242, 0.18);
+    --border-hover: rgba(102, 217, 242, 0.42);
+    --code-bg: #050606;
     --dot-red: #ff5f57;
     --dot-yellow: #febc2e;
     --dot-green: #28c840;
 }
 
 [data-theme="light"] {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8f8f8;
-    --bg-tertiary: #f0f0f0;
-    --text-primary: #111111;
-    --text-secondary: rgba(17, 17, 17, 0.75);
-    --text-muted: rgba(17, 17, 17, 0.55);
-    --accent: #558B2F;
-    --accent-hover: #689F38;
-    --border: rgba(0, 0, 0, 0.12);
-    --border-hover: rgba(0, 0, 0, 0.25);
-    --code-bg: #1a1a1a;
+    color-scheme: light;
+    --bg-primary: #f7fbfc;
+    --bg-secondary: #edf6f8;
+    --bg-tertiary: #ffffff;
+    --surface: #ffffff;
+    --surface-raised: #f8fdff;
+    --text-primary: #071013;
+    --text-secondary: rgba(7, 16, 19, 0.84);
+    --text-muted: rgba(7, 16, 19, 0.62);
+    --accent: #0d6f84;
+    --accent-hover: #0a8ca8;
+    --accent-strong: #064f60;
+    --accent-subtle: rgba(13, 111, 132, 0.14);
+    --accent-glow: rgba(13, 111, 132, 0.14);
+    --accent-hover-bg: rgba(13, 111, 132, 0.2);
+    --accent-command-hover: var(--bg-secondary);
+    --accent-on-fill: #ffffff;
+    --accent-shadow: rgba(13, 111, 132, 0.25);
+    --accent-shadow-soft: rgba(13, 111, 132, 0.15);
+    --nav-bg: rgba(247, 251, 252, 0.9);
+    --border: rgba(13, 111, 132, 0.18);
+    --border-hover: rgba(13, 111, 132, 0.38);
+    --code-bg: #071013;
 }
 
 /* Reset and base styles */
@@ -42,7 +76,7 @@ html {
 }
 
 body {
-    font-family: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+    font-family: var(--font-sans);
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
@@ -53,6 +87,13 @@ body {
 p {
     /* Unsupported browsers ignore this declaration, so no @supports wrapper is needed. */
     text-wrap: pretty;
+}
+
+code,
+pre,
+.install-command,
+.code-box-content {
+    font-family: var(--font-mono);
 }
 
 /* Container */
@@ -68,14 +109,14 @@ p {
     top: 0;
     left: 0;
     right: 0;
-    background: var(--bg-primary);
+    background: var(--nav-bg);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     z-index: 100;
 }
 
 [data-theme="light"] .nav {
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--nav-bg);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
@@ -193,17 +234,17 @@ p {
     transform: translate(-50%, -50%);
     width: 800px;
     height: 500px;
-    background: radial-gradient(ellipse at center, rgba(178, 233, 105, 0.12) 0%, transparent 60%);
+    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 62%);
     filter: blur(80px);
     pointer-events: none;
 }
 
 [data-theme="light"] .hero::before {
-    background: radial-gradient(ellipse at center, rgba(85, 139, 47, 0.12) 0%, transparent 60%);
+    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 60%);
 }
 
 [data-theme="light"] .hero-logo {
-    background: linear-gradient(135deg, var(--text-primary) 0%, #558B2F 100%);
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-strong) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -244,18 +285,18 @@ p {
 .install-box {
     max-width: 600px;
     margin: 0 auto 2rem;
-    background: var(--code-bg);
+    background: var(--surface);
     border-radius: 12px;
     border: 1px solid var(--border);
     overflow: hidden;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .install-header {
     display: flex;
     align-items: center;
     padding: 0.75rem 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--surface-raised);
     border-bottom: 1px solid var(--border);
     gap: 1rem;
 }
@@ -286,12 +327,12 @@ p {
 
 .install-tab:hover {
     color: var(--text-secondary);
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--accent-subtle);
 }
 
 .install-tab.active {
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.08);
+    color: var(--accent);
+    background: var(--accent-subtle);
 }
 
 .install-panels {
@@ -322,7 +363,7 @@ p {
 }
 
 .install-command:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--accent-command-hover);
 }
 
 .command-text {
@@ -361,7 +402,7 @@ p {
 }
 
 [data-theme="light"] .install-box {
-    background: #ffffff;
+    background: var(--surface);
     border: 1px solid var(--border);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 }
@@ -377,12 +418,12 @@ p {
 
 [data-theme="light"] .install-tab:hover {
     color: var(--text-secondary);
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--accent-subtle);
 }
 
 [data-theme="light"] .install-tab.active {
-    color: var(--text-primary);
-    background: rgba(0, 0, 0, 0.08);
+    color: var(--accent-strong);
+    background: var(--accent-subtle);
 }
 
 [data-theme="light"] .command-highlight {
@@ -411,13 +452,13 @@ p {
 
 /* Code Box */
 .code-box {
-    background: var(--code-bg);
+    background: var(--surface);
     border-radius: 12px;
     border: 1px solid var(--border);
     overflow: hidden;
     text-align: left;
     margin-bottom: 2rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .code-box-small {
@@ -429,7 +470,7 @@ p {
     display: flex;
     align-items: center;
     padding: 0.75rem 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--surface-raised);
     border-bottom: 1px solid var(--border);
 }
 
@@ -488,7 +529,7 @@ p {
 }
 
 [data-theme="light"] .code-box {
-    background: #ffffff;
+    background: var(--surface);
     border: 1px solid var(--border);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 }
@@ -595,17 +636,17 @@ p {
 }
 
 .btn:focus {
-    box-shadow: 0 0 0 3px rgba(178, 233, 105, 0.3);
+    box-shadow: 0 0 0 3px var(--border-hover);
 }
 
 [data-theme="light"] .btn:focus {
-    box-shadow: 0 0 0 3px rgba(85, 139, 47, 0.3);
+    box-shadow: 0 0 0 3px var(--border-hover);
 }
 
 [data-theme="light"] .btn-primary {
     background: var(--accent);
-    color: #ffffff;
-    box-shadow: 0 20px 25px -5px rgba(85, 139, 47, 0.25), 0 8px 10px -6px rgba(85, 139, 47, 0.15);
+    color: var(--accent-on-fill);
+    box-shadow: 0 20px 25px -5px var(--accent-shadow), 0 8px 10px -6px var(--accent-shadow-soft);
 }
 
 [data-theme="light"] .btn-primary:hover {
@@ -614,8 +655,8 @@ p {
 
 /* Primary button - filled with accent */
 .btn-primary {
-    background: var(--text-primary);
-    color: var(--bg-primary);
+    background: var(--accent);
+    color: var(--accent-on-fill);
     border: none;
     padding-left: 3.25rem;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
@@ -676,14 +717,14 @@ p {
 
 /* Secondary button - outlined */
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--accent-subtle);
     color: var(--text-primary);
     border: none;
     padding-left: 1.5rem;
 }
 
 [data-theme="light"] .btn-secondary {
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--accent-subtle);
 }
 
 .btn-secondary .btn-icon-left {
@@ -703,8 +744,8 @@ p {
 
 .btn-secondary .btn-badge {
     margin-left: 0.875rem;
-    background: var(--text-primary);
-    color: var(--bg-primary);
+    background: var(--accent);
+    color: var(--accent-on-fill);
     padding: 0.25rem 0.5rem;
     border-radius: 0.5rem;
     font-size: 0.875rem;
@@ -712,11 +753,11 @@ p {
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--accent-hover-bg);
 }
 
 [data-theme="light"] .btn-secondary:hover {
-    background: rgba(0, 0, 0, 0.08);
+    background: var(--accent-hover-bg);
 }
 
 /* Nav download button style */
@@ -732,7 +773,7 @@ p {
     font-weight: 700;
     font-family: inherit;
     text-decoration: none;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--accent-subtle);
     color: var(--text-primary);
     transition: all 0.3s ease;
     cursor: pointer;
@@ -740,7 +781,7 @@ p {
 }
 
 [data-theme="light"] .btn-nav {
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--accent-subtle);
 }
 
 .btn-nav .btn-icon-left {
@@ -783,11 +824,11 @@ p {
 }
 
 .btn-nav:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--accent-hover-bg);
 }
 
 [data-theme="light"] .btn-nav:hover {
-    background: rgba(0, 0, 0, 0.08);
+    background: var(--accent-hover-bg);
 }
 
 @media (min-width: 640px) {
@@ -832,7 +873,7 @@ p {
     align-items: center;
     justify-content: center;
     background: var(--accent);
-    color: var(--bg-primary);
+    color: var(--accent-on-fill);
     font-weight: 700;
     font-size: 1.1rem;
     border-radius: 50%;
@@ -928,7 +969,7 @@ p {
 }
 
 .feature-card {
-    background: var(--bg-tertiary);
+    background: var(--surface-raised);
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 2rem;
