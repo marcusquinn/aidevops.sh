@@ -687,8 +687,10 @@
             const response = await fetch(`${RAW_BASE}${path}`);
             if (!response.ok) throw new Error(`raw fetch ${response.status}`);
             const text = await response.text();
+            if (selectedAgentsPath !== path) return;
             setContent(path, text.slice(0, 60000), githubLinkForPath(path, 'blob'));
         } catch (error) {
+            if (selectedAgentsPath !== path) return;
             setContent(path, 'Could not load this file from GitHub raw content.', githubLinkForPath(path, 'blob'));
         }
     }
