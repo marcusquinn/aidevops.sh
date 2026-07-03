@@ -247,6 +247,17 @@
         });
     }
 
+    function ensureDocsMetricBadges() {
+        if (!document.body.classList.contains('docs-page')) return;
+
+        const githubBlobPrefix = 'https://github.com/marcusquinn/aidevops/blob/main/docs/metrics/badges/';
+        const rawGithubPrefix = 'https://raw.githubusercontent.com/marcusquinn/aidevops/main/docs/metrics/badges/';
+
+        document.querySelectorAll(`.docs-content img[src^="${githubBlobPrefix}"]`).forEach((image) => {
+            image.src = image.src.replace(githubBlobPrefix, rawGithubPrefix);
+        });
+    }
+
     function createDocsSidebar() {
         const sidebar = document.createElement('aside');
         sidebar.className = 'docs-sidebar';
@@ -302,6 +313,7 @@
     }
 
     ensureDocsFavicons();
+    ensureDocsMetricBadges();
     ensureDocsShell();
 
     const tocTargets = Array.from(document.querySelectorAll('.docs-content h2, .docs-content h3'));
