@@ -1618,7 +1618,9 @@ pre,
 /* Features Section */
 .features {
     padding: 6rem 1.5rem;
-    background: var(--bg-primary);
+    background:
+        radial-gradient(circle at 80% 12%, rgba(102, 217, 242, 0.08), transparent 24%),
+        var(--bg-primary);
 }
 
 .section-title {
@@ -1693,9 +1695,27 @@ pre,
     line-height: 1.5;
 }
 
+.feature-support-stack {
+    margin-top: 3rem;
+}
+
+.feature-support-stack .depth-grid {
+    margin-top: 0;
+}
+
+.section-divider {
+    background: linear-gradient(90deg, transparent, var(--border-hover), var(--accent), var(--border-hover), transparent);
+    height: 1px;
+    margin: 0 auto 4rem;
+    max-width: 960px;
+    opacity: 0.8;
+}
+
 /* Services Section */
 .services {
-    padding: 6rem 1.5rem;
+    padding: 0 1.5rem 6rem;
+    background:
+        linear-gradient(180deg, var(--bg-secondary) 0%, color-mix(in srgb, var(--bg-secondary) 82%, var(--bg-primary)) 100%);
 }
 
 .services-grid {
@@ -1746,8 +1766,10 @@ pre,
 
 /* FAQ Section */
 .faq {
-    padding: 6rem 1.5rem;
-    background: var(--bg-primary);
+    padding: 0 1.5rem 6rem;
+    background:
+        radial-gradient(circle at 18% 20%, var(--accent-glow), transparent 26%),
+        var(--bg-primary);
 }
 
 .faq-list {
@@ -2183,8 +2205,12 @@ pre,
         padding: 1rem;
     }
     
-    .features, .services, .stats-panel, .cta {
+    .features, .stats-panel, .cta {
         padding: 4rem 1rem;
+    }
+
+    .services, .faq {
+        padding: 0 1rem 4rem;
     }
     
     .features-grid, .services-grid, .stats-grid, .depth-grid {
