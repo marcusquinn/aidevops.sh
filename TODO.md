@@ -95,3 +95,5 @@ t001,Audit README.md — ensure content accurately describes site purpose and li
 <!--TOON:summary{total,ready,pending,in_progress,in_review,done,declined,total_est,total_actual}:
 1,0,0,0,0,1,0,~15m,~15m
 -->
+
+- [ ] t1504 Add --dir flag to issue-sync-helper.sh to prevent cross-repo TODO.md contamination ref:GH#2919
