@@ -49,11 +49,11 @@
       <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">12</text>
       <text x="54" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">main agent experts</text>
     </g>
-    <g transform="translate(292 28)">
-      <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">2,200+</text>
-      <text x="124" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">subagent skills</text>
+    <g transform="translate(300 28)">
+      <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">4,700+</text>
+      <text x="124" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">subagents skills &amp; helpers</text>
     </g>
-    <g transform="translate(606 28)">
+    <g transform="translate(775 28)">
       <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">185+</text>
       <text x="92" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">/command shortcuts</text>
     </g>

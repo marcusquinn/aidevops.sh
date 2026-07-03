@@ -78,7 +78,7 @@ Use the CSS custom properties in `styles.css` as the source of truth.
 - Approved supporting line: `OpenCode plugin for autonomous project delivery`.
 - Approved stats labels:
   - `12 main agent experts`
-  - `2,200+ subagent skills`
+  - `4,700+ subagents skills & helpers`
   - `185+ /command shortcuts`
 - Install command pill:
   - Command: `bash <(curl -fsSL aidevops.sh/install)`.

@@ -7,6 +7,7 @@ import base64
 import datetime as dt
 import json
 import os
+import re
 import time
 import urllib.error
 import urllib.parse
@@ -16,6 +17,7 @@ from pathlib import Path
 
 TARGET_REPO = os.environ.get("AIDEVOPS_STATS_REPO", "marcusquinn/aidevops")
 OUTPUT_PATH = Path("data/aidevops-stats.json")
+OG_IMAGE_PATH = Path("og-image.svg")
 PREVIEW_EXTENSIONS = {".md", ".txt", ".sh", ".py", ".js", ".json", ".yml", ".yaml", ".toml"}
 MAX_PREVIEWS = 60
 MAX_PREVIEW_CHARS = 6000
@@ -218,18 +220,50 @@ def agents_tree_and_previews() -> dict[str, object]:
     return {"encoding": "base64", "tree": serialized_tree, "previews": previews}
 
 
+def rounded_hundred_label(count: int) -> str:
+    rounded = max(0, count // 100 * 100)
+    if rounded >= 1000:
+        return f"{rounded // 1000},{rounded % 1000:03d}+"
+    return f"{rounded}+"
+
+
+def update_og_image_metric(agents_payload: dict[str, object]) -> None:
+    tree = agents_payload.get("tree", [])
+    if not isinstance(tree, list) or not OG_IMAGE_PATH.exists():
+        return
+    label = rounded_hundred_label(len(tree))
+    content = OG_IMAGE_PATH.read_text(encoding="utf-8")
+    content, metric_replacements = re.subn(
+        r'(<g transform="translate\()\d+( 28\)">\n\s*<text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">)[^<]+(</text>\n\s*<text x="124" y="27" fill="#ffffff" opacity="0\.74" font-size="19" font-weight="650">)(?:subagent skills|subagents skills &amp; helpers)(</text>)',
+        rf'\g<1>300\g<2>{label}\g<3>subagents skills &amp; helpers\g<4>',
+        content,
+        count=1,
+    )
+    content, command_replacements = re.subn(
+        r'(<g transform="translate\()\d+( 28\)">\n\s*<text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">185\+</text>\n\s*<text x="92" y="27" fill="#ffffff" opacity="0\.74" font-size="19" font-weight="650">/command shortcuts</text>)',
+        r'\g<1>775\g<2>',
+        content,
+        count=1,
+    )
+    if metric_replacements != 1 or command_replacements != 1:
+        raise RuntimeError("Unable to update social graph .agents metric")
+    OG_IMAGE_PATH.write_text(content, encoding="utf-8")
+
+
 def main() -> None:
     repo = github_request(f"/repos/{TARGET_REPO}")
     if not isinstance(repo, dict):
         raise TypeError("Unexpected GitHub repository response")
     repo_created_at = str(repo["created_at"])
     generated_at = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    agents_payload = agents_tree_and_previews()
+    update_og_image_metric(agents_payload)
     payload = {
         "generatedAt": generated_at,
         "repo": TARGET_REPO,
         "monthly": monthly_issue_counts(repo_created_at),
         "commitsDaily": commit_activity(repo_created_at),
-        "agents": agents_tree_and_previews(),
+        "agents": agents_payload,
     }
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
