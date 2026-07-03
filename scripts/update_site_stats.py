@@ -50,7 +50,10 @@ def github_url_request(url: str, token: str | None = None) -> tuple[object, obje
         },
     )
     with urllib.request.urlopen(request, timeout=60) as response:
-        return json.loads(response.read().decode("utf-8")), response.headers
+        body = response.read().decode("utf-8")
+        if response.status == 202 and not body.strip():
+            return None, response.headers
+        return json.loads(body), response.headers
 
 
 def next_link_url(link_header: str | None) -> str | None:
@@ -167,7 +170,7 @@ def agents_tree_and_previews() -> dict[str, object]:
         kind = str(item.get("type", ""))
         if not path.startswith(".agents/") or kind not in {"tree", "blob"}:
             continue
-        tree.append({"path64": base64_text(path), "type": kind})
+        tree.append({"path": path, "path64": base64_text(path), "type": kind})
         if kind != "blob" or preview_count >= MAX_PREVIEWS:
             continue
         suffix = Path(path).suffix.lower()
@@ -178,7 +181,9 @@ def agents_tree_and_previews() -> dict[str, object]:
                 preview_count += 1
             except (OSError, UnicodeDecodeError, urllib.error.URLError):
                 continue
-    tree.sort(key=lambda item: (item["type"] != "tree", item["path64"]))
+    tree.sort(key=lambda item: (item["type"] != "tree", item["path"]))
+    for item in tree:
+        item.pop("path", None)
     return {"encoding": "base64", "tree": tree, "previews": previews}
 
 
