@@ -793,8 +793,8 @@
         if (anchor) anchor.href = link;
     }
 
-    function highlightContent(path, text) {
-        const isMarkdown = /\.(md|markdown)$/i.test(path);
+    function highlightCode(text, options = {}) {
+        const isMarkdown = Boolean(options.isMarkdown);
         const escapedLines = text.split('\n').map((line) => {
             const escaped = escapeHtml(line);
             if (isMarkdown && /^\s*#{1,6}\s/.test(line)) return `<span class="syntax-heading">${escaped}</span>`;
@@ -807,6 +807,12 @@
                 .replace(/\b(\d+(?:\.\d+)?)\b/g, '<span class="syntax-number">$1</span>');
         });
         return escapedLines.join('\n');
+    }
+
+    window.aidevopsHighlightCode = highlightCode;
+
+    function highlightContent(path, text) {
+        return highlightCode(text, { isMarkdown: /\.(md|markdown)$/i.test(path) });
     }
 
     function renderDirectory(path) {
@@ -976,6 +982,19 @@
     }
 
     initStatsPanel();
+})();
+
+// Documentation Code Blocks — reuse the .agents preview syntax palette
+(function() {
+    const highlighter = window.aidevopsHighlightCode;
+    if (typeof highlighter !== 'function') return;
+
+    document.querySelectorAll('.docs-content pre code').forEach((code) => {
+        const languageClass = Array.from(code.classList).find((className) => className.startsWith('language-')) || '';
+        const isMarkdown = /language-(markdown|md)/i.test(languageClass);
+        code.innerHTML = highlighter(code.textContent, { isMarkdown });
+        code.closest('pre')?.classList.add('docs-codeblock-coloured');
+    });
 })();
 
 // Add intersection observer for fade-in animations
