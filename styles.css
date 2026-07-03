@@ -1507,7 +1507,6 @@ pre,
     white-space: pre-wrap;
 }
 
-.agents-directory-title,
 .agents-directory-more {
     color: var(--text-muted);
     display: block;
