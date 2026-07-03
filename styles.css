@@ -879,8 +879,9 @@ pre,
     border-radius: 50%;
 }
 
-[data-theme="light"] .step-number {
-    color: #ffffff;
+[data-theme="light"] .step-number,
+[data-theme="light"] .btn-secondary .btn-badge {
+    color: var(--accent-on-fill);
 }
 
 .quickstart-step p {
