@@ -24,14 +24,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 scripts/update_site_stats.py
 
-      - name: Commit updated stats
+      - name: Commit updated stats and social image metrics
         run: |
-          if git diff --quiet -- data/aidevops-stats.json; then
-            echo "No site stats changes"
+          if git diff --quiet -- data/aidevops-stats.json og-image.svg og-image.png; then
+            echo "No site stats or social image metric changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/aidevops-stats.json
+          git add data/aidevops-stats.json og-image.svg og-image.png
           git commit -m "chore: update site stats"
           git push
