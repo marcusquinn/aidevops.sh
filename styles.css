@@ -1901,6 +1901,13 @@ pre,
     min-width: 0;
 }
 
+/* Fallback for generated docs that have not yet been wrapped in .docs-shell. */
+.docs-page > .docs-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+}
+
 .docs-header {
     margin-bottom: 3rem;
     padding-bottom: 2rem;
