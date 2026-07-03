@@ -29,4 +29,8 @@
 | `TODO.md` | Task tracking |
 | `CHANGELOG.md` | Version history |
 
+## Site Metrics
+
+- Keep the social graph metric in `og-image.svg` rounded down to the current `.agents file browser` count at the next hundred, e.g. `4,700+ subagents skills & helpers`; `scripts/update_site_stats.py` updates this automatically when the `.agents` tree data is refreshed.
+
 <!-- AI-CONTEXT-END -->
