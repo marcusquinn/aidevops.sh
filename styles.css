@@ -1523,13 +1523,19 @@ pre,
     font: inherit;
     padding: 0.08rem 0;
     text-align: left;
-    width: fit-content;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    width: max-content;
 }
 
 .agents-content-item:hover,
 .agents-content-item:focus-visible {
     color: var(--accent);
-    text-decoration: underline;
+    outline: none;
+    text-decoration-color: currentColor;
 }
 
 .agents-content-item.folder,
@@ -1537,8 +1543,19 @@ pre,
     color: var(--text-primary);
 }
 
+.agents-content-item.folder:hover,
+.agents-content-item.folder:focus-visible,
+.agents-content-item.parent:hover,
+.agents-content-item.parent:focus-visible {
+    color: var(--accent);
+}
+
 [data-theme="light"] .agents-content-item:hover,
-[data-theme="light"] .agents-content-item:focus-visible {
+[data-theme="light"] .agents-content-item:focus-visible,
+[data-theme="light"] .agents-content-item.folder:hover,
+[data-theme="light"] .agents-content-item.folder:focus-visible,
+[data-theme="light"] .agents-content-item.parent:hover,
+[data-theme="light"] .agents-content-item.parent:focus-visible {
     color: var(--accent-strong);
 }
 

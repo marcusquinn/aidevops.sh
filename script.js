@@ -660,19 +660,23 @@
         const children = childItems(path);
         const rows = [`<span class="agents-directory-title">${escapeHtml(displayPath(path))}</span>`];
         if (path !== '.agents') {
-            rows.push(`<button class="agents-content-item parent" type="button" data-path="${escapeHtml(parentPath(path))}">↰ ../</button>`);
+            const parent = parentPath(path);
+            rows.push(`<a class="agents-content-item parent" href="${githubLinkForPath(parent, 'tree')}" data-path="${escapeHtml(parent)}">↰ ../</a>`);
         }
         children.slice(0, 240).forEach((child) => {
             const icon = child.type === 'tree' ? '▸' : '•';
             const name = `${child.path.split('/').pop()}${child.type === 'tree' ? '/' : ''}`;
-            rows.push(`<button class="agents-content-item ${child.type === 'tree' ? 'folder' : 'file'}" type="button" data-path="${escapeHtml(child.path)}">${icon} ${escapeHtml(name)}</button>`);
+            rows.push(`<a class="agents-content-item ${child.type === 'tree' ? 'folder' : 'file'}" href="${githubLinkForPath(child.path, child.type)}" data-path="${escapeHtml(child.path)}">${icon} ${escapeHtml(name)}</a>`);
         });
         if (children.length > 240) rows.push(`<span class="agents-directory-more">… ${children.length - 240} more items</span>`);
         setDirectoryContent(path, rows.join(''), githubLinkForPath(path, 'tree'));
         const content = $('agentsContent');
         if (content) {
-            content.querySelectorAll('.agents-content-item').forEach((button) => {
-                button.addEventListener('click', () => selectTreeItem(button.dataset.path));
+            content.querySelectorAll('.agents-content-item').forEach((link) => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    selectTreeItem(link.dataset.path);
+                });
             });
         }
     }
