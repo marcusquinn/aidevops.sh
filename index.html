@@ -36,7 +36,7 @@
     <meta name="apple-mobile-web-app-title" content="AI DevOps">
     <meta name="application-name" content="AI DevOps">
     
-    <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=9">
     
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -323,6 +323,105 @@
             </div>
         </section>
 
+        <section class="stats-panel" id="stats">
+            <div class="container">
+                <div class="stats-header">
+                    <p class="stats-kicker">24/7 Development</p>
+                    <h2 class="section-title">Scaleable teamwork you can trust</h2>
+                    <p class="section-subtitle">AIDevOps is the exact same systems we use and evolve every day to build and optimise websites, apps, marketing, businessses, and client services.</p>
+                </div>
+
+                <div class="stats-grid" aria-live="polite">
+                    <article class="stat-card stat-card-wide monthly-card">
+                        <div class="stat-card-header">
+                            <span class="stat-label">Issues</span>
+                            <span class="stat-source" id="issuesSource">loading</span>
+                        </div>
+                        <div class="monthly-summary">
+                            <span><i class="legend-dot opened"></i><b id="issuesOpen">--</b> opened</span>
+                            <span><i class="legend-dot closed"></i><b id="issuesClosed">--</b> closed</span>
+                        </div>
+                        <div class="monthly-chart" id="issuesMonthlyChart" aria-label="Monthly open and closed issues since the repository began"></div>
+                    </article>
+
+                    <article class="stat-card stat-card-wide monthly-card">
+                        <div class="stat-card-header">
+                            <span class="stat-label">Pull requests</span>
+                            <span class="stat-source" id="prsSource">loading</span>
+                        </div>
+                        <div class="monthly-summary">
+                            <span><i class="legend-dot opened"></i><b id="prsOpen">--</b> opened</span>
+                            <span><i class="legend-dot closed"></i><b id="prsClosed">--</b> closed</span>
+                        </div>
+                        <div class="monthly-chart" id="prsMonthlyChart" aria-label="Monthly open and closed pull requests since the repository began"></div>
+                    </article>
+
+                    <article class="stat-card stat-card-wide monthly-card">
+                        <div class="stat-card-header">
+                            <span class="stat-label" id="commitsHeading">Commits per day</span>
+                            <span class="stat-source" id="commitsSource">loading</span>
+                        </div>
+                        <svg class="commit-chart" id="commitChart" viewBox="0 0 900 260" role="img" aria-label="Commits per day over the repository lifetime"></svg>
+                    </article>
+                </div>
+
+                <div class="capability-strip" aria-label="Aidevops framework capability metrics">
+                    <div class="capability-pill"><strong>12</strong><span>primary agents</span></div>
+                    <div class="capability-pill"><strong>2,200+</strong><span>agent docs</span></div>
+                    <div class="capability-pill"><strong>1,800+</strong><span>helper scripts</span></div>
+                    <div class="capability-pill"><strong>185+</strong><span>commands &amp; workflows</span></div>
+                    <div class="capability-pill"><strong>30+</strong><span>services</span></div>
+                    <div class="capability-pill"><strong>20</strong><span>MCP servers</span></div>
+                </div>
+
+                <div class="depth-grid depth-grid-single">
+                    <article class="stat-card depth-card">
+                        <h3>Token and time efficiency signals</h3>
+                        <ul class="efficiency-list">
+                            <li><strong>Helper-first automation:</strong> deterministic scripts collect facts, compress output, and reduce repeated AI reasoning.</li>
+                            <li><strong>TOON-ready context:</strong> documented 20-60% token reduction vs JSON/YAML for indexes and registries.</li>
+                            <li><strong>Worktree discipline:</strong> isolated branches, PRs, CI gates, and review loops keep autonomous work auditable.</li>
+                            <li><strong>Domain routing:</strong> specialist agents avoid one-size-fits-all prompts for SEO, ops, security, content, finance, and more.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <article class="stat-card agents-explorer-card">
+                    <div class="stat-card-header">
+                        <h3>.agents file browser</h3>
+                        <span class="stat-source" id="folderSource">loading</span>
+                    </div>
+                    <div class="agents-explorer" aria-label="Navigable .agents directory browser">
+                        <aside class="agents-tree-pane">
+                            <label class="agents-search-label" for="agentsSearch">Search .agents</label>
+                            <input class="agents-search" id="agentsSearch" type="search" placeholder="agents, scripts, workflows...">
+                            <div class="agents-tree" id="agentsTree" role="tree">
+                                <button class="agents-tree-item folder active" type="button" data-path=".agents">.agents/</button>
+                                <button class="agents-tree-item folder" type="button" data-path=".agents/scripts">▸ scripts/</button>
+                                <button class="agents-tree-item folder" type="button" data-path=".agents/workflows">▸ workflows/</button>
+                                <button class="agents-tree-item folder" type="button" data-path=".agents/reference">▸ reference/</button>
+                                <button class="agents-tree-item folder" type="button" data-path=".agents/tools">▸ tools/</button>
+                            </div>
+                        </aside>
+                        <div class="agents-content-pane">
+                            <div class="agents-content-header">
+                                <span id="agentsContentPath">.agents/</span>
+                                <a id="agentsContentLink" href="https://github.com/marcusquinn/aidevops/tree/main/.agents" target="_blank" rel="noopener noreferrer">Open on GitHub</a>
+                            </div>
+                            <pre class="agents-content" id="agentsContent">.agents/
+
+▸ scripts/     helper automation that saves repeated AI reasoning
+▸ workflows/   repeatable playbooks for delivery, git, reviews, and ops
+▸ reference/   deeper guidance loaded only when needed
+▸ tools/       service, browser, security, hosting, and platform docs
+
+Loading the live GitHub tree...</pre>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
         <section class="features" id="features">
             <div class="container">
                 <h2 class="section-title">AI DevOps Features &amp; Capabilities</h2>
@@ -507,6 +606,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
 </body>
 </html>
