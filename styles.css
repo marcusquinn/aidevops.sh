@@ -1251,7 +1251,7 @@ pre,
     display: grid;
     gap: 0.75rem;
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    margin: 1.5rem auto;
+    margin: 0 auto 1.5rem;
     max-width: 1000px;
 }
 
