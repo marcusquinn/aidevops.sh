@@ -658,7 +658,7 @@
 
     function renderDirectory(path) {
         const children = childItems(path);
-        const rows = [`<span class="agents-directory-title">${escapeHtml(displayPath(path))}</span>`];
+        const rows = [];
         if (path !== '.agents') {
             const parent = parentPath(path);
             rows.push(`<a class="agents-content-item parent" href="${githubLinkForPath(parent, 'tree')}" data-path="${escapeHtml(parent)}">↰ ../</a>`);
