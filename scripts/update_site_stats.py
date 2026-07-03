@@ -7,6 +7,7 @@ import base64
 import datetime as dt
 import json
 import os
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -18,10 +19,43 @@ OUTPUT_PATH = Path("data/aidevops-stats.json")
 PREVIEW_EXTENSIONS = {".md", ".txt", ".sh", ".py", ".js", ".json", ".yml", ".yaml", ".toml"}
 MAX_PREVIEWS = 60
 MAX_PREVIEW_CHARS = 6000
+MAX_REQUEST_ATTEMPTS = 4
+RETRY_STATUS_CODES = {403, 429, 500, 502, 503, 504}
 
 
 def base64_text(value: str) -> str:
     return base64.b64encode(value.encode("utf-8")).decode("ascii")
+
+
+def retry_delay(attempt: int, headers: object | None = None) -> float:
+    retry_after = headers.get("Retry-After") if headers is not None and hasattr(headers, "get") else None
+    if retry_after:
+        try:
+            return min(float(retry_after), 30.0)
+        except ValueError:
+            pass
+    return min(2.0**attempt, 30.0)
+
+
+def urlopen_with_retries(request: urllib.request.Request, timeout: int = 60):
+    for attempt in range(MAX_REQUEST_ATTEMPTS):
+        try:
+            response = urllib.request.urlopen(request, timeout=timeout)
+            if getattr(response, "status", 200) == 202 and attempt < MAX_REQUEST_ATTEMPTS - 1:
+                delay = retry_delay(attempt, response.headers)
+                response.close()
+                time.sleep(delay)
+                continue
+            return response
+        except urllib.error.HTTPError as error:
+            if error.code not in RETRY_STATUS_CODES or attempt == MAX_REQUEST_ATTEMPTS - 1:
+                raise
+            time.sleep(retry_delay(attempt, error.headers))
+        except urllib.error.URLError:
+            if attempt == MAX_REQUEST_ATTEMPTS - 1:
+                raise
+            time.sleep(retry_delay(attempt))
+    raise RuntimeError("GitHub request retry loop exhausted")
 
 
 def github_request(path: str, params: dict[str, str] | None = None) -> object:
@@ -49,11 +83,9 @@ def github_url_request(url: str, token: str | None = None) -> tuple[object, obje
             **({"Authorization": f"Bearer {token}"} if token else {}),
         },
     )
-    with urllib.request.urlopen(request, timeout=60) as response:
+    with urlopen_with_retries(request, timeout=60) as response:
         body = response.read().decode("utf-8")
-        if response.status == 202 and not body.strip():
-            return None, response.headers
-        return json.loads(body), response.headers
+        return (json.loads(body) if body else {}), response.headers
 
 
 def next_link_url(link_header: str | None) -> str | None:
@@ -75,7 +107,7 @@ def raw_github_text(path: str) -> str:
         f"https://raw.githubusercontent.com/{TARGET_REPO}/HEAD/{quoted}",
         headers={"User-Agent": "aidevops.sh-site-stats"},
     )
-    with urllib.request.urlopen(request, timeout=30) as response:
+    with urlopen_with_retries(request, timeout=30) as response:
         return response.read(MAX_PREVIEW_CHARS + 1).decode("utf-8", errors="replace")[:MAX_PREVIEW_CHARS]
 
 
@@ -170,7 +202,7 @@ def agents_tree_and_previews() -> dict[str, object]:
         kind = str(item.get("type", ""))
         if not path.startswith(".agents/") or kind not in {"tree", "blob"}:
             continue
-        tree.append({"path": path, "path64": base64_text(path), "type": kind})
+        tree.append({"path64": base64_text(path), "sort_path": path, "type": kind})
         if kind != "blob" or preview_count >= MAX_PREVIEWS:
             continue
         suffix = Path(path).suffix.lower()
@@ -181,10 +213,9 @@ def agents_tree_and_previews() -> dict[str, object]:
                 preview_count += 1
             except (OSError, UnicodeDecodeError, urllib.error.URLError):
                 continue
-    tree.sort(key=lambda item: (item["type"] != "tree", item["path"]))
-    for item in tree:
-        item.pop("path", None)
-    return {"encoding": "base64", "tree": tree, "previews": previews}
+    tree.sort(key=lambda item: (item["type"] != "tree", item["sort_path"]))
+    serialized_tree = [{"path64": item["path64"], "type": item["type"]} for item in tree]
+    return {"encoding": "base64", "tree": serialized_tree, "previews": previews}
 
 
 def main() -> None:

@@ -5,6 +5,10 @@ on:
   schedule:
     - cron: '17 2 * * *'
 
+concurrency:
+  group: update-site-stats-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
