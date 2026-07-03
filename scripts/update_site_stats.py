@@ -241,7 +241,7 @@ def update_og_image_metric(agents_payload: dict[str, object]) -> None:
     )
     content, command_replacements = re.subn(
         r'(<g transform="translate\()\d+( 28\)">\n\s*<text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">185\+</text>\n\s*<text x="92" y="27" fill="#ffffff" opacity="0\.74" font-size="19" font-weight="650">/command shortcuts</text>)',
-        r'\g<1>775\g<2>',
+        r'\g<1>700\g<2>',
         content,
         count=1,
     )
