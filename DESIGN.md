@@ -127,6 +127,15 @@ magick favicon-16x16.png favicon-32x32.png favicon-48x48.png favicon.ico
 - Check the social graph at full size and social-preview size; the install command needs visible right padding.
 - Verify live deploys by comparing live asset hashes against committed bytes after GitHub Pages deployment.
 
+## Responsive layout rules
+
+- Mobile pages must avoid document-level horizontal scrolling; oversized components should wrap, stack, or scroll inside their own card.
+- Section gutters collapse to the section padding at tablet/mobile widths so cards keep enough internal space.
+- Stats card headings and source pills stack on mobile; source text may wrap instead of forcing card overflow.
+- Chart cards keep horizontal scroll contained within `.monthly-chart`; the whole page should remain width-safe at `320`, `360`, `390`, `414`, and `768` pixel viewports.
+- The `.agents` file browser stacks tree above content on mobile. Search paths, breadcrumbs, file names, and preview text wrap within the card rather than clipping behind the right edge.
+- Install commands, quickstart command snippets, service links, and other long strings should use wrapping/word-break rules that preserve tap targets and readability.
+
 ## Verification checklist
 
 Before merging visual changes, run:
