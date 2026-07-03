@@ -849,9 +849,8 @@ pre,
 
 /* Quickstart Section */
 .quickstart {
-    padding: 5rem 1.5rem;
+    padding: 0 1.5rem 5rem;
     background: var(--bg-secondary);
-    border-top: 1px solid var(--border);
 }
 
 .quickstart .section-title {
@@ -943,12 +942,10 @@ pre,
 
 /* Stats Panel */
 .stats-panel {
-    padding: 6rem 1.5rem;
+    padding: 0 1.5rem 6rem;
     background:
         radial-gradient(circle at 20% 20%, var(--accent-glow), transparent 30%),
         linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
 }
 
 .stats-header {
@@ -1617,7 +1614,7 @@ pre,
 
 /* Features Section */
 .features {
-    padding: 6rem 1.5rem;
+    padding: 0 1.5rem 6rem;
     background:
         radial-gradient(circle at 80% 12%, rgba(102, 217, 242, 0.08), transparent 24%),
         var(--bg-primary);
@@ -1819,7 +1816,7 @@ pre,
 
 /* CTA Section */
 .cta {
-    padding: 6rem 1.5rem;
+    padding: 0 1.5rem 6rem;
     background: var(--bg-secondary);
     text-align: center;
 }
@@ -2205,11 +2202,7 @@ pre,
         padding: 1rem;
     }
     
-    .features, .stats-panel, .cta {
-        padding: 4rem 1rem;
-    }
-
-    .services, .faq {
+    .quickstart, .stats-panel, .features, .services, .faq, .cta {
         padding: 0 1rem 4rem;
     }
     
