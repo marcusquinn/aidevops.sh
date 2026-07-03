@@ -75,7 +75,7 @@ Compatible with [todo-md](https://github.com/todo-md/todo-md), [todomd](https://
 t001,Audit README.md — ensure content accurately describes site purpose and links to main repo and has correct install/usage instructions,marcus,docs audit,~15m,~15m,2026-03-01,,2026-03-01,done
 -->
 
-- [x] t001 Audit README.md — ensure content accurately describes the site purpose, links to the main aidevops repo correctly, and has correct install/usage instructions. #docs #audit ref:GH#12 logged:2026-03-01 completed:2026-03-01
+- [x] t001 Audit README.md — ensure content accurately describes the site purpose, links to the main aidevops repo correctly, and has correct install/usage instructions. #docs #audit ref:GH#1 logged:2026-03-01 completed:2026-03-01
 
 ## Declined
 
@@ -96,4 +96,8 @@ t001,Audit README.md — ensure content accurately describes site purpose and li
 1,0,0,0,0,1,0,~15m,~15m
 -->
 
-- [ ] t1504 Add --dir flag to issue-sync-helper.sh to prevent cross-repo TODO.md contamination ref:GH#2919
+- [x] t1504 Add --dir flag to issue-sync-helper.sh to prevent cross-repo TODO.md contamination ref:GH#2919 verified:2026-04-25 completed:2026-07-03
+
+- [ ] t8182 fix admin users Load more rows repeat clicks #auto-dispatch #bug ref:GH#8287
+
+- [ ] t8179 fix admin users boolean filter all-values state #auto-dispatch #bug ref:GH#8274
