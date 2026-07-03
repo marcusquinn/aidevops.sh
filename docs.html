@@ -155,7 +155,7 @@
 <p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
 <a href="https://github.com/marcusquinn"><img src="https://img.shields.io/badge/Copyright-Marcus%20Quinn%202025--2026-blue.svg" alt="Copyright"></a></p>
 <!-- Release & Version Info -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.31.32-blue.svg" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.31.33-blue.svg" alt="Version"></a>
 <a href="https://www.npmjs.com/package/aidevops"><img src="https://img.shields.io/npm/v/aidevops" alt="npm version"></a>
 <a href="https://github.com/marcusquinn/homebrew-tap"><img src="https://img.shields.io/badge/homebrew-marcusquinn%2Ftap-orange" alt="Homebrew"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/github-repository-181717.svg?logo=github" alt="GitHub repository"></a></p>
@@ -1976,7 +1976,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <li><a href="https://openapi-mcp.openapisearch.com/mcp">OpenAPI Search</a> - Search and explore any OpenAPI specification (zero install, Cloudflare Worker)</li>
 <li><a href="https://github.com/steipete/mcporter">MCPorter</a> - Discover, call, compose, and generate CLIs/typed clients for MCP servers</li>
 </ul>
-<p><strong>Browser Automation</strong> (8 tools + anti-detect stack, <a href="#browser-automation">benchmarked</a>):</p>
+<p><strong>Browser Automation</strong> (browser tool suite + anti-detect stack, <a href="#browser-automation">benchmarked</a>):</p>
 <ul>
 <li><strong>Auto-browse workflow</strong> - <code>/auto-browse</code> orchestrates the tools below to learn messy browser tasks, choose the cheapest reliable path, preserve private profile/session state under <code>~/.aidevops/</code>, and graduate reusable private agents or sanitized <code>todo/</code> plans</li>
 <li><a href="https://playwright.dev/">Playwright</a> - Fastest engine (0.9s form fill), parallel contexts, extensions, proxy (auto-installed)</li>
@@ -1987,6 +1987,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <li><a href="https://github.com/watercrawl/watercrawl">WaterCrawl</a> - Self-hosted crawling with web search, sitemap generation, JS rendering, proxy support</li>
 <li><a href="https://github.com/nicholasgriffintn/playwriter">Playwriter</a> - Your browser&#39;s extensions/passwords/proxy, already unlocked</li>
 <li><a href="https://github.com/browserbase/stagehand">Stagehand</a> - Natural language automation, self-healing selectors</li>
+<li><a href="https://github.com/browser-use/browser-use">browser-use</a> - AI-native browser automation, CLI 3.0 Browser Harness, packaged agent skill, Browser Use Cloud, 100-task upstream benchmark</li>
 <li><a href="https://github.com/nicholasgriffintn/chrome-devtools-mcp">Chrome DevTools MCP</a> - Companion: Lighthouse, network throttling, CSS coverage (pairs with any tool)</li>
 <li><a href="https://developers.cloudflare.com/browser-rendering/">Cloudflare Browser Rendering</a> - Server-side web scraping</li>
 <li><a href="https://github.com/steipete/Peekaboo">Peekaboo</a> - macOS screen capture and GUI automation (pixel-accurate captures, AI vision analysis)</li>
@@ -2082,7 +2083,7 @@ cargo install toon-lsp                        # TOON syntax validation
 </code></pre>
 <p>These catch formatting and syntax issues during editing, reducing preflight/postflight fix cycles.</p>
 <h2><strong>Browser Automation</strong></h2>
-<p>8 browser tools + anti-detect stack + device emulation, benchmarked and integrated for AI-assisted web automation, dev testing, mobile/responsive testing, data extraction, and bot detection evasion. Agents automatically select the optimal tool based on task requirements.</p>
+<p>Browser tool suite + anti-detect stack + device emulation, benchmarked and integrated for AI-assisted web automation, dev testing, mobile/responsive testing, data extraction, and bot detection evasion. Agents automatically select the optimal tool based on task requirements.</p>
 <p>For repeatable browser operations and web data mining, use <code>/auto-browse</code>. It runs an intake and learning loop that starts with cheap fetch/API/crawler options, escalates to deterministic or high-agency browser tools only when needed, and then graduates the workflow into a private custom agent, helper, schema, or sanitized <code>todo/</code> plan. Account-specific workflows, cookies, profile state, downloads, and traces stay in private aidevops user data; only generalized plans should be committed to the repo.</p>
 <h3>Performance Benchmarks</h3>
 <p>Tested on macOS ARM64, all headless, warm daemon:</p>
@@ -2097,6 +2098,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <th>Crawl4AI</th>
 <th>Playwriter</th>
 <th>Stagehand</th>
+<th>browser-use</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -2108,6 +2110,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>2.78s</td>
 <td>2.95s</td>
 <td>7.72s</td>
+<td>Agentic; not in local deterministic suite</td>
 </tr>
 <tr>
 <td><strong>Form Fill</strong> (4 fields)</td>
@@ -2118,6 +2121,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>N/A</td>
 <td>2.24s</td>
 <td>2.58s</td>
+<td>Agentic; use for fuzzy forms</td>
 </tr>
 <tr>
 <td><strong>Data Extraction</strong> (5 items)</td>
@@ -2128,6 +2132,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>2.53s</td>
 <td>2.68s</td>
 <td>3.48s</td>
+<td>Agentic; compress to deterministic when stable</td>
 </tr>
 <tr>
 <td><strong>Multi-step</strong> (click + nav)</td>
@@ -2138,6 +2143,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>N/A</td>
 <td>4.37s</td>
 <td>4.48s</td>
+<td>Upstream BU Bench covers 100 real-world tasks</td>
 </tr>
 <tr>
 <td><strong>Parallel</strong> (3 sessions)</td>
@@ -2148,6 +2154,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>3.0s</td>
 <td>N/A</td>
 <td>Slow</td>
+<td>Prefer Browser Use Cloud for scale</td>
 </tr>
 </tbody></table>
 <h3>Feature Matrix</h3>
@@ -2162,6 +2169,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <th>Crawl4AI</th>
 <th>Playwriter</th>
 <th>Stagehand</th>
+<th>browser-use</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -2173,6 +2181,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>Yes</td>
 <td>No (your browser)</td>
 <td>Yes</td>
+<td>Yes</td>
 </tr>
 <tr>
 <td><strong>Proxy/VPN</strong></td>
@@ -2183,6 +2192,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>Full</td>
 <td>Your browser</td>
 <td>Via args</td>
+<td>Cloud/profiles</td>
 </tr>
 <tr>
 <td><strong>Extensions</strong></td>
@@ -2193,6 +2203,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td>Yes (yours)</td>
 <td>Possible</td>
+<td>Profile/browser dependent</td>
 </tr>
 <tr>
 <td><strong>Password managers</strong></td>
@@ -2203,6 +2214,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td><strong>Yes</strong> (unlocked)</td>
 <td>No</td>
+<td>Profile/browser dependent</td>
 </tr>
 <tr>
 <td><strong>Device emulation</strong></td>
@@ -2213,6 +2225,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td>No</td>
 <td>Via Playwright</td>
+<td>Profile/browser dependent</td>
 </tr>
 <tr>
 <td><strong>Parallel sessions</strong></td>
@@ -2223,6 +2236,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>arun_many 1.7x</td>
 <td>Shared</td>
 <td>Per-instance</td>
+<td>Cloud for scale</td>
 </tr>
 <tr>
 <td><strong>Session persistence</strong></td>
@@ -2233,6 +2247,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>user_data_dir</td>
 <td>Your browser</td>
 <td>Per-instance</td>
+<td>BrowserProfile / Cloud</td>
 </tr>
 <tr>
 <td><strong>Tracing</strong></td>
@@ -2243,6 +2258,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td>Via CDP</td>
 <td>Via Playwright</td>
+<td>History + Browser Harness CLI</td>
 </tr>
 <tr>
 <td><strong>Natural language</strong></td>
@@ -2252,6 +2268,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td>LLM extraction</td>
 <td>No</td>
+<td>Yes</td>
 <td>Yes</td>
 </tr>
 <tr>
@@ -2263,6 +2280,18 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td>No</td>
 <td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Agent skill</strong></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td><code>browser-use skill</code></td>
 </tr>
 <tr>
 <td><strong>iOS Simulator</strong></td>
@@ -2270,6 +2299,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td>No</td>
 <td><strong>Yes</strong> (macOS)</td>
+<td>No</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
@@ -2283,6 +2313,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>Community</td>
 <td>Community</td>
 <td>Browserbase</td>
+<td>Browser Use</td>
 </tr>
 </tbody></table>
 <h3>Tool Selection</h3>
@@ -2350,6 +2381,11 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>Natural language, self-healing</td>
 </tr>
 <tr>
+<td><strong>High-agency browser tasks</strong></td>
+<td>browser-use</td>
+<td>AI-native browser agent, CLI 3.0, Browser Harness, cloud/stealth/CAPTCHA options</td>
+</tr>
+<tr>
 <td><strong>Performance debugging</strong></td>
 <td>Chrome DevTools MCP</td>
 <td>Companion tool, pairs with any browser</td>
@@ -2411,7 +2447,7 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>Visual debugging only</td>
 </tr>
 </tbody></table>
-<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/browser-automation.md"><code>.agents/tools/browser/browser-automation.md</code></a> for the full decision tree and <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/browser-benchmark.md"><code>browser-benchmark.md</code></a> for reproducible benchmark scripts.</p>
+<p>See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/browser-automation.md"><code>.agents/tools/browser/browser-automation.md</code></a> for the full decision tree, <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/browser-use.md"><code>browser-use.md</code></a> for Browser Use CLI 3.0 guidance, and <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/browser/browser-benchmark.md"><code>browser-benchmark.md</code></a> for reproducible benchmark scripts.</p>
 <h3>Device Emulation</h3>
 <p>Test responsive layouts and mobile-specific behavior using Playwright&#39;s built-in device emulation. Supports 100+ device presets with viewport, user agent, touch events, device scale factor, geolocation, locale/timezone, permissions, color scheme, offline mode, and network throttling.</p>
 <p><strong>Common device presets:</strong></p>
