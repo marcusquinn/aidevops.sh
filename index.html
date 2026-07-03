@@ -441,51 +441,6 @@
                     </article>
                 </div>
 
-                <div class="depth-grid depth-grid-single">
-                    <article class="stat-card depth-card">
-                        <h3>Token and time efficiency signals</h3>
-                        <ul class="efficiency-list">
-                            <li><strong>Helper-first automation:</strong> deterministic scripts collect facts, compress output, and reduce repeated AI reasoning.</li>
-                            <li><strong>TOON-ready context:</strong> documented 20-60% token reduction vs JSON/YAML for indexes and registries.</li>
-                            <li><strong>Worktree discipline:</strong> isolated branches, PRs, CI gates, and review loops keep autonomous work auditable.</li>
-                            <li><strong>Domain routing:</strong> specialist agents avoid one-size-fits-all prompts for SEO, ops, security, content, finance, and more.</li>
-                        </ul>
-                    </article>
-                </div>
-
-                <article class="stat-card agents-explorer-card">
-                    <div class="stat-card-header">
-                        <h3>.agents file browser</h3>
-                        <span class="stat-source" id="folderSource">loading</span>
-                    </div>
-                    <div class="agents-explorer" aria-label="Navigable .agents directory browser">
-                        <aside class="agents-tree-pane">
-                            <label class="agents-search-label" for="agentsSearch">Search .agents</label>
-                            <input class="agents-search" id="agentsSearch" type="search" placeholder="agents, scripts, workflows...">
-                            <div class="agents-tree" id="agentsTree" role="tree">
-                                <button class="agents-tree-item folder active" type="button" data-path=".agents">.agents/</button>
-                                <button class="agents-tree-item folder" type="button" data-path=".agents/scripts">▸ scripts/</button>
-                                <button class="agents-tree-item folder" type="button" data-path=".agents/workflows">▸ workflows/</button>
-                                <button class="agents-tree-item folder" type="button" data-path=".agents/reference">▸ reference/</button>
-                                <button class="agents-tree-item folder" type="button" data-path=".agents/tools">▸ tools/</button>
-                            </div>
-                        </aside>
-                        <div class="agents-content-pane">
-                            <div class="agents-content-header">
-                                <span id="agentsContentPath">.agents/</span>
-                                <a id="agentsContentLink" href="https://github.com/marcusquinn/aidevops/tree/main/.agents" target="_blank" rel="noopener noreferrer">Open on GitHub</a>
-                            </div>
-                            <pre class="agents-content" id="agentsContent">.agents/
-
-▸ scripts/     helper automation that saves repeated AI reasoning
-▸ workflows/   repeatable playbooks for delivery, git, reviews, and ops
-▸ reference/   deeper guidance loaded only when needed
-▸ tools/       service, browser, security, hosting, and platform docs
-
-Loading the live GitHub tree...</pre>
-                        </div>
-                    </div>
-                </article>
             </div>
         </section>
 
@@ -515,11 +470,60 @@ Loading the live GitHub tree...</pre>
                         <p>Infrastructure, hosting, DNS, SEO, marketing, reports, content, video, browser automation, business operations, and personal productivity routines.</p>
                     </div>
                 </div>
+
+                <div class="feature-support-stack" aria-label="Supporting AI DevOps feature evidence">
+                    <div class="depth-grid depth-grid-single">
+                        <article class="stat-card depth-card">
+                            <h3>Token and time efficiency signals</h3>
+                            <ul class="efficiency-list">
+                                <li><strong>Helper-first automation:</strong> deterministic scripts collect facts, compress output, and reduce repeated AI reasoning.</li>
+                                <li><strong>TOON-ready context:</strong> documented 20-60% token reduction vs JSON/YAML for indexes and registries.</li>
+                                <li><strong>Worktree discipline:</strong> isolated branches, PRs, CI gates, and review loops keep autonomous work auditable.</li>
+                                <li><strong>Domain routing:</strong> specialist agents avoid one-size-fits-all prompts for SEO, ops, security, content, finance, and more.</li>
+                            </ul>
+                        </article>
+                    </div>
+
+                    <article class="stat-card agents-explorer-card">
+                        <div class="stat-card-header">
+                            <h3>.agents file browser</h3>
+                            <span class="stat-source" id="folderSource">loading</span>
+                        </div>
+                        <div class="agents-explorer" aria-label="Navigable .agents directory browser">
+                            <aside class="agents-tree-pane">
+                                <label class="agents-search-label" for="agentsSearch">Search .agents</label>
+                                <input class="agents-search" id="agentsSearch" type="search" placeholder="agents, scripts, workflows...">
+                                <div class="agents-tree" id="agentsTree" role="tree">
+                                    <button class="agents-tree-item folder active" type="button" data-path=".agents">.agents/</button>
+                                    <button class="agents-tree-item folder" type="button" data-path=".agents/scripts">▸ scripts/</button>
+                                    <button class="agents-tree-item folder" type="button" data-path=".agents/workflows">▸ workflows/</button>
+                                    <button class="agents-tree-item folder" type="button" data-path=".agents/reference">▸ reference/</button>
+                                    <button class="agents-tree-item folder" type="button" data-path=".agents/tools">▸ tools/</button>
+                                </div>
+                            </aside>
+                            <div class="agents-content-pane">
+                                <div class="agents-content-header">
+                                    <span id="agentsContentPath">.agents/</span>
+                                    <a id="agentsContentLink" href="https://github.com/marcusquinn/aidevops/tree/main/.agents" target="_blank" rel="noopener noreferrer">Open on GitHub</a>
+                                </div>
+                                <pre class="agents-content" id="agentsContent">.agents/
+
+▸ scripts/     helper automation that saves repeated AI reasoning
+▸ workflows/   repeatable playbooks for delivery, git, reviews, and ops
+▸ reference/   deeper guidance loaded only when needed
+▸ tools/       service, browser, security, hosting, and platform docs
+
+Loading the live GitHub tree...</pre>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
         <section class="services" id="services">
             <div class="container">
+                <div class="section-divider" aria-hidden="true"></div>
                 <h2 class="section-title">AI DevOps Services &amp; Integrations</h2>
                 <p class="section-subtitle">AIDevOps connects your agents to the infrastructure, developer platforms, quality tools, document workflows, communications channels, creative systems, and local automation services that make delivery happen.</p>
                 <div class="services-grid">
@@ -659,6 +663,7 @@ Loading the live GitHub tree...</pre>
 
         <section class="faq" id="faq">
             <div class="container">
+                <div class="section-divider" aria-hidden="true"></div>
                 <h2 class="section-title">AI DevOps FAQ</h2>
                 <div class="faq-list">
                     <article class="faq-item">
