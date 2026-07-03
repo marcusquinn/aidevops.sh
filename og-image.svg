@@ -38,10 +38,11 @@
     </g>
   </g>
   <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
-    <text x="268" y="132" fill="#66d9f2" font-size="20" font-weight="800" letter-spacing="4">24/7 DEVELOPMENT</text>
-    <text x="268" y="214" fill="url(#headline)" font-size="78" font-weight="850" letter-spacing="-4">AI DevOps</text>
-    <text x="268" y="280" fill="#ffffff" font-size="46" font-weight="760" letter-spacing="-1.5">Scaleable teamwork you can trust</text>
-    <text x="268" y="333" fill="#ffffff" opacity="0.76" font-size="25" font-weight="500">OpenCode plugin for autonomous project delivery</text>
+    <text x="82" y="62" fill="#66d9f2" font-size="16.8" font-weight="800" letter-spacing="1.95" textLength="1026" lengthAdjust="spacingAndGlyphs">BUILD WEBSITES, APPS, CONTENT, MARKETING, SEO, BRAND ASSETS, AND BUSINESS AUTOMATIONS</text>
+    <text x="268" y="202" fill="url(#headline)" font-size="78" font-weight="850" letter-spacing="-4">AI DevOps</text>
+    <text x="268" y="262" fill="#ffffff" font-size="35" font-weight="760" letter-spacing="-1.5">Designed for speed, token-efficiency,</text>
+    <text x="268" y="302" fill="#ffffff" font-size="35" font-weight="760" letter-spacing="-1.5">and infinite scale with AI teamwork</text>
+    <text x="268" y="347" fill="#ffffff" opacity="0.76" font-size="23" font-weight="500">The open-source AI coding plugin for complete Git workflow automation</text>
   </g>
   <g transform="translate(82 386)" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
     <rect width="1036" height="102" rx="26" fill="#050606" opacity="0.86" stroke="#66d9f2" stroke-opacity="0.22"/>
