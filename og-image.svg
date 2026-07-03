@@ -1,6 +1,6 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">AI DevOps Assistant and OpenCode Plugin</title>
-  <desc id="desc">AIDevOps social preview with cyan AI mark, autonomous delivery message, and framework capability highlights.</desc>
+  <desc id="desc">AIDevOps social preview with the same cyan terminal prompt icon used in the website logo and framework capability highlights.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#000000"/>
@@ -25,56 +25,45 @@
       <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#000000" flood-opacity="0.46"/>
     </filter>
   </defs>
-
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
   <rect width="1200" height="630" fill="url(#glow2)"/>
   <path d="M0 514C154 456 274 453 424 505c169 59 310 66 480 1 123-47 217-52 296-25v149H0Z" fill="#66d9f2" opacity="0.035"/>
   <path d="M0 462c132-48 261-54 386-17 162 48 320 53 468 0 137-49 253-50 346-7" fill="none" stroke="#66d9f2" stroke-width="1.5" opacity="0.14"/>
-
   <g transform="translate(82 86)" filter="url(#shadow)">
     <rect width="156" height="156" rx="32" fill="#000000"/>
-    <circle cx="78" cy="66" r="82" fill="#66d9f2" opacity="0.22"/>
-    <rect x="10" y="10" width="136" height="136" rx="26" fill="none" stroke="#66d9f2" stroke-opacity="0.38" stroke-width="4"/>
-    <g transform="translate(29 30) scale(0.31)" fill="#8ce8ff">
-      <path d="M116 344h50l28-78h88l28 78h52L268 126h-58L116 344Zm93-120 29-82 30 82h-59Z"/>
-      <rect x="378" y="126" width="42" height="218" rx="21"/>
-      <rect x="356" y="126" width="86" height="42" rx="21"/>
-      <rect x="356" y="302" width="86" height="42" rx="21"/>
+    <rect x="10" y="10" width="136" height="136" rx="27" fill="none" stroke="#66d9f2" stroke-opacity="0.38" stroke-width="4"/>
+    <g transform="translate(78 79) scale(0.145) translate(-288 -256)">
+      <path fill="#8ce8ff" d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/>
     </g>
-    <rect x="49" y="118" width="58" height="7" rx="3.5" fill="#66d9f2" opacity="0.92"/>
   </g>
-
   <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
     <text x="268" y="132" fill="#66d9f2" font-size="20" font-weight="800" letter-spacing="4">24/7 DEVELOPMENT</text>
     <text x="268" y="214" fill="url(#headline)" font-size="78" font-weight="850" letter-spacing="-4">AI DevOps</text>
     <text x="268" y="280" fill="#ffffff" font-size="46" font-weight="760" letter-spacing="-1.5">Scaleable teamwork you can trust</text>
     <text x="268" y="333" fill="#ffffff" opacity="0.76" font-size="25" font-weight="500">OpenCode plugin for autonomous project delivery</text>
   </g>
-
   <g transform="translate(82 386)" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
     <rect width="1036" height="102" rx="26" fill="#050606" opacity="0.86" stroke="#66d9f2" stroke-opacity="0.22"/>
     <g transform="translate(34 28)">
       <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">12</text>
-      <text x="54" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">primary agents</text>
+      <text x="54" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">main agent experts</text>
     </g>
     <g transform="translate(292 28)">
-      <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">1,800+</text>
-      <text x="124" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">helper scripts</text>
+      <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">2,200+</text>
+      <text x="124" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">subagent skills</text>
     </g>
     <g transform="translate(606 28)">
       <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">185+</text>
-      <text x="92" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">commands &amp; workflows</text>
+      <text x="92" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">/command shortcuts</text>
     </g>
   </g>
-
   <g transform="translate(82 536)" font-family="Menlo, Monaco, Consolas, 'Liberation Mono', monospace">
-    <rect width="542" height="54" rx="15" fill="#000000" opacity="0.7" stroke="#66d9f2" stroke-opacity="0.2"/>
+    <rect width="610" height="54" rx="15" fill="#000000" opacity="0.7" stroke="#66d9f2" stroke-opacity="0.2"/>
     <circle cx="29" cy="27" r="5.5" fill="#ff5f57"/>
     <circle cx="50" cy="27" r="5.5" fill="#febc2e"/>
     <circle cx="71" cy="27" r="5.5" fill="#28c840"/>
     <text x="106" y="34" fill="#66d9f2" font-size="19">bash &lt;(curl -fsSL aidevops.sh/install)</text>
   </g>
-
   <text x="1118" y="572" text-anchor="end" fill="#66d9f2" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="800">aidevops.sh</text>
 </svg>
