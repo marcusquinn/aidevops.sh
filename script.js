@@ -223,6 +223,87 @@
         heading.id = slug;
     });
 
+    function ensureDocsFavicons() {
+        if (!document.body.classList.contains('docs-page')) return;
+
+        const faviconLinks = [
+            { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png?v=5' },
+            { rel: 'icon', type: 'image/svg+xml', sizes: 'any', href: '/favicon.svg?v=5' },
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico?v=5' },
+            { rel: 'icon', type: 'image/png', sizes: '48x48', href: '/favicon-48x48.png?v=5' },
+            { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png?v=5' },
+            { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png?v=5' },
+            { rel: 'manifest', href: '/site.webmanifest?v=5' }
+        ];
+
+        document.querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"], link[rel="manifest"]').forEach((link) => {
+            link.remove();
+        });
+
+        faviconLinks.forEach((config) => {
+            const link = document.createElement('link');
+            Object.entries(config).forEach(([key, value]) => link.setAttribute(key, value));
+            document.head.appendChild(link);
+        });
+    }
+
+    function createDocsSidebar() {
+        const sidebar = document.createElement('aside');
+        sidebar.className = 'docs-sidebar';
+        sidebar.setAttribute('aria-label', 'Documentation navigation');
+        sidebar.innerHTML = `
+            <nav class="docs-sidebar-inner">
+                <div class="docs-sidebar-section">
+                    <p class="docs-sidebar-label">Pages</p>
+                    <a class="docs-sidebar-link active" href="docs.html">Documentation</a>
+                    <a class="docs-sidebar-link docs-sidebar-child active" href="docs.html" aria-current="page">README</a>
+                </div>
+                <div class="docs-sidebar-section docs-toc-section">
+                    <p class="docs-sidebar-label">On this page</p>
+                    <ol class="docs-toc" id="docsToc" aria-label="Table of contents"></ol>
+                </div>
+            </nav>`;
+        return sidebar;
+    }
+
+    function createDocsMobileNav() {
+        const mobileNav = document.createElement('details');
+        mobileNav.className = 'docs-mobile-nav';
+        mobileNav.innerHTML = `
+            <summary>Documentation navigation</summary>
+            <div class="docs-mobile-nav-panel">
+                <a class="docs-sidebar-link active" href="docs.html">Documentation</a>
+                <a class="docs-sidebar-link docs-sidebar-child active" href="docs.html" aria-current="page">README</a>
+                <p class="docs-sidebar-label">On this page</p>
+                <ol class="docs-toc" id="docsMobileToc" aria-label="Mobile table of contents"></ol>
+            </div>`;
+        return mobileNav;
+    }
+
+    function ensureDocsShell() {
+        if (!document.body.classList.contains('docs-page')) return;
+        if (document.querySelector('.docs-shell')) return;
+
+        const legacyContainer = document.querySelector('main.docs-container');
+        if (!legacyContainer) return;
+
+        const shell = document.createElement('main');
+        shell.className = 'docs-shell';
+        legacyContainer.replaceWith(shell);
+        shell.appendChild(createDocsSidebar());
+        shell.appendChild(createDocsMobileNav());
+
+        const contentContainer = document.createElement('div');
+        contentContainer.className = 'docs-container';
+        while (legacyContainer.firstChild) {
+            contentContainer.appendChild(legacyContainer.firstChild);
+        }
+        shell.appendChild(contentContainer);
+    }
+
+    ensureDocsFavicons();
+    ensureDocsShell();
+
     const tocTargets = Array.from(document.querySelectorAll('.docs-content h2, .docs-content h3'));
     const tocContainers = [
         document.getElementById('docsToc'),
