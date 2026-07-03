@@ -268,6 +268,7 @@
     };
     let agentsTreeItems = [];
     let currentAgentsPath = '.agents';
+    let selectedAgentsPath = '.agents';
     let filePreviews = {};
     let siteStats = null;
     let chartTooltip = null;
@@ -604,11 +605,38 @@
         return agentsTreeItems.find((candidate) => candidate.path === path) || { path, type: 'tree' };
     }
 
+    function githubLinkForPath(path, type) {
+        return `https://github.com/${REPO}/${type === 'blob' ? 'blob' : 'tree'}/main/${path}`;
+    }
+
+    function renderPathHeader(path) {
+        const header = $('agentsContentPath');
+        if (!header) return;
+        const parts = path.split('/');
+        const crumbs = parts.map((part, index) => {
+            const crumbPath = parts.slice(0, index + 1).join('/');
+            const suffix = index === parts.length - 1 && itemForPath(path).type === 'tree' ? '/' : '';
+            return `<button class="agents-path-link" type="button" data-path="${escapeHtml(crumbPath)}">${escapeHtml(part)}${suffix}</button>`;
+        });
+        header.innerHTML = crumbs.join('<span class="agents-path-separator">/</span>');
+        header.querySelectorAll('.agents-path-link').forEach((button) => {
+            button.addEventListener('click', () => selectTreeItem(button.dataset.path));
+        });
+    }
+
     function setContent(path, text, link) {
-        setText('agentsContentPath', displayPath(path));
+        renderPathHeader(path);
         const content = $('agentsContent');
         const anchor = $('agentsContentLink');
         if (content) content.innerHTML = highlightContent(path, text);
+        if (anchor) anchor.href = link;
+    }
+
+    function setDirectoryContent(path, html, link) {
+        renderPathHeader(path);
+        const content = $('agentsContent');
+        const anchor = $('agentsContentLink');
+        if (content) content.innerHTML = html;
         if (anchor) anchor.href = link;
     }
 
@@ -630,33 +658,46 @@
 
     function renderDirectory(path) {
         const children = childItems(path);
-        const lines = [`${displayPath(path)}`, ''];
+        const rows = [`<span class="agents-directory-title">${escapeHtml(displayPath(path))}</span>`];
+        if (path !== '.agents') {
+            rows.push(`<button class="agents-content-item parent" type="button" data-path="${escapeHtml(parentPath(path))}">↰ ../</button>`);
+        }
         children.slice(0, 240).forEach((child) => {
             const icon = child.type === 'tree' ? '▸' : '•';
-            lines.push(`${icon} ${child.path.split('/').pop()}${child.type === 'tree' ? '/' : ''}`);
+            const name = `${child.path.split('/').pop()}${child.type === 'tree' ? '/' : ''}`;
+            rows.push(`<button class="agents-content-item ${child.type === 'tree' ? 'folder' : 'file'}" type="button" data-path="${escapeHtml(child.path)}">${icon} ${escapeHtml(name)}</button>`);
         });
-        if (children.length > 240) lines.push(`… ${children.length - 240} more items`);
-        setContent(path, lines.join('\n'), `https://github.com/${REPO}/tree/main/${path}`);
+        if (children.length > 240) rows.push(`<span class="agents-directory-more">… ${children.length - 240} more items</span>`);
+        setDirectoryContent(path, rows.join(''), githubLinkForPath(path, 'tree'));
+        const content = $('agentsContent');
+        if (content) {
+            content.querySelectorAll('.agents-content-item').forEach((button) => {
+                button.addEventListener('click', () => selectTreeItem(button.dataset.path));
+            });
+        }
     }
 
     async function renderFile(path) {
         if (filePreviews[path]) {
-            setContent(path, filePreviews[path], `https://github.com/${REPO}/blob/main/${path}`);
+            setContent(path, filePreviews[path], githubLinkForPath(path, 'blob'));
             return;
         }
-        setContent(path, 'Loading file...', `https://github.com/${REPO}/blob/main/${path}`);
+        setContent(path, 'Loading file...', githubLinkForPath(path, 'blob'));
         try {
             const response = await fetch(`${RAW_BASE}${path}`);
             if (!response.ok) throw new Error(`raw fetch ${response.status}`);
             const text = await response.text();
-            setContent(path, text.slice(0, 60000), `https://github.com/${REPO}/blob/main/${path}`);
+            if (selectedAgentsPath !== path) return;
+            setContent(path, text.slice(0, 60000), githubLinkForPath(path, 'blob'));
         } catch (error) {
-            setContent(path, 'Could not load this file from GitHub raw content.', `https://github.com/${REPO}/blob/main/${path}`);
+            if (selectedAgentsPath !== path) return;
+            setContent(path, 'Could not load this file from GitHub raw content.', githubLinkForPath(path, 'blob'));
         }
     }
 
     function selectTreeItem(path) {
         const item = itemForPath(path);
+        selectedAgentsPath = path;
         document.querySelectorAll('.agents-tree-item').forEach((button) => {
             button.classList.toggle('active', button.dataset.path === path);
         });
@@ -667,12 +708,16 @@
             if (search) search.value = '';
             renderAgentsTree('');
         } else {
+            currentAgentsPath = parentPath(path);
             renderFile(path);
+            const search = $('agentsSearch');
+            if (search) search.value = '';
+            renderAgentsTree('');
         }
     }
 
     function treeButton(item, label, extraClass) {
-        const isActive = item.path === currentAgentsPath;
+        const isActive = item.path === selectedAgentsPath;
         return `<button class="agents-tree-item ${item.type === 'tree' ? 'folder' : 'file'} ${extraClass || ''} ${isActive ? 'active' : ''}" type="button" role="treeitem" data-path="${escapeHtml(item.path)}">${escapeHtml(label)}</button>`;
     }
 
@@ -708,6 +753,7 @@
             agentsTreeItems = [{ path: '.agents', type: 'tree' }].concat(normalizeAgentTree(siteStats.agents.tree));
             filePreviews = normalizeAgentPreviews(siteStats.agents.previews, siteStats.agents.encoding);
             currentAgentsPath = '.agents';
+            selectedAgentsPath = '.agents';
             renderAgentsTree('');
             renderDirectory('.agents');
             setSource('folderSource', `${formatNumber(Math.max(0, agentsTreeItems.length - 1))} agents & helpers`);
@@ -726,6 +772,7 @@
                 })
         );
         currentAgentsPath = '.agents';
+        selectedAgentsPath = '.agents';
         renderAgentsTree('');
         renderDirectory('.agents');
         setSource('folderSource', `${formatNumber(Math.max(0, agentsTreeItems.length - 1))} agents & helpers`);
@@ -746,6 +793,7 @@
             { path: '.agents/AGENTS.md', type: 'blob' }
         ];
         currentAgentsPath = '.agents';
+        selectedAgentsPath = '.agents';
         renderAgentsTree('');
         renderDirectory('.agents');
         setSource('folderSource', 'sample agents & helpers');

@@ -1450,11 +1450,33 @@ pre,
 
 .agents-content-header span {
     color: var(--accent);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem;
     font-family: var(--font-mono);
     font-size: 0.8rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.agents-path-link {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+}
+
+.agents-path-link:hover,
+.agents-path-link:focus-visible {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+.agents-path-separator {
+    color: var(--text-muted);
 }
 
 [data-theme="light"] .agents-content-header span {
@@ -1483,6 +1505,41 @@ pre,
     overflow: auto;
     padding: 1rem;
     white-space: pre-wrap;
+}
+
+.agents-directory-title,
+.agents-directory-more {
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+.agents-content-item {
+    background: transparent;
+    border: 0;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: block;
+    font: inherit;
+    padding: 0.08rem 0;
+    text-align: left;
+    width: fit-content;
+}
+
+.agents-content-item:hover,
+.agents-content-item:focus-visible {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+.agents-content-item.folder,
+.agents-content-item.parent {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .agents-content-item:hover,
+[data-theme="light"] .agents-content-item:focus-visible {
+    color: var(--accent-strong);
 }
 
 [data-theme="light"] .agents-content {
