@@ -1,4 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="64" fill="#000000"/>
-  <path fill="#66d9f2" d="M73.4 150.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 288 73.4 150.6zM240 400h192c17.7 0 32 14.3 32 32s-14.3 32-32 32H240c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#000000"/>
+      <stop offset="1" stop-color="#030707"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="42%" r="58%">
+      <stop offset="0" stop-color="#66d9f2" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#66d9f2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <circle cx="256" cy="216" r="248" fill="url(#glow)"/>
+  <rect x="32" y="32" width="448" height="448" rx="82" fill="none" stroke="#66d9f2" stroke-opacity="0.32" stroke-width="10"/>
+  <g fill="#8ce8ff">
+    <path d="M116 344h50l28-78h88l28 78h52L268 126h-58L116 344Zm93-120 29-82 30 82h-59Z"/>
+    <rect x="378" y="126" width="42" height="218" rx="21"/>
+    <rect x="356" y="126" width="86" height="42" rx="21"/>
+    <rect x="356" y="302" width="86" height="42" rx="21"/>
+  </g>
+  <rect x="164" y="370" width="184" height="22" rx="11" fill="#66d9f2" opacity="0.92"/>
 </svg>
