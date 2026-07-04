@@ -1,16 +1,22 @@
 # aidevops.sh
 
+![AI DevOps social graph preview](./og-image.png)
+
 Static website for the [AI DevOps Framework](https://github.com/marcusquinn/aidevops).
 
 **Live site:** [aidevops.sh](https://aidevops.sh)
 
 ## About
 
-This repository contains the static website for AI DevOps - a framework that transforms your AI assistant into a powerful infrastructure management tool with 30+ service integrations.
+This repository contains the static website for AI DevOps - a framework that
+transforms your AI assistant into a powerful infrastructure management tool with
+30+ service integrations.
 
 ## Auto-sync
 
-The `docs.html` page is automatically generated from the [aidevops README.md](https://github.com/marcusquinn/aidevops/blob/main/README.md) via GitHub Actions on each release.
+The `docs.html` page is automatically generated from the
+[aidevops README.md](https://github.com/marcusquinn/aidevops/blob/main/README.md)
+via GitHub Actions on each release.
 
 ## Local Development
 
