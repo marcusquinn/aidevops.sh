@@ -133,6 +133,9 @@ magick favicon-16x16.png favicon-32x32.png favicon-48x48.png favicon.ico
 - Section gutters collapse to the section padding at tablet/mobile widths so cards keep enough internal space.
 - Stats card headings and source pills stack on mobile; source text may wrap instead of forcing card overflow.
 - Chart cards keep horizontal scroll contained within `.monthly-chart`; the whole page should remain width-safe at `320`, `360`, `390`, `414`, and `768` pixel viewports.
+- Monthly bar charts must reserve enough vertical clearance for the tallest generated stack so rounded bar tops and glow are not clipped.
+- Dense line charts should sit inside their own horizontal scroll wrapper on mobile instead of scaling until labels and peaks are unreadable.
+- Mobile navigation should preserve Docs, GitHub, social, and theme actions as compact icon buttons rather than dropping links.
 - The `.agents` file browser stacks tree above content on mobile. Search paths, breadcrumbs, file names, and preview text wrap within the card rather than clipping behind the right edge.
 - Install commands, quickstart command snippets, service links, and other long strings should use wrapping/word-break rules that preserve tap targets and readability.
 
