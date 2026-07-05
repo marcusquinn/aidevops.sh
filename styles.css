@@ -1592,8 +1592,9 @@ pre,
 .agents-content-item:hover,
 .agents-content-item:focus-visible {
     color: var(--accent);
-    outline: none;
-    text-decoration-color: currentColor;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    text-decoration-color: currentcolor;
 }
 
 .agents-content-item.folder,
