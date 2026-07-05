@@ -1005,7 +1005,6 @@
         const languageClass = Array.from(code.classList).find((className) => className.startsWith('language-')) || '';
         const isMarkdown = /language-(markdown|md)/i.test(languageClass);
         code.innerHTML = highlighter(code.textContent, { isMarkdown });
-        code.closest('pre')?.classList.add('docs-codeblock-coloured');
     });
 })();
 
