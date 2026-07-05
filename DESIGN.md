@@ -35,8 +35,12 @@ Use the CSS custom properties in `styles.css` as the source of truth.
 
 - Primary background: `#f7fbfc`.
 - Secondary background: `#edf6f8`.
+- Tertiary background: `#ffffff`.
 - Surface: `#ffffff`.
+- Raised surface: `#f8fdff`.
 - Primary text: `#071013`.
+- Secondary text: `rgba(7, 16, 19, 0.84)`.
+- Muted text: `rgba(7, 16, 19, 0.62)`.
 - Accent: `#0d6f84`.
 - Accent hover: `#0a8ca8`.
 - Strong accent: `#064f60`.
