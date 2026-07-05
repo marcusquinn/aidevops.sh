@@ -828,22 +828,26 @@
         const rows = [];
         if (path !== '.agents') {
             const parent = parentPath(path);
-            rows.push(`<a class="agents-content-item parent" href="${githubLinkForPath(parent, 'tree')}" data-path="${escapeHtml(parent)}">↰ ../</a>`);
+            rows.push(`<a class="agents-content-item parent" href="${escapeHtml(githubLinkForPath(parent, 'tree'))}" data-path="${escapeHtml(parent)}">↰ ../</a>`);
         }
         children.slice(0, 240).forEach((child) => {
             const icon = child.type === 'tree' ? '▸' : '•';
             const name = `${child.path.split('/').pop()}${child.type === 'tree' ? '/' : ''}`;
-            rows.push(`<a class="agents-content-item ${child.type === 'tree' ? 'folder' : 'file'}" href="${githubLinkForPath(child.path, child.type)}" data-path="${escapeHtml(child.path)}">${icon} ${escapeHtml(name)}</a>`);
+            rows.push(`<a class="agents-content-item ${child.type === 'tree' ? 'folder' : 'file'}" href="${escapeHtml(githubLinkForPath(child.path, child.type))}" data-path="${escapeHtml(child.path)}">${icon} ${escapeHtml(name)}</a>`);
         });
         if (children.length > 240) rows.push(`<span class="agents-directory-more">… ${children.length - 240} more items</span>`);
         setDirectoryContent(path, rows.join(''), githubLinkForPath(path, 'tree'));
         const content = $('agentsContent');
-        if (content) {
-            content.querySelectorAll('.agents-content-item').forEach((link) => {
-                link.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    selectTreeItem(link.dataset.path);
-                });
+        if (content && !content.dataset.agentsContentListenerBound) {
+            content.dataset.agentsContentListenerBound = 'true';
+            content.addEventListener('click', (event) => {
+                const target = event.target instanceof Element ? event.target : event.target.parentElement;
+                const link = target?.closest('.agents-content-item');
+                if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+                    return;
+                }
+                event.preventDefault();
+                selectTreeItem(link.dataset.path);
             });
         }
     }
