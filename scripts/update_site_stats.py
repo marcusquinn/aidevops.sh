@@ -222,25 +222,23 @@ def agents_tree_and_previews() -> dict[str, object]:
 
 def rounded_hundred_label(count: int) -> str:
     rounded = max(0, count // 100 * 100)
-    if rounded >= 1000:
-        return f"{rounded // 1000},{rounded % 1000:03d}+"
-    return f"{rounded}+"
+    return f"{rounded:,}+"
 
 
 def update_og_image_metric(agents_payload: dict[str, object]) -> None:
     tree = agents_payload.get("tree", [])
-    if not isinstance(tree, list) or not OG_IMAGE_PATH.exists():
+    if not isinstance(tree, list) or not tree or not OG_IMAGE_PATH.exists():
         return
     label = rounded_hundred_label(len(tree))
     content = OG_IMAGE_PATH.read_text(encoding="utf-8")
     content, metric_replacements = re.subn(
-        r'(<g transform="translate\()\d+( 28\)">\n\s*<text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">)[^<]+(</text>\n\s*<text x="124" y="27" fill="#ffffff" opacity="0\.74" font-size="19" font-weight="650">)(?:subagent skills|subagents skills &amp; helpers)(</text>)',
+        r'(<g transform="translate\()\d+( 28\)">\s*<text[^>]*>)[^<]+(</text>\s*<text[^>]*>)(?:subagent skills|subagents skills &amp; helpers)(</text>)',
         rf'\g<1>300\g<2>{label}\g<3>subagents skills &amp; helpers\g<4>',
         content,
         count=1,
     )
     content, command_replacements = re.subn(
-        r'(<g transform="translate\()\d+( 28\)">\n\s*<text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">185\+</text>\n\s*<text x="92" y="27" fill="#ffffff" opacity="0\.74" font-size="19" font-weight="650">/command shortcuts</text>)',
+        r'(<g transform="translate\()\d+( 28\)">\s*<text[^>]*>185\+</text>\s*<text[^>]*>/command shortcuts</text>)',
         r'\g<1>700\g<2>',
         content,
         count=1,
