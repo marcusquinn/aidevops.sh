@@ -342,27 +342,35 @@
 
     tocContainers.forEach(buildToc);
 
+    const tocLinks = Array.from(document.querySelectorAll('.docs-toc-link'));
+
     function setActiveTocLink(id) {
         if (!id) return;
-        document.querySelectorAll('.docs-toc-link.active').forEach((link) => {
-            link.classList.remove('active');
-            link.removeAttribute('aria-current');
-        });
-        document.querySelectorAll('.docs-toc-link').forEach((link) => {
+        tocLinks.forEach((link) => {
             if (link.dataset.tocTarget === id) {
                 link.classList.add('active');
                 link.setAttribute('aria-current', 'location');
+            } else if (link.classList.contains('active')) {
+                link.classList.remove('active');
+                link.removeAttribute('aria-current');
             }
         });
     }
 
     if ('IntersectionObserver' in window && tocTargets.length > 0) {
+        const intersectingHeadings = new Set();
         const observer = new IntersectionObserver((entries) => {
-            const visible = entries
-                .filter((entry) => entry.isIntersecting)
-                .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-            if (visible[0]) {
-                setActiveTocLink(visible[0].target.id);
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    intersectingHeadings.add(entry.target.id);
+                } else {
+                    intersectingHeadings.delete(entry.target.id);
+                }
+            });
+
+            const activeHeading = tocTargets.find((heading) => intersectingHeadings.has(heading.id));
+            if (activeHeading) {
+                setActiveTocLink(activeHeading.id);
             }
         }, { rootMargin: '-20% 0px -70% 0px', threshold: 0.01 });
 
