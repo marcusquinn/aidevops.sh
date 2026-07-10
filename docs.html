@@ -204,9 +204,9 @@ the required notices and preferred credit text.</p>
 </ul>
 <h3>Agent Structure</h3>
 <ul>
-<li>12 primary agents (Build+, Automate, Product, SEO, Marketing-Sales, etc.) with specialist @subagents on demand</li>
-<li>2,200+ agent and subagent markdown files organized by domain</li>
-<li>1,800+ helper scripts in <code>.agents/scripts/</code></li>
+<li>14 primary agents (Build+, Automate, Product, SEO, Marketing-Sales, etc.) with specialist @subagents on demand</li>
+<li>2,150+ agent and subagent markdown files organized by domain</li>
+<li>1,630+ helper scripts in <code>.agents/scripts/</code></li>
 <li>185+ slash commands and workflow guides for common operations</li>
 </ul>
 <h3>What You Can Ask aidevops To Do</h3>
@@ -891,7 +891,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 1,480+ helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 1,630+ helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -901,7 +901,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tr>
 <td><strong>Knowledge Graph Routing</strong></td>
 <td>Indexed, cross-referenced agents instead of isolated skills</td>
-<td><code>subagent-index.toon</code> maps 2,050+ agents by domain, purpose, and dependency — agents discover related context through the graph, not just their own file</td>
+<td><code>subagent-index.toon</code> maps 2,150+ agents by domain, purpose, and dependency — agents discover related context through the graph, not just their own file</td>
 </tr>
 <tr>
 <td><strong>Progressive Disclosure</strong></td>
@@ -2870,7 +2870,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 12 primary agents, 2,050+ subagents, and 1,480+ helper scripts.</p>
+<p>This installs the complete framework: 14 primary agents, 2,150+ subagents, and 1,630+ helper scripts.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -3044,7 +3044,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <td>opus</td>
 </tr>
 </tbody></table>
-<p><strong>Specialist subagents</strong> (e.g. <code>@wordpress</code>, <code>@seo</code>, Build-Agent, Build-MCP, etc.) live under <code>.agents/tools/</code> or as <code>mode: subagent</code> files and are invoked via <code>@mention</code> when domain expertise is needed. See <code>subagent-index.toon</code> for the full roster.</p>
+<p><strong>Specialist subagents</strong> (e.g. <code>@wordpress</code>, <code>@seo</code>, Build-Agent, Build-MCP, etc.) live under <code>.agents/tools/</code> or as <code>mode: subagent</code> files and are invoked via <code>@mention</code> when domain expertise is needed. See <code>subagent-index.toon</code> for the full roster. For read-only macOS Activity Monitor and background-efficiency audits, use <code>@macos-activity-cleaner</code> or <code>/aidevops-macos-activity-cleaner</code>.</p>
 <h4>How to invoke a main agent</h4>
 <table>
 <thead>
@@ -3186,7 +3186,7 @@ AIDEVOPS_FEATURE_COMMANDS_CURSOR=no setup.sh
 <h4>Endgame: progressive disclosure</h4>
 <p>The long-term direction is to make slash commands and <code>@mentions</code> unnecessary altogether. A progressive disclosure layer should load the right domain agents and tools into context based on the nature of the conversation — you should never have to remember agent names or prefix commands. The <code>aidevops-</code> slash commands documented above are a stepping stone: they standardise routing across every client we support, and will eventually be auto-invoked by the router rather than typed by hand.</p>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 2,050+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 2,150+ subagents organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -4425,7 +4425,7 @@ source &lt;(credential-helper.sh export)
 <li>Autonomous supervisor — pulse runs every 2 minutes, merging PRs, dispatching workers, killing stuck processes, advancing missions</li>
 <li>Operational intelligence — struggle-ratio detection, orphaned PR recovery, circuit breaker, dynamic concurrency</li>
 <li>Cost-aware routing — provider-aware model selection across OpenAI, Anthropic, Gemini, Cursor, Grok, and local models with budget tracking</li>
-<li>Progressive context — 2,050+ subagents loaded on demand, project bundles auto-configuring quality gates and model tiers</li>
+<li>Progressive context — 2,150+ subagents loaded on demand, project bundles auto-configuring quality gates and model tiers</li>
 <li>Self-improving — session mining extracts learnings, quality findings auto-create tasks, patterns feed back into agent prompts</li>
 </ul>
 <p><strong>Get Started:</strong></p>
