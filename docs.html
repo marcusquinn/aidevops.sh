@@ -225,6 +225,7 @@ the required notices and preferred credit text.</p>
 <li><strong>Self-hosted runner operations</strong>: lifecycle and storage runbooks, Docker foreground-mode guidance, systemd timer freshness triage, and ExecStop race-guard documentation (<code>.agents/reference/github-self-hosted-runners.md</code>).</li>
 <li><strong>Pulse diagnostics and reliability</strong>: compact API-budget diagnostics, pulse cadence/API diagnostics, GitHub read ramp pacing, configurable worker floors, Renovate dashboard skipping, and more defensive duplicate/blocked-by/rate-limit handling.</li>
 <li><strong>Worker and PR observability</strong>: worker diagnostic failure families, runtime observability signals, review-thread response scanning, required-check validation, orphan-recovery base handling, and safer automated GitHub write guards.</li>
+<li><strong>Runtime-neutral safety and evidence contracts</strong>: shared command decisions across supported runtimes, commit-pinned plugin provenance with explicit hook authorization, recognized-client network checks, causal worker lineage, and redacted state snapshots/deltas in the existing observability database.</li>
 <li><strong>OpenCode runtime polish</strong>: versioned session title suffixes, session archive retention, OAuth pool hardening, debug-error preservation, and reusable shell-env version lookup in the OpenCode plugin.</li>
 </ul>
 <!-- AI-CONTEXT-END --><h2><strong>Enterprise-Grade Quality &amp; Security</strong></h2>
@@ -714,7 +715,7 @@ aidevops model-accounts-pool remove &lt;p&gt; &lt;email&gt;# Remove an account
 <li><strong>Mailbox</strong> - SQLite-backed inter-agent messaging for coordination across parallel sessions</li>
 <li><strong>Worktree isolation</strong> - Each agent works on its own branch in a separate directory, no merge conflicts</li>
 <li><strong>Budget tracking</strong> - Append-only cost log (<code>budget-tracker-helper.sh</code>) with burn-rate analysis and <code>/budget-analysis</code> command for model routing decisions</li>
-<li><strong>Observability</strong> - LLM request capture plugin (<code>observability.mjs</code>) for cost tracking, performance analysis, and debugging</li>
+<li><strong>Observability</strong> - LLM request/tool capture plus append-only, redacted runtime lifecycle/state evidence with worker correlation and causal lineage in the existing local SQLite database</li>
 <li><strong>Rate limits and API budget diagnostics</strong> - Per-provider rate-limit configuration, secondary cooldown capture, reset-aware pacing, and compact API budget summaries for pulse and worker decisions</li>
 </ul>
 <p><strong>Project Intelligence:</strong></p>
@@ -1023,8 +1024,8 @@ aidevops sources remove my-private-agents         # Remove a source
 </tr>
 <tr>
 <td>Observability</td>
-<td><code>observability.mjs</code> plugin</td>
-<td>LLM request capture for cost tracking and performance analysis</td>
+<td><code>observability.mjs</code>, <code>runtime-events.mjs</code></td>
+<td>LLM/tool metrics plus redacted lifecycle, lineage, and state evidence in one local SQLite database</td>
 </tr>
 </tbody></table>
 <p><strong>How it works:</strong></p>
