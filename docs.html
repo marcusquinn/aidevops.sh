@@ -156,7 +156,7 @@
 <p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
 <a href="https://github.com/marcusquinn"><img src="https://img.shields.io/badge/Copyright-Marcus%20Quinn%202025--2026-blue.svg" alt="Copyright"></a></p>
 <!-- Release & Version Info -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.32.18-blue.svg" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.32.19-blue.svg" alt="Version"></a>
 <a href="https://www.npmjs.com/package/aidevops"><img src="https://img.shields.io/npm/v/aidevops" alt="npm version"></a>
 <a href="https://github.com/marcusquinn/homebrew-tap"><img src="https://img.shields.io/badge/homebrew-marcusquinn%2Ftap-orange" alt="Homebrew"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/github-repository-181717.svg?logo=github" alt="GitHub repository"></a></p>
@@ -2981,67 +2981,67 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <td>Build+</td>
 <td><code>build-plus.md</code></td>
 <td>Code: features, bug fixes, refactors, CI, full-loop delivery (default)</td>
-<td>opus</td>
+<td>thinking</td>
 </tr>
 <tr>
 <td>Automate</td>
 <td><code>automate.md</code></td>
 <td>Scheduling, dispatch, monitoring, background orchestration</td>
-<td>sonnet</td>
+<td>standard</td>
 </tr>
 <tr>
 <td>Aidevops</td>
 <td><code>aidevops.md</code></td>
 <td>Framework development — meta-agent for improving aidevops itself</td>
-<td>opus</td>
+<td>thinking</td>
 </tr>
 <tr>
 <td>Business</td>
 <td><code>business.md</code></td>
 <td>Company orchestration, financial ops, invoicing, strategy</td>
-<td>sonnet</td>
+<td>standard</td>
 </tr>
 <tr>
 <td>Content</td>
 <td><code>content.md</code></td>
 <td>Content creation across blog, video, audio, image, social</td>
-<td>opus</td>
+<td>thinking</td>
 </tr>
 <tr>
 <td>Health</td>
 <td><code>health.md</code></td>
 <td>Health and wellness content, fitness, nutrition</td>
-<td>opus</td>
+<td>thinking</td>
 </tr>
 <tr>
 <td>Legal</td>
 <td><code>legal.md</code></td>
 <td>Legal compliance, terms, privacy, GDPR</td>
-<td>opus</td>
+<td>thinking</td>
 </tr>
 <tr>
 <td>Marketing-Sales</td>
 <td><code>marketing-sales.md</code></td>
 <td>Email campaigns, CRM, outreach, paid ads, direct response, CRO</td>
-<td>opus</td>
+<td>thinking</td>
 </tr>
 <tr>
 <td>Product</td>
 <td><code>product.md</code></td>
 <td>Product management, PRDs, roadmaps, requirements capture</td>
-<td>opus</td>
+<td>thinking</td>
 </tr>
 <tr>
 <td>Research</td>
 <td><code>research.md</code></td>
 <td>Technical and market research, competitive analysis</td>
-<td>gemini/grok</td>
+<td>standard</td>
 </tr>
 <tr>
 <td>SEO</td>
 <td><code>seo.md</code></td>
 <td>SEO audits, keyword research, GSC, schema, technical SEO</td>
-<td>opus</td>
+<td>thinking</td>
 </tr>
 </tbody></table>
 <p><strong>Specialist subagents</strong> (e.g. <code>@wordpress</code>, <code>@seo</code>, Build-Agent, Build-MCP, etc.) live under <code>.agents/tools/</code> or as <code>mode: subagent</code> files and are invoked via <code>@mention</code> when domain expertise is needed. See <code>subagent-index.toon</code> for the full roster. For read-only macOS Activity Monitor and background-efficiency audits, use <code>@macos-activity-cleaner</code> or <code>/aidevops-macos-activity-cleaner</code>.</p>
@@ -3996,7 +3996,7 @@ memory-helper.sh recall &quot;how to optimize queries&quot; --semantic
 </code></pre>
 <p><strong>Pattern tracking:</strong></p>
 <pre><code class="language-bash"># Record what worked (via memory system)
-memory-helper.sh store --type SUCCESS_PATTERN --content &quot;Structured debugging found root cause&quot; --tags &quot;bugfix,sonnet&quot;
+memory-helper.sh store --type SUCCESS_PATTERN --content &quot;Structured debugging found root cause&quot; --tags &quot;bugfix,standard&quot;
 
 # Record what failed
 memory-helper.sh store --type FAILURE_PATTERN --content &quot;Blind refactor without tests caused regressions&quot; --tags &quot;refactor&quot;
@@ -4343,8 +4343,8 @@ bash .agents/scripts/continue-cli.sh review
 <pre><code class="language-bash"># Disable automatic updates
 aidevops config set updates.auto_update false
 
-# Use opus-tier verification for destructive operations
-aidevops config set safety.verification_tier opus
+# Use thinking-tier verification for destructive operations
+aidevops config set safety.verification_tier thinking
 
 # View all current config values
 aidevops config list
