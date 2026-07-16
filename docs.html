@@ -1108,6 +1108,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <li><strong>Worker failure families</strong> — headless runtime errors, local runtime diagnostics, blocked-by lookup gaps, provider quota/credit exhaustion, and review-thread remediation issues are classified for targeted redispatch</li>
 <li><strong>Stale assignment recovery</strong> — tasks assigned to workers that died (no active process, no PR, 3+ hours stale) are automatically unassigned and made available for re-dispatch</li>
 <li><strong>Priority ordering</strong> — green PRs (free merge) &gt; failing PRs (closer to done) &gt; high-priority/bug issues &gt; active mission features &gt; product repos &gt; smaller tasks &gt; oldest</li>
+<li><strong>Repository campaign shadow</strong> — an opt-in, default-off projection preserves an oldest-ready frontier, semantic work state, and device-aware runner lanes without changing legacy dispatch or GitHub authority. See <code>.agents/reference/repository-campaigns.md</code></li>
 </ul>
 <p><strong>The pulse is an LLM, not a script.</strong> It reads issue bodies, assesses context, and uses judgment. When it encounters something unexpected — an issue body that says &quot;completed&quot;, a task with no clear description, a label that doesn&#39;t match reality — it handles it the way a competent human manager would.</p>
 <pre><code class="language-bash"># Pulse runs automatically via launchd (every 2 minutes)
