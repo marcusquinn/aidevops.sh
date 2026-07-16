@@ -608,7 +608,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <li><strong><a href="https://opencode.ai/">OpenCode Zen</a></strong> - Free tier of OpenCode with included models. Start working with AI straight away at no cost -- no API keys or subscriptions required.</li>
 <li><strong>OpenAI GPT-5.5 / GPT-5.4 mini</strong> - Recommended model pair for aidevops today. Use GPT-5.5 for complex reasoning and high-impact agent tiers; use GPT-5.4 mini for triage, routine implementation, and cost-efficient parallel workers.</li>
 <li><strong><a href="https://claude.ai/">Claude</a></strong> (Anthropic) - Fully supported alternative provider. Claude models remain useful for fallback, cross-provider verification, and users with Claude Pro/Max OAuth access.</li>
-<li><strong><a href="https://tabby.sh/">Tabby</a></strong> - Recommended terminal. Colour-coded Profiles per project/repo, <strong>auto-syncs tab titles with git/session context and marks OpenCode turns as <code>[RUN]</code> or <code>[WAIT]</code>.</strong></li>
+<li><strong><a href="https://tabby.sh/">Tabby</a></strong> - Recommended terminal. Colour-coded Profiles per project/repo, <strong>auto-syncs tab titles with git/session context and marks OpenCode turns as 🟡 or 🟢.</strong></li>
 <li><strong><a href="https://zed.dev/">Zed</a></strong> - Recommended editor. High-performance with AI integration (use with the OpenCode Agent Extension).</li>
 </ul>
 <h3>Troubleshooting Auth</h3>
@@ -687,7 +687,7 @@ aidevops model-accounts-pool remove &lt;p&gt; &lt;email&gt;# Remove an account
 </code></pre>
 <p>The agent contains the full recovery flow and symptom table. Free models work fine for this — no paid subscription needed.</p>
 <h3>Terminal Tab Title Sync</h3>
-<p>Your terminal tab/window title automatically shows <code>repo/branch</code> context when working in git repositories. Interactive OpenCode tabs add <code>[RUN]</code> while the root session is busy or retrying and <code>[WAIT]</code> when it has finished and is awaiting input. This helps identify both the work context and session state across multiple terminal sessions.</p>
+<p>Your terminal tab/window title automatically shows <code>repo/branch</code> context when working in git repositories. Interactive OpenCode tabs add 🟡 while the root session is busy or retrying and 🟢 when it has finished and is awaiting input. This helps identify both the work context and session state across multiple terminal sessions.</p>
 <p><strong>Supported terminals:</strong> <a href="https://tabby.sh/">Tabby</a>, <a href="https://cmux.dev/">cmux</a>, <a href="https://iterm2.com/">iTerm2</a>, <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a>, <a href="https://alacritty.org/">Alacritty</a>, <a href="https://wezfurlong.org/wezterm/">WezTerm</a>, <a href="https://hyper.is/">Hyper</a>, and most xterm-compatible terminals.</p>
 <p><strong>How it works:</strong> The <code>pre-edit-check.sh</code> script&#39;s primary role is enforcing git workflow protection (blocking edits on main/master branches). As a secondary, non-blocking action, it updates the terminal title via escape sequences. The OpenCode plugin listens for root-session <code>busy</code>, <code>retry</code>, and <code>idle</code> events and updates the same title without changing the stored OpenCode session name. No configuration is needed when dynamic terminal titles are enabled.</p>
 <p><strong>Example format:</strong> <code>{repo}/{branch-type}/{description}</code></p>
