@@ -370,19 +370,23 @@ open-design-helper.sh start --https-local open-design
 <h3><strong>Use aidevops in Any Project</strong></h3>
 <p>Initialize <strong><a href="https://aidevops.sh">aidevops</a></strong> features in any git repository:</p>
 <pre><code class="language-bash">cd ~/your-project
-aidevops init                         # Enable all features
+aidevops init                         # Enable the default feature set
 aidevops init planning                # Enable only planning
 aidevops init planning,time-tracking  # Enable specific features
+aidevops init deployment-context   # Scaffold a deployment manifest
+aidevops init wordpress-context    # Scaffold WordPress + deployment manifests
 </code></pre>
 <p>This creates:</p>
 <ul>
 <li><code>.aidevops.json</code> - Configuration with enabled features</li>
-<li><code>.agents</code> symlink → <code>~/.aidevops/agents/</code></li>
+<li><code>.agents/AGENTS.md</code> - Project-specific agent context</li>
 <li><code>TODO.md</code> - Quick task tracking with time estimates</li>
 <li><code>todo/PLANS.md</code> - Complex execution plans</li>
 <li><code>.beads/</code> - Task graph database (if beads enabled)</li>
+<li><code>.aidevops/deployments.yaml</code> - Deployment instance inventory (opt-in)</li>
+<li><code>.aidevops/wordpress.yaml</code> - WordPress and LocalWP context (opt-in)</li>
 </ul>
-<p><strong>Available features:</strong> <code>planning</code>, <code>git-workflow</code>, <code>code-quality</code>, <code>time-tracking</code>, <code>beads</code></p>
+<p><strong>Available features:</strong> <code>planning</code>, <code>git-workflow</code>, <code>code-quality</code>, <code>time-tracking</code>, <code>database</code>, <code>beads</code>, <code>sops</code>, <code>security</code>, <code>deployment-context</code>, <code>wordpress-context</code>. <code>hosting-context</code> is an alias for <code>deployment-context</code>; <code>wordpress-context</code> implies deployment context. The default <code>all</code> set intentionally excludes both project-instance context features.</p>
 <h3>Per-repo platform setup</h3>
 <p>After <code>aidevops init</code> registers a new repo, run <code>/setup-git</code> in your AI assistant
 to apply per-repo platform secrets. Most notably, this sets <code>SYNC_PAT</code> — a
