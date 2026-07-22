@@ -1274,7 +1274,11 @@ bundle-helper.sh list                  # List all available bundles
 </thead>
 <tbody><tr>
 <td><strong>Headless dispatch</strong></td>
-<td><code>opencode run</code> for one-shot tasks, <code>opencode serve</code> + <code>--attach</code> for warm server</td>
+<td><code>headless-runtime-helper.sh run</code> provides canonical model routing, retries, and session isolation</td>
+</tr>
+<tr>
+<td><strong>Durable one-shot scheduling</strong></td>
+<td><code>aidevops schedule once</code> queues private, restart-safe delayed work without fake recurring jobs or sleeper processes</td>
 </tr>
 <tr>
 <td><strong>Runners</strong></td>
@@ -1306,6 +1310,11 @@ runner-helper.sh create code-reviewer --description &quot;Reviews code for secur
 
 # Dispatch a task (one-shot)
 runner-helper.sh run code-reviewer &quot;Review src/auth/ for vulnerabilities&quot;
+
+# Queue one delayed execution and inspect its lifecycle
+aidevops schedule once --after 2h --name &quot;Review authentication&quot; \
+  --dir ~/Git/example --prompt-file ~/.config/aidevops/prompts/auth-review.md
+aidevops schedule status
 
 # Dispatch against warm server (faster, no MCP cold boot)
 opencode serve --port 4096 &amp;
