@@ -729,6 +729,7 @@ aidevops model-accounts-pool remove &lt;p&gt; &lt;email&gt;# Remove an account
 <ul>
 <li><strong><a href="#project-bundles-auto-configuration">Bundles</a></strong> - Project-type presets that auto-configure model tiers, quality gates, and agent routing per repo. 7 built-in bundles (web-app, library, cli-tool, content-site, infrastructure, agent, schema) with auto-detection from marker files (<code>bundle-helper.sh</code>)</li>
 <li><strong>TTSR rules</strong> - Soft rule engine (<code>ttsr-rule-loader.sh</code>) with <code>.agents/rules/</code> directory for AI output correction (e.g., no-edit-on-main, no-glob-for-discovery)</li>
+<li><strong>Unified review</strong> - <code>/review</code> applies one evidence and finding contract to issues, PRs, local patches, branches, and commits. Workflow-owned findings are verified and repaired autonomously; ad-hoc human reviews can remain report-only</li>
 <li><strong>Cross-review</strong> - <code>/cross-review</code> dispatches the same prompt to multiple AI models in parallel, diffs results, and optionally auto-scores via a judge model</li>
 <li><strong>Local models</strong> - Run AI models locally via llama.cpp for free, private, offline inference (<code>local-model-helper.sh</code>) with HuggingFace GGUF model management</li>
 <li><strong>Tech stack lookup</strong> - <code>/tech-stack</code> detects technology stacks of URLs or finds sites using specific technologies (Wappalyzer, httpx, nuclei, BuiltWith)</li>
@@ -3532,6 +3533,10 @@ AIDEVOPS_FEATURE_COMMANDS_CURSOR=no setup.sh
 <tr>
 <td><code>/pr</code></td>
 <td>Unified PR workflow (orchestrates all checks)</td>
+</tr>
+<tr>
+<td><code>/review</code></td>
+<td>Review an issue, PR, local patch, branch, or commit through the shared review core</td>
 </tr>
 <tr>
 <td><code>/cross-review</code></td>
