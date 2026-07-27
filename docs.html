@@ -606,6 +606,7 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 </tbody></table>
 <p>See <code>.agents/tools/git/opencode-github-security.md</code> for the full security documentation.</p>
 <p><strong>Supported AI tool:</strong> <a href="https://opencode.ai/">OpenCode</a> is the recommended and tested AI coding tool for aidevops. All features, agents, and workflows are designed and tested for OpenCode first. We recommend OpenAI models for the best current results across all agent tiers: GPT-5.4 mini for fast triage/routine work and GPT-5.5 for complex implementation, review, and reasoning. <a href="https://claude.ai/">Claude</a> models (Anthropic) remain fully supported, and other providers are tested as their capabilities change.</p>
+<p>The native <code>ai_research</code> tool uses OpenCode&#39;s configured providers and canonical <code>simple</code>, <code>standard</code>, and <code>thinking</code> workload tiers; it does not require a specific provider credential.</p>
 <p><strong>Recommended stack:</strong></p>
 <ul>
 <li><strong><a href="https://opencode.ai/">OpenCode</a></strong> - The recommended AI coding agent. Powerful agentic TUI/CLI with native MCP support, Tab-based agent switching, LSP integration, plugin ecosystem, and excellent DX. All aidevops features are designed and tested for OpenCode first.</li>
