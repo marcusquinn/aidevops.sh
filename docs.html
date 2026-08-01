@@ -156,7 +156,7 @@
 <p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
 <a href="https://github.com/marcusquinn"><img src="https://img.shields.io/badge/Copyright-Marcus%20Quinn%202025--2026-blue.svg" alt="Copyright"></a></p>
 <!-- Release & Version Info -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.32.214-blue.svg" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.32.215-blue.svg" alt="Version"></a>
 <a href="https://www.npmjs.com/package/aidevops"><img src="https://img.shields.io/npm/v/aidevops" alt="npm version"></a>
 <a href="https://github.com/marcusquinn/homebrew-tap"><img src="https://img.shields.io/badge/homebrew-marcusquinn%2Ftap-orange" alt="Homebrew"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/github-repository-181717.svg?logo=github" alt="GitHub repository"></a></p>
@@ -303,6 +303,13 @@ aidevops security dismiss &lt;id&gt; # Dismiss a security advisory after taking 
 <p><strong>Direct from source</strong> (aidevops.sh):</p>
 <pre><code class="language-bash">bash &lt;(curl -fsSL https://aidevops.sh/install)
 </code></pre>
+<blockquote>
+<p><strong>Updater recovery for v3.32.213:</strong> If <code>aidevops update</code> stops because the
+official framework source checkout is not in the project registry, run the
+direct installer above once, then rerun <code>aidevops update</code>. Do not add the
+framework checkout to the downstream project registry or bypass canonical
+remote validation.</p>
+</blockquote>
 <p><strong>Manual</strong> (git clone):</p>
 <pre><code class="language-bash">git clone https://github.com/marcusquinn/aidevops.git ~/Git/aidevops
 ~/Git/aidevops/setup.sh
