@@ -192,6 +192,7 @@ the required notices and preferred credit text.</p>
 <li><code>aidevops auto-update</code> - Automatic update polling (enable/disable/status)</li>
 <li><code>aidevops runtime-bundle list</code> - List retained validated runtime bundles; use <code>rollback --bundle-id &lt;id&gt; --reason &lt;text&gt;</code> for an explicit audited rollback</li>
 <li><code>aidevops gpt56-context [enable|disable|status]</code> - Keep GPT-5.6 at a 300K advertised context window in OpenCode (enabled by default), so 80% auto-compaction runs near 240K before long-context pricing; disable to use native provider limits</li>
+<li><code>aidevops buzz [status|apply|rollback]</code> - Inspect or manage Buzz Desktop OpenCode ACP compatibility</li>
 <li><code>aidevops secret</code> - Manage secrets (gopass encrypted, AI-safe)</li>
 <li><code>aidevops security</code> - Full security assessment (posture, secrets, supply chain)</li>
 <li><code>aidevops lint audit</code> - Audit native lint/format/typecheck commands and repo-verify hooks</li>
@@ -625,6 +626,20 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 <li><strong><a href="https://tabby.sh/">Tabby</a></strong> - Recommended terminal. Colour-coded Profiles per project/repo, <strong>auto-syncs tab titles with git/session context and marks OpenCode turns from the first submitted message as ⚪, 🔴, 🟡, or 🟢.</strong></li>
 <li><strong><a href="https://zed.dev/">Zed</a></strong> - Recommended editor. High-performance with AI integration (use with the OpenCode Agent Extension).</li>
 </ul>
+<h3>Buzz Desktop OpenCode ACP compatibility</h3>
+<p>Buzz Desktop 0.5.4 can save an OpenCode managed agent without the required
+<code>acp</code> runtime argument, causing ACP initialization to time out. On macOS,
+<code>aidevops init</code> and <code>aidevops update</code> automatically reconcile affected records
+after deploying the current helper. Close Buzz first; if it is running, setup
+defers the change and reports the manual command.</p>
+<pre><code class="language-bash">aidevops buzz status    # Inspect compatibility state without changing it
+aidevops buzz apply     # Add &quot;acp&quot; only to eligible empty argument lists
+aidevops buzz rollback  # Restore only fields changed by aidevops
+</code></pre>
+<p>The migration preserves custom runtime arguments and unknown record fields,
+uses private backups and rollback state, and fails closed for unsupported Buzz
+versions or unsafe store paths. It never prints the managed-agent store, which
+can contain fallback credentials.</p>
 <h3>Troubleshooting Auth</h3>
 <p>If you see <strong>&quot;Anthropic Key Missing&quot;</strong>, <strong>&quot;OpenAI Key Missing&quot;</strong>, or the model stops responding, run these commands from any terminal — no working model session required.</p>
 <p><strong>Step 1 — Check pool health</strong></p>
