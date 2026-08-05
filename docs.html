@@ -194,6 +194,7 @@ the required notices and preferred credit text.</p>
 <li><code>aidevops gpt56-context [enable|disable|status]</code> - Keep GPT-5.6 at a 300K advertised context window in OpenCode (enabled by default), so 80% auto-compaction runs near 240K before long-context pricing; disable to use native provider limits</li>
 <li><code>aidevops buzz [status|apply|rollback]</code> - Inspect or manage Buzz Desktop OpenCode ACP compatibility</li>
 <li><code>aidevops secret</code> - Manage secrets (gopass encrypted, AI-safe)</li>
+<li><code>aidevops source-access</code> - Manage exact-path, session-bound source-read approvals signed via sudo</li>
 <li><code>aidevops security</code> - Full security assessment (posture, secrets, supply chain)</li>
 <li><code>aidevops lint audit</code> - Audit native lint/format/typecheck commands and repo-verify hooks</li>
 <li><code>aidevops lint configure --dry-run</code> - Preview safe evidence-based lint provisioning</li>
@@ -284,8 +285,18 @@ aidevops security scan-secrets # Plaintext credential locations only
 aidevops security scan-deps    # Unpinned dependency check
 aidevops security check        # Per-repo security posture assessment
 aidevops security dismiss &lt;id&gt; # Dismiss a security advisory after taking action
+aidevops source-access status  # List temporary source-read approvals
+sudo -k /usr/bin/python3 /etc/aidevops/source-access/source-access-helper.py setup
+sudo -k /usr/bin/python3 /etc/aidevops/source-access/source-access-helper.py revoke &lt;approval-id&gt;
 </code></pre>
 <p>Running <code>aidevops security</code> with no arguments is the single command that covers everything — user security posture, plaintext secret detection, supply chain IoC scanning, and active advisories.</p>
+<p>When a read guard identifies only a low-confidence source-code basename match, it emits a scoped request. A maintainer can run the displayed root-broker approval command. Approvals are bound to the exact runtime session, user, Git-tracked regular source path, approved content digest, and guard reason; they expire within 12 hours and never override private-key, environment-file, credential-store, hard-link, symlink, changed-content, or untracked-file denials. The plugin redirects the approved read to a root-controlled immutable snapshot of those bytes so the live path cannot be rebound after verification; revocation removes both receipt and snapshot.</p>
+<p>Privileged operations never execute the user-managed aidevops deployment as root. Resolve the immutable commit from the published, signed aidevops release metadata, substitute it for <code>&lt;verified-release-commit&gt;</code>, and let root fetch that reviewed broker directly over TLS. Never install the broker from the user-writable deployed tree.</p>
+<pre><code class="language-bash">sudo -k /usr/bin/install -d -o 0 -g 0 -m 0755 /etc/aidevops/source-access
+sudo -k -H /usr/bin/curl --disable --fail --location --proto &#39;=https&#39; --proto-redir &#39;=https&#39; --tlsv1.2 &quot;https://raw.githubusercontent.com/marcusquinn/aidevops/&lt;verified-release-commit&gt;/.agents/scripts/source-access-helper.py&quot; --output /etc/aidevops/source-access/source-access-helper.py
+sudo /bin/chmod 0644 /etc/aidevops/source-access/source-access-helper.py
+sudo -k /usr/bin/python3 /etc/aidevops/source-access/source-access-helper.py setup
+</code></pre>
 <p><strong>Security advisories</strong> are delivered via <code>aidevops update</code> and shown in the session greeting until dismissed. The scanner never exposes secret values — only file locations and key names. All remediation commands should be run in a separate terminal, not inside AI chat sessions.</p>
 <p><strong>Supply chain hardening:</strong> All Python dependencies are pinned to exact versions (<code>==</code>) to prevent malicious package upgrades. The <code>.pth</code> file auditor detects known supply chain attack indicators (e.g., the LiteLLM March 2026 PyPI compromise).</p>
 <h2><strong>Quick Start</strong></h2>
