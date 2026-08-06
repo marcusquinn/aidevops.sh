@@ -193,6 +193,7 @@ the required notices and preferred credit text.</p>
 <li><code>aidevops runtime-bundle list</code> - List retained validated runtime bundles; use <code>rollback --bundle-id &lt;id&gt; --reason &lt;text&gt;</code> for an explicit audited rollback</li>
 <li><code>aidevops gpt56-context [enable|disable|status]</code> - Keep GPT-5.6 at a 300K advertised context window in OpenCode (enabled by default), so 80% auto-compaction runs near 240K before long-context pricing; disable to use native provider limits</li>
 <li><code>aidevops buzz [status|apply|rollback]</code> - Inspect or manage Buzz Desktop OpenCode ACP compatibility</li>
+<li><code>~/.aidevops/agents/scripts/team-interface-helper.sh [providers|detect|status|doctor|plan]</code> - Inspect registered collaboration providers, persist read-only observations, or emit deterministic dry-run plans; no provider-write command is exposed</li>
 <li><code>aidevops secret</code> - Manage secrets (gopass encrypted, AI-safe)</li>
 <li><code>aidevops source-access</code> - Manage exact-path, session-bound source-read approvals signed via sudo</li>
 <li><code>aidevops security</code> - Full security assessment (posture, secrets, supply chain)</li>
