@@ -66,6 +66,8 @@ Use the CSS custom properties in `styles.css` as the source of truth.
 - Use the same SVG path as `index.html` navigation logo and current `favicon.svg` / `og-image.svg` assets.
 - The prompt glyph should be optically centred, not mathematically centred, because the `>` shape is visually left-heavy.
 - Current app-icon glyph placement: `translate(512 522) scale(0.94) translate(-288 -256)`.
+- Profile avatar canvas: `1024x1024`; keep the circular background inside a `504` radius and all essential details inside a `451` radius so platform circle crops remain safe.
+- Current profile-avatar glyph placement: `translate(512 521) scale(1.08) translate(-288 -256)`.
 - Current social-preview icon placement: `translate(78 79) scale(0.145) translate(-288 -256)`.
 - Favicon/app icons use a rounded black square with a subtle cyan glow and cyan stroke.
 - Keep icon SVGs accessible with `<title>` and `<desc>` metadata.
@@ -93,9 +95,11 @@ Use the CSS custom properties in `styles.css` as the source of truth.
 ## Asset generation and cache busting
 
 - Source SVG files:
+  - `images/aidevops-avatar.svg`
   - `favicon.svg`
   - `og-image.svg`
 - Generated raster assets:
+  - `images/aidevops-avatar.png`
   - `og-image.png`
   - `favicon-16x16.png`
   - `favicon-32x32.png`
