@@ -116,7 +116,7 @@
 <p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> is an <a href="https://opencode.ai/">OpenCode</a> plugin and AI DevOps framework for people who want AI to do useful work across code, infrastructure, business, marketing, content, and creative projects without turning every job into another long, fragile chat.</p>
 <p>Most AI tools still leave you doing the hard coordination yourself: finding the right context, choosing a model, protecting secrets, managing branches, watching CI, spotting stuck work, and remembering what went wrong last time. aidevops puts structure around that work so agents can share context, work safely in parallel, spend model budget where it matters, and leave the system better than they found it.</p>
 <blockquote>
-<p><strong>Recommended setup:</strong> <a href="https://opencode.ai/">OpenCode</a> + OpenAI models. GPT-5.5 is the preferred high-capability model for complex agent work; GPT-5.4 mini is the preferred fast, lower-cost model for triage and routine implementation. Claude models (Anthropic) remain fully supported, and other model providers are evaluated from time to time as their quality, latency, and cost profiles change.</p>
+<p><strong>Recommended setup:</strong> <a href="https://opencode.ai/">OpenCode</a> + OpenAI GPT-5.6 models. aidevops routes Luna to bounded work, Terra to general implementation, and Sol to consequential reasoning and synthesis. Claude models (Anthropic) remain fully supported fallbacks, and other model providers are evaluated as their quality, latency, and cost profiles change.</p>
 </blockquote>
 <p><em>&quot;Scope a mission to redesign the landing pages — break it into milestones, dispatch workers in parallel, validate each milestone, and track budget across the whole project.&quot;</em></p>
 <p><strong>One conversation, autonomous project delivery, with security, teamwork, token efficiency, and quality control built in.</strong></p>
@@ -156,7 +156,7 @@
 <p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
 <a href="https://github.com/marcusquinn"><img src="https://img.shields.io/badge/Copyright-Marcus%20Quinn%202025--2026-blue.svg" alt="Copyright"></a></p>
 <!-- Release & Version Info -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.32.288-blue.svg" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.32.291-blue.svg" alt="Version"></a>
 <a href="https://www.npmjs.com/package/aidevops"><img src="https://img.shields.io/npm/v/aidevops" alt="npm version"></a>
 <a href="https://github.com/marcusquinn/homebrew-tap"><img src="https://img.shields.io/badge/homebrew-marcusquinn%2Ftap-orange" alt="Homebrew"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/github-repository-181717.svg?logo=github" alt="GitHub repository"></a></p>
@@ -180,10 +180,10 @@ the required notices and preferred credit text.</p>
 <ul>
 <li><strong>Purpose</strong>: AI-assisted DevOps automation framework</li>
 <li><strong>Install</strong>: <code>npm install -g aidevops &amp;&amp; aidevops update</code></li>
-<li><strong>Recommended runtime/models</strong>: OpenCode + OpenAI GPT-5.5 / GPT-5.4 mini</li>
+<li><strong>Recommended runtime/models</strong>: OpenCode + OpenAI GPT-5.6 Luna / Terra / Sol</li>
 <li><strong>Entry</strong>: <code>aidevops</code> CLI, <code>~/.aidevops/agents/AGENTS.md</code></li>
 <li><strong>Stack</strong>: Bash scripts, TypeScript (Bun), MCP servers</li>
-<li><strong>Recent focus</strong>: OpenCode control-plane safety, local repo metrics, mobile simulator testing, self-hosted runner operations, and pulse/worker diagnostics</li>
+<li><strong>Recent focus</strong>: evidence-based model routing, indexed worker worktrees, audited deployment copies, release provenance, and OpenCode control-plane safety</li>
 </ul>
 <h3>Key Commands</h3>
 <ul>
@@ -207,15 +207,16 @@ the required notices and preferred credit text.</p>
 <li><code>/auto-browse</code> - Learn, optimize, and graduate repeatable browser operations and web data-mining workflows</li>
 <li><code>/report-render</code> - Render report-ready Markdown or JSON to HTML with sticky TOC, print CSS, evidence badges, and source cards for PDF export</li>
 <li><code>/report-token-use</code> - Generate a local per-session token, model, compaction, and MCP-use report</li>
+<li><code>/optimize-tiers</code> - Compare production routing telemetry with sealed historical model replay before changing model defaults</li>
 <li><code>/pulse</code> - Run the autonomous supervisor loop for dispatch, merge, diagnostics, and stuck-work recovery</li>
 <li><code>/serve-sim</code> / <code>serve-sim-helper.sh</code> - Exercise mobile web flows in simulator-backed local previews</li>
 </ul>
 <h3>Agent Structure</h3>
 <ul>
 <li>14 primary agents (Build+, Automate, Product, SEO, Marketing-Sales, etc.) with specialist @subagents on demand</li>
-<li>2,150+ agent and subagent markdown files organized by domain</li>
-<li>1,630+ helper scripts in <code>.agents/scripts/</code></li>
-<li>185+ slash commands and workflow guides for common operations</li>
+<li>2,350+ agent and subagent markdown files organized by domain</li>
+<li>1,960+ helper scripts in <code>.agents/scripts/</code></li>
+<li>210+ slash commands and workflow guides for common operations</li>
 </ul>
 <h3>What You Can Ask aidevops To Do</h3>
 <ul>
@@ -228,6 +229,10 @@ the required notices and preferred credit text.</p>
 <h3>Recent framework upgrades</h3>
 <p>Since the last README feature refresh, aidevops has added or expanded:</p>
 <ul>
+<li><strong>Evidence-based model routing</strong>: sealed historical replay evaluates model tiers and reasoning effort against deterministic hidden checks, with isolated macOS and Linux sandboxes and an explicit trusted-local posture that cannot automatically change routing (<code>.agents/workflows/optimize-tiers.md</code>).</li>
+<li><strong>Indexed worker worktrees</strong>: dispatched linked worktrees can initialize branch-local CodeGraph indexes asynchronously, with bounded queues, disk-capacity checks, and failure isolation from worker launch (<code>.agents/scripts/codegraph-worktree-init-helper.sh</code>).</li>
+<li><strong>Audited non-Git deployment copies</strong>: reviewed worktree content can converge into allowlisted stable runtime directories through dry-run manifests, private receipts, verified activation, recovery, and rollback (<code>.agents/reference/dirty-worktree-preservation.md</code>).</li>
+<li><strong>Release provenance recovery</strong>: exact-tip aggregation successors preserve reviewed source manifests when <code>main</code> advances, while fenced release lanes continue to block unreviewed or conflicting publication (<code>.agents/reference/release-aggregation-recovery.md</code>).</li>
 <li><strong>OpenCode GUI/control-plane planning</strong>: ADRs, threat model, trust-boundary guidance, and containment rules for a future GUI that stays local-first, auditable, and explicitly separated from secret-bearing helpers (<code>docs/gui/</code>).</li>
 <li><strong>Mobile and simulator workflows</strong>: app-development guidance, App Store Connect support, Expo/Xcode/Swift workflows, Maestro/minisim/iOS Simulator MCP references, and <code>serve-sim</code> mobile web testing support (<code>.agents/tools/mobile/</code>).</li>
 <li><strong>Self-hosted runner operations</strong>: lifecycle and storage runbooks, Docker foreground-mode guidance, systemd timer freshness triage, and ExecStop race-guard documentation (<code>.agents/reference/github-self-hosted-runners.md</code>).</li>
@@ -335,7 +340,7 @@ remote validation.</p>
 <li>Ensure all PATH and alias changes work in both bash, zsh, and fish</li>
 <li>When Claude Code is installed, add a <code>claude</code> alias that runs <code>claude --dangerously-skip-permissions</code> (skips per-tool permission prompts). Re-running setup updates the alias automatically. To grant permissions per-session instead, press <strong>Shift-Tab</strong> inside Claude Code to cycle through permission modes (default → skip permissions → auto-approve).</li>
 </ul>
-<p><strong>New users: Start <a href="https://opencode.ai/">OpenCode</a> and type <code>/onboarding</code></strong> to configure your services interactively. OpenCode is the recommended tool for aidevops; pair it with OpenAI GPT-5.5 and GPT-5.4 mini for the best current results across agent tiers. The onboarding wizard will:</p>
+<p><strong>New users: Start <a href="https://opencode.ai/">OpenCode</a> and type <code>/onboarding</code></strong> to configure your services interactively. OpenCode is the recommended tool for aidevops; the default routing uses OpenAI GPT-5.6 Luna, Terra, and Sol across the simple, standard, and thinking tiers. The onboarding wizard will:</p>
 <ul>
 <li>Explain what <strong><a href="https://aidevops.sh">aidevops</a></strong> can do</li>
 <li>Ask about your work to give personalized recommendations</li>
@@ -498,7 +503,7 @@ aidevops upgrade-planning --force   # Skip confirmation prompt
 <p>See <code>.agents/tools/task-management/beads.md</code> for complete documentation and installation commands.</p>
 <p><strong>Your AI assistant now has agentic access to 30+ service integrations.</strong></p>
 <h3>OpenAI Models in OpenCode (Recommended)</h3>
-<p>OpenCode with OpenAI is the current recommended aidevops setup. Use GPT-5.5 for complex reasoning, architecture, security-sensitive review, and hard agent tiers; use GPT-5.4 mini for fast triage, routine implementation, retries, and lower-cost worker throughput.</p>
+<p>OpenCode with OpenAI is the current recommended aidevops setup. The default routing uses GPT-5.6 Luna for bounded low-consequence work, Terra for established-pattern implementation, and Sol for consequential decisions, architecture, and synthesis-heavy work.</p>
 <p><strong>Authenticate via the pool:</strong></p>
 <pre><code class="language-bash">aidevops model-accounts-pool add openai
 # Restart OpenCode after adding
@@ -506,7 +511,7 @@ aidevops upgrade-planning --force   # Skip confirmation prompt
 <p><strong>Why this is the default:</strong></p>
 <ul>
 <li><strong>Best current cross-tier results</strong> — strongest observed balance across interactive Build+, workers, review, and dispatch tiers</li>
-<li><strong>Good cost/latency split</strong> — GPT-5.5 for depth, GPT-5.4 mini for high-volume routine work</li>
+<li><strong>Tiered cost/latency split</strong> — Luna for bounded work, Terra for general implementation, and Sol where deeper judgement is worth the extra budget</li>
 <li><strong>Provider isolation</strong> — OpenAI accounts rotate independently from Anthropic, Google, Cursor, and local providers</li>
 <li><strong>Fallback-friendly</strong> — Claude, Gemini, Cursor, and local models remain available when a task or rate-limit profile calls for them</li>
 </ul>
@@ -622,13 +627,13 @@ gh label create &quot;security-review&quot; --color &quot;D93F0B&quot; --descrip
 </tr>
 </tbody></table>
 <p>See <code>.agents/tools/git/opencode-github-security.md</code> for the full security documentation.</p>
-<p><strong>Supported AI tool:</strong> <a href="https://opencode.ai/">OpenCode</a> is the recommended and tested AI coding tool for aidevops. All features, agents, and workflows are designed and tested for OpenCode first. We recommend OpenAI models for the best current results across all agent tiers: GPT-5.4 mini for fast triage/routine work and GPT-5.5 for complex implementation, review, and reasoning. <a href="https://claude.ai/">Claude</a> models (Anthropic) remain fully supported, and other providers are tested as their capabilities change.</p>
+<p><strong>Supported AI tool:</strong> <a href="https://opencode.ai/">OpenCode</a> is the recommended and tested AI coding tool for aidevops. All features, agents, and workflows are designed and tested for OpenCode first. The default OpenAI routing maps GPT-5.6 Luna, Terra, and Sol to the simple, standard, and thinking tiers. <a href="https://claude.ai/">Claude</a> models (Anthropic) remain fully supported fallbacks, and other providers are tested as their capabilities change.</p>
 <p>The native <code>ai_research</code> tool uses OpenCode&#39;s configured providers and canonical <code>simple</code>, <code>standard</code>, and <code>thinking</code> workload tiers; it does not require a specific provider credential.</p>
 <p><strong>Recommended stack:</strong></p>
 <ul>
 <li><strong><a href="https://opencode.ai/">OpenCode</a></strong> - The recommended AI coding agent. Powerful agentic TUI/CLI with native MCP support, Tab-based agent switching, LSP integration, plugin ecosystem, and excellent DX. All aidevops features are designed and tested for OpenCode first.</li>
 <li><strong><a href="https://opencode.ai/">OpenCode Zen</a></strong> - Free tier of OpenCode with included models. Start working with AI straight away at no cost -- no API keys or subscriptions required.</li>
-<li><strong>OpenAI GPT-5.5 / GPT-5.4 mini</strong> - Recommended model pair for aidevops today. Use GPT-5.5 for complex reasoning and high-impact agent tiers; use GPT-5.4 mini for triage, routine implementation, and cost-efficient parallel workers.</li>
+<li><strong>OpenAI GPT-5.6 Luna / Terra / Sol</strong> - Recommended tier family for aidevops today: Luna for bounded work, Terra for routine implementation, and Sol for consequential reasoning and high-impact decisions.</li>
 <li><strong><a href="https://claude.ai/">Claude</a></strong> (Anthropic) - Fully supported alternative provider. Claude models remain useful for fallback, cross-provider verification, and users with Claude Pro/Max OAuth access.</li>
 <li><strong><a href="https://tabby.sh/">Tabby</a></strong> - Recommended terminal. Colour-coded Profiles per project/repo, <strong>auto-syncs tab titles with git/session context and marks OpenCode turns from the first submitted message as ⚪, 🔴, 🟡, or 🟢.</strong></li>
 <li><strong><a href="https://zed.dev/">Zed</a></strong> - Recommended editor. High-performance with AI integration (use with the OpenCode Agent Extension).</li>
@@ -932,7 +937,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 1,630+ helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 1,960+ helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -942,7 +947,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tr>
 <td><strong>Knowledge Graph Routing</strong></td>
 <td>Indexed, cross-referenced agents instead of isolated skills</td>
-<td><code>subagent-index.toon</code> maps 2,150+ agents by domain, purpose, and dependency — agents discover related context through the graph, not just their own file</td>
+<td><code>subagent-index.toon</code> maps 2,350+ agents by domain, purpose, and dependency — agents discover related context through the graph, not just their own file</td>
 </tr>
 <tr>
 <td><strong>Progressive Disclosure</strong></td>
@@ -1026,7 +1031,7 @@ aidevops sources remove my-private-agents         # Remove a source
 │   ├── task_assignment → worker inbox
 │   ├── status_report → coordinator outbox
 │   └── broadcast → all agents
-└── Model Routing (tier-based: GPT-5.4 mini / GPT-5.5 / provider fallbacks)
+└── Model Routing (tier-based: GPT-5.6 Luna / Terra / Sol / provider fallbacks)
 </code></pre>
 <p><strong>Key components:</strong></p>
 <table>
@@ -2922,7 +2927,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 14 primary agents, 2,150+ subagents, and 1,630+ helper scripts.</p>
+<p>This installs the complete framework: 14 primary agents, 2,350+ subagents, and 1,960+ helper scripts.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -3238,7 +3243,7 @@ AIDEVOPS_FEATURE_COMMANDS_CURSOR=no setup.sh
 <h4>Endgame: progressive disclosure</h4>
 <p>The long-term direction is to make slash commands and <code>@mentions</code> unnecessary altogether. A progressive disclosure layer should load the right domain agents and tools into context based on the nature of the conversation — you should never have to remember agent names or prefix commands. The <code>aidevops-</code> slash commands documented above are a stepping stone: they standardise routing across every client we support, and will eventually be auto-invoked by the router rather than typed by hand.</p>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 2,150+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 2,350+ subagents organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -4493,7 +4498,7 @@ source &lt;(credential-helper.sh export)
 <li>Autonomous supervisor — pulse runs every 2 minutes, merging PRs, dispatching workers, killing stuck processes, advancing missions</li>
 <li>Operational intelligence — struggle-ratio detection, orphaned PR recovery, circuit breaker, dynamic concurrency</li>
 <li>Cost-aware routing — provider-aware model selection across OpenAI, Anthropic, Gemini, Cursor, Grok, and local models with budget tracking</li>
-<li>Progressive context — 2,150+ subagents loaded on demand, project bundles auto-configuring quality gates and model tiers</li>
+<li>Progressive context — 2,350+ subagents loaded on demand, project bundles auto-configuring quality gates and model tiers</li>
 <li>Self-improving — session mining extracts learnings, quality findings auto-create tasks, patterns feed back into agent prompts</li>
 </ul>
 <p><strong>Get Started:</strong></p>
