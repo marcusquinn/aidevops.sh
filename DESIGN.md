@@ -161,5 +161,8 @@ python3 -m json.tool data/aidevops-stats.json >/dev/null
 python3 -m json.tool site.webmanifest >/dev/null
 python3 -m html.parser index.html >/dev/null
 git diff --check
-magick identify og-image.svg og-image.png favicon.svg favicon-16x16.png favicon-32x32.png favicon-48x48.png apple-touch-icon.png android-chrome-192x192.png android-chrome-512x512.png favicon.ico
+magick identify images/aidevops-avatar.svg images/aidevops-avatar.png og-image.svg og-image.png favicon.svg favicon-16x16.png favicon-32x32.png favicon-48x48.png apple-touch-icon.png android-chrome-192x192.png android-chrome-512x512.png favicon.ico
 ```
+
+- Inspect `images/aidevops-avatar.png` to confirm its corners are transparent
+  and all essential avatar details remain inside the circle-crop safe area.
