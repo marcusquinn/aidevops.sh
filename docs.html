@@ -1921,8 +1921,8 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </tr>
 <tr>
 <td><a href="https://github.com/marcusquinn/quickfile-mcp">QuickFile</a></td>
-<td>Accounting API</td>
-<td>Per-agent</td>
+<td>Guarded multi-account accounting API</td>
+<td>On-demand per-agent</td>
 <td>Yes</td>
 </tr>
 <tr>
@@ -2107,7 +2107,16 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </ul>
 <p><strong>Accounts &amp; Finance:</strong></p>
 <ul>
-<li><a href="https://github.com/marcusquinn/quickfile-mcp">QuickFile</a> - Accounting API integration (MCP)</li>
+<li><strong>Provider-neutral accounting</strong> - Bookkeeping, statement imports,
+reconciliation, classifications, chart evolution, debtors/creditors,
+management and investor reports, statutory-return workpapers, and cash-flow
+forecasts with approval and read-back controls (<code>business/accounting.md</code>)</li>
+<li><strong>Accounting software catalogue</strong> - Truthful support states and export
+fallbacks across QuickFile, Xero, QuickBooks, FreeAgent, Sage, Zoho Books,
+FreshBooks, Wave, KashFlow, Clear Books, MYOB, Odoo, and others
+(<code>business/accounting-software.md</code>)</li>
+<li><a href="https://github.com/marcusquinn/quickfile-mcp">QuickFile</a> - First executable
+reference adapter, activated on demand through <code>@quickfile</code></li>
 <li><a href="https://github.com/marcusquinn/amazon-order-history-csv-download-mcp">Amazon Order History</a> - Order data extraction (MCP)</li>
 </ul>
 <p><strong>Document Processing &amp; OCR:</strong></p>
@@ -3055,7 +3064,7 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 <tr>
 <td>Business</td>
 <td><code>business.md</code></td>
-<td>Company orchestration, financial ops, invoicing, strategy</td>
+<td>Company orchestration, provider-neutral accounting, finance, invoicing, strategy</td>
 <td>standard</td>
 </tr>
 <tr>
