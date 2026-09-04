@@ -1838,7 +1838,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <h2><strong>MCP Integrations</strong></h2>
 <p><strong>Model Context Protocol servers for real-time AI assistant integration.</strong> The framework configures these MCPs for <strong><a href="https://opencode.ai/">OpenCode</a></strong> (TUI, Desktop, and Extension for Zed/VSCode).</p>
 <h3><strong>All Supported MCPs (20 available)</strong></h3>
-<p>MCP packages are installed globally via <code>bun install -g</code> for instant startup (no <code>npx</code> registry lookups). Run <code>setup.sh</code> or <code>aidevops update-tools</code> to update to latest versions.</p>
+<p>MCP integrations use reviewed local package runners or remote HTTPS endpoints. Security-sensitive local integrations use exact package pins where required; setup may globally cache selected tools for faster startup. Run <code>setup.sh</code> or <code>aidevops update-tools</code> to refresh managed tooling.</p>
 <table>
 <thead>
 <tr>
@@ -1915,8 +1915,8 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <td>No</td>
 </tr>
 <tr>
-<td><a href="https://github.com/nicholasgriffintn/playwriter">Playwriter</a></td>
-<td>Browser with extensions</td>
+<td><a href="https://github.com/microsoft/playwright-mcp">Playwright MCP</a></td>
+<td>Isolated or extension-connected browser automation</td>
 <td>Per-agent</td>
 <td>No</td>
 </tr>
@@ -1974,7 +1974,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <li><strong>Global</strong> - Tools always available (loaded into every session)</li>
 <li><strong>Per-agent</strong> - Tools disabled globally, enabled per-agent via config (zero context overhead when unused)</li>
 </ul>
-<p><strong>Performance optimization:</strong> MCP packages are installed globally via <code>bun install -g</code> for instant startup (~0.1s vs 2-3s with <code>npx</code>). The framework uses a three-tier loading strategy: MCPs load eagerly at startup or on-demand when their subagent is invoked. This reduces OpenCode startup time significantly.</p>
+<p><strong>Performance optimization:</strong> MCPs stay disabled globally and connect on demand when their subagent is invoked. Selected packages may be globally installed or cached, while integrations such as Playwright use an exact pinned package runner to preserve their reviewed CLI contract.</p>
 <h3><strong>SEO Integrations (curl subagents - no MCP overhead)</strong></h3>
 <p>These use direct API calls via curl, avoiding MCP server startup entirely:</p>
 <table>
@@ -2044,13 +2044,13 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <p><strong>Browser Automation</strong> (browser tool suite + anti-detect stack, <a href="#browser-automation">benchmarked</a>):</p>
 <ul>
 <li><strong>Auto-browse workflow</strong> - <code>/auto-browse</code> orchestrates the tools below to learn messy browser tasks, choose the cheapest reliable path, preserve private profile/session state under <code>~/.aidevops/</code>, and graduate reusable private agents or sanitized <code>todo/</code> plans</li>
-<li><a href="https://playwright.dev/">Playwright</a> - Fastest engine (0.9s form fill), parallel contexts, extensions, proxy (auto-installed)</li>
+<li><a href="https://playwright.dev/">Playwright</a> - Fastest engine (0.9s form fill); standalone Brave is preferred for headed/headless work, while Microsoft&#39;s <a href="https://chromewebstore.google.com/detail/playwright-extension/mmlmfjhmonkocbjadbfplnigmagldckm">Playwright Extension</a> is reserved for interactive access to approved user-owned tabs</li>
 <li><a href="https://github.com/microsoft/playwright-cli">playwright-cli</a> - Microsoft official CLI for AI agents, <code>--session</code> isolation, built-in tracing</li>
 <li><a href="https://github.com/nicholasgriffintn/dev-browser">dev-browser</a> - Persistent profile, stays logged in, ARIA snapshots, pairs with DevTools</li>
 <li><a href="https://github.com/vercel-labs/agent-browser">agent-browser</a> - CLI/CI/CD, <code>--session</code> parallel, ref-based element targeting, <strong>iOS Simulator support</strong> (macOS)</li>
 <li><a href="https://github.com/unclecode/crawl4ai">Crawl4AI</a> - Bulk extraction, <code>arun_many</code> parallel (1.7x), LLM-ready markdown</li>
 <li><a href="https://github.com/watercrawl/watercrawl">WaterCrawl</a> - Self-hosted crawling with web search, sitemap generation, JS rendering, proxy support</li>
-<li><a href="https://github.com/nicholasgriffintn/playwriter">Playwriter</a> - Your browser&#39;s extensions/passwords/proxy, already unlocked</li>
+<li><a href="https://chromewebstore.google.com/detail/playwright-recorder/bapaclfmcgookbglclacfgeemaehkkme">Playwright Recorder</a> - Optional third-party, low-sensitivity human-flow capture into draft test code; pair with written acceptance criteria and review/redact output</li>
 <li><a href="https://github.com/browserbase/stagehand">Stagehand</a> - Natural language automation, self-healing selectors</li>
 <li><a href="https://github.com/browser-use/browser-use">browser-use</a> - AI-native browser automation, CLI 3.0 Browser Harness, packaged agent skill, Browser Use Cloud, 100-task upstream benchmark</li>
 <li><a href="https://github.com/nicholasgriffintn/chrome-devtools-mcp">Chrome DevTools MCP</a> - Companion: Lighthouse, network throttling, CSS coverage (pairs with any tool)</li>
@@ -2170,7 +2170,6 @@ cargo install toon-lsp                        # TOON syntax validation
 <th>dev-browser</th>
 <th>agent-browser</th>
 <th>Crawl4AI</th>
-<th>Playwriter</th>
 <th>Stagehand</th>
 <th>browser-use</th>
 </tr>
@@ -2182,7 +2181,6 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>1.39s</td>
 <td>1.90s</td>
 <td>2.78s</td>
-<td>2.95s</td>
 <td>7.72s</td>
 <td>Agentic; not in local deterministic suite</td>
 </tr>
@@ -2193,7 +2191,6 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>1.34s</td>
 <td>1.37s</td>
 <td>N/A</td>
-<td>2.24s</td>
 <td>2.58s</td>
 <td>Agentic; use for fuzzy forms</td>
 </tr>
@@ -2204,7 +2201,6 @@ cargo install toon-lsp                        # TOON syntax validation
 <td><strong>1.08s</strong></td>
 <td>1.53s</td>
 <td>2.53s</td>
-<td>2.68s</td>
 <td>3.48s</td>
 <td>Agentic; compress to deterministic when stable</td>
 </tr>
@@ -2215,7 +2211,6 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>1.49s</td>
 <td>3.06s</td>
 <td>N/A</td>
-<td>4.37s</td>
 <td>4.48s</td>
 <td>Upstream BU Bench covers 100 real-world tasks</td>
 </tr>
@@ -2226,7 +2221,6 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>N/A</td>
 <td>2.0s</td>
 <td>3.0s</td>
-<td>N/A</td>
 <td>Slow</td>
 <td>Prefer Browser Use Cloud for scale</td>
 </tr>
@@ -2241,52 +2235,47 @@ cargo install toon-lsp                        # TOON syntax validation
 <th>dev-browser</th>
 <th>agent-browser</th>
 <th>Crawl4AI</th>
-<th>Playwriter</th>
 <th>Stagehand</th>
 <th>browser-use</th>
 </tr>
 </thead>
 <tbody><tr>
 <td><strong>Headless</strong></td>
-<td>Yes</td>
+<td>Yes; extension mode headed</td>
 <td>Yes (default)</td>
 <td>Yes</td>
 <td>Yes (default)</td>
 <td>Yes</td>
-<td>No (your browser)</td>
 <td>Yes</td>
 <td>Yes</td>
 </tr>
 <tr>
 <td><strong>Proxy/VPN</strong></td>
-<td>Full</td>
+<td>Full or existing browser</td>
 <td>No</td>
 <td>Via args</td>
 <td>No</td>
 <td>Full</td>
-<td>Your browser</td>
 <td>Via args</td>
 <td>Cloud/profiles</td>
 </tr>
 <tr>
 <td><strong>Extensions</strong></td>
-<td>Yes (persistent)</td>
-<td>No</td>
+<td>Persistent context or interactive approved user tabs</td>
+<td>No in normal mode</td>
 <td>Yes (profile)</td>
 <td>No</td>
 <td>No</td>
-<td>Yes (yours)</td>
 <td>Possible</td>
 <td>Profile/browser dependent</td>
 </tr>
 <tr>
 <td><strong>Password managers</strong></td>
-<td>Partial (needs unlock)</td>
+<td>Interactive approved user tabs only</td>
 <td>No</td>
 <td>Partial</td>
 <td>No</td>
 <td>No</td>
-<td><strong>Yes</strong> (unlocked)</td>
 <td>No</td>
 <td>Profile/browser dependent</td>
 </tr>
@@ -2297,29 +2286,26 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td>No</td>
 <td>No</td>
-<td>No</td>
 <td>Via Playwright</td>
 <td>Profile/browser dependent</td>
 </tr>
 <tr>
 <td><strong>Parallel sessions</strong></td>
-<td>5 ctx/2.1s</td>
+<td>5 standalone contexts/2.1s; interactive extension tab groups only</td>
 <td>--session</td>
 <td>Shared</td>
 <td>3 sess/2.0s</td>
 <td>arun_many 1.7x</td>
-<td>Shared</td>
 <td>Per-instance</td>
 <td>Cloud for scale</td>
 </tr>
 <tr>
 <td><strong>Session persistence</strong></td>
-<td>storageState</td>
+<td>storageState/profile/existing browser</td>
 <td>Profile dir</td>
 <td>Profile dir</td>
 <td>state save/load</td>
 <td>user_data_dir</td>
-<td>Your browser</td>
 <td>Per-instance</td>
 <td>BrowserProfile / Cloud</td>
 </tr>
@@ -2330,7 +2316,6 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>Via Playwright</td>
 <td>Via Playwright</td>
 <td>No</td>
-<td>Via CDP</td>
 <td>Via Playwright</td>
 <td>History + Browser Harness CLI</td>
 </tr>
@@ -2341,7 +2326,6 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td>No</td>
 <td>LLM extraction</td>
-<td>No</td>
 <td>Yes</td>
 <td>Yes</td>
 </tr>
@@ -2352,13 +2336,11 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td>No</td>
 <td>No</td>
-<td>No</td>
 <td>Yes</td>
 <td>Yes</td>
 </tr>
 <tr>
 <td><strong>Agent skill</strong></td>
-<td>No</td>
 <td>No</td>
 <td>No</td>
 <td>No</td>
@@ -2376,7 +2358,6 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>No</td>
 <td>No</td>
 <td>No</td>
-<td>No</td>
 </tr>
 <tr>
 <td><strong>Maintainer</strong></td>
@@ -2384,7 +2365,6 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>Microsoft</td>
 <td>Community</td>
 <td>Vercel</td>
-<td>Community</td>
 <td>Community</td>
 <td>Browserbase</td>
 <td>Browser Use</td>
@@ -2406,8 +2386,8 @@ cargo install toon-lsp                        # TOON syntax validation
 </tr>
 <tr>
 <td><strong>Fastest automation</strong></td>
-<td>Playwright</td>
-<td>0.9s form fill, parallel contexts</td>
+<td>Standalone Playwright with Brave preferred</td>
+<td>0.9s form fill, parallel isolated contexts without disturbing user activity</td>
 </tr>
 <tr>
 <td><strong>AI agent (CLI)</strong></td>
@@ -2420,9 +2400,14 @@ cargo install toon-lsp                        # TOON syntax validation
 <td>Profile persists across restarts</td>
 </tr>
 <tr>
-<td><strong>Your extensions/passwords</strong></td>
-<td>Playwriter</td>
-<td>Already unlocked in your browser</td>
+<td><strong>Interactive access to your browser</strong></td>
+<td>Playwright Extension</td>
+<td>User-present selected-tab access to an existing Chrome/Edge/Chromium session; never for workers/CI, and Brave extension support is unverified</td>
+</tr>
+<tr>
+<td><strong>Record expected human flow</strong></td>
+<td>Playwright Recorder (optional)</td>
+<td>Produces draft test code for low-sensitivity flows; pair with written acceptance criteria and review/redact output</td>
 </tr>
 <tr>
 <td><strong>Bulk extraction</strong></td>
