@@ -388,7 +388,7 @@ open-design-helper.sh start --https-local open-design
 # → https://open-design.local when localdev is configured
 </code></pre>
 <p>Imported Open Design skills are not copied verbatim. They are evaluated through aidevops build-agent methodology, deduplicated against existing agents, flattened into aidevops <code>*-skill.md</code> structure, attributed to upstream, and given verification commands. See <code>.agents/tools/design/open-design-ingestion.md</code> for the full skill-value matrix.</p>
-<p><strong>Project tracking:</strong> When you run <code>aidevops init</code>, the project is automatically registered in <code>~/.config/aidevops/repos.json</code>. Running <code>aidevops update</code> checks all registered projects for version updates.</p>
+<p><strong>Project tracking:</strong> When you run <code>aidevops init</code>, the project is automatically registered in <code>~/.config/aidevops/repos.json</code>. Running <code>aidevops update</code> checks all registered projects for version updates. Repository layout changes remain separate and user-invoked: <code>aidevops repos migrate-layout plan</code> creates a non-mutating, content-hashed plan, while confirmed apply, status, resume, and rollback operations preserve private receipts and fail closed on drift.</p>
 <h3><strong>Use aidevops in Any Project</strong></h3>
 <p>Initialize <strong><a href="https://aidevops.sh">aidevops</a></strong> features in any git repository:</p>
 <pre><code class="language-bash">cd ~/your-project
