@@ -111,7 +111,7 @@
     <main class="docs-container">
         <div class="docs-content">
 <!-- SPDX-License-Identifier: MIT -->
-<!-- SPDX-FileCopyrightText: 2025-2026 Marcus Quinn --><p><img src="https://github.com/marcusquinn/aidevops/blob/main/docs/assets/og-image.png" alt="AI DevOps social graph preview"></p>
+<!-- SPDX-FileCopyrightText: 2025-2026 Marcus Quinn --><p><img src="https://github.com/marcusquinn/aidevops/blob/main/docs/assets/og-image.png" alt="AI DevOps — 14 main agents, 2,200+ sub agents, 2,010+ helper scripts, and 100+ slash commands"></p>
 <h1>AI DevOps Framework</h1>
 <p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> is an <a href="https://opencode.ai/">OpenCode</a> plugin and AI DevOps framework for people who want AI to do useful work across code, infrastructure, business, marketing, content, and creative projects without turning every job into another long, fragile chat.</p>
 <p>Most AI tools still leave you doing the hard coordination yourself: finding the right context, choosing a model, protecting secrets, managing branches, watching CI, spotting stuck work, and remembering what went wrong last time. aidevops puts structure around that work so agents can share context, work safely in parallel, spend model budget where it matters, and leave the system better than they found it.</p>
@@ -156,7 +156,7 @@
 <p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
 <a href="https://github.com/marcusquinn"><img src="https://img.shields.io/badge/Copyright-Marcus%20Quinn%202025--2026-blue.svg" alt="Copyright"></a></p>
 <!-- Release & Version Info -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.32.314-blue.svg" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.32.317-blue.svg" alt="Version"></a>
 <a href="https://www.npmjs.com/package/aidevops"><img src="https://img.shields.io/npm/v/aidevops" alt="npm version"></a>
 <a href="https://github.com/marcusquinn/homebrew-tap"><img src="https://img.shields.io/badge/homebrew-marcusquinn%2Ftap-orange" alt="Homebrew"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/github-repository-181717.svg?logo=github" alt="GitHub repository"></a></p>
@@ -214,11 +214,14 @@ the required notices and preferred credit text.</p>
 </ul>
 <h3>Agent Structure</h3>
 <ul>
-<li>14 primary agents (Build+, Automate, Product, SEO, Marketing-Sales, etc.) with specialist @subagents on demand</li>
-<li>2,350+ agent and subagent markdown files organized by domain</li>
-<li>1,960+ helper scripts in <code>.agents/scripts/</code></li>
-<li>210+ slash commands and workflow guides for common operations</li>
+<li>14 main agents (Build+, Automate, Product, SEO, Marketing-Sales, etc.) with specialist @subagents on demand</li>
+<li>2,200+ sub agents: individually callable Markdown modules, including skills, workflows and specialist references</li>
+<li>2,010+ helper scripts across scripting languages, including supporting production modules but excluding tests</li>
+<li>100+ slash commands for common operations</li>
 </ul>
+<!-- aidevops:inventory:start -->
+<p>Exact source inventory: <strong>14 main agents</strong>, <strong>2,236 sub agents</strong>, <strong>2,017 helper scripts</strong>, <strong>106 slash commands</strong>.</p>
+<!-- aidevops:inventory:end --><p>These are tracked source modules and entry points, not counts of running agents. Main agents follow the runtime&#39;s discovery exclusions. Sub agents are individually addressable Markdown instruction modules selected by the generator&#39;s filename rules, regardless of <code>mode</code> metadata; callable skills, workflows and references count too. This measures distinct source paths, not unique flattened runtime names. Helper scripts include production script files and supporting modules across scripting languages, not just <code>*-helper</code> filenames. Tests, fixtures, generated/vendor files and duplicate aliases are excluded. Slash commands include valid shipped aliases; their regular source modules also belong to the sub-agent library, so the categories must not be added together. Audit every included path with <code>bash .agents/scripts/readme-helper.sh counts --inventory</code>; see <a href="https://github.com/marcusquinn/aidevops/blob/main/DESIGN.md#readme-hero-counts">counting rules and hero maintenance</a>.</p>
 <h3>What You Can Ask aidevops To Do</h3>
 <ul>
 <li>Build, fix, review, release, and maintain software with worktrees, PRs, tests, and quality gates.</li>
@@ -365,6 +368,8 @@ aidevops upgrade-planning # Upgrade TODO.md/PLANS.md to latest templates
 aidevops update-tools     # Check and update installed tools
 aidevops uninstall        # Remove aidevops
 </code></pre>
+<h3>Optional Blender Lab MCP</h3>
+<p><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/design/blender.md">Blender MCP guidance</a> covers source-specific setup, scene analysis, Python API lookup, and the distinction between Blender&#39;s Lab project and the independent community <code>blender-mcp</code> package. Includes opt-in <a href="https://github.com/marcusquinn/aidevops/blob/main/configs/blender-lab-opencode-config.json.txt">OpenCode</a> and <a href="https://github.com/marcusquinn/aidevops/blob/main/configs/blender-lab-mcp-config.json.txt">MCP client</a> templates. Nothing is installed or activated automatically: Blender executes generated Python without protective guards, so use an isolated system and disposable scene copies.</p>
 <h3>Optional Design Artifact Studio</h3>
 <p>aidevops now treats design as a self-contained stack with optional peripherals:</p>
 <ul>
@@ -941,7 +946,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 1,960+ helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 2,010+ helper scripts</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -951,7 +956,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tr>
 <td><strong>Knowledge Graph Routing</strong></td>
 <td>Indexed, cross-referenced agents instead of isolated skills</td>
-<td><code>subagent-index.toon</code> maps 2,350+ agents by domain, purpose, and dependency — agents discover related context through the graph, not just their own file</td>
+<td><code>subagent-index.toon</code> routes context across subagent profiles and the wider skills/documentation library — agents discover related context through the graph, not just their own file</td>
 </tr>
 <tr>
 <td><strong>Progressive Disclosure</strong></td>
@@ -1687,6 +1692,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 </ul>
 <h3><strong>Video Creation</strong></h3>
 <ul>
+<li><strong><a href="https://github.com/browser-use/video-use">Video-use</a></strong>: Conversational footage editing through the <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/video/video-use-runtime.md">video-editor runtime adapter</a>, with a reviewed executable pin, explicit installation, whole-repository update checks and a no-upload synthetic render smoke test. Run <code>python3 ~/.aidevops/agents/scripts/video-use-helper.py status</code> to check readiness.</li>
 <li><strong><a href="https://remotion.dev/">Remotion</a></strong>: Programmatic video creation with React - animations, compositions, media handling, captions</li>
 <li><strong><a href="https://github.com/snubroot/Veo-3-Meta-Framework">Video Prompt Design</a></strong>: AI video prompt engineering using the 7-component meta prompt framework for Veo 3 and similar models</li>
 <li><strong><a href="https://kie.ai/">Kie.ai</a></strong>: Unified asynchronous Market API and <code>kie-helper.sh</code> workflow for image, video, audio, uploads, callbacks, and credit checks with model-specific JSON pass-through</li>
@@ -1710,7 +1716,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 <li><strong><a href="https://github.com/dani-garcia/vaultwarden">Vaultwarden</a></strong>: Password and secrets management</li>
 <li><strong><a href="https://sonarcloud.io/">SonarCloud</a></strong>: Security and quality analysis (A-grade ratings)</li>
 <li><strong><a href="https://www.codefactor.io/">CodeFactor</a></strong>: Code quality metrics (A+ score)</li>
-<li><strong><a href="https://www.codacy.com/">Codacy</a></strong>: Multi-tool analysis (0 findings)</li>
+<li><strong><a href="https://www.codacy.com/">Codacy</a></strong>: Multi-tool analysis with a live quality badge and daily A-grade monitoring</li>
 <li><strong><a href="https://coderabbit.ai/">CodeRabbit</a></strong>: AI-powered code reviews</li>
 <li><strong><a href="https://snyk.io/">Snyk</a></strong>: Security vulnerability scanning</li>
 <li><strong><a href="https://socket.dev/">Socket</a></strong>: Dependency security and supply chain protection</li>
@@ -2816,7 +2822,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 14 primary agents, 2,350+ subagents, and 1,960+ helper scripts.</p>
+<p>This installs the complete framework: 14 main agents, 2,200+ sub agents, and 2,010+ helper scripts, including callable skill/reference modules and supporting production script code.</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -3150,7 +3156,7 @@ AIDEVOPS_FEATURE_COMMANDS_CURSOR=no setup.sh
 <h4>Endgame: progressive disclosure</h4>
 <p>The long-term direction is to make slash commands and <code>@mentions</code> unnecessary altogether. A progressive disclosure layer should load the right domain agents and tools into context based on the nature of the conversation — you should never have to remember agent names or prefix commands. The <code>aidevops-</code> slash commands documented above are a stepping stone: they standardise routing across every client we support, and will eventually be auto-invoked by the router rather than typed by hand.</p>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 2,350+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for 2,200+ sub agents, including callable skill, workflow and reference modules organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -4289,8 +4295,8 @@ bash .agents/scripts/continue-cli.sh review
 ├── AGENTS.md                      # AI agent guidance (dev)
 ├── .agents/                        # Agents and documentation
 │   ├── AGENTS.md                  # User guide (deployed to ~/.aidevops/agents/)
-│   ├── *.md                       # 12 primary agents
-│   ├── scripts/                   # 1,480+ helper scripts
+│   ├── *.md                       # 14 main agents, plus excluded root guides
+│   ├── scripts/                   # 2,010+ helper scripts (including modules; tests excluded)
 │   ├── tools/                     # Cross-domain utilities (video, browser, git, etc.)
 │   ├── services/                  # External service integrations
 │   └── workflows/                 # Development process guides
@@ -4405,7 +4411,7 @@ source &lt;(credential-helper.sh export)
 <li>Autonomous supervisor — pulse runs every 2 minutes, merging PRs, dispatching workers, killing stuck processes, advancing missions</li>
 <li>Operational intelligence — struggle-ratio detection, orphaned PR recovery, circuit breaker, dynamic concurrency</li>
 <li>Cost-aware routing — provider-aware model selection across OpenAI, Anthropic, Gemini, Cursor, Grok, and local models with budget tracking</li>
-<li>Progressive context — 2,350+ subagents loaded on demand, project bundles auto-configuring quality gates and model tiers</li>
+<li>Progressive context — 2,200+ sub agents available on demand, project bundles auto-configuring quality gates and model tiers</li>
 <li>Self-improving — session mining extracts learnings, quality findings auto-create tasks, patterns feed back into agent prompts</li>
 </ul>
 <p><strong>Get Started:</strong></p>
