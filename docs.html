@@ -207,7 +207,7 @@ the required notices and preferred credit text.</p>
 <li><code>/auto-browse</code> - Learn, optimize, and graduate repeatable browser operations and web data-mining workflows</li>
 <li><code>/report-render</code> - Render report-ready Markdown or JSON to HTML with sticky TOC, print CSS, evidence badges, and source cards for PDF export</li>
 <li><code>/report-token-use</code> - Generate a local per-session token, model, compaction, and MCP-use report</li>
-<li><code>/optimize-tiers</code> - Compare production routing telemetry with sealed historical model replay before changing model defaults</li>
+<li><code>/optimize-tiers</code> - Optionally investigate unresolved model comparisons with production telemetry and sealed historical replay</li>
 <li><code>/pulse</code> - Run the autonomous supervisor loop for dispatch, merge, diagnostics, and stuck-work recovery</li>
 <li><code>/serve-sim</code> / <code>serve-sim-helper.sh</code> - Exercise mobile web flows in simulator-backed local previews</li>
 </ul>
@@ -504,14 +504,15 @@ aidevops upgrade-planning --force   # Skip confirmation prompt
 <p>See <code>.agents/tools/task-management/beads.md</code> for complete documentation and installation commands.</p>
 <p><strong>Your AI assistant now has agentic access to 30+ service integrations.</strong></p>
 <h3>OpenAI Models in OpenCode (Recommended)</h3>
-<p>OpenCode with OpenAI is the current recommended aidevops setup. The default routing uses GPT-5.6 Luna for bounded low-consequence work, Terra for established-pattern implementation, and Sol for consequential decisions, architecture, and synthesis-heavy work.</p>
+<p>OpenCode with OpenAI is the current recommended aidevops setup. Delegation defaults are GPT-5.6 Luna <strong>medium</strong> for bounded low-consequence work, Terra <strong>high</strong> for established-pattern implementation, and Sol <strong>medium</strong> for consequential decisions, architecture, and synthesis-heavy work. GPT-6 Astra <strong>medium</strong> is an optional interactive daily driver; selecting it does not replace the cheaper child tiers.</p>
+<p>Optimise through ordinary verified work, retries and parent repair rather than a prerequisite benchmark project. API prices are directional resource-cost estimates, not ChatGPT subscription allowance percentages. See <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/context/model-routing.md#practical-model-and-effort-selection">practical model and effort selection</a> for the strategy, estimate scope and safe escalation rules.</p>
 <p><strong>Authenticate via the pool:</strong></p>
 <pre><code class="language-bash">aidevops model-accounts-pool add openai
 # Restart OpenCode after adding
 </code></pre>
 <p><strong>Why this is the default:</strong></p>
 <ul>
-<li><strong>Best current cross-tier results</strong> — strongest observed balance across interactive Build+, workers, review, and dispatch tiers</li>
+<li><strong>Pragmatic defaults</strong> — reversible choices improved through actual completion and repair evidence, not a claim of benchmark superiority</li>
 <li><strong>Tiered cost/latency split</strong> — Luna for bounded work, Terra for general implementation, and Sol where deeper judgement is worth the extra budget</li>
 <li><strong>Provider isolation</strong> — OpenAI accounts rotate independently from Anthropic, Google, Cursor, and local providers</li>
 <li><strong>Fallback-friendly</strong> — Claude, Gemini, Cursor, and local models remain available when a task or rate-limit profile calls for them</li>
