@@ -111,7 +111,7 @@
     <main class="docs-container">
         <div class="docs-content">
 <!-- SPDX-License-Identifier: MIT -->
-<!-- SPDX-FileCopyrightText: 2025-2026 Marcus Quinn --><p><img src="https://github.com/marcusquinn/aidevops/blob/main/docs/assets/og-image.png" alt="AI DevOps social graph preview"></p>
+<!-- SPDX-FileCopyrightText: 2025-2026 Marcus Quinn --><p><img src="https://github.com/marcusquinn/aidevops/blob/main/docs/assets/og-image.png" alt="AI DevOps — 15 primary agents, 2,250+ supporting guides, 2,140+ shell scripts, and 100+ slash commands"></p>
 <h1>AI DevOps Framework</h1>
 <p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> is an <a href="https://opencode.ai/">OpenCode</a> plugin and AI DevOps framework for people who want AI to do useful work across code, infrastructure, business, marketing, content, and creative projects without turning every job into another long, fragile chat.</p>
 <p>Most AI tools still leave you doing the hard coordination yourself: finding the right context, choosing a model, protecting secrets, managing branches, watching CI, spotting stuck work, and remembering what went wrong last time. aidevops puts structure around that work so agents can share context, work safely in parallel, spend model budget where it matters, and leave the system better than they found it.</p>
@@ -214,11 +214,12 @@ the required notices and preferred credit text.</p>
 </ul>
 <h3>Agent Structure</h3>
 <ul>
-<li>14 primary agents (Build+, Automate, Product, SEO, Marketing-Sales, etc.) with specialist @subagents on demand</li>
-<li>2,350+ agent and subagent markdown files organized by domain</li>
-<li>1,960+ helper scripts in <code>.agents/scripts/</code></li>
-<li>210+ slash commands and workflow guides for common operations</li>
+<li>15 primary agents (Build+, Automate, Product, SEO, Marketing-Sales, etc.) with specialist @subagents on demand</li>
+<li>2,250+ supporting Markdown guides: subagents, skills, references, templates, commands, and workflows organized by domain</li>
+<li>2,140+ scripts in <code>.agents/scripts/</code> (shell helpers and tests)</li>
+<li>100+ slash commands and 100+ workflow guides for common operations</li>
 </ul>
+<p>Counts checked on 5 September 2026: 15 root agent files (excluding <code>AGENTS.md</code>), 2,268 regular Markdown files in <code>.agents/</code> subdirectories (excluding symlink aliases), 2,146 shell scripts, 106 slash-command entry points, and 104 workflow guides. Command and workflow source guides are included in the supporting-guide total, not additional agents. See <a href="https://github.com/marcusquinn/aidevops/blob/main/DESIGN.md#readme-hero-counts">hero count maintenance</a> for sources and refresh instructions.</p>
 <h3>What You Can Ask aidevops To Do</h3>
 <ul>
 <li>Build, fix, review, release, and maintain software with worktrees, PRs, tests, and quality gates.</li>
@@ -941,7 +942,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tbody><tr>
 <td><strong>Give Agents a Computer</strong></td>
 <td>Filesystem + shell for persistent context</td>
-<td><code>~/.aidevops/.agent-workspace/</code>, 1,960+ helper scripts</td>
+<td><code>~/.aidevops/.agent-workspace/</code>, 2,140+ scripts (shell helpers and tests)</td>
 </tr>
 <tr>
 <td><strong>Multi-Layer Action Space</strong></td>
@@ -951,7 +952,7 @@ aidevops sources remove my-private-agents         # Remove a source
 <tr>
 <td><strong>Knowledge Graph Routing</strong></td>
 <td>Indexed, cross-referenced agents instead of isolated skills</td>
-<td><code>subagent-index.toon</code> maps 2,350+ agents by domain, purpose, and dependency — agents discover related context through the graph, not just their own file</td>
+<td><code>subagent-index.toon</code> routes agent context within a library of 2,250+ supporting guides — agents discover related context through the graph, not just their own file</td>
 </tr>
 <tr>
 <td><strong>Progressive Disclosure</strong></td>
@@ -2816,7 +2817,7 @@ tldr impact src/auth.py validate   # What would change affect?
 <pre><code class="language-bash">/plugin marketplace add marcusquinn/aidevops
 /plugin install aidevops@aidevops
 </code></pre>
-<p>This installs the complete framework: 14 primary agents, 2,350+ subagents, and 1,960+ helper scripts.</p>
+<p>This installs the complete framework: 15 primary agents, 2,250+ supporting guides, and 2,140+ scripts (shell helpers and tests).</p>
 <h3>Importing External Skills</h3>
 <p>Import skills from GitHub or ClawdHub using the <code>aidevops skill</code> CLI:</p>
 <pre><code class="language-bash"># Import from GitHub (auto-detects format)
@@ -3150,7 +3151,7 @@ AIDEVOPS_FEATURE_COMMANDS_CURSOR=no setup.sh
 <h4>Endgame: progressive disclosure</h4>
 <p>The long-term direction is to make slash commands and <code>@mentions</code> unnecessary altogether. A progressive disclosure layer should load the right domain agents and tools into context based on the nature of the conversation — you should never have to remember agent names or prefix commands. The <code>aidevops-</code> slash commands documented above are a stepping stone: they standardise routing across every client we support, and will eventually be auto-invoked by the router rather than typed by hand.</p>
 <h3><strong>Example Subagents with MCP Integration</strong></h3>
-<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the full list of 2,350+ subagents organized by domain.</p>
+<p>These are examples of subagents that have supporting MCPs enabled. See <code>.agents/</code> for the library of 2,250+ supporting guides organized by domain.</p>
 <table>
 <thead>
 <tr>
@@ -4289,8 +4290,8 @@ bash .agents/scripts/continue-cli.sh review
 ├── AGENTS.md                      # AI agent guidance (dev)
 ├── .agents/                        # Agents and documentation
 │   ├── AGENTS.md                  # User guide (deployed to ~/.aidevops/agents/)
-│   ├── *.md                       # 12 primary agents
-│   ├── scripts/                   # 1,480+ helper scripts
+│   ├── *.md                       # 15 primary agents
+│   ├── scripts/                   # 2,140+ shell scripts (helpers and tests)
 │   ├── tools/                     # Cross-domain utilities (video, browser, git, etc.)
 │   ├── services/                  # External service integrations
 │   └── workflows/                 # Development process guides
@@ -4405,7 +4406,7 @@ source &lt;(credential-helper.sh export)
 <li>Autonomous supervisor — pulse runs every 2 minutes, merging PRs, dispatching workers, killing stuck processes, advancing missions</li>
 <li>Operational intelligence — struggle-ratio detection, orphaned PR recovery, circuit breaker, dynamic concurrency</li>
 <li>Cost-aware routing — provider-aware model selection across OpenAI, Anthropic, Gemini, Cursor, Grok, and local models with budget tracking</li>
-<li>Progressive context — 2,350+ subagents loaded on demand, project bundles auto-configuring quality gates and model tiers</li>
+<li>Progressive context — 2,250+ supporting guides available on demand, project bundles auto-configuring quality gates and model tiers</li>
 <li>Self-improving — session mining extracts learnings, quality findings auto-create tasks, patterns feed back into agent prompts</li>
 </ul>
 <p><strong>Get Started:</strong></p>
