@@ -368,6 +368,8 @@ aidevops upgrade-planning # Upgrade TODO.md/PLANS.md to latest templates
 aidevops update-tools     # Check and update installed tools
 aidevops uninstall        # Remove aidevops
 </code></pre>
+<h3>Optional Blender Lab MCP</h3>
+<p><a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/design/blender.md">Blender MCP guidance</a> covers source-specific setup, scene analysis, Python API lookup, and the distinction between Blender&#39;s Lab project and the independent community <code>blender-mcp</code> package. Includes opt-in <a href="https://github.com/marcusquinn/aidevops/blob/main/configs/blender-lab-opencode-config.json.txt">OpenCode</a> and <a href="https://github.com/marcusquinn/aidevops/blob/main/configs/blender-lab-mcp-config.json.txt">MCP client</a> templates. Nothing is installed or activated automatically: Blender executes generated Python without protective guards, so use an isolated system and disposable scene copies.</p>
 <h3>Optional Design Artifact Studio</h3>
 <p>aidevops now treats design as a self-contained stack with optional peripherals:</p>
 <ul>
@@ -1690,6 +1692,7 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 </ul>
 <h3><strong>Video Creation</strong></h3>
 <ul>
+<li><strong><a href="https://github.com/browser-use/video-use">Video-use</a></strong>: Conversational footage editing through the <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/video/video-use-runtime.md">video-editor runtime adapter</a>, with a reviewed executable pin, explicit installation, whole-repository update checks and a no-upload synthetic render smoke test. Run <code>python3 ~/.aidevops/agents/scripts/video-use-helper.py status</code> to check readiness.</li>
 <li><strong><a href="https://remotion.dev/">Remotion</a></strong>: Programmatic video creation with React - animations, compositions, media handling, captions</li>
 <li><strong><a href="https://github.com/snubroot/Veo-3-Meta-Framework">Video Prompt Design</a></strong>: AI video prompt engineering using the 7-component meta prompt framework for Veo 3 and similar models</li>
 <li><strong><a href="https://kie.ai/">Kie.ai</a></strong>: Unified asynchronous Market API and <code>kie-helper.sh</code> workflow for image, video, audio, uploads, callbacks, and credit checks with model-specific JSON pass-through</li>
