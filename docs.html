@@ -1721,7 +1721,6 @@ ssh-keygen -t ed25519 -C &quot;your-email@domain.com&quot;
 </ul>
 <h3><strong>AI Prompt Optimization</strong></h3>
 <ul>
-<li><strong><a href="https://docs.augmentcode.com/context-services/mcp/overview">Augment Context Engine</a></strong>: Semantic codebase retrieval with deep code understanding</li>
 <li><strong><a href="https://repomix.com/">Repomix</a></strong>: Pack codebases into AI-friendly context (80% token reduction with compress mode)</li>
 <li><strong><a href="https://dspy.ai/">DSPy</a></strong>: Framework for programming with language models</li>
 <li><strong><a href="https://dspyground.com/">DSPyGround</a></strong>: Interactive playground for prompt optimization</li>
@@ -1837,7 +1836,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </ul>
 <h2><strong>MCP Integrations</strong></h2>
 <p><strong>Model Context Protocol servers for real-time AI assistant integration.</strong> The framework configures these MCPs for <strong><a href="https://opencode.ai/">OpenCode</a></strong> (TUI, Desktop, and Extension for Zed/VSCode).</p>
-<h3><strong>All Supported MCPs (20 available)</strong></h3>
+<h3><strong>All Supported MCPs (19 available)</strong></h3>
 <p>MCP integrations use reviewed local package runners or remote HTTPS endpoints. Security-sensitive local integrations use exact package pins where required; setup may globally cache selected tools for faster startup. Run <code>setup.sh</code> or <code>aidevops update-tools</code> to refresh managed tooling.</p>
 <table>
 <thead>
@@ -1849,12 +1848,6 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </tr>
 </thead>
 <tbody><tr>
-<td><a href="https://docs.augmentcode.com/context-services/mcp/overview">Augment Context Engine</a></td>
-<td>Semantic codebase retrieval</td>
-<td>Global</td>
-<td>Yes (Augment account)</td>
-</tr>
-<tr>
 <td><a href="https://github.com/steipete/claude-code-mcp">Claude Code MCP</a></td>
 <td>Claude as sub-agent</td>
 <td>Global</td>
@@ -2034,7 +2027,6 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <h3><strong>By Category</strong></h3>
 <p><strong>Context &amp; Codebase:</strong></p>
 <ul>
-<li><a href="https://docs.augmentcode.com/context-services/mcp/overview">Augment Context Engine</a> - Semantic codebase retrieval with deep code understanding</li>
 <li><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a> - Semantic code analysis with 95% token savings (<a href="#llm-tldr---semantic-code-analysis">details below</a>)</li>
 <li><a href="https://context7.com/">Context7</a> - Real-time documentation access for thousands of libraries</li>
 <li><a href="https://github.com/yamadashy/repomix">Repomix</a> - Pack codebases into AI-friendly context</li>
@@ -2762,107 +2754,6 @@ npx repomix --compress
 <p>Install globally first: <code>bun install -g repomix</code> (done automatically by <code>setup.sh</code>)</p>
 </blockquote>
 <p>See <code>.agents/tools/context/context-builder.md</code> for complete documentation.</p>
-<h2><strong>Augment Context Engine - Semantic Codebase Search</strong></h2>
-<p><a href="https://docs.augmentcode.com/context-services/mcp/overview">Augment Context Engine</a> provides semantic codebase retrieval - understanding your code at a deeper level than simple text search. It&#39;s the recommended tool for real-time interactive coding sessions.</p>
-<h3>Why Augment Context Engine?</h3>
-<table>
-<thead>
-<tr>
-<th>Feature</th>
-<th>grep/glob</th>
-<th>Augment Context Engine</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Text matching</td>
-<td>Exact patterns</td>
-<td>Semantic understanding</td>
-</tr>
-<tr>
-<td>Cross-file context</td>
-<td>Manual</td>
-<td>Automatic</td>
-</tr>
-<tr>
-<td>Code relationships</td>
-<td>None</td>
-<td>Understands dependencies</td>
-</tr>
-<tr>
-<td>Natural language</td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-</tbody></table>
-<p>Use it to:</p>
-<ul>
-<li>Find related code across your entire codebase</li>
-<li>Understand project architecture quickly</li>
-<li>Discover patterns and implementations</li>
-<li>Get context-aware code suggestions</li>
-</ul>
-<h3>Quick Setup</h3>
-<pre><code class="language-bash"># 1. Install Auggie CLI (requires Node.js 22+)
-npm install -g @augmentcode/auggie@prerelease
-
-# 2. Authenticate (opens browser)
-auggie login
-
-# 3. Verify installation
-auggie token print
-</code></pre>
-<h3>MCP Integration</h3>
-<p>Add to your AI assistant&#39;s MCP configuration:</p>
-<p><strong>OpenCode</strong> (<code>~/.config/opencode/opencode.json</code>):</p>
-<pre><code class="language-json">{
-  &quot;mcp&quot;: {
-    &quot;augment-context-engine&quot;: {
-      &quot;type&quot;: &quot;local&quot;,
-      &quot;command&quot;: [&quot;auggie&quot;, &quot;--mcp&quot;],
-      &quot;enabled&quot;: true
-    }
-  }
-}
-</code></pre>
-<p><strong>claude-code CLI</strong>:</p>
-<pre><code class="language-bash">claude mcp add-json auggie-mcp --scope user &#39;{&quot;type&quot;:&quot;stdio&quot;,&quot;command&quot;:&quot;auggie&quot;,&quot;args&quot;:[&quot;--mcp&quot;]}&#39;
-</code></pre>
-<h3>Verification</h3>
-<p>Test with this prompt:</p>
-<pre><code class="language-text">What is this project? Please use codebase retrieval tool to get the answer.
-</code></pre>
-<p>The AI should provide a semantic understanding of your project architecture.</p>
-<h3>Repomix vs Augment Context Engine</h3>
-<table>
-<thead>
-<tr>
-<th>Use Case</th>
-<th>Tool</th>
-<th>When to Use</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Interactive coding</strong></td>
-<td>Augment Context Engine</td>
-<td>Real-time semantic search during development</td>
-</tr>
-<tr>
-<td><strong>Share with external AI</strong></td>
-<td>Repomix</td>
-<td>Self-contained snapshot for ChatGPT, Claude web, etc.</td>
-</tr>
-<tr>
-<td><strong>Architecture review</strong></td>
-<td>Repomix (compress)</td>
-<td>80% token reduction, structure only</td>
-</tr>
-<tr>
-<td><strong>CI/CD integration</strong></td>
-<td>Repomix GitHub Action</td>
-<td>Automated context in releases</td>
-</tr>
-</tbody></table>
-<p>See <code>.agents/tools/context/augment-context-engine.md</code> for complete documentation.</p>
 <h3>llm-tldr - Semantic Code Analysis</h3>
 <p><a href="https://github.com/parcadei/llm-tldr">llm-tldr</a> extracts code structure and semantics, saving ~95% tokens compared to raw code. From the <a href="https://github.com/parcadei/Continuous-Claude-v3">Continuous-Claude</a> project.</p>
 <pre><code class="language-bash"># Install
