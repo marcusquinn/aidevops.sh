@@ -3010,6 +3010,11 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 </tbody></table>
 <p>The <code>aidevops-</code> prefix differentiates framework commands from each client&#39;s native slash commands and groups them alphabetically in the command picker. It applies to <strong>every</strong> aidevops slash command — not just main agents — so <code>/aidevops-preflight</code>, <code>/aidevops-release</code>, <code>/aidevops-commit</code> etc. all sort together in your <code>/</code> menu.</p>
+<p>Codex setup/update also installs global <code>AGENTS.md</code> guidance, native workflow
+skills and compatible lifecycle hooks. Build+ loads by default; use <code>/skills</code>
+for workflows and <code>/hooks</code> to review/trust new hooks. Existing personal settings
+are preserved. For full-access launch flags and runtime differences, see
+<a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/ai-assistants/codex-cli.md">Codex CLI integration</a>.</p>
 <h4>Supported AI clients (14)</h4>
 <p>The framework installs itself across these clients. Slash commands, agent definitions, and (optionally) session-memory mining are wired up per-client by <code>setup.sh</code>, gated on per-client feature flags in <code>.agents/scripts/runtime-registry.sh</code>.</p>
 <table>
@@ -3038,10 +3043,10 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tr>
 <tr>
 <td>Codex CLI</td>
-<td>✅ <code>~/.codex/prompts/</code></td>
-<td>—</td>
+<td>✅ native skills + legacy <code>~/.codex/prompts/</code></td>
+<td>Workflow skills</td>
 <td>✅ default</td>
-<td>Invoked as <code>/prompts:aidevops-&lt;name&gt;</code></td>
+<td><code>$aidevops-&lt;name&gt;</code>; legacy <code>/prompts:aidevops-&lt;name&gt;</code></td>
 </tr>
 <tr>
 <td>Cursor</td>
