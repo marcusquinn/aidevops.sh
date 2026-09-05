@@ -2990,6 +2990,19 @@ aidevops skill add owner/repo --dry-run             # Preview without changes
 </tbody></table>
 <p><strong>Specialist subagents</strong> (e.g. <code>@wordpress</code>, <code>@seo</code>, Build-Agent, Build-MCP, etc.) live under <code>.agents/tools/</code> or as <code>mode: subagent</code> files and are invoked via <code>@mention</code> when domain expertise is needed. See <code>subagent-index.toon</code> for the full roster. For read-only macOS Activity Monitor and background-efficiency audits, use <code>@macos-activity-cleaner</code> or <code>/aidevops-macos-activity-cleaner</code>.</p>
 <h4>How to invoke a main agent</h4>
+<p>Launch terminal clients directly with Build+ selected by default, or name a main agent:</p>
+<pre><code class="language-bash">aidevops codex
+aidevops codex automate
+aidevops claude seo
+aidevops opencode research
+</code></pre>
+<p>These shortcuts apply each CLI&#39;s supported full-access options for the session.
+They also support Cursor Agent, Gemini, Continue, Kilo, Kiro CLI, Aider, Amp, Kimi,
+Qwen and Droid (which retains its configured interactive autonomy). Use
+<code>aidevops codex --list-agents</code> to list main agents, <code>--dry-run</code> to preview a launch,
+and <code>--native</code> for native subcommands without injected defaults. See
+<a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/ai-assistants/runtime-launchers.md">interactive runtime launchers</a>
+for aliases, argument forwarding and runtime limitations.</p>
 <table>
 <thead>
 <tr>
