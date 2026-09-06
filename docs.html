@@ -114,6 +114,13 @@
 <!-- SPDX-FileCopyrightText: 2025-2026 Marcus Quinn --><p><img src="https://github.com/marcusquinn/aidevops/blob/main/docs/assets/og-image.png" alt="AI DevOps — 14 main agents, 2,200+ sub agents, 2,010+ helper scripts, and 100+ slash commands"></p>
 <h1>AI DevOps Framework</h1>
 <p><strong><a href="https://aidevops.sh">aidevops.sh</a></strong> is an <a href="https://opencode.ai/">OpenCode</a> plugin and AI DevOps framework for people who want AI to do useful work across code, infrastructure, business, marketing, content, and creative projects without turning every job into another long, fragile chat.</p>
+<p>It layers value and automation onto information flows: work in every covered
+domain can be codified, systemised, and improved with DevOps principles and tool
+leverage. Durable repository knowledge holds tasks, plans, decisions, evidence,
+and progress; forge issues and PRs are portable execution conversations, not the
+only record of the work. The aim of helping people become 100x more capable at
+value generation is an ambition to substantiate, not a guaranteed or measured
+result.</p>
 <p>Most AI tools still leave you doing the hard coordination yourself: finding the right context, choosing a model, protecting secrets, managing branches, watching CI, spotting stuck work, and remembering what went wrong last time. aidevops puts structure around that work so agents can share context, work safely in parallel, spend model budget where it matters, and leave the system better than they found it.</p>
 <blockquote>
 <p><strong>Recommended setup:</strong> <a href="https://opencode.ai/">OpenCode</a> + OpenAI GPT-5.6 Luna / Terra and GPT-6 Astra. aidevops routes Luna to bounded work, Terra to general implementation, and Astra at low reasoning to consequential reasoning and synthesis. Claude models (Anthropic) remain fully supported fallbacks, and other model providers are evaluated as their quality, latency, and cost profiles change.</p>
@@ -131,8 +138,11 @@
 <li>Notice when the system is struggling. Stuck workers, orphaned PRs, stale assignments, CI failures, review-bot traps, and repeated mistakes should become visible signals.</li>
 <li>Improve the framework from real use. Imported skills, session learnings, quality findings, and better patterns should become better agents, hooks, scripts, and docs.</li>
 <li>Optimise for profitable outcomes: useful work shipped, lower supervision cost, safer operations, and decisions that make sense beyond the next prompt.</li>
+<li>Make ownership structural: explicit sources of truth, generated views, consistency checks, and verified fallback behaviour prevent knowledge and progress from drifting between tools.</li>
 </ul>
 <p>The result: an AI operations platform that manages projects across every business domain — absorbing everything automatable so you can focus on what matters.</p>
+<p>The canonical purpose and architectural decision criteria are in
+<a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/aidevops/purpose.md"><code>.agents/aidevops/purpose.md</code></a>.</p>
 <p><strong>Built on proven patterns</strong>: aidevops implements <a href="#agent-design-patterns">industry-standard agent design patterns</a> - including multi-layer action spaces, context isolation, and iterative execution loops.</p>
 <h2><strong>Why This Framework?</strong></h2>
 <p><strong>Beyond single-task AI.</strong> A normal AI harness can be brilliant for one job and still weak at the work around the job. aidevops is for the surrounding discipline: context, routing, safety, git hygiene, collaboration, verification, memory, and follow-through.</p>
@@ -156,7 +166,7 @@
 <p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
 <a href="https://github.com/marcusquinn"><img src="https://img.shields.io/badge/Copyright-Marcus%20Quinn%202025--2026-blue.svg" alt="Copyright"></a></p>
 <!-- Release & Version Info -->
-<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.32.317-blue.svg" alt="Version"></a>
+<p><a href="https://github.com/marcusquinn/aidevops/releases"><img src="https://img.shields.io/badge/Version-3.32.328-blue.svg" alt="Version"></a>
 <a href="https://www.npmjs.com/package/aidevops"><img src="https://img.shields.io/npm/v/aidevops" alt="npm version"></a>
 <a href="https://github.com/marcusquinn/homebrew-tap"><img src="https://img.shields.io/badge/homebrew-marcusquinn%2Ftap-orange" alt="Homebrew"></a>
 <a href="https://github.com/marcusquinn/aidevops"><img src="https://img.shields.io/badge/github-repository-181717.svg?logo=github" alt="GitHub repository"></a></p>
@@ -192,6 +202,7 @@ the required notices and preferred credit text.</p>
 <li><code>aidevops auto-update</code> - Automatic update polling (enable/disable/status)</li>
 <li><code>aidevops runtime-bundle list</code> - List retained validated runtime bundles; use <code>rollback --bundle-id &lt;id&gt; --reason &lt;text&gt;</code> for an explicit audited rollback</li>
 <li><code>aidevops gpt56-context [enable|disable|status]</code> - Keep GPT-5.6 at a 300K advertised context window in OpenCode (enabled by default), so 80% auto-compaction runs near 240K before long-context pricing; <code>status</code> verifies plugin discovery, initialization, hook registration, and effective limits</li>
+<li><code>aidevops astra-context [enable|disable|status]</code> - Opt into ~240K usable-input Astra compaction; <code>disable</code> restores the default 400K target while preserving native-metadata opt-out. Settings survive updates; <code>status</code> probes fresh-process configuration. Restart OpenCode after changes; subscription savings are not guaranteed</li>
 <li><code>aidevops buzz [status|apply|rollback]</code> - Inspect or manage Buzz Desktop OpenCode ACP compatibility</li>
 <li><code>~/.aidevops/agents/scripts/team-interface-helper.sh [providers|detect|status|doctor|plan]</code> - Inspect registered collaboration providers, persist read-only observations, or emit deterministic dry-run plans; no provider-write command is exposed</li>
 <li><code>aidevops opencode conversation --overlay FILE --dir PATH</code> - Launch fixed-argv OpenCode ACP with a schema-validated ephemeral team-interface overlay and a final read-only capability guard; see <code>.agents/reference/team-interface-opencode-overlays.md</code></li>
