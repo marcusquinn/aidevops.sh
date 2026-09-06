@@ -117,6 +117,7 @@ macOS `sips` renders these SVG assets reliably in this repo. ImageMagick may fai
 Recommended generation commands:
 
 ```sh
+sips -s format png images/aidevops-avatar.svg --out images/aidevops-avatar.png
 sips -s format png og-image.svg --out og-image.png
 sips -s format png -z 16 16 favicon.svg --out favicon-16x16.png
 sips -s format png -z 32 32 favicon.svg --out favicon-32x32.png
@@ -131,6 +132,9 @@ magick favicon-16x16.png favicon-32x32.png favicon-48x48.png favicon.ico
 
 - Use a preview-first workflow for icon/social graph changes.
 - Generate shareable previews or a contact sheet before committing visual changes.
+- Verify `images/aidevops-avatar.svg` and `images/aidevops-avatar.png` are both
+  `1024x1024`; the PNG must retain transparency outside its circular background
+  and keep all essential avatar details inside the circle-crop safe area.
 - Compare favicon sizes at `16`, `32`, and `48` pixels; the prompt glyph must stay recognisable.
 - Check the social graph at full size and social-preview size; the install command needs visible right padding.
 - Verify live deploys by comparing live asset hashes against committed bytes after GitHub Pages deployment.
