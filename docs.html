@@ -1859,7 +1859,7 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 </ul>
 <h2><strong>MCP Integrations</strong></h2>
 <p><strong>Model Context Protocol servers for real-time AI assistant integration.</strong> The framework configures these MCPs for <strong><a href="https://opencode.ai/">OpenCode</a></strong> (TUI, Desktop, and Extension for Zed/VSCode).</p>
-<h3><strong>All Supported MCPs (19 available)</strong></h3>
+<h3><strong>All Supported MCPs (20 available)</strong></h3>
 <p>MCP integrations use reviewed local package runners or remote HTTPS endpoints. Security-sensitive local integrations use exact package pins where required; setup may globally cache selected tools for faster startup. Run <code>setup.sh</code> or <code>aidevops update-tools</code> to refresh managed tooling.</p>
 <table>
 <thead>
@@ -1935,6 +1935,12 @@ ollama run glm-ocr &quot;Extract all text&quot; --images /path/to/document.png
 <td>Isolated or extension-connected browser automation</td>
 <td>Per-agent</td>
 <td>No</td>
+</tr>
+<tr>
+<td><a href="https://posthog.com/docs/model-context-protocol">PostHog</a></td>
+<td>Product analytics, feature flags, experiments, and error data</td>
+<td>On-demand per-agent</td>
+<td>OAuth</td>
 </tr>
 <tr>
 <td><a href="https://github.com/marcusquinn/quickfile-mcp">QuickFile</a></td>
@@ -3238,6 +3244,11 @@ AIDEVOPS_FEATURE_COMMANDS_CURSOR=no setup.sh
 <td><code>@git-platforms</code></td>
 <td>GitHub, GitLab, Gitea</td>
 <td>context7</td>
+</tr>
+<tr>
+<td><code>@posthog</code></td>
+<td>Product analytics, feature flags, experiments, errors, and support</td>
+<td>posthog</td>
 </tr>
 <tr>
 <td><code>@sentry</code></td>
