@@ -259,6 +259,11 @@ maintenance rules live in <a href="https://github.com/marcusquinn/aidevops/blob/
 <td>Custom agents, imported skills, private agent sources, MCPs, API helpers, OpenAPI exploration, and project bundles</td>
 </tr>
 </tbody></table>
+<p>For YouTube transcripts, <code>python3 .agents/scripts/youtube-transcript.py VIDEO_ID</code>
+tries captions, then local speech-to-text, and emits timestamped JSON. Hosted
+TranscriptAPI access is opt-in (<code>--source api</code>). See the
+<a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/voice/transcription.md">transcription guide</a> for setup, Mac
+dictation alternatives, and access boundaries.</p>
 <p>The <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/domain-index.md">domain index</a> is the human-readable map
 from user intent to specialist guidance. The generated
 <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/capability-registry.md">capability registry</a> separately records
