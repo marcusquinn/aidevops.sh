@@ -171,6 +171,7 @@ measured result. The canonical purpose and decision criteria are in
 <h3>Essential commands</h3>
 <pre><code class="language-bash">aidevops status                 # Installation, runtime and storage health
 aidevops init                   # Add aidevops conventions to a repository
+aidevops project-config restore owner/repo   # Preview recovery of missing ignored local config
 aidevops update                 # Update the framework and registered projects
 aidevops features               # Discover framework features
 aidevops repos                  # Manage registered projects
@@ -178,6 +179,17 @@ aidevops skills                 # Discover available workflows and capabilities
 aidevops security               # Security posture, hygiene and supply-chain checks
 aidevops metrics generate       # Refresh local repository metrics
 </code></pre>
+<p>If a registered repository loses its ignored <code>.aidevops.json</code>, first preview
+<code>aidevops project-config restore owner/repo --backup /path/to/verified-backup.json</code>.
+Without a verified backup, omit <code>--backup</code> to preview only the explicitly enabled
+features and init scope recorded in the local registry; other settings (including
+plugins and <code>counter_branch</code>) are <strong>unknown</strong>, not defaults or explicit opt-outs.
+After reviewing the target and settings, rerun with <code>--apply</code> in an attached
+terminal and type the exact destination path. This operation writes only a new
+ignored local config in the registered checkout; it refuses tracked configs,
+linked-worktree registrations, symlinks, ambiguous entries, and overwrites.
+For tracked configs, use the existing linked-worktree migration instead. Do not
+run the full <code>aidevops init</code> workflow as a config-only repair.</p>
 <p>In an AI session:</p>
 <pre><code class="language-text">/onboarding
 /skills recommend &quot;TASK&quot;
