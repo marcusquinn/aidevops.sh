@@ -625,6 +625,10 @@ to its shared history. Existing databases, routing choices, and disabled service
 are preserved; Desktop&#39;s first server/project selection remains manual. See the
 <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/opencode-service.md">managed-service guide</a> for platform
 verification limits, opt-out, and rollback.</p>
+<p>For Desktop builds advertising connection-link support, opt in with
+<code>aidevops opencode-desktop --connect-managed --dir PATH</code>. Desktop confirms the
+server and folder without replacing saved defaults. Unsupported builds, including
+the released 1.18.32 app, retain the manual flow; this does not install a patched Desktop.</p>
 <h2>Quick Start</h2>
 <ol>
 <li>Install aidevops using one of the methods above.</li>
