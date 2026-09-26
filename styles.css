@@ -694,7 +694,8 @@ pre,
 }
 
 [data-theme="light"] .btn-primary:hover {
-    background: var(--accent-hover);
+    /* --accent-hover (#0a8ca8) gives white text only 3.9:1; --accent-strong keeps WCAG AA. */
+    background: var(--accent-strong);
 }
 
 /* Primary button - filled with accent */
