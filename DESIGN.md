@@ -20,7 +20,7 @@ The **Brand core** section below is byte-identical in both files. Change it in b
 
 - Formal product name: `AI DevOps`. Wordmark: lowercase `aidevops` beside the prompt glyph. Domain signature: `aidevops.sh`.
 - Positioning: `AI DevOps Assistant & OpenCode Plugin`.
-- Approved headline: `Scaleable teamwork you can trust` (keep the approved spelling). Supporting line: `OpenCode plugin for autonomous project delivery`. Eyebrow: `24/7 DEVELOPMENT`.
+- Approved headline (the elevator pitch): `Token-efficiency harness & curated skills for speed, teamwork, and secure 24/7 development agents.` Supporting line: `The open-source OpenCode plugin for AI Git workflow automation`. Eyebrow: `24/7 DEVELOPMENT`. Two-line layouts break after `for`, keeping the speed/teamwork/secure list together.
 - Install command: `bash <(curl -fsSL aidevops.sh/install)`.
 - Voice: terminal-native, precise, autonomous, trustworthy. Short declarative copy; no hype, exclamation marks, or emoji in brand surfaces.
 
@@ -112,7 +112,7 @@ diff <(sed -n '/BRAND-CORE:START/,/BRAND-CORE:END/p' aidevops/DESIGN.md) <(sed -
 The Brand core sets identity and voice for every surface. These are the approved website-specific lines:
 
 - Hero strapline: `Automating development and scaling teamwork — designed to work 24/7, so you don't have to.` It sits directly under the `AI DevOps` wordmark as `.hero-strapline` in the accent colour (`--accent`), semibold and smaller than the headline.
-- Hero headline: `A smarter, safer, faster AI harness — for maximum token-efficiency, with every skill you need to design & build, all managed for you.` On the home-page hero it replaced the Brand core headline `Scaleable teamwork you can trust` (September 2026). The Brand core copy is unchanged; if the new headline should also apply to app surfaces, update the Brand core in both repositories in the same session.
+- Hero headline: `A smarter, safer, faster AI harness — for maximum token-efficiency, with every skill you need to design & build, all managed for you.` (September 2026). This longer line is website-only; the Brand core headline is the short elevator pitch used on the social image and app surfaces.
 - Typography: use curly apostrophes, `&nbsp;` before em-dashes and around `&`, and `&#8209;` in hyphenated words that must not break (for example `token&#8209;efficiency`), so phrases never wrap mid-thought on mobile.
 
 ## Landing page structure
@@ -178,8 +178,8 @@ Construction values live in the Brand core; these are website-specific placement
 - Do not add a circular blob/glow behind the social graph icon mark.
 - Approved eyebrow: `BUILD WEBSITES, APPS, CONTENT, MARKETING, SEO, BRAND ASSETS, AND BUSINESS AUTOMATIONS` (updated in #121).
 - Approved title: `AI DevOps`.
-- Approved headline (two lines, 32px, the elevator pitch shown when links are shared; September 2026): `Token-efficiency harness & curated skills for` / `speed, teamwork, and secure 24/7 development agents.` The second line must end inside the stats box's right edge (`x ≤ 1118`).
-- Approved supporting line: `The open-source OpenCode plugin for AI Git workflow automation`.
+- Approved headline: the Brand core headline in two lines at 32px (the elevator pitch shown when links are shared; September 2026): `Token-efficiency harness & curated skills for` / `speed, teamwork, and secure 24/7 development agents.` The second line must end inside the stats box's right edge (`x ≤ 1118`).
+- Approved supporting line: the Brand core supporting line, `The open-source OpenCode plugin for AI Git workflow automation`.
 - `og:image:alt` and `twitter:image:alt` in `index.html` repeat the headline and supporting line, so the alt text always describes what the image says. Update them together.
 - Approved stats labels (numbers refreshed by `scripts/update_site_stats.py`):
   - `17 main agent experts` — upstream README `main agents`.
