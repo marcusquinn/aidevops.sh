@@ -20,6 +20,9 @@ TARGET_REPO = os.environ.get("AIDEVOPS_STATS_REPO", "marcusquinn/aidevops")
 MAINTAINER_PROFILE_REPO = os.environ.get("AIDEVOPS_MAINTAINER_PROFILE_REPO", "marcusquinn/marcusquinn")
 PROFILE_HUMAN_ROWS = ("Interactive human attention", "Worker-classified human attention")
 PROFILE_AI_ROWS = ("Interactive AI generation", "Worker/headless AI generation")
+# Public commit-history.com profile (server-rendered, keyless) that supplies the maintainer's total-contributions rank.
+COMMIT_HISTORY_USER = os.environ.get("AIDEVOPS_COMMIT_HISTORY_USER", "marcusquinn")
+COMMIT_HISTORY_RANK_PATTERN = re.compile(r">#([\d,]+)</div>\s*<div[^>]*>\s*Total rank\s*</div>")
 OUTPUT_PATH = Path("data/aidevops-stats.json")
 OG_IMAGE_PATH = Path("og-image.svg")
 INDEX_PATH = Path("index.html")
@@ -272,6 +275,56 @@ def maintainer_profile_stats() -> dict[str, object] | None:
     return result
 
 
+def commit_history_rank() -> dict[str, object] | None:
+    """Maintainer total-contributions rank from the public commit-history.com profile; None when unavailable."""
+    url = f"https://commit-history.com/{urllib.parse.quote(COMMIT_HISTORY_USER)}?metric=total"
+    request = urllib.request.Request(url, headers={"User-Agent": "aidevops.sh-site-stats"})
+    try:
+        with urlopen_with_retries(request, timeout=30) as response:
+            html = response.read(MAX_SOURCE_CHARS).decode("utf-8", errors="replace")
+    except (OSError, RuntimeError, ValueError):
+        return None
+    match = COMMIT_HISTORY_RANK_PATTERN.search(html)
+    if not match:
+        return None
+    rank = parse_count(match.group(1))
+    if rank <= 0:
+        return None
+    checked_on = dt.datetime.now(dt.timezone.utc).date().isoformat()
+    return {"rank": rank, "checkedOn": checked_on, "source": url}
+
+
+def rank_bracket(rank: int) -> int:
+    """Conservative 'Top N' bracket: the rank rounded up to the next hundred (next ten inside the top 100)."""
+    step = 100 if rank > 100 else 10
+    return -(-rank // step) * step
+
+
+def update_index_commit_history(ranking: dict[str, object] | None) -> None:
+    """Refresh the #github-memory commit-history.com card; keep the static fallback when the rank is unavailable."""
+    if not ranking or not INDEX_PATH.exists():
+        print("::warning::commit-history.com rank unavailable; keeping the static fallback in index.html")
+        return
+    rank = int(ranking["rank"])
+    checked = dt.date.fromisoformat(str(ranking["checkedOn"]))
+    values = {
+        r'(id="memoryRankCard"[^>]*\stitle=")[^"]*(")': (
+            f"Maintainer total-contributions rank on commit-history.com: #{rank:,} on {checked.day} {checked:%B %Y}"
+        ),
+        r'(id="memoryRank">)[^<]*(<)': f"Top {rank_bracket(rank):,}",
+        r'(id="memoryRankDetail">)[^<]*(<)': f"#{rank:,} by total GitHub contributions · {checked:%b %Y}",
+    }
+    content = INDEX_PATH.read_text(encoding="utf-8")
+    updated = content
+    for pattern, value in values.items():
+        updated, count = re.subn(pattern, lambda match, text=value: f"{match.group(1)}{text}{match.group(2)}", updated, count=1)
+        if count != 1:
+            print(f"::warning::commit-history.com card element not found for pattern {pattern}; keeping the static fallback")
+            return
+    if updated != content:
+        INDEX_PATH.write_text(updated, encoding="utf-8")
+
+
 def commit_activity(repo_created_at: str) -> list[dict[str, int | str]]:
     created_day = repo_created_at[:10]
     weeks = github_request(f"/repos/{TARGET_REPO}/stats/commit_activity")
@@ -445,8 +498,10 @@ def main() -> None:
     agents_payload = agents_tree_and_previews()
     inventory = source_inventory()
     release = latest_release()
+    ranking = commit_history_rank()
     update_og_image_metric(agents_payload, inventory)
     update_index_version(release)
+    update_index_commit_history(ranking)
     items = paginated_issues()
     activity: dict[str, object] = dict(activity_totals(items))
     labels = label_count()
@@ -468,6 +523,8 @@ def main() -> None:
         payload["inventory"] = inventory
     if release:
         payload["release"] = release
+    if ranking:
+        payload["commitHistory"] = ranking
     maintainer = maintainer_profile_stats()
     if maintainer:
         payload["maintainer"] = maintainer

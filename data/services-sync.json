@@ -8,7 +8,7 @@
     "Hostinger": [], "Hetzner Cloud": [], "Coolify": [], "Cloudron": [], "Vercel": [], "AWS": [], "DigitalOcean": [], "Proxmox VE": [], "Ubicloud": [],
     "Backblaze B2": [], "IDrive e2": [], "Wasabi": [], "Tailscale": [], "NetBird": [], "ObscuraVPN": [], "Nostr VPN": [],
     "Cloudflare": [], "Spaceship": [], "101domains": [], "AWS Route 53": [], "Namecheap": [],
-    "GitHub": [], "GitLab": [], "Gitea": [], "Forgejo": [], "Agno": [], "Langflow": [], "CrewAI": [], "AutoGen": [], "Pandoc": [], "Jujutsu": [], "Worktrunk": [], "Beads": [], "OrbStack": [], "Apple container": [".agents/configs/agent-sandbox-backends.json"], "Firecracker microVMs": [".agents/configs/agent-sandbox-backends.json"], "Gonicus Bubbles": [".agents/configs/agent-sandbox-backends.json"],
+    "GitHub": [], "GitLab": [], "Gitea": [], "Forgejo": [], "Agno": [], "Langflow": [], "CrewAI": [], "AutoGen": [], "Pandoc": [], "Jujutsu": [], "Worktrunk": [], "Beads": [], "OrbStack": [], "Apple container": [".agents/configs/agent-sandbox-backends.json"], "Firecracker microVMs": [".agents/configs/agent-sandbox-backends.json"], "Linux Bubbles": [".agents/configs/agent-sandbox-backends.json"],
     "WordPress": [], "LocalWP": [], "MainWP": [], "Ahrefs": [], "DataForSEO": [], "Serper": [], "Google Search Console": [], "Bing Webmaster Tools": [], "Outscraper": [],
     "Expo": [], "MobileBuildMCP": [], "App Store Connect": [], "iOS Simulator MCP": [], "Mobile MCP": [], "Maestro": [],
     "Open Design": [], "Remotion": [], "Anime.js": [], "MuAPI": [], "Video Prompt Design": [], "yt-dlp": [], "shadcn/ui": [],
