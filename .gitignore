@@ -20,3 +20,7 @@ secrets.json
 
 # Log files
 *.log
+
+# Python bytecode (scripts/*.py)
+__pycache__/
+*.pyc

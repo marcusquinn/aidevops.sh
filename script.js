@@ -570,6 +570,134 @@
         return data.total_count;
     }
 
+    // Round down to the nearest hundred so marketing counts never overstate live data.
+    function roundedHundredLabel(value) {
+        if (typeof value !== 'number' || !Number.isFinite(value) || value < 100) return null;
+        return `${formatNumber(Math.floor(value / 100) * 100)}+`;
+    }
+
+    function sumRows(rows, key) {
+        if (!Array.isArray(rows)) return 0;
+        return rows.reduce((sum, row) => sum + (Number(row?.[key]) || 0), 0);
+    }
+
+    function updateHeroProof() {
+        if (!siteStats) return;
+        const labels = {
+            proofCommits: roundedHundredLabel(sumRows(siteStats.commitsDaily, 'count')),
+            proofPrs: roundedHundredLabel(sumRows(siteStats.monthly?.prs, 'opened')),
+            proofStars: roundedHundredLabel(siteStats.repoStats?.stars)
+        };
+        Object.entries(labels).forEach(([id, label]) => {
+            if (label) setText(id, label);
+        });
+        advanceHeroVersion(siteStats.release?.tag);
+    }
+
+    function versionParts(tag) {
+        const match = typeof tag === 'string' ? /^v?(\d+)\.(\d+)\.(\d+)$/.exec(tag.trim()) : null;
+        return match ? match.slice(1).map(Number) : null;
+    }
+
+    // Only move the hero badge forward, so a stale cache can never replace a newer version.
+    function advanceHeroVersion(tag) {
+        const next = versionParts(tag);
+        const el = $('heroVersion');
+        if (!next || !el) return;
+        const current = versionParts(el.textContent);
+        const diff = current ? next.findIndex((part, index) => part !== current[index]) : 0;
+        if (!current || (diff !== -1 && next[diff] > current[diff])) {
+            el.textContent = `v${next.join('.')}`;
+        }
+    }
+
+    // The upstream docs sync deploys this site a few minutes before each GitHub release is
+    // published, so the build-time version usually trails by one. Confirm it live
+    // (keyless, cached 15 min, best-effort); the build-time value remains the fallback.
+    async function refreshHeroVersion() {
+        if (!$('heroVersion')) return;
+        const release = await fetchJson(`/repos/${REPO}/releases/latest`);
+        advanceHeroVersion(release?.tag_name);
+    }
+
+    function updateInventory() {
+        const inventory = siteStats?.inventory;
+        if (!inventory) return;
+        const pills = {
+            mainAgents: 'inventoryMainAgents',
+            subAgents: 'inventorySubAgents',
+            helperScripts: 'inventoryHelperScripts',
+            slashCommands: 'inventorySlashCommands',
+            mcpServers: 'inventoryMcpServers'
+        };
+        Object.entries(pills).forEach(([key, id]) => {
+            const pill = $(id);
+            const label = inventory.rounded?.[key];
+            if (!pill || typeof label !== 'string' || !label) return;
+            const strong = pill.querySelector('strong');
+            const span = pill.querySelector('span');
+            if (strong) strong.textContent = label;
+            const exact = inventory.exact?.[key];
+            if (typeof exact === 'number' && span) pill.title = `${formatNumber(exact)} ${span.textContent}`;
+        });
+    }
+
+    // Floor percentages and multiples too, so proof metrics never round up past the live data.
+    function flooredPercent(part, total) {
+        if (!Number.isFinite(part) || !Number.isFinite(total) || total <= 0) return null;
+        return `${(Math.floor((part / total) * 1000) / 10).toFixed(1)}%`;
+    }
+
+    function roundedTenLabel(value) {
+        if (typeof value !== 'number' || !Number.isFinite(value) || value < 10) return null;
+        return `${formatNumber(Math.floor(value / 10) * 10)}+`;
+    }
+
+    function setTitle(id, value) {
+        const el = $(id);
+        if (el && value) el.title = value;
+    }
+
+    function updateMemoryProof() {
+        const activity = siteStats?.activity;
+        const issues = activity?.issues;
+        const prs = activity?.pullRequests;
+        if (issues && Number.isFinite(issues.open) && Number.isFinite(issues.closed)) {
+            const rate = flooredPercent(issues.closed, issues.open + issues.closed);
+            const closedLabel = roundedHundredLabel(issues.closed);
+            if (rate && closedLabel) {
+                setText('memoryIssueRate', rate);
+                setText('memoryIssueDetail', `${closedLabel}\u00a0closed · ${formatNumber(issues.open)}\u00a0open`);
+                setTitle('memoryIssueCard', `${formatNumber(issues.closed)} closed and ${formatNumber(issues.open)} open issues`);
+            }
+        }
+        if (prs && Number.isFinite(prs.merged) && Number.isFinite(prs.closedUnmerged) && Number.isFinite(prs.open)) {
+            const mergedLabel = roundedHundredLabel(prs.merged);
+            const mergeRate = flooredPercent(prs.merged, prs.merged + prs.closedUnmerged);
+            if (mergedLabel && mergeRate) {
+                setText('memoryPrsMerged', mergedLabel);
+                setText('memoryPrDetail', `${mergeRate} of closed PRs merged`);
+                setTitle('memoryPrCard', `${formatNumber(prs.merged)} merged, ${formatNumber(prs.closedUnmerged)} closed unmerged, and ${formatNumber(prs.open)} open pull requests`);
+            }
+        }
+        const labels = roundedTenLabel(activity?.labels);
+        if (labels) {
+            setText('memoryLabels', labels);
+            setTitle('memoryLabelCard', `${formatNumber(activity.labels)} labels`);
+        }
+        const maintainer = siteStats?.maintainer;
+        const human = maintainer?.humanHours365;
+        const ai = maintainer?.aiHours365;
+        if (Number.isFinite(human) && Number.isFinite(ai) && human > 0 && ai >= human) {
+            setText('memoryLeverage', `${Math.floor(ai / human)}×`);
+            setTitle('memoryLeverageCard', `Prior 365 days: ${formatNumber(Math.floor(ai))} AI generation hours for ${formatNumber(Math.floor(human))} hours of human attention, from the maintainer’s GitHub profile`);
+        }
+        const tokensMillions = maintainer?.tokensMillions;
+        if (Number.isFinite(tokensMillions) && tokensMillions >= 1000) {
+            setText('memoryTokens', `${formatNumber(Math.floor(tokensMillions / 1000))}B+ tokens processed`);
+        }
+    }
+
     function updateMonthlySummary(prefix, rows) {
         const opened = rows.reduce((sum, row) => sum + row.opened, 0);
         const closed = rows.reduce((sum, row) => sum + row.closed, 0);
@@ -977,6 +1105,9 @@
     async function initStatsPanel() {
         if (!$('issuesMonthlyChart')) return;
         await loadSiteStats();
+        updateHeroProof();
+        updateInventory();
+        updateMemoryProof();
         const monthly = siteStats?.monthly || MONTHLY_STATS;
         const generatedAt = siteStats?.generatedAt || MONTHLY_STATS.generatedAt;
         try {
@@ -984,6 +1115,7 @@
                 refreshTotals('issues', 'issuesSource', monthly.issues || MONTHLY_STATS.issues, generatedAt).catch(() => markUnavailable('issues', 'issuesSource', 'issuesMonthlyChart')),
                 refreshTotals('prs', 'prsSource', monthly.prs || MONTHLY_STATS.prs, generatedAt).catch(() => markUnavailable('prs', 'prsSource', 'prsMonthlyChart')),
                 loadCommitActivity().catch(() => setSource('commitsSource', 'unavailable')),
+                refreshHeroVersion().catch(() => {}),
                 loadAgentsExplorer().catch(() => {
                     initAgentsFallback();
                 })
