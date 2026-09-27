@@ -151,6 +151,7 @@ Keep the home page ordered for conversion: promise, how it works, install steps,
 - Buzz (`buzz.xyz`, the aidevops team interface for people and agents) leads `Team Chat`. Don't confuse it with the unrelated Buzz transcription app in upstream `tools/voice/buzz.md`.
 - A service may appear in more than one category when it is used for both (FluentCRM: `Business & Payments` and `Email`). The integrations count uses unique names, so duplicates never inflate it.
 - Retired integrations are removed, not badged (Closte, September 2026).
+- Adding, removing, or renaming a site service updates `data/services-sync.json` in the same PR. The scheduled services-sync check files a drift issue when upstream aidevops changes require a site review.
 
 ## Website colour usage
 
