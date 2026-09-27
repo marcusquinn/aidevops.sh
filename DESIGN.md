@@ -178,8 +178,9 @@ Construction values live in the Brand core; these are website-specific placement
 - Do not add a circular blob/glow behind the social graph icon mark.
 - Approved eyebrow: `BUILD WEBSITES, APPS, CONTENT, MARKETING, SEO, BRAND ASSETS, AND BUSINESS AUTOMATIONS` (updated in #121).
 - Approved title: `AI DevOps`.
-- Approved headline (two lines): `Designed for speed, token-efficiency,` / `and infinite scale with AI teamwork`.
-- Approved supporting line: `The open-source AI coding plugin for complete Git workflow automation`.
+- Approved headline (two lines, 32px, the elevator pitch shown when links are shared; September 2026): `Token-efficiency harness & curated skills for` / `speed, teamwork, and secure 24/7 development agents.` The second line must end inside the stats box's right edge (`x ≤ 1118`).
+- Approved supporting line: `The open-source OpenCode plugin for AI Git workflow automation`.
+- `og:image:alt` and `twitter:image:alt` in `index.html` repeat the headline and supporting line, so the alt text always describes what the image says. Update them together.
 - Approved stats labels (numbers refreshed by `scripts/update_site_stats.py`):
   - `17 main agent experts` — upstream README `main agents`.
   - `6,900+ subagents skills & helpers` — `.agents` tree item count rounded down to the hundred.
@@ -207,7 +208,7 @@ Construction values live in the Brand core; these are website-specific placement
   - `apple-touch-icon.png`
   - `android-chrome-192x192.png`
   - `android-chrome-512x512.png`
-- Current public cache-buster versions: social image `og-image.png?v=4`; favicons, app icons, and manifest `v=5`; `styles.css?v=21`; `script.js?v=7`.
+- Current public cache-buster versions: social image `og-image.png?v=5`; favicons, app icons, and manifest `v=5`; `styles.css?v=21`; `script.js?v=7`.
 - CI rewrites `og-image.svg` but does not re-render `og-image.png`. Re-render the PNG with `sips` and bump its cache-buster when social metrics change materially.
 - Bump the matching cache-buster whenever committed asset bytes change.
 - Keep `index.html` and `site.webmanifest` cache-busters in sync.
