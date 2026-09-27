@@ -47,15 +47,15 @@
   <g transform="translate(82 386)" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
     <rect width="1036" height="102" rx="26" fill="#050606" opacity="0.86" stroke="#66d9f2" stroke-opacity="0.22"/>
     <g transform="translate(34 28)">
-      <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">12</text>
+      <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">17</text>
       <text x="54" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">main agent experts</text>
     </g>
     <g transform="translate(300 28)">
-      <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">4,700+</text>
-      <text x="124" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">subagents skills &amp; helpers</text>
+      <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">6,900+</text>
+      <text x="134" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">subagents skills &amp; helpers</text>
     </g>
     <g transform="translate(700 28)">
-      <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">185+</text>
+      <text x="0" y="28" fill="#8ce8ff" font-size="32" font-weight="820">100+</text>
       <text x="92" y="27" fill="#ffffff" opacity="0.74" font-size="19" font-weight="650">/command shortcuts</text>
     </g>
   </g>

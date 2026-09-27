@@ -107,6 +107,51 @@ diff <(sed -n '/BRAND-CORE:START/,/BRAND-CORE:END/p' aidevops/DESIGN.md) <(sed -
 
 <!-- BRAND-CORE:END -->
 
+## Website messaging
+
+The Brand core sets identity and voice for every surface. These are the approved website-specific lines:
+
+- Hero strapline: `Automating development and scaling teamwork — designed to work 24/7, so you don't have to.` It sits directly under the `AI DevOps` wordmark as `.hero-strapline` in the accent colour (`--accent`), semibold and smaller than the headline.
+- Hero headline: `A smarter, safer, faster AI harness — for maximum token-efficiency, with every skill you need to design & build, all managed for you.` On the home-page hero it replaced the Brand core headline `Scaleable teamwork you can trust` (September 2026). The Brand core copy is unchanged; if the new headline should also apply to app surfaces, update the Brand core in both repositories in the same session.
+- Typography: use curly apostrophes, `&nbsp;` before em-dashes and around `&`, and `&#8209;` in hyphenated words that must not break (for example `token&#8209;efficiency`), so phrases never wrap mid-thought on mobile.
+
+## Landing page structure
+
+Keep the home page ordered for conversion: promise, how it works, install steps, public proof, depth, breadth, objections, then a final call to action.
+
+1. Hero: release badge (`Free & open source / vX.Y.Z`, links to GitHub releases), `AI DevOps` wordmark, approved strapline, approved headline, three-paragraph description (`.hero-description` wrapper: what it is — managed agents plus the OpenCode optimisation plugin for automating projects, subagents, and background workers; how it works across 150+ services; guided setup, recommendations of free and low-cost services, and AI DevOps as a teacher for all experience levels), canonical install box (`#install-box-source`), proof strip, then `See how it works` (primary, in-page) and `View on GitHub` (secondary), then `Works with`.
+2. `#how-it-works`: title `From one request to verified, shipped work`, approved subtitle `You bring vision, taste, priorities, and approvals. AI DevOps runs delivery, freeing your time for the things only you can do.` (September 2026), then four cards (`Ask`, `Plan`, `Build safely`, `Verify & ship`) in reading order, with no `01`–`04` index labels (removed September 2026 to save space; the same applies to the `#github-memory` trail). Each has a short mono terminal line on the fixed dark code surface. `Verify & ship` carries the CI/CD claim (workflows designed and managed for you, with an `<abbr>` expansion for beginners); keep card copy within about two lines of its neighbours so the equal-height row does not leave large gaps. Grid goes 4 → 2 → 1 columns at `920px` and `520px`.
+3. `#quickstart`: three install steps. Keep model recommendations in step 3 current.
+4. `#stats`: kicker `24/7 Development`, title `Built in public, shipping around the clock`, capability strip, then live issue, pull request, and commit charts.
+5. `#github-memory`: kicker `Your Git platform becomes a parallel teamwork audit-trail.` (was `GitHub as memory`; "Git platform" matches the upstream term for GitHub, GitLab, Gitea, and Forgejo), title `Quite possibly the best Git workflow harness in the world right now`, subtitle ending `Don't take our word for it: every receipt is built in public.` (September 2026), five linked evidence metrics (issue closure rate, merged PRs, workflow labels, AI-hours-per-human-hour leverage, commit-history.com rank), a six-card who/what/where/when/why/how trail reusing the `.how-step` card style, then two notes: GitHub API-limit design and self-aware/self-improving behaviour.
+6. `#features`, then `#services`, `#faq`, and `#install` (final CTA with kicker, subtitle, cloned install box, and docs, GitHub, and X links).
+
+### Proof and count rules
+
+- Never overstate numbers. Round live counts down, never up.
+- Hero proof strip: GitHub stars, commits, and pull requests are rounded down to the nearest hundred with `+`, hydrated by `script.js` from `data/aidevops-stats.json`. Static HTML values are fallbacks and must not exceed the latest data.
+- Capability strip labels must match the upstream README hero labels exactly: **main agents**, **sub agents**, **helper scripts**, and **slash commands**. Never merge overlapping categories into one total. Values come from the README's rounded hero alt text; the exact counts go in the pill `title`.
+- MCP servers: active entries in the upstream `mcp-registry.mjs` (before `DEPRECATED_MCPS`), rounded down to the nearest five.
+- Integrations: the number of unique links listed in `#services`, rounded down to the nearest ten. Update the hero description, capability pill, and JSON-LD together when the list changes.
+- `scripts/update_site_stats.py` refreshes `inventory`, `release`, `repoStats`, `activity`, and `maintainer` in the stats JSON, the social graph metrics, and the JSON-LD `softwareVersion` / hero badge fallback on every deploy. Parsing failures are non-fatal and leave the static fallbacks in place.
+- Hero version badge: the upstream `update-website-docs.yml` push-triggered docs sync deploys this site a few minutes before each GitHub release is published, and its release-triggered run exits with "No changes", so build-time versions usually trail by one release until the next push or the daily cron. `script.js` therefore confirms `releases/latest` live through the keyless, 15-minute-cached `fetchJson` and only ever advances the badge. The JSON-LD `softwareVersion` stays build-time. Never add a token or secret for this: the repository is public.
+- GitHub memory metrics (`activity`, from the same paginated issues list as the monthly charts, plus one labels request): issue closure rate and PR merge rate are floored to one decimal place; merged PRs and closed issues round down to the nearest hundred; labels round down to the nearest ten. The PR merge rate is merged ÷ (merged + closed unmerged); open PRs are excluded.
+- Maintainer leverage (`maintainer`, parsed from the `Work with AI` table on the maintainer's GitHub profile README): floor(AI generation hours ÷ human attention hours) over the prior 365 days, shown as `N×`, with all-time tokens floored to whole billions. Link the card to the profile so visitors can verify it.
+- External rankings are mutable and not refreshed by CI. State them as a conservative bracket (`Top 400`) with the observed rank and month in the caption, and link the live source (`commit-history.com/marcusquinn?metric=total`). Re-check and update the caption when the bracket no longer holds.
+- Signing claims must match the implementation: signature footers are provenance text (version, runtime, model, time, tokens), not cryptographic signatures; cryptographic claims are limited to SSH-signed commits, maintainer approvals, and release tags.
+
+### Services and integrations links
+
+- Brand names link to the provider's official site, never to the aidevops agent doc. Source each URL from the project's own metadata (upstream doc, GitHub repo `homepage`, or GitHub org website) and confirm it resolves before merging. Never guess vendor URLs.
+- Open-source projects whose only home is their GitHub repository link to that repository.
+- Existing affiliate (`rel="sponsored"`) links stay as they are.
+- The agent guides stay reachable through the services footer links to the upstream `services` and `tools` folders.
+- No per-service status badges (`soon`, `beta`, etc.): the list is not auto-maintained, so status labels go stale. List a service once aidevops has a guide or backend for it; link titles describe the product, never its support status (`.service-soon` retired, September 2026).
+- Agent sandbox backends (Apple container, Firecracker microVMs, Gonicus Bubbles) sit after OrbStack in `Dev, Git & Agents`.
+- Buzz (`buzz.xyz`, the aidevops team interface for people and agents) leads `Team Chat`. Don't confuse it with the unrelated Buzz transcription app in upstream `tools/voice/buzz.md`.
+- A service may appear in more than one category when it is used for both (FluentCRM: `Business & Payments` and `Email`). The integrations count uses unique names, so duplicates never inflate it.
+- Retired integrations are removed, not badged (Closte, September 2026).
+
 ## Website colour usage
 
 - Consume colours only through the `styles.css` custom properties (`--bg-*`, `--surface*`, `--text-*`, `--accent*`, `--border*`, `--code-bg`, `--dot-*`); do not hard-code hex values in new rules.
@@ -131,14 +176,15 @@ Construction values live in the Brand core; these are website-specific placement
 - Background: black-to-near-black gradient with soft cyan/teal radial glows and subtle wave accents.
 - Top-left mark: clean rounded black icon box with cyan border and prompt glyph.
 - Do not add a circular blob/glow behind the social graph icon mark.
-- Approved eyebrow: `24/7 DEVELOPMENT`.
+- Approved eyebrow: `BUILD WEBSITES, APPS, CONTENT, MARKETING, SEO, BRAND ASSETS, AND BUSINESS AUTOMATIONS` (updated in #121).
 - Approved title: `AI DevOps`.
-- Approved headline: `Scaleable teamwork you can trust`.
-- Approved supporting line: `OpenCode plugin for autonomous project delivery`.
-- Approved stats labels:
-  - `12 main agent experts`
-  - `4,700+ subagents skills & helpers`
-  - `185+ /command shortcuts`
+- Approved headline (two lines): `Designed for speed, token-efficiency,` / `and infinite scale with AI teamwork`.
+- Approved supporting line: `The open-source AI coding plugin for complete Git workflow automation`.
+- Approved stats labels (numbers refreshed by `scripts/update_site_stats.py`):
+  - `17 main agent experts` — upstream README `main agents`.
+  - `6,900+ subagents skills & helpers` — `.agents` tree item count rounded down to the hundred.
+  - `100+ /command shortcuts` — upstream README rounded `slash commands`.
+- The middle stats label sits at `x="134"` so six-character values keep a visible gap.
 - Install command pill:
   - Command: `bash <(curl -fsSL aidevops.sh/install)`.
   - Current pill width: `610`.
@@ -161,7 +207,8 @@ Construction values live in the Brand core; these are website-specific placement
   - `apple-touch-icon.png`
   - `android-chrome-192x192.png`
   - `android-chrome-512x512.png`
-- Current public cache-buster versions in `index.html`: icons (`favicon.*`, `favicon-*`, `apple-touch-icon.png`) `v=5`; social image (`og-image.png`) `v=3`; stylesheet `styles.css?v=15`.
+- Current public cache-buster versions: social image `og-image.png?v=4`; favicons, app icons, and manifest `v=5`; `styles.css?v=21`; `script.js?v=7`.
+- CI rewrites `og-image.svg` but does not re-render `og-image.png`. Re-render the PNG with `sips` and bump its cache-buster when social metrics change materially.
 - Bump the matching cache-buster whenever committed asset bytes change.
 - Keep `index.html` and `site.webmanifest` cache-busters in sync.
 
@@ -197,6 +244,9 @@ magick favicon-16x16.png favicon-32x32.png favicon-48x48.png favicon.ico
 - Mobile pages must avoid document-level horizontal scrolling; oversized components should wrap, stack, or scroll inside their own card.
 - Section gutters collapse to the section padding at tablet/mobile widths so cards keep enough internal space.
 - Stats card headings and source pills stack on mobile; source text may wrap instead of forcing card overflow.
+- Capability strip goes 6 → 3 → 2 columns at `920px` and `768px`; never a single column, so the six proof numbers stay in one phone viewport.
+- GitHub memory metrics go 5 → 3 + 2 → 2 + 2 + 1 (last card full width) at `920px` and `768px`, with no orphan gaps. The who-to-how trail goes 3 → 2 → 1 columns at `920px` and `520px`; the two notes stack at `920px`.
+- Hero proof strip stays on one row at desktop widths (`max-width: 820px`) and wraps naturally on narrow screens. Short inline commands such as `/full-loop` never break mid-token.
 - Chart cards keep horizontal scroll contained within `.monthly-chart`; the whole page should remain width-safe at `320`, `360`, `390`, `414`, and `768` pixel viewports.
 - Monthly bar charts must reserve enough vertical clearance for the tallest generated stack so rounded bar tops and glow are not clipped.
 - Dense line charts should sit inside their own horizontal scroll wrapper on mobile instead of scaling until labels and peaks are unreadable.

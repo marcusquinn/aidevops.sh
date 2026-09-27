@@ -16,11 +16,26 @@ from pathlib import Path
 
 
 TARGET_REPO = os.environ.get("AIDEVOPS_STATS_REPO", "marcusquinn/aidevops")
+# Maintainer profile README whose STATS block (auto-updated by the aidevops pulse) supplies time-leverage stats.
+MAINTAINER_PROFILE_REPO = os.environ.get("AIDEVOPS_MAINTAINER_PROFILE_REPO", "marcusquinn/marcusquinn")
+PROFILE_HUMAN_ROWS = ("Interactive human attention", "Worker-classified human attention")
+PROFILE_AI_ROWS = ("Interactive AI generation", "Worker/headless AI generation")
 OUTPUT_PATH = Path("data/aidevops-stats.json")
 OG_IMAGE_PATH = Path("og-image.svg")
+INDEX_PATH = Path("index.html")
 PREVIEW_EXTENSIONS = {".md", ".txt", ".sh", ".py", ".js", ".json", ".yml", ".yaml", ".toml"}
 MAX_PREVIEWS = 60
 MAX_PREVIEW_CHARS = 6000
+MAX_SOURCE_CHARS = 1_000_000
+MCP_REGISTRY_PATH = ".agents/plugins/opencode-aidevops/mcp-registry.mjs"
+# Upstream README hero labels; keep these exact so site counts match the README.
+INVENTORY_LABELS = {
+    "mainAgents": "main agents",
+    "subAgents": "sub agents",
+    "helperScripts": "helper scripts",
+    "slashCommands": "slash commands",
+}
+VERSION_PATTERN = re.compile(r"^v?(\d+\.\d+\.\d+)$")
 MAX_REQUEST_ATTEMPTS = 4
 RETRY_STATUS_CODES = {403, 429, 500, 502, 503, 504}
 
@@ -103,14 +118,26 @@ def next_link_url(link_header: str | None) -> str | None:
     return None
 
 
-def raw_github_text(path: str) -> str:
+def last_page_number(link_header: str | None) -> int | None:
+    if not link_header:
+        return None
+    for link in link_header.split(","):
+        if 'rel="last"' not in link:
+            continue
+        match = re.search(r"[?&]page=(\d+)", link)
+        if match:
+            return int(match.group(1))
+    return None
+
+
+def raw_github_text(path: str, max_chars: int = MAX_PREVIEW_CHARS, repo: str = TARGET_REPO) -> str:
     quoted = "/".join(urllib.parse.quote(part) for part in path.split("/"))
     request = urllib.request.Request(
-        f"https://raw.githubusercontent.com/{TARGET_REPO}/HEAD/{quoted}",
+        f"https://raw.githubusercontent.com/{repo}/HEAD/{quoted}",
         headers={"User-Agent": "aidevops.sh-site-stats"},
     )
     with urlopen_with_retries(request, timeout=30) as response:
-        return response.read(MAX_PREVIEW_CHARS + 1).decode("utf-8", errors="replace")[:MAX_PREVIEW_CHARS]
+        return response.read(max_chars + 1).decode("utf-8", errors="replace")[:max_chars]
 
 
 def month_range(start: dt.datetime, end: dt.datetime) -> list[tuple[int, int]]:
@@ -151,7 +178,10 @@ def month_key(value: object) -> str | None:
     return dt.datetime.fromisoformat(value.replace("Z", "+00:00")).strftime("%Y-%m")
 
 
-def monthly_issue_counts(repo_created_at: str) -> dict[str, list[dict[str, int | str]]]:
+def monthly_issue_counts(
+    repo_created_at: str,
+    items: list[dict[str, object]],
+) -> dict[str, list[dict[str, int | str]]]:
     created = dt.datetime.fromisoformat(repo_created_at.replace("Z", "+00:00"))
     now = dt.datetime.now(dt.timezone.utc)
     result: dict[str, list[dict[str, int | str]]] = {"issues": [], "prs": []}
@@ -162,7 +192,7 @@ def monthly_issue_counts(repo_created_at: str) -> dict[str, list[dict[str, int |
             entry = {"month": start[:7], "opened": 0, "closed": 0}
             result[key].append(entry)
             indexes[key][start[:7]] = entry
-    for item in paginated_issues():
+    for item in items:
         key = "prs" if "pull_request" in item else "issues"
         opened_month = month_key(item.get("created_at"))
         if opened_month in indexes[key]:
@@ -170,6 +200,75 @@ def monthly_issue_counts(repo_created_at: str) -> dict[str, list[dict[str, int |
         closed_month = month_key(item.get("closed_at"))
         if closed_month in indexes[key]:
             indexes[key][closed_month]["closed"] += 1
+    return result
+
+
+def activity_totals(items: list[dict[str, object]]) -> dict[str, dict[str, int]]:
+    """Lifetime issue and PR state totals from the same paginated issues list (no extra API calls)."""
+    issues = {"open": 0, "closed": 0}
+    pull_requests = {"open": 0, "merged": 0, "closedUnmerged": 0}
+    for item in items:
+        is_open = item.get("state") == "open"
+        if "pull_request" not in item:
+            issues["open" if is_open else "closed"] += 1
+            continue
+        pull_request = item.get("pull_request")
+        if is_open:
+            pull_requests["open"] += 1
+        elif isinstance(pull_request, dict) and pull_request.get("merged_at"):
+            pull_requests["merged"] += 1
+        else:
+            pull_requests["closedUnmerged"] += 1
+    return {"issues": issues, "pullRequests": pull_requests}
+
+
+def label_count() -> int | None:
+    """Repository label total from one per_page=1 request and its rel="last" page number."""
+    try:
+        data, headers = github_request_with_headers(f"/repos/{TARGET_REPO}/labels", {"per_page": "1"})
+    except (OSError, ValueError):
+        return None
+    last_page = last_page_number(headers.get("Link"))
+    if last_page:
+        return last_page
+    return len(data) if isinstance(data, list) else None
+
+
+def profile_hours(readme: str, label: str) -> float | None:
+    """Prior-365-day hours for one row of the maintainer profile 'Work with AI' table."""
+    match = re.search(rf"^\|\s*{re.escape(label)}\s*\|(.+)\|\s*$", readme, re.M)
+    if not match:
+        return None
+    value = match.group(1).split("|")[-1].strip()
+    number = re.fullmatch(r"~?([\d,]+(?:\.\d+)?)h\*?", value)
+    return float(number.group(1).replace(",", "")) if number else None
+
+
+def maintainer_profile_stats() -> dict[str, object] | None:
+    """Read time-leverage and token totals from the maintainer profile; None when the format is unrecognised."""
+    try:
+        readme = raw_github_text("README.md", MAX_SOURCE_CHARS, MAINTAINER_PROFILE_REPO)
+    except (OSError, UnicodeDecodeError):
+        return None
+    if not re.search(r"^\|\s*Metric\s*\|.*\|\s*Prior 365 Days\s*\|\s*$", readme, re.M):
+        return None
+    human = [profile_hours(readme, label) for label in PROFILE_HUMAN_ROWS]
+    machine = [profile_hours(readme, label) for label in PROFILE_AI_ROWS]
+    if any(value is None for value in human + machine):
+        return None
+    human_hours = sum(value for value in human if value is not None)
+    ai_hours = sum(value for value in machine if value is not None)
+    if human_hours <= 0:
+        return None
+    result: dict[str, object] = {
+        "humanHours365": round(human_hours, 1),
+        "aiHours365": round(ai_hours, 1),
+        "source": f"{MAINTAINER_PROFILE_REPO}/README.md",
+    }
+    _recent, separator, all_time = readme.partition("## AI Model Usage (all time)")
+    tokens = re.search(r"_([\d,]+(?:\.\d+)?)M total tokens processed", all_time) if separator else None
+    if tokens:
+        result["tokensMillions"] = float(tokens.group(1).replace(",", ""))
     return result
 
 
@@ -225,11 +324,91 @@ def rounded_hundred_label(count: int) -> str:
     return f"{rounded:,}+"
 
 
-def update_og_image_metric(agents_payload: dict[str, object]) -> None:
+def rounded_five_label(count: int) -> str:
+    if count < 5:
+        return str(max(0, count))
+    return f"{count // 5 * 5:,}+"
+
+
+def active_mcp_server_count(registry: str) -> int:
+    """Count registry entries before the deprecated-MCP list; 0 when the layout is unrecognised."""
+    start = registry.find("function getMcpRegistry")
+    end = registry.find("const DEPRECATED_MCPS")
+    if start == -1 or end == -1 or end <= start:
+        return 0
+    return len(re.findall(r'\bname:\s*"[^"]+"', registry[start:end]))
+
+
+def parse_count(value: str) -> int:
+    return int(value.replace(",", "").rstrip("+"))
+
+
+def source_inventory() -> dict[str, object] | None:
+    """Read upstream README hero counts; return None when the format is unrecognised."""
+    try:
+        readme = raw_github_text("README.md", MAX_SOURCE_CHARS)
+    except (OSError, UnicodeDecodeError):
+        return None
+    exact_line = re.search(r"Exact source inventory:([^\n]+)", readme)
+    hero_alt = re.search(r"!\[([^\]]*main agents[^\]]*)\]", readme)
+    if not exact_line or not hero_alt:
+        return None
+    exact: dict[str, int] = {}
+    rounded: dict[str, str] = {}
+    for key, label in INVENTORY_LABELS.items():
+        exact_match = re.search(rf"\*\*([\d,]+) {label}\*\*", exact_line.group(1))
+        rounded_match = re.search(rf"([\d,]+\+?) {label}", hero_alt.group(1))
+        if not exact_match or not rounded_match:
+            return None
+        exact[key] = parse_count(exact_match.group(1))
+        rounded[key] = rounded_match.group(1)
+    try:
+        registry = raw_github_text(MCP_REGISTRY_PATH, MAX_SOURCE_CHARS)
+    except (OSError, UnicodeDecodeError):
+        registry = ""
+    mcp_servers = active_mcp_server_count(registry)
+    if mcp_servers:
+        exact["mcpServers"] = mcp_servers
+        rounded["mcpServers"] = rounded_five_label(mcp_servers)
+    return {"exact": exact, "rounded": rounded, "source": "README.md"}
+
+
+def latest_release() -> dict[str, str] | None:
+    try:
+        release = github_request(f"/repos/{TARGET_REPO}/releases/latest")
+    except (OSError, ValueError):
+        return None
+    if not isinstance(release, dict):
+        return None
+    tag = str(release.get("tag_name", ""))
+    if not VERSION_PATTERN.match(tag):
+        return None
+    return {"tag": tag, "publishedAt": str(release.get("published_at", ""))}
+
+
+def update_index_version(release: dict[str, str] | None) -> None:
+    """Keep the JSON-LD softwareVersion and hero badge fallback in sync with the latest release."""
+    if not release or not INDEX_PATH.exists():
+        return
+    match = VERSION_PATTERN.match(release["tag"])
+    if not match:
+        return
+    version = match.group(1)
+    content = INDEX_PATH.read_text(encoding="utf-8")
+    updated = re.sub(r'("softwareVersion":\s*")[^"]*(")', rf"\g<1>{version}\g<2>", content, count=1)
+    updated = re.sub(r'(id="heroVersion">)v?[^<]*(<)', rf"\g<1>v{version}\g<2>", updated, count=1)
+    if updated != content:
+        INDEX_PATH.write_text(updated, encoding="utf-8")
+
+
+def update_og_image_metric(agents_payload: dict[str, object], inventory: dict[str, object] | None = None) -> None:
     tree = agents_payload.get("tree", [])
     if not isinstance(tree, list) or not tree or not OG_IMAGE_PATH.exists():
         return
     label = rounded_hundred_label(len(tree))
+    rounded = inventory.get("rounded", {}) if inventory else {}
+    if not isinstance(rounded, dict):
+        rounded = {}
     content = OG_IMAGE_PATH.read_text(encoding="utf-8")
     content, metric_replacements = re.subn(
         r'(<g transform="translate\()\d+( 28\)">\s*<text[^>]*>)[^<]+(</text>\s*<text[^>]*>)(?:subagent skills|subagents skills &amp; helpers)(</text>)',
@@ -237,12 +416,21 @@ def update_og_image_metric(agents_payload: dict[str, object]) -> None:
         content,
         count=1,
     )
+    command_label = rounded.get("slashCommands")
     content, command_replacements = re.subn(
-        r'(<g transform="translate\()\d+( 28\)">\s*<text[^>]*>185\+</text>\s*<text[^>]*>/command shortcuts</text>)',
-        r'\g<1>700\g<2>',
+        r'(<g transform="translate\()\d+( 28\)">\s*<text[^>]*>)([^<]+)(</text>\s*<text[^>]*>/command shortcuts</text>)',
+        lambda match: f"{match.group(1)}700{match.group(2)}{command_label or match.group(3)}{match.group(4)}",
         content,
         count=1,
     )
+    main_label = rounded.get("mainAgents")
+    if main_label:
+        content = re.sub(
+            r'(<text[^>]*>)[^<]+(</text>\s*<text[^>]*>main agent experts</text>)',
+            lambda match: f"{match.group(1)}{main_label}{match.group(2)}",
+            content,
+            count=1,
+        )
     if metric_replacements != 1 or command_replacements != 1:
         raise RuntimeError("Unable to update social graph .agents metric")
     OG_IMAGE_PATH.write_text(content, encoding="utf-8")
@@ -255,14 +443,34 @@ def main() -> None:
     repo_created_at = str(repo["created_at"])
     generated_at = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
     agents_payload = agents_tree_and_previews()
-    update_og_image_metric(agents_payload)
+    inventory = source_inventory()
+    release = latest_release()
+    update_og_image_metric(agents_payload, inventory)
+    update_index_version(release)
+    items = paginated_issues()
+    activity: dict[str, object] = dict(activity_totals(items))
+    labels = label_count()
+    if labels is not None:
+        activity["labels"] = labels
     payload = {
         "generatedAt": generated_at,
         "repo": TARGET_REPO,
-        "monthly": monthly_issue_counts(repo_created_at),
+        "repoStats": {
+            "stars": int(repo.get("stargazers_count") or 0),
+            "forks": int(repo.get("forks_count") or 0),
+        },
+        "monthly": monthly_issue_counts(repo_created_at, items),
+        "activity": activity,
         "commitsDaily": commit_activity(repo_created_at),
         "agents": agents_payload,
     }
+    if inventory:
+        payload["inventory"] = inventory
+    if release:
+        payload["release"] = release
+    maintainer = maintainer_profile_stats()
+    if maintainer:
+        payload["maintainer"] = maintainer
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
