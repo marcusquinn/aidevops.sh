@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "upstream_repo": "marcusquinn/aidevops",
+  "baseline_commit": "ba76cc49385c8f1993022f1a9eb759f7fcd243cd",
+  "candidate_prefixes": [".agents/services/", ".agents/tools/"],
+  "services": {
+    "OpenAI": [], "Anthropic Claude": [], "OpenCode Zen": [], "OpenCode Go": [], "NanoGPT": [], "Cloudflare Workers AI": [], "Together AI": [], "Fireworks AI": [], "NVIDIA Cloud": [], "NEAR AI Cloud": [], "Hugging Face": [], "Llama.cpp": [],
+    "Hostinger": [], "Hetzner Cloud": [], "Coolify": [], "Cloudron": [], "Vercel": [], "AWS": [], "DigitalOcean": [], "Proxmox VE": [], "Ubicloud": [],
+    "Backblaze B2": [], "IDrive e2": [], "Wasabi": [], "Tailscale": [], "NetBird": [], "ObscuraVPN": [], "Nostr VPN": [],
+    "Cloudflare": [], "Spaceship": [], "101domains": [], "AWS Route 53": [], "Namecheap": [],
+    "GitHub": [], "GitLab": [], "Gitea": [], "Forgejo": [], "Agno": [], "Langflow": [], "CrewAI": [], "AutoGen": [], "Pandoc": [], "Jujutsu": [], "Worktrunk": [], "Beads": [], "OrbStack": [], "Apple container": [".agents/configs/agent-sandbox-backends.json"], "Firecracker microVMs": [".agents/configs/agent-sandbox-backends.json"], "Gonicus Bubbles": [".agents/configs/agent-sandbox-backends.json"],
+    "WordPress": [], "LocalWP": [], "MainWP": [], "Ahrefs": [], "DataForSEO": [], "Serper": [], "Google Search Console": [], "Bing Webmaster Tools": [], "Outscraper": [],
+    "Expo": [], "MobileBuildMCP": [], "App Store Connect": [], "iOS Simulator MCP": [], "Mobile MCP": [], "Maestro": [],
+    "Open Design": [], "Remotion": [], "Anime.js": [], "MuAPI": [], "Video Prompt Design": [], "yt-dlp": [], "shadcn/ui": [],
+    "Blender": [], "FreeCAD": [], "OpenSCAD": [], "Affinity Studio": [], "Ableton Live": [], "DaVinci Resolve": [],
+    "Stripe": [], "RevenueCat": [], "Superwall": [], "Shopify": [], "QuickFile": [], "FluentCRM": [],
+    "Google Workspace": [], "Microsoft 365": [], "Thunderbird": [], "AWS SES": [], "OpenPGP": [], "S/MIME": [],
+    "Smartlead": [], "Instantly": [], "ManyReach": [], "Infraforge": [], "Leadsforge": [], "Warmforge": [],
+    "Gopass": [], "Vaultwarden": [], "Snyk": [], "Socket": [], "Secretlint": [], "OSV Scanner": [], "Tirith": [], "Shannon": [],
+    "SonarCloud": [], "CodeFactor": [], "Codacy": [], "CodeRabbit": [], "Qlty": [], "Sentry": [], "Gemini Code Assist": [],
+    "Augment Context Engine": [], "Repomix": [], "Context7": [], "DSPy": [], "DSPyGround": [],
+    "LibPDF": [], "MinerU": [], "Unstract": [], "GLM-OCR": [],
+    "PostHog": [], "Google Analytics": [], "LangWatch": [], "PageSpeed Insights": [], "Lighthouse": [], "WebPageTest": [], "Updown.io": [],
+    "Playwright": [], "Stagehand": [], "Crawl4AI": [], "Chrome DevTools": [], "mkcert": [], "macOS Automator": [],
+    "Buzz": [".agents/tools/ai-assistants/buzz-team-interface.md"], "Slack": [], "Discord": [], "Microsoft Teams": [], "Google Chat": [], "Nextcloud Talk": [], "Matrix": [], "Matterbridge": [],
+    "Telegram": [], "WhatsApp": [], "Signal": [], "iMessage": [], "SimpleX Chat": [], "XMTP": [], "Convos": [], "Nostr": [], "Bitchat": [], "Urbit": [],
+    "Twilio": [], "Telfon": [], "Speech-to-Speech": [], "Pipecat": []
+  },
+  "acknowledged": {}
+}
