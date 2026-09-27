@@ -256,6 +256,7 @@ magick favicon-16x16.png favicon-32x32.png favicon-48x48.png favicon.ico
 - Mobile navigation should preserve Docs, GitHub, social, and theme actions as compact icon buttons rather than dropping links.
 - The `.agents` file browser stacks tree above content on mobile. Search paths, breadcrumbs, file names, and preview text wrap within the card rather than clipping behind the right edge.
 - Install commands, quickstart command snippets, service links, and other long strings should use wrapping/word-break rules that preserve tap targets and readability.
+- Lists styled with `list-style: none` (`ol.how-steps`, `ol.quickstart-steps`, `ol.memory-trail`) carry `role="list"`, because Safari/VoiceOver otherwise stops announcing them as lists.
 
 ## Verification checklist
 
