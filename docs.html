@@ -157,6 +157,83 @@ runtime hooks or compaction changes.</li>
 <p>The “100x more capable” goal is an ambition to substantiate, not a guaranteed or
 measured result. The canonical purpose and decision criteria are in
 <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/aidevops/purpose.md"><code>.agents/aidevops/purpose.md</code></a>.</p>
+<h2>Quick Setup</h2>
+<p>New to aidevops? Work through these six steps once, in order, so nothing is
+missed. Commands are safe to rerun. For a guided version, type <code>/onboarding</code> in
+an AI session after step 2.</p>
+<h3>1. Install aidevops</h3>
+<pre><code class="language-bash">brew install marcusquinn/tap/aidevops &amp;&amp; aidevops update   # macOS (Homebrew)
+npm install -g aidevops &amp;&amp; aidevops update                 # Linux / cross-platform
+</code></pre>
+<p>Setup deploys agents to <code>~/.aidevops/agents/</code>, installs and configures
+OpenCode, and offers optional tools. Accept <strong>Tabby</strong> when offered. Other
+methods: <a href="#installation">Installation</a>. Check the result with
+<code>aidevops status</code>; <code>aidevops doctor --fix</code> resolves duplicate installs and PATH
+conflicts.</p>
+<h3>2. Open Tabby and start OpenCode</h3>
+<pre><code class="language-bash">brew install --cask tabby   # macOS, only if you skipped Tabby during setup
+aidevops tabby sync         # one Tabby profile per registered project
+aidevops opencode           # launch OpenCode with the Build+ agent
+</code></pre>
+<p>Rerun <code>aidevops tabby sync</code> after adding projects in step 4. Profile details:
+<a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/tabby-profiles.md">Tabby profiles</a>.</p>
+<h3>3. Connect model providers</h3>
+<pre><code class="language-bash"># OpenCode Go subscription: create an API key in your OpenCode account first
+opencode auth login                          # choose &quot;OpenCode Go&quot;, paste the key
+
+# NanoGPT: create an API key in your NanoGPT account first
+opencode auth login                          # choose &quot;NanoGPT&quot;, paste the key
+
+# OAuth pool for subscription accounts (browser sign-in, add one or more each)
+aidevops model-accounts-pool add anthropic   # Claude Pro/Max
+aidevops model-accounts-pool add openai      # ChatGPT Plus/Pro
+aidevops model-accounts-pool status          # pool health
+aidevops model-accounts-pool check           # live token test
+</code></pre>
+<p>Inside OpenCode, <code>/connect</code> is equivalent to <code>opencode auth login</code>. Add several
+accounts per provider so the pool can rotate on rate limits, then restart
+OpenCode. Never paste keys or tokens into an AI chat; store other service
+credentials with <code>aidevops secret set NAME</code>.</p>
+<h3>4. Put projects in <code>~/Git</code> on the local drive</h3>
+<p>Keep canonical clones on the local disk, not in a cloud-synced folder such as
+iCloud Drive, Dropbox, or OneDrive. Layout: personal repositories at
+<code>~/Git/&lt;repo&gt;</code>, organization or third-party repositories at
+<code>~/Git/&lt;owner&gt;/&lt;repo&gt;</code> (<a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/repo-organization.md">repository organization</a>).</p>
+<pre><code class="language-bash">mkdir -p ~/Git
+mv ~/path/to/my-project ~/Git/my-project                  # move an existing checkout
+gh repo clone example-org/service ~/Git/example-org/service   # or clone fresh
+cd ~/Git/my-project &amp;&amp; aidevops init                      # add conventions and register
+aidevops detect                                           # find and register other projects
+aidevops repos clean                                      # drop entries for moved paths
+aidevops repos                                            # review the registry
+aidevops tabby sync                                       # refresh Tabby profiles
+</code></pre>
+<p>Already-registered repositories in an older layout can use the guarded
+<code>aidevops repos migrate-layout plan</code> instead of a manual move.</p>
+<h3>5. Turn on auto-update, Pulse, workers, and routines</h3>
+<pre><code class="language-bash">aidevops auto-update enable                                # check for updates every 10 minutes
+aidevops repo-sync enable                                  # daily git pull for repos under ~/Git
+aidevops config set orchestration.supervisor_pulse true    # unattended Pulse, survives reboots
+aidevops setup --scope pulse                               # install or refresh the Pulse scheduler
+aidevops pulse status                                      # consent layers, workers, repos
+aidevops init-routines                                     # private aidevops-routines repo (--local: no remote)
+</code></pre>
+<p>Pulse runs every 2 minutes and dispatches headless workers only for repositories
+marked <code>&quot;pulse&quot;: true</code> in <code>~/.config/aidevops/repos.json</code>; enable it only where
+autonomous work is approved. Workers pick up issues labelled <code>auto-dispatch</code>.
+Pause with <code>aidevops pulse stop</code>. In an AI session, use <code>/routine</code> to design
+recurring jobs, <code>/pulse</code> to supervise, and <code>/runners</code> for runner setup. Details:
+<a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/routines.md">routines</a>,
+<a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/worker-diagnostics.md">worker diagnostics</a>.</p>
+<h3>6. Verify and start working</h3>
+<pre><code class="language-bash">aidevops status
+aidevops security
+</code></pre>
+<p>Then, in OpenCode inside a project:</p>
+<pre><code class="language-text">/onboarding
+/skills recommend &quot;TASK&quot;
+/full-loop &quot;Describe the outcome you want&quot;
+</code></pre>
 <!-- AI-CONTEXT-START --><h2>Quick Reference</h2>
 <ul>
 <li><strong>Install:</strong> <code>npm install -g aidevops &amp;&amp; aidevops update</code></li>
@@ -630,6 +707,8 @@ verification limits, opt-out, and rollback.</p>
 server and folder without replacing saved defaults. Unsupported builds, including
 the released 1.18.32 app, retain the manual flow; this does not install a patched Desktop.</p>
 <h2>Quick Start</h2>
+<p>For the full first-run checklist (providers, project layout, automation), see
+<a href="#quick-setup">Quick Setup</a>.</p>
 <ol>
 <li>Install aidevops using one of the methods above.</li>
 <li>Start OpenCode in a project and run <code>/onboarding</code> for account-level setup.</li>
