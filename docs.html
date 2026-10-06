@@ -256,6 +256,13 @@ aidevops skills                 # Discover available workflows and capabilities
 aidevops security               # Security posture, hygiene and supply-chain checks
 aidevops metrics generate       # Refresh local repository metrics
 </code></pre>
+<p>For a registered repository whose GitHub Actions cannot run, record
+<code>aidevops repos actions off owner/repo &quot;billing blocked&quot;</code>. Full-loop and worker
+verification then uses the repository&#39;s configured local checks with trusted
+exact-head PR evidence, without polling unavailable Actions. Restore normal CI
+with <code>aidevops repos actions on owner/repo</code>. Non-billing failures, reviews and
+native branch protection still block; see the
+<a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/ci-gate-policy.md#github-actions-unavailable">local-verification contract</a>.</p>
 <p>If a registered repository loses its ignored <code>.aidevops.json</code>, first preview
 <code>aidevops project-config restore owner/repo --backup /path/to/verified-backup.json</code>.
 Without a verified backup, omit <code>--backup</code> to preview only the explicitly enabled
