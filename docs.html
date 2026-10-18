@@ -608,7 +608,12 @@ unsafe permissions, leftover backups and literal MCP environment secrets without
 printing values. Interactive fixes delegate to secret import/prune commands,
 confirm pruning and trash moves, and leave drift and malformed lines unchanged.
 Import and prune target only the active tenant. Scans do not probe provider APIs;
-an opt-in <code>--probe</code> may be added later.</p>
+an opt-in <code>--probe</code> may be added later. SSH checks parse <code>~/.ssh/config</code> and its
+<code>Include</code> files as text (never <code>ssh -G</code>, which runs <code>Match exec</code>): passphrase-less
+<code>id_*</code> and <code>IdentityFile</code> keys, loose key/config/<code>~/.ssh</code> permissions, and
+risky directives such as disabled host-key checking, global agent forwarding and
+command hooks, reported by keyword and line only. Fixes offer a per-file
+confirmed <code>chmod 600</code> for owned regular files, never through a symlinked target.</p>
 <h3>Vault</h3>
 <p>Vault adds protected-data classes, local encrypted stores, provider-routing
 labels, device trust, fleet lock/unlock policy, secure sync guidance, and
