@@ -1,0 +1,118 @@
+{
+  "schema": "aidevops.repo-metrics.v1",
+  "schema_version": 1,
+  "generated_at": "2026-10-18T15:54:48Z",
+  "tool": {
+    "name": "aidevops repo-metrics",
+    "version": "1.0.0"
+  },
+  "repo": {
+    "name": "aidevops.sh",
+    "slug": "marcusquinn/aidevops.sh"
+  },
+  "summary": {
+    "source_files": 32,
+    "code": 36384,
+    "comments": 126,
+    "blanks": 959,
+    "languages": 9,
+    "dependencies": 0
+  },
+  "languages": [
+    {
+      "name": "JSON",
+      "files": 2,
+      "code": 29378,
+      "comments": 0,
+      "blanks": 0,
+      "percentage": 80.74,
+      "color": "#292929"
+    },
+    {
+      "name": "CSS",
+      "files": 1,
+      "code": 2512,
+      "comments": 36,
+      "blanks": 458,
+      "percentage": 6.9,
+      "color": "#563d7c"
+    },
+    {
+      "name": "HTML",
+      "files": 3,
+      "code": 2106,
+      "comments": 23,
+      "blanks": 56,
+      "percentage": 5.79,
+      "color": "#e34c26"
+    },
+    {
+      "name": "JavaScript",
+      "files": 1,
+      "code": 996,
+      "comments": 51,
+      "blanks": 119,
+      "percentage": 2.74,
+      "color": "#f1e05a"
+    },
+    {
+      "name": "Python",
+      "files": 2,
+      "code": 580,
+      "comments": 5,
+      "blanks": 96,
+      "percentage": 1.59,
+      "color": "#3572A5"
+    },
+    {
+      "name": "Markdown",
+      "files": 14,
+      "code": 544,
+      "comments": 0,
+      "blanks": 211,
+      "percentage": 1.5,
+      "color": "#083fa1"
+    },
+    {
+      "name": "SVG",
+      "files": 4,
+      "code": 163,
+      "comments": 0,
+      "blanks": 3,
+      "percentage": 0.45,
+      "color": "#6e7781"
+    },
+    {
+      "name": "YAML",
+      "files": 4,
+      "code": 90,
+      "comments": 11,
+      "blanks": 16,
+      "percentage": 0.25,
+      "color": "#cb171e"
+    },
+    {
+      "name": "XML",
+      "files": 1,
+      "code": 15,
+      "comments": 0,
+      "blanks": 0,
+      "percentage": 0.04,
+      "color": "#0060ac"
+    }
+  ],
+  "dependencies": {
+    "direct": 0,
+    "runtime": 0,
+    "dev": 0,
+    "locked": 0,
+    "total": 0,
+    "ecosystems": [],
+    "manifests": []
+  },
+  "refresh": {
+    "default_policy": "weekly scheduled refresh plus manual runs; skip generated outputs younger than 24h in managed workflows",
+    "cost_profile": "fast local git/unignored-file scan; no network by default",
+    "top_languages": 6
+  }
+}
