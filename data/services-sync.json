@@ -1,19 +1,25 @@
 {
   "schema": 1,
   "upstream_repo": "marcusquinn/aidevops",
-  "baseline_commit": "7db9b55482bc908d5dc6ef71b659acb2bd24d81e",
+  "baseline_commit": "4edf7ebff583dbc92b8b14b0073bf8810f3c7993",
   "candidate_prefixes": [".agents/services/", ".agents/tools/"],
   "services": {
     "OpenAI": [], "Anthropic Claude": [], "OpenCode Zen": [], "OpenCode Go": [], "NanoGPT": [], "Cloudflare Workers AI": [], "Together AI": [], "Fireworks AI": [], "NVIDIA Cloud": [], "NEAR AI Cloud": [], "Hugging Face": [], "Llama.cpp": [],
-    "Hostinger": [], "Hetzner Cloud": [], "Coolify": [], "Cloudron": [], "Vercel": [], "AWS": [], "DigitalOcean": [], "Proxmox VE": [], "Ubicloud": [],
+    "Hostinger": [], "Hetzner Cloud": [], "Coolify": [], "Cloudron": [], "Vercel": [], "AWS": [], "Google Cloud": [".agents/services/hosting/google-cloud.md"], "DigitalOcean": [], "Proxmox VE": [], "Ubicloud": [],
     "Backblaze B2": [], "IDrive e2": [], "Wasabi": [], "Tailscale": [], "NetBird": [], "ObscuraVPN": [], "Nostr VPN": [],
-    "Cloudflare": [".agents/tools/api/cloudflare-cf-cli.md"], "Spaceship": [], "101domains": [], "AWS Route 53": [], "Namecheap": [],
+    "Cloudflare": [
+      ".agents/tools/api/cloudflare-cf-cli.md",
+      ".agents/services/hosting/cloudflare-platform-skill/basin.md",
+      ".agents/services/hosting/cloudflare-platform-skill/flagship.md",
+      ".agents/services/hosting/cloudflare-platform-skill/secrets-store.md",
+      ".agents/services/hosting/cloudflare-platform-skill/sandbox-stable.md"
+    ], "Spaceship": [], "101domains": [], "AWS Route 53": [], "Namecheap": [],
     "GitHub": [], "GitLab": [], "Gitea": [], "Forgejo": [], "Agno": [], "Langflow": [], "CrewAI": [], "AutoGen": [], "Pandoc": [], "Jujutsu": [], "Worktrunk": [], "Beads": [], "OrbStack": [], "Apple container": [".agents/configs/agent-sandbox-backends.json"], "Firecracker microVMs": [".agents/configs/agent-sandbox-backends.json"], "Linux Bubbles": [".agents/configs/agent-sandbox-backends.json"],
-    "WordPress": [], "LocalWP": [], "MainWP": [], "Ahrefs": [], "DataForSEO": [], "Serper": [], "Google Search Console": [], "Bing Webmaster Tools": [], "Outscraper": [],
+    "WordPress": [], "LocalWP": [], "MainWP": [], "Rank Math": [".agents/tools/wordpress/rankmath-mcp.md"], "Ahrefs": [], "DataForSEO": [], "Serper": [], "Google Search Console": [], "Bing Webmaster Tools": [], "Outscraper": [],
     "Expo": [], "MobileBuildMCP": [], "App Store Connect": [], "iOS Simulator MCP": [], "Mobile MCP": [], "Maestro": [],
-    "Open Design": [], "Remotion": [], "Anime.js": [], "MuAPI": [], "Video Prompt Design": [], "yt-dlp": [], "shadcn/ui": [],
+    "Open Design": [], "Remotion": [".agents/tools/video/remotion/remotion.md"], "Anime.js": [], "MuAPI": [], "Video Prompt Design": [], "yt-dlp": [], "shadcn/ui": [],
     "Blender": [], "FreeCAD": [], "OpenSCAD": [], "Affinity Studio": [], "Ableton Live": [], "DaVinci Resolve": [],
-    "Stripe": [], "RevenueCat": [], "Superwall": [], "Shopify": [], "QuickFile": [], "FluentCRM": [],
+    "Stripe": [], "RevenueCat": [], "Superwall": [], "Shopify": [], "QuickFile": [], "FluentCRM": [".agents/tools/wordpress/fluent-mcp.md"],
     "Google Workspace": [], "Microsoft 365": [], "Thunderbird": [], "AWS SES": [], "OpenPGP": [], "S/MIME": [],
     "Smartlead": [], "Instantly": [], "ManyReach": [], "Infraforge": [], "Leadsforge": [], "Warmforge": [],
     "Gopass": [], "Vaultwarden": [], "Snyk": [], "Socket": [], "Secretlint": [], "OSV Scanner": [], "Tirith": [], "Shannon": [],
@@ -26,5 +32,16 @@
     "Telegram": [], "WhatsApp": [], "Signal": [], "iMessage": [], "SimpleX Chat": [], "XMTP": [], "Convos": [], "Nostr": [], "Bitchat": [], "Urbit": [],
     "Twilio": [], "Telfon": [], "Speech-to-Speech": [], "Pipecat": []
   },
-  "acknowledged": {}
+  "acknowledged": {
+    ".agents/tools/containers/disposable-resources.md": "Disposable-resource lifecycle guidance, not a separate service.",
+    ".agents/tools/credentials/credential-inventory.md": "Credential inventory workflow, not a service integration.",
+    ".agents/tools/deployment/cloudron-os-upgrade.md": "OS upgrade procedure for the existing Cloudron integration.",
+    ".agents/tools/runtime/php-server-admin.md": "PHP runtime administration, not a hosted service.",
+    ".agents/tools/video/motion-design.md": "Motion-design guidance; Remotion and creative integrations are already listed.",
+    ".agents/tools/wordpress/premium-plugin-updates.md": "Plugin maintenance workflow for the existing WordPress integration.",
+    ".agents/tools/wordpress/wp-change-plan.md": "WordPress change-planning workflow, not a separate service.",
+    ".agents/tools/wordpress/wp-plugin-new.md": "WordPress plugin scaffolding workflow, not a separate service.",
+    ".agents/tools/wordpress/wp-plugin-release.md": "WordPress plugin release workflow, not a separate service.",
+    ".agents/tools/wordpress/wp-plugin-standards.md": "WordPress coding standards, not a separate service."
+  }
 }
