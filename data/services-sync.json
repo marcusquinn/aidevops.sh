@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "upstream_repo": "marcusquinn/aidevops",
-  "baseline_commit": "95996f5de5c021da62b57a66cba458fd7dbdb3d7",
+  "baseline_commit": "bbe69f8a6d18364bb25f1d9ae5a3dc5b823ea176",
   "candidate_prefixes": [".agents/services/", ".agents/tools/"],
   "services": {
     "OpenAI": [], "Anthropic Claude": [], "OpenCode Zen": [], "OpenCode Go": [], "NanoGPT": [], "Cloudflare Workers AI": [], "Together AI": [], "Fireworks AI": [], "NVIDIA Cloud": [], "NEAR AI Cloud": [], "Hugging Face": [], "Llama.cpp": [],
@@ -36,6 +36,8 @@
     ".agents/tools/containers/disposable-resources.md": "Disposable-resource lifecycle guidance, not a separate service.",
     ".agents/tools/credentials/credential-inventory.md": "Credential inventory workflow, not a service integration.",
     ".agents/tools/deployment/cloudron-os-upgrade.md": "OS upgrade procedure for the existing Cloudron integration.",
+    ".agents/tools/design/font-pairing.md": "Typography selection, font licensing and delivery guidance, not a separate service integration.",
+    ".agents/tools/design/impeccable.md": "Design source assessment and adapted concepts only; the Impeccable runtime and services are explicitly not integrated.",
     ".agents/tools/research/web-search-apis.md": "Search and fetch API selection guidance, not a separate service; Linkup has a dedicated integration guide.",
     ".agents/tools/runtime/php-server-admin.md": "PHP runtime administration, not a hosted service.",
     ".agents/tools/security/cert-watch.md": "Certificate Transparency and CAA monitoring workflow for operated domains, not a separate service integration.",
