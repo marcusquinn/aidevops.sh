@@ -177,6 +177,9 @@ aidevops opencode           # launch OpenCode with the Build+ agent
 </code></pre>
 <p>Rerun <code>aidevops tabby sync</code> after adding projects in step 4. Profile details:
 <a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/reference/tabby-profiles.md">Tabby profiles</a>.</p>
+<p>For persistent remote tmux tabs across configured SSH hosts, use
+<code>aidevops tabby sessions new|restore|list|doctor</code>; see
+<a href="https://github.com/marcusquinn/aidevops/blob/main/.agents/tools/terminal/remote-sessions.md">Remote Tabby sessions</a>.</p>
 <h3>3. Connect model providers</h3>
 <pre><code class="language-bash"># OpenCode Go subscription: create an API key in your OpenCode account first
 opencode auth login                          # choose &quot;OpenCode Go&quot;, paste the key
