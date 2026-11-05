@@ -5,10 +5,10 @@
   <rect class="track" x="20" y="10" width="480" height="14" rx="3"/>
   <rect x="20" y="10" width="390" height="14" fill="#292929"/>
   <rect x="410" y="10" width="33" height="14" fill="#563d7c"/>
-  <rect x="443" y="10" width="27" height="14" fill="#e34c26"/>
-  <rect x="470" y="10" width="13" height="14" fill="#f1e05a"/>
-  <rect x="483" y="10" width="7" height="14" fill="#3572A5"/>
-  <rect x="490" y="10" width="10" height="14" fill="#083fa1"/>
+  <rect x="443" y="10" width="28" height="14" fill="#e34c26"/>
+  <rect x="471" y="10" width="13" height="14" fill="#f1e05a"/>
+  <rect x="484" y="10" width="7" height="14" fill="#3572A5"/>
+  <rect x="491" y="10" width="9" height="14" fill="#083fa1"/>
   <rect x="20" y="34" width="10" height="10" rx="2" fill="#292929"/>
   <text x="34" y="44" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11" class="lbl">JSON <tspan class="pct">80.7%</tspan></text>
   <rect x="270" y="34" width="10" height="10" rx="2" fill="#563d7c"/>
