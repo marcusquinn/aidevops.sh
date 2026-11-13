@@ -158,11 +158,26 @@
 
 // Copy to Clipboard
 (function() {
+    // Long multi-line text (the AI setup prompt) lives once in a sibling
+    // element named by data-copy-source and is looked up within the same
+    // install panel, so the cloned CTA install box needs no ID rewiring.
+    function getCopyText(button) {
+        const sourceSelector = button.dataset.copySource;
+        if (sourceSelector) {
+            const scope = button.closest('.install-panel') || button.parentElement;
+            const source = scope ? scope.querySelector(sourceSelector) : null;
+            if (source) {
+                return source.textContent.trim();
+            }
+        }
+        return button.dataset.command || '';
+    }
+
     function setupCopyButton(button) {
         if (!button) return;
         
         button.addEventListener('click', async () => {
-            const command = button.dataset.command;
+            const command = getCopyText(button);
             
             try {
                 await navigator.clipboard.writeText(command);
