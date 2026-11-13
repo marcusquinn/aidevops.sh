@@ -624,6 +624,92 @@ pre,
     stroke: var(--accent);
 }
 
+/* AI setup prompt: copy button shows the opening line; the full prompt
+   stays readable in a collapsed preview so visitors see what they paste. */
+.ai-prompt {
+    border-top: 1px solid var(--border);
+    text-align: left;
+}
+
+.ai-prompt-summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.55rem 1.5rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+    cursor: pointer;
+    list-style: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.ai-prompt-summary::-webkit-details-marker {
+    display: none;
+}
+
+.ai-prompt-summary:hover {
+    background: var(--accent-command-hover);
+    color: var(--text-secondary);
+}
+
+.ai-prompt-summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+
+.ai-prompt-toggle {
+    flex: 0 0 auto;
+    color: var(--accent);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.ai-prompt-toggle::after {
+    content: '';
+    display: inline-block;
+    width: 0.4em;
+    height: 0.4em;
+    margin-left: 0.45em;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-0.2em) rotate(45deg);
+    transition: transform 0.2s;
+}
+
+.ai-prompt[open] .ai-prompt-toggle::after {
+    transform: translateY(0.05em) rotate(-135deg);
+}
+
+.ai-prompt-toggle-hide,
+.ai-prompt[open] .ai-prompt-toggle-show {
+    display: none;
+}
+
+.ai-prompt[open] .ai-prompt-toggle-hide {
+    display: inline;
+}
+
+.ai-prompt-text {
+    max-height: min(18rem, 50vh);
+    margin: 0;
+    padding: 1rem 1.5rem 1.25rem;
+    overflow-y: auto;
+    border-top: 1px solid var(--border);
+    background: var(--surface-raised);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    scrollbar-width: thin;
+}
+
+[data-theme="light"] .ai-prompt-text {
+    background: var(--bg-secondary);
+}
+
 /* Code Box */
 .code-box {
     background: var(--surface);
@@ -2715,6 +2801,12 @@ pre,
     .install-command {
         font-size: 0.92rem;
         padding: 1rem;
+    }
+
+    .ai-prompt-summary,
+    .ai-prompt-text {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
     .quickstart-step p,

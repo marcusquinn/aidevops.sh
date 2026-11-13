@@ -41,7 +41,7 @@
     <meta name="apple-mobile-web-app-title" content="AI DevOps">
     <meta name="application-name" content="AI DevOps">
     
-    <link rel="stylesheet" href="styles.css?v=22">
+    <link rel="stylesheet" href="styles.css?v=23">
     
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=5">
@@ -294,6 +294,7 @@
                             <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-brew" id="tab-brew" tabindex="-1" data-tab="brew">brew</button>
                             <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-bun" id="tab-bun" tabindex="-1" data-tab="bun">bun</button>
                             <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-git" id="tab-git" tabindex="-1" data-tab="git">git</button>
+                            <button class="install-tab" role="tab" aria-selected="false" aria-controls="panel-ai" id="tab-ai" tabindex="-1" data-tab="ai" title="Ask your AI assistant to set up aidevops for you">ai</button>
                         </div>
                     </div>
                     <div class="install-panels">
@@ -341,6 +342,39 @@
                                     <svg class="check-icon" width="20" height="20"><use href="#icon-check"/></svg>
                                 </span>
                             </button>
+                        </div>
+                        <div class="install-panel" data-panel="ai" role="tabpanel" id="panel-ai" aria-labelledby="tab-ai" aria-hidden="true">
+                            <button class="install-command" id="copyBtnAi" data-copy-source=".ai-prompt-text" aria-label="Copy the full setup prompt for your AI assistant">
+                                <span class="command-text"><span class="command-dim">Install and set up</span> <span class="command-highlight">aidevops</span> <span class="command-dim">for me from</span> <span class="command-highlight">https://aidevops.sh</span></span>
+                                <span class="copy-status">
+                                    <svg class="copy-icon" width="20" height="20"><use href="#icon-copy"/></svg>
+                                    <svg class="check-icon" width="20" height="20"><use href="#icon-check"/></svg>
+                                </span>
+                            </button>
+                            <details class="ai-prompt">
+                                <summary class="ai-prompt-summary">
+                                    <span class="ai-prompt-hint">Paste into Claude Code, Codex, Cursor, or any AI assistant.</span>
+                                    <span class="ai-prompt-toggle" aria-hidden="true"><span class="ai-prompt-toggle-show">View prompt</span><span class="ai-prompt-toggle-hide">Hide prompt</span></span>
+                                </summary>
+<pre class="ai-prompt-text">Install and set up aidevops for me from https://aidevops.sh
+
+aidevops (AI DevOps) is an open-source, MIT-licensed framework of agents, skills and helpers, plus an OpenCode plugin. Source and docs: https://github.com/marcusquinn/aidevops
+
+Please:
+1. Check my operating system and shell. aidevops supports macOS and Linux (on Windows, use WSL2). Make sure git and curl are installed.
+2. Read the Quick Setup and Installation sections of https://github.com/marcusquinn/aidevops/blob/main/README.md and follow them if they differ from the commands below.
+3. Install with one method:
+   - macOS with Homebrew: brew install marcusquinn/tap/aidevops &amp;&amp; aidevops update
+   - Node.js with npm: npm install -g aidevops &amp;&amp; aidevops update
+   - Otherwise: bash &lt;(curl -fsSL https://aidevops.sh/install)
+   In a shell without an interactive terminal, setup deploys the framework and OpenCode and skips optional tools. That is expected.
+4. Verify with: aidevops status
+   If it reports problems, run aidevops doctor and explain the findings before changing anything.
+5. Then offer the remaining Quick Setup steps one at a time. Ask me before using sudo, installing optional tools, moving my projects, or enabling background automation (auto-update, Pulse, workers).
+6. Never ask me to paste API keys, tokens or passwords into this chat. I will connect model providers myself with: opencode auth login
+7. If you cannot run commands on my computer, give me one command at a time to paste into my terminal, and explain what each does.
+8. Finish with a short summary of what was installed, anything that failed, and my next step: open a new terminal, run opencode, and type /onboarding</pre>
+                            </details>
                         </div>
                     </div>
                 </div>
@@ -1022,6 +1056,6 @@ Loading the live GitHub tree...</pre>
         </div>
     </footer>
 
-    <script src="script.js?v=8"></script>
+    <script src="script.js?v=9"></script>
 </body>
 </html>
