@@ -215,7 +215,7 @@ aidevops tabby sync                                       # refresh Tabby profil
 <code>aidevops repos migrate-layout plan</code> instead of a manual move.</p>
 <h3>5. Turn on auto-update, Pulse, workers, and routines</h3>
 <pre><code class="language-bash">aidevops auto-update enable                                # check for updates every 10 minutes
-aidevops repo-sync enable                                  # daily git pull for repos under ~/Git
+aidevops repo-sync enable                                  # daily read-only drift report for repos under ~/Git
 aidevops config set orchestration.supervisor_pulse true    # unattended Pulse, survives reboots
 aidevops setup --scope pulse                               # install or refresh the Pulse scheduler
 aidevops pulse status                                      # consent layers, workers, repos
