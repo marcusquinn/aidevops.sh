@@ -114,7 +114,10 @@ def create_issue(summary: str, config: dict[str, object], result: dict[str, obje
     existing = github_request(f"/repos/{target}/issues", {"state": "open", "per_page": "100"})
     if any(MARKER in str(issue.get("body", "")) for issue in existing if isinstance(issue, dict)):
         return
-    body = f"{MARKER}\n\n{summary}\n\n## What\nSynchronize the site services list with upstream aidevops.\n\n## How\nUpdate `index.html` and `data/services-sync.json` together. Triage non-service candidates into `acknowledged`, use confirmed official URLs, remove retired services, update count claims, and set `baseline_commit` to `{result['head']}`. Verify with `python3 scripts/check_services_sync.py --dry-run --head {result['head']}`.\n\n## Acceptance\nThe dry run reports no findings."
+    head = result["head"]
+    baseline = str(config["baseline_commit"])
+    full_check = f"python3 scripts/check_services_sync.py --dry-run --baseline {baseline} --head {head}"
+    body = f"{MARKER}\n\n{summary}\n\n## What\nSynchronize the site services list with upstream aidevops.\n\n## How\nUpdate `index.html` and `data/services-sync.json` together. Map every added candidate to a service or triage it into `acknowledged`, use confirmed official URLs, remove retired services, and update count claims. The list above shows at most 60 candidates, and advancing the baseline hides any that are untriaged, so rerun `{full_check}` until it reports `Added (0)` before you set `baseline_commit` to `{head}`. Then verify with `python3 scripts/check_services_sync.py --dry-run --head {head}`.\n\n### Files Scope\n\n- `index.html`\n- `data/services-sync.json`\n\n## Acceptance\n`{full_check}` reports `Added (0)`, and the dry run against the new baseline reports no findings."
     payload = json.dumps({"title": f"Sync site services list with upstream aidevops ({str(result['head'])[:7]})", "body": body, "labels": ["enhancement", "auto-dispatch", "tier:standard", "origin:worker"]}).encode()
     request = urllib.request.Request(f"https://api.github.com/repos/{target}/issues", data=payload, method="POST", headers={"Accept": "application/vnd.github+json", "Authorization": f"Bearer {token}", "Content-Type": "application/json"})
     with urlopen_with_retries(request, timeout=60):
