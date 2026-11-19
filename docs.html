@@ -170,6 +170,13 @@ OpenCode, and offers optional tools. Accept <strong>Tabby</strong> when offered.
 methods: <a href="#installation">Installation</a>. Check the result with
 <code>aidevops status</code>; <code>aidevops doctor --fix</code> resolves duplicate installs and PATH
 conflicts.</p>
+<p><strong>OpenCode version:</strong> aidevops supports OpenCode 1 as the stable default.
+OpenCode 2 is a preview. Setup installs it as a separate <code>opencode2</code> command,
+so you can try it without replacing <code>opencode</code>. Don&#39;t install OpenCode with
+<code>brew install opencode</code>, because Homebrew&#39;s formula now installs OpenCode 2.
+<code>aidevops opencode-runtime status</code> shows which version <code>opencode</code> runs.
+<code>aidevops opencode-runtime use-stable</code> switches an OpenCode 2 install back to
+OpenCode 1 and keeps a backup of your OpenCode data.</p>
 <h3>2. Open Tabby and start OpenCode</h3>
 <pre><code class="language-bash">brew install --cask tabby   # macOS, only if you skipped Tabby during setup
 aidevops tabby sync         # one Tabby profile per registered project
